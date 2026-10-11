@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 650" width="100%" height="100%" style="background:#f4f5f8; font-family:'Segoe UI', sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="2" dy="3" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="0" y="0" width="1000" height="60" fill="#1B2A4A"/>
+  <text x="500" y="38" fill="#C89B3C" font-size="22" font-weight="bold" text-anchor="middle" letter-spacing="1">KITCOEK CAMPUS LAYOUT &amp; NAVIGATION MAP</text>
+
+  <!-- Ground / Roadways -->
+  <rect x="50" y="80" width="900" height="540" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="2" filter="url(#shadow)"/>
+  
+  <!-- Main Entrance -->
+  <rect x="420" y="580" width="160" height="40" rx="8" fill="#3E6E64"/>
+  <text x="500" y="605" fill="#FFFFFF" font-size="14" font-weight="bold" text-anchor="middle">MAIN GATE / ENTRANCE</text>
+
+  <!-- Central Road / Avenue -->
+  <path d="M500,580 L500,200" stroke="#CBD5E1" stroke-width="24" stroke-dasharray="10,10"/>
+  <path d="M150,380 L850,380" stroke="#CBD5E1" stroke-width="20" stroke-dasharray="8,8"/>
+
+  <!-- Admin & Library Block -->
+  <g transform="translate(100, 420)">
+    <rect width="260" height="130" rx="10" fill="#1B2A4A" filter="url(#shadow)"/>
+    <text x="130" y="32" fill="#C89B3C" font-size="16" font-weight="bold" text-anchor="middle">ADMIN &amp; LIBRARY</text>
+    <text x="130" y="58" fill="#FFFFFF" font-size="13" text-anchor="middle">Ground: Principal Office &amp; CBCR</text>
+    <text x="130" y="80" fill="#FFFFFF" font-size="13" text-anchor="middle">1st Floor: Central Library &amp; Exam Cell</text>
+    <text x="130" y="104" fill="#94A3B8" font-size="11" text-anchor="middle">Room: ADM-01, LIB-101</text>
+  </g>
+
+  <!-- IT & CSE Department Block -->
+  <g transform="translate(640, 420)">
+    <rect width="260" height="130" rx="10" fill="#1E293B" filter="url(#shadow)"/>
+    <text x="130" y="32" fill="#38BDF8" font-size="16" font-weight="bold" text-anchor="middle">IT &amp; COMPUTER SCIENCE</text>
+    <text x="130" y="58" fill="#FFFFFF" font-size="13" text-anchor="middle">1st Floor: ENTC Department</text>
+    <text x="130" y="80" fill="#FFFFFF" font-size="13" text-anchor="middle">2nd Floor: CSE Dept &amp; AI Lab</text>
+    <text x="130" y="104" fill="#94A3B8" font-size="11" text-anchor="middle">Room: CS-201, CS-208</text>
+  </g>
+
+  <!-- Central Lawn / Circle -->
+  <circle cx="500" cy="380" r="45" fill="#10B981" opacity="0.85"/>
+  <text x="500" y="384" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">CENTRAL</text>
+  <text x="500" y="398" fill="#FFFFFF" font-size="12" font-weight="bold" text-anchor="middle">LAWN</text>
+
+  <!-- Main Academic Wing & Classrooms -->
+  <g transform="translate(100, 210)">
+    <rect width="260" height="130" rx="10" fill="#334155" filter="url(#shadow)"/>
+    <text x="130" y="32" fill="#FBBF24" font-size="16" font-weight="bold" text-anchor="middle">MAIN ACADEMIC WING</text>
+    <text x="130" y="58" fill="#FFFFFF" font-size="13" text-anchor="middle">Ground: First Year Dept (FE)</text>
+    <text x="130" y="80" fill="#FFFFFF" font-size="13" text-anchor="middle">1st-2nd Floor: Classrooms (201-210)</text>
+    <text x="130" y="104" fill="#94A3B8" font-size="11" text-anchor="middle">Lecture Hall 204</text>
+  </g>
+
+  <!-- Auditorium & T&P Cell -->
+  <g transform="translate(640, 210)">
+    <rect width="260" height="130" rx="10" fill="#475569" filter="url(#shadow)"/>
+    <text x="130" y="32" fill="#F472B6" font-size="16" font-weight="bold" text-anchor="middle">AUDITORIUM &amp; T&amp;P CELL</text>
+    <text x="130" y="60" fill="#FFFFFF" font-size="13" text-anchor="middle">Ground: Main Auditorium</text>
+    <text x="130" y="82" fill="#FFFFFF" font-size="13" text-anchor="middle">1st Floor: Training &amp; Placement Cell</text>
+    <text x="130" y="104" fill="#94A3B8" font-size="11" text-anchor="middle">Room: TP-101</text>
+  </g>
+
+  <!-- Mechanical Workshop & Canteen Block -->
+  <g transform="translate(320, 100)">
+    <rect width="360" height="90" rx="10" fill="#0F766E" filter="url(#shadow)"/>
+    <text x="180" y="30" fill="#A7F3D0" font-size="16" font-weight="bold" text-anchor="middle">MECHANICAL WORKSHOP &amp; CANTEEN</text>
+    <text x="180" y="54" fill="#FFFFFF" font-size="13" text-anchor="middle">Ground: Central Canteen &amp; Machine Shop</text>
+    <text x="180" y="74" fill="#E2E8F0" font-size="12" text-anchor="middle">Adjacent to Boys' Hostel &amp; Sports Ground</text>
+  </g>
+</svg>

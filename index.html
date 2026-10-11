@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KITCOEK Assistant — Campus Chatbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="crest">K</div>
+      <div class="brand-name">KITCOEK
+        <span>Campus assistant</span>
+      </div>
+    </div>
+
+    <button class="new-chat" id="newChatBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      New conversation
+    </button>
+
+    <p class="nav-label">Recent</p>
+    <ul class="history" id="historyList">
+      <li>Financial aid deadlines</li>
+      <li>Add/drop a course</li>
+      <li>Library hours this week</li>
+      <li>Hostel application status</li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="student-id">
+        <span class="student-name" id="sidebarName">Student</span>
+        <span class="student-prn" id="sidebarPrn"></span>
+      </div>
+      <a href="#">Help &amp; feedback</a>
+      <a href="#">Talk to a staff member</a>
+      <a href="login.html" id="signOutLink">Sign out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <header class="chat-header">
+      <div>
+        <h1>Ask KITCOEK</h1>
+        <p>Answers on admissions, courses, and campus life.</p>
+      </div>
+      <div class="status"><span class="dot"></span>Online</div>
+    </header>
+
+    <div class="thread" id="thread">
+      <div class="row bot">
+        <div class="avatar">K</div>
+        <div class="bubble">
+          <p>Hi, I'm the KITCOEK Assistant. Ask me about registration, financial aid, hostel, or anything else about campus — or pick a topic below to start.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="suggestions" id="suggestions">
+      <button class="chip" data-q="How do I apply for financial aid?">Financial aid</button>
+      <button class="chip" data-q="How do I register for classes?">Course registration</button>
+      <button class="chip" data-q="What are the library hours?">Library hours</button>
+      <button class="chip" data-q="What campus events are happening this week?">Campus events</button>
+    </div>
+
+    <div class="composer">
+      <div class="composer-inner">
+        <textarea id="input" rows="1" placeholder="Message KITCOEK Assistant…"></textarea>
+        <button class="send-btn" id="sendBtn" aria-label="Send message">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+      </div>
+      <p class="disclaimer">The assistant can make mistakes. Confirm important dates and requirements with your department.</p>
+    </div>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

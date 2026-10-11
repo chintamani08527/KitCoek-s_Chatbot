@@ -1,0 +1,172 @@
+import json
+import re
+from typing import Dict, Any, List, Optional
+from google import genai
+from google.genai import types
+from backend.app.core.config import settings
+
+class GeminiService:
+    def __init__(self):
+        self.api_key = settings.GEMINI_API_KEY
+        self.client = None
+        if self.api_key and self.api_key.strip() and self.api_key != "your_gemini_api_key_here":
+            try:
+                self.client = genai.Client(api_key=self.api_key)
+            except Exception as e:
+                print(f"[Warning] Failed to initialize Gemini Client: {e}")
+
+    def is_configured(self) -> bool:
+        return self.client is not None
+
+    def classify_query(self, query: str) -> Dict[str, Any]:
+        """
+        Classifies query into:
+        - category: 'academic', 'navigation', 'rules', 'general_college', 'out_of_scope'
+        - is_relevant: bool
+        """
+        nav_keywords = [
+            "where is", "how to reach", "location of", "direction", "floor", "building",
+            "room", "classroom", "lab", "cbcr", "canteen", "library location", "office location",
+            "department location", "where can i find"
+        ]
+        q_lower = query.lower()
+        if any(kw in q_lower for kw in nav_keywords):
+            return {"category": "navigation", "is_relevant": True}
+
+        # Fast heuristic for unrelated out-of-scope queries to save network calls
+        unrelated_topics = [
+            "recipe", "cake", "bake", "cook", "movie", "film", "actor", "bitcoin", "crypto",
+            "stock market", "football", "cricket match", "weather in", "song", "lyrics", "game"
+        ]
+        if any(topic in q_lower for topic in unrelated_topics):
+            # Double check it doesn't mention college
+            if not any(c in q_lower for c in ["kit", "college", "campus", "engineering", "dept", "exam"]):
+                return {"category": "out_of_scope", "is_relevant": False}
+
+        college_keywords = [
+            "kit", "kitcoek", "syllabus", "subject", "semester", "sem", "nep", "exam", "course",
+            "unit", "notes", "passing", "grade", "credits", "result", "prn", "admission", "fee",
+            "scholarship", "hostel", "mess", "faculty", "hod", "department", "lab", "classroom",
+            "cbcr", "cscr", "mccr", "library", "canteen", "attendance", "placement", "rules"
+        ]
+        if any(w in q_lower for w in college_keywords):
+            return {"category": "academic", "is_relevant": True}
+
+        # Check if greeting or introduction
+        greetings = ["hi", "hello", "hey", "who are you", "what can you do", "help", "good morning", "good evening"]
+        if any(q_lower.startswith(g) or q_lower == g for g in greetings):
+            return {"category": "general_college", "is_relevant": True}
+
+        return {"category": "academic", "is_relevant": True}
+
+    def generate_rag_answer(
+        self,
+        query: str,
+        context_chunks: List[str],
+        location_data: Optional[Dict[str, Any]] = None,
+        chat_history: Optional[List[Dict[str, str]]] = None
+    ) -> Dict[str, Any]:
+        """
+        Generate grounded RAG answer using official college documents and campus location data.
+        Follows strict grounding: never invents facts, syllabus, or room numbers.
+        """
+        if not self.is_configured():
+            if context_chunks:
+                joined = "\n\n".join(context_chunks[:2])
+                return {
+                    "answer": f"<p>{joined[:600]}...</p>",
+                    "follow_up_questions": ["Where can I view the full syllabus?", "What are the passing criteria?"]
+                }
+            elif location_data:
+                return {
+                    "answer": f"<p><strong>{location_data.get('name')}</strong> is located in the <strong>{location_data.get('building')}</strong> on the <strong>{location_data.get('floor')}</strong> (Room: {location_data.get('room_number', 'N/A')}).</p><p>Landmark: {location_data.get('landmark', 'Main Campus')}</p>",
+                    "follow_up_questions": ["Where is CBCR?", "How do I reach the Library?"]
+                }
+            else:
+                return {
+                    "answer": "<p>Official records for this are not currently available in my knowledge base. Please check with your department or student section.</p>",
+                    "follow_up_questions": []
+                }
+
+        context_str = ""
+        if context_chunks:
+            context_str += "=== OFFICIAL COLLEGE DOCUMENTS CONTEXT ===\n"
+            for i, chunk in enumerate(context_chunks):
+                context_str += f"[Extract {i+1}]:\n{chunk}\n\n"
+        if location_data:
+            context_str += "=== CAMPUS LOCATION DATABASE ===\n"
+            context_str += json.dumps(location_data, indent=2) + "\n\n"
+
+        system_instruction = """You are the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
+Core Directives:
+1. ONLY answer questions regarding KITCOEK campus, student academics (syllabus, NEP-2020, subjects, semesters, notes, units, important questions, exams, faculty, facilities, rules, notices), and campus locations.
+2. Politely decline any question completely unrelated to KITCOEK or college life with: "I am KITCOEK's campus assistant and can only answer questions related to KITCOEK academics, campus locations, syllabus, and college procedures."
+3. GROUNDING IS STRICT: Use the provided context as the authority for college-specific facts (room numbers, syllabus units, dates, rules). NEVER invent or hallucinate course details, faculty names, or room numbers.
+4. If the information requested is not present in the provided context, state clearly: "Official records for this topic are not currently available in the knowledge base. Please verify with your department head or student section."
+5. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>). Include official URLs from context as clickable links when available.
+6. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+
+Output format (respond ONLY with valid JSON):
+{
+  "answer": "<p>HTML answer...</p>",
+  "follow_up_questions": ["Question 1", "Question 2"]
+}
+"""
+
+        user_prompt = f"""Context:
+{context_str if context_str else "No specific document match found in knowledge base."}
+
+Student Query: {query}
+"""
+
+        try:
+            models_to_try = [settings.GEMINI_MODEL, "gemini-3.5-flash-lite", "gemini-3.8-flash"]
+            last_err = None
+            response = None
+            
+            for m in models_to_try:
+                try:
+                    response = self.client.models.generate_content(
+                        model=m,
+                        contents=[
+                            {"role": "user", "parts": [{"text": system_instruction + "\n\n" + user_prompt}]}
+                        ],
+                        config=types.GenerateContentConfig(
+                            temperature=0.2,
+                            response_mime_type="application/json"
+                        )
+                    )
+                    if response and response.text:
+                        break
+                except Exception as ex:
+                    last_err = ex
+                    continue
+
+            if not response or not response.text:
+                raise last_err or Exception("No response generated")
+
+            data = json.loads(response.text.strip())
+            return {
+                "answer": data.get("answer", "<p>No response generated.</p>"),
+                "follow_up_questions": data.get("follow_up_questions", [])
+            }
+        except Exception as e:
+            print(f"[Error] Gemini API generation error: {e}")
+            if context_chunks:
+                return {
+                    "answer": f"<p>{context_chunks[0][:400]}...</p>",
+                    "follow_up_questions": ["Where can I view the full syllabus?", "What are the passing criteria?"]
+                }
+            return {
+                "answer": "<p>Official records for this are not currently available in my knowledge base. Please check with your department or student section.</p>",
+                "follow_up_questions": []
+            }
+
+
+_gemini_service = None
+
+def get_gemini_service() -> GeminiService:
+    global _gemini_service
+    if _gemini_service is None:
+        _gemini_service = GeminiService()
+    return _gemini_service

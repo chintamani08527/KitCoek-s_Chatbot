@@ -1,0 +1,72 @@
+# ==============================================================================
+# OFFICIAL KITCOEK CLASSROOM, LAB & BUILDING LOCATION DIRECTORY
+# Sourced from the official KIT Classroom Allocation & Building Block Map
+# ==============================================================================
+
+1. IMER BUILDING:
+- Ground Floor:
+  * ETCR 04 (Electronics & Telecommunication Classroom 04)
+- First Floor:
+  * CSAMCR-01 (Computer Science AIML Classroom 01)
+  * CSDSCR-01 (Computer Science Data Science Classroom 01)
+  * ETCR 03 (Electronics & Telecommunication Classroom 03)
+- Second Floor:
+  * CSAMCR 02 (Computer Science AIML Classroom 02)
+  * CSAMCR 03 (Computer Science AIML Classroom 03)
+  * CSAMCR 04 (Computer Science AIML Classroom 04)
+  * CSDSCR 02 (Computer Science Data Science Classroom 02)
+  * CSDSCR 03 (Computer Science Data Science Classroom 03)
+- Third Floor:
+  * CBCR 01 (Central Block Classroom 01)
+  * CBCR 02 (Central Block Classroom 02)
+  * CBCR 03 (Central Block Classroom 03)
+  * CBCR 04 (Central Block Classroom 04)
+  * CBCR 05 (Central Block Classroom 05)
+
+2. MAIN BUILDING:
+- Entrance: Main Building Entrance (central division between North Wing & South Wing)
+- North Wing Ground Floor:
+  * CVCR 01, CVCR 02, CVCR 03, CVCR 04 (Civil Engineering Classrooms)
+  * ENCR 01, ENCR 02, ENPGT (Environmental Engineering Classrooms / PG)
+  * Civil Model Room
+  * Civil Geotech. Lab (Geotechnical Engineering Laboratory)
+  * Civil Transportation Lab (Transportation Engineering Laboratory)
+- South Wing Ground Floor:
+  * EECR 01, EECR 02 (Electrical Engineering Classrooms)
+  * CSCR 05, CSCR 06 (Computer Science Classrooms 05 & 06)
+  * ETCR 03 (Electronics Classroom)
+- North Wing First Floor:
+  * CSCR 03, CSCR 04, CSCR 07 (Computer Science Classrooms 03, 04, 07)
+- South Wing First Floor:
+  * CSCR 01, CSCR 02 (Computer Science Classrooms 01 & 02)
+  * BSHCR 11, BSHCR 12 (Basic Sciences & Humanities Classrooms 11 & 12)
+- North Wing Second Floor:
+  * BSHCR 01, BSHCR 02, BSHCR 03, BSHCR 04, BSHCR 05 (Basic Sciences & Humanities Classrooms)
+- South Wing Second Floor:
+  * BSHCR 06, BSHCR 07, BSHCR 08, BSHCR 09, BSHCR 10 (Basic Sciences & Humanities Classrooms)
+
+3. MECHANICAL BUILDING:
+- Entrance: Mechanical Building Entrance
+- Ground Floor:
+  * MCCR 01 (Mechanical Classroom 01)
+  * Mech. Material Lab (Material Science & Testing Laboratory)
+- First Floor:
+  * MCCR 02, MCCR 03 (Mechanical Classrooms 02 & 03)
+  * Mech. Thermal Lab (Thermal Engineering Laboratory)
+  * Mech. Industrial Lab (Industrial Engineering & Automation Laboratory)
+- Second Floor:
+  * MCCR 04, MCCR 05, MCCR 06 (Mechanical Classrooms 04, 05, 06)
+- Third Floor:
+  * MCCR 07 (Mechanical Classroom 07)
+
+4. BIOTECHNOLOGY BUILDING:
+- First Floor:
+  * BTCR 01 (Biotechnology Classroom 01)
+  * BTCR 02 (Biotechnology Classroom 02)
+
+5. ETC BUILDING (ELECTRONICS & TELECOMMUNICATION):
+- First Floor:
+  * ETCR 01 (Electronics & Telecommunication Classroom 01)
+  * ETCR 02 (Electronics & Telecommunication Classroom 02)
+- Third Floor:
+  * ETC SEM. HALL (ETC Department Seminar Hall)

@@ -1,0 +1,62 @@
+# ==============================================================================
+# OFFICIAL KITCOEK ONLINE SYLLABUS DIRECTORY & NEP-2020 CURRICULUM LINKS
+# Sourced directly from https://www.kitcoek.in/online-syllabus
+# ==============================================================================
+
+INSTITUTION: Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur
+CURRICULUM SCHEMES: 
+- 2023 [NEP-2020] Scheme (National Education Policy 2020 compliant)
+- 2021 Cycle-2 Autonomy Scheme
+- 2017 Cycle-1 Autonomy Scheme
+
+OFFICIAL NEP-2020 ACADEMIC REGULATIONS & GUIDELINES:
+- Rules & Regulations UG NEP-2020: https://www.kitcoek.in/documents/academics/importantDocuments/UG%20ACADEMIC%20RULES%20AND%20REGULATIONS_NEP%202020.pdf
+- Rules & Regulations PG NEP-2020: https://www.kitcoek.in/documents/academics/importantDocuments/PG%20ACADEMIC%20RULES%20AND%20REGULATIONS_NEP%202020.pdf
+- UG Internship Policy NEP: https://www.kitcoek.in/documents/academics/internship-policy/Internship%20Policy%20wef.%202026-27%20(NEP).pdf
+
+FIRST YEAR B.TECH (F.Y. B.TECH) NEP-2020 SYLLABUS:
+1. Circuit Branches (CSE, AI & ML, Data Science, ENTC, Electrical):
+   - Syllabus & Structure: https://kitcoek.s3.amazonaws.com/syllabus/FY%20B%20Tech%20Circuit%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf
+   - Subjects: Engineering Mathematics-I & II, Engineering Physics / Chemistry, Basic Electrical Engineering, Programming for Problem Solving (C / Python), Engineering Graphics, Basic Electronics, Communication Skills, Environmental Studies.
+2. Core Branches (Biotechnology, Civil, Civil & Environmental, Mechanical):
+   - Syllabus & Structure: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf
+   - Subjects: Engineering Mechanics, Basic Mechanical Systems, Workshop Practices, Engineering Materials, Chemistry for Engineers.
+
+DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING (CSE):
+1. Second Year (S.Y. B.Tech CSE):
+   - Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/SY-CSE-AY-2022-23-Syllabus%20-%20updatged_CO_PO.pdf
+   - Key Subjects: Discrete Mathematical Structures, Data Structures and Algorithms, Object Oriented Programming with Java/C++, Computer Organization and Architecture, Digital Systems and Microprocessors.
+2. Third Year (T.Y. B.Tech CSE):
+   - Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/TY-CSE-Syllabus-AY-2023-24%20-%20updated%20copy%2025.pdf
+   - Key Subjects: CS501 Database Management Systems (DBMS), CS502 Design & Analysis of Algorithms (DAA), Operating Systems, Software Engineering, Machine Learning & AI, Computer Networks, Theory of Computation.
+3. Final Year B.Tech CSE:
+   - Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/2017-FinalYear_Old_syllabus.pdf
+   - Key Subjects: Distributed Systems, Cloud Computing, Big Data Analytics, Information Security, Capstone Project Phase I & II.
+4. CSE Structure Document:
+   - Link: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Structure4Web_AY2324.pdf
+
+CSE (ARTIFICIAL INTELLIGENCE & MACHINE LEARNING - AIML):
+1. S.Y. CSE (AIML):
+   - Syllabus: https://kitcoek.s3.amazonaws.com/syllabus/2.CSE%20AIML%20SY%20Syllabus%20Sem%203%20to%20Sem%204.pdf
+2. T.Y. CSE (AIML):
+   - Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20CSE(AIML)_syllabus_SEM-V_WEBSITE%20COPY_17%20JUNE%2023.pdf
+3. Honors Specialization in Cyber Security:
+   - Structure & Syllabus: https://kitcoek.s3.amazonaws.com/syllabus/B-Tech%20(Hons-)%20CSE(AIML)_Cyber%20Security%20Structure.pdf
+
+CSE (DATA SCIENCE - DS):
+1. S.Y. CSE (DS):
+   - Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SYCSE-DS-Syllabus-28-09-22.pdf
+2. T.Y. CSE (DS):
+   - Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TYCSE(DS)_syllabus_SEM-V_VI_WEBSITE%20COPY_17%20JUNE%2023.pdf
+3. Honors Specialization in Cyber Security for Data Science:
+   - Link: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B-%20Tech%20(Hons-)%20Computer%20Science%20and%20Engineering%20(Data%20Science)%20with%20specialization%20in%20cyber%20security.pdf
+
+BIOTECHNOLOGY ENGINEERING:
+- S.Y. B.Tech Biotech Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SY%20BTech%20syllabus%20contents%202022-23.pdf
+- T.Y. B.Tech Biotech Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20BTech%20syllabus%20contents%202023-24.pdf
+- Autonomy Structure: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Autonomy%202nd%20Cycle%20Structure%20Biotech%20%20wef%202022-23.pdf
+
+EXAM CELL QUESTION PAPERS & NOTICES:
+- Old Question Papers Google Drive repository: https://drive.google.com/drive/folders/1o0k3KU6SWt7Ep2GitzmeAUm_0hGCEZsZ?usp=drive_link
+- Autonomous Exam Timetables and Notices portal: https://www.kitcoek.in/notice
+- vmedulife LMS portal login: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur

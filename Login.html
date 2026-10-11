@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KITCOEK Assistant — Sign in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="login-page">
+
+  <div class="login-side">
+    <div class="crest">K</div>
+    <h2>KITCOEK<span>Campus Assistant</span></h2>
+    <p class="side-copy">Sign in with your PRN to get help with admissions, courses, hostel, placements, and everything else on campus.</p>
+
+    <ul class="side-points">
+      <li>Course registration &amp; timetable queries</li>
+      <li>Financial aid &amp; fee deadlines</li>
+      <li>Hostel status &amp; campus events</li>
+    </ul>
+  </div>
+
+  <div class="login-card-wrap">
+    <form class="login-card" id="loginForm" novalidate>
+      <h1>Sign in</h1>
+      <p class="subtitle">Enter your details to start chatting with Beacon.</p>
+
+      <label for="prn">PRN</label>
+      <input type="text" id="prn" name="prn" placeholder="e.g. 21210123456" autocomplete="off" required>
+      <p class="error" id="prnError"></p>
+
+      <label for="studentName">Full name</label>
+      <input type="text" id="studentName" name="studentName" placeholder="e.g. Aditi Sharma" autocomplete="off" required>
+      <p class="error" id="nameError"></p>
+
+      <button type="submit" class="continue-btn">Continue to chat</button>
+
+      <p class="fine-print">Your PRN is used only to personalize this session and is not shared outside KITCOEK.</p>
+    </form>
+  </div>
+
+</div>
+
+<script src="login.js"></script>
+</body>
+</html>

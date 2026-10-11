@@ -1,0 +1,17 @@
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Vector & SQLite DB data
+backend/data/chroma_db/
+*.db
+*.sqlite3
+
+# Uploaded documents (keep sample docs if needed)
+backend/data/documents/uploads/

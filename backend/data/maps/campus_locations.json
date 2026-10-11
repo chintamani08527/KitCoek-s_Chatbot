@@ -1,0 +1,209 @@
+[
+  {
+    "name": "Central Library",
+    "category": "Library",
+    "building": "Administrative & Library Building",
+    "floor": "Ground Floor & First Floor",
+    "room_number": "LIB-101",
+    "landmark": "Near Main Entrance, opposite Green Lawn",
+    "description": "Houses reference section, reading hall, digital library section with e-journals, and book bank."
+  },
+  {
+    "name": "CBCR 01 to CBCR 05 (Central Block Classrooms)",
+    "category": "CBCR",
+    "building": "IMER Building",
+    "floor": "Third Floor",
+    "room_number": "CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05",
+    "landmark": "IMER Building, 3rd Floor",
+    "description": "Central Block lecture halls and classrooms CBCR 01 through CBCR 05 located on the 3rd floor of the IMER Building."
+  },
+  {
+    "name": "CSAMCR 01 (CSE AIML Classroom 01)",
+    "category": "Classroom",
+    "building": "IMER Building",
+    "floor": "First Floor",
+    "room_number": "CSAMCR-01",
+    "landmark": "IMER Building 1st Floor, next to CSDSCR-01 and ETCR 03",
+    "description": "Classroom for Computer Science Engineering - Artificial Intelligence & Machine Learning."
+  },
+  {
+    "name": "CSDSCR 01 (CSE Data Science Classroom 01)",
+    "category": "Classroom",
+    "building": "IMER Building",
+    "floor": "First Floor",
+    "room_number": "CSDSCR-01",
+    "landmark": "IMER Building 1st Floor, next to CSAMCR-01",
+    "description": "Classroom for Computer Science Engineering - Data Science."
+  },
+  {
+    "name": "CSAMCR 02, 03, 04 (CSE AIML Classrooms)",
+    "category": "Classroom",
+    "building": "IMER Building",
+    "floor": "Second Floor",
+    "room_number": "CSAMCR 02, CSAMCR 03, CSAMCR 04",
+    "landmark": "IMER Building 2nd Floor",
+    "description": "AIML branch classrooms on the second floor of IMER Building."
+  },
+  {
+    "name": "CSDSCR 02, 03 (CSE Data Science Classrooms)",
+    "category": "Classroom",
+    "building": "IMER Building",
+    "floor": "Second Floor",
+    "room_number": "CSDSCR 02, CSDSCR 03",
+    "landmark": "IMER Building 2nd Floor",
+    "description": "Data Science branch classrooms on the second floor of IMER Building."
+  },
+  {
+    "name": "ETCR 04 (Electronics Classroom 04)",
+    "category": "Classroom",
+    "building": "IMER Building",
+    "floor": "Ground Floor",
+    "room_number": "ETCR 04",
+    "landmark": "IMER Building Ground Floor",
+    "description": "Electronics & Telecommunication classroom on IMER ground floor."
+  },
+  {
+    "name": "CSCR 03, CSCR 04, CSCR 07 (CSE Classrooms - North Wing)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "First Floor (North Wing)",
+    "room_number": "CSCR 03, CSCR 04, CSCR 07",
+    "landmark": "Main Building North Wing, 1st Floor",
+    "description": "Computer Science & Engineering lecture halls in North Wing."
+  },
+  {
+    "name": "CSCR 01, CSCR 02 (CSE Classrooms - South Wing)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "First Floor (South Wing)",
+    "room_number": "CSCR 01, CSCR 02",
+    "landmark": "Main Building South Wing, 1st Floor",
+    "description": "Computer Science & Engineering lecture halls in South Wing alongside BSHCR 11, 12."
+  },
+  {
+    "name": "CSCR 05, CSCR 06 (CSE Classrooms - South Wing Ground)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "Ground Floor (South Wing)",
+    "room_number": "CSCR 05, CSCR 06",
+    "landmark": "Main Building South Wing Ground Floor",
+    "description": "Computer Science lecture halls alongside EECR 01, EECR 02 and ETCR 03."
+  },
+  {
+    "name": "BSHCR 01 to 05 (Basic Science & Humanities - North Wing)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "Second Floor (North Wing)",
+    "room_number": "BSHCR 01, BSHCR 02, BSHCR 03, BSHCR 04, BSHCR 05",
+    "landmark": "Main Building North Wing, 2nd Floor",
+    "description": "First year engineering and Basic Science classrooms BSHCR 01 through 05."
+  },
+  {
+    "name": "BSHCR 06 to 10 (Basic Science & Humanities - South Wing)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "Second Floor (South Wing)",
+    "room_number": "BSHCR 06, BSHCR 07, BSHCR 08, BSHCR 09, BSHCR 10",
+    "landmark": "Main Building South Wing, 2nd Floor",
+    "description": "Basic Science and Humanities classrooms BSHCR 06 through 10."
+  },
+  {
+    "name": "CVCR 01 to 04 & Civil Labs (Civil Engineering)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "Ground Floor (North Wing)",
+    "room_number": "CVCR 01, CVCR 02, CVCR 03, CVCR 04",
+    "landmark": "Main Building North Wing Ground Floor",
+    "description": "Civil Classrooms CVCR 01-04, ENCR 01-02, ENPGT, Civil Model Room, Geotech Lab, and Transportation Lab."
+  },
+  {
+    "name": "EECR 01, EECR 02 (Electrical Engineering Classrooms)",
+    "category": "Classroom",
+    "building": "Main Building",
+    "floor": "Ground Floor (South Wing)",
+    "room_number": "EECR 01, EECR 02",
+    "landmark": "Main Building South Wing Ground Floor",
+    "description": "Electrical engineering classrooms."
+  },
+  {
+    "name": "MCCR 01 & Mech. Material Lab",
+    "category": "Lab",
+    "building": "Mechanical Building",
+    "floor": "Ground Floor",
+    "room_number": "MCCR 01",
+    "landmark": "Mechanical Building Entrance Ground Floor",
+    "description": "Classroom MCCR 01 and Mechanical Material Science Lab."
+  },
+  {
+    "name": "MCCR 02, 03 & Mech Thermal / Industrial Labs",
+    "category": "Lab",
+    "building": "Mechanical Building",
+    "floor": "First Floor",
+    "room_number": "MCCR 02, MCCR 03",
+    "landmark": "Mechanical Building 1st Floor",
+    "description": "MCCR 02, MCCR 03, Mechanical Thermal Lab, and Mechanical Industrial Lab."
+  },
+  {
+    "name": "MCCR 04, 05, 06 (Mechanical Classrooms)",
+    "category": "Classroom",
+    "building": "Mechanical Building",
+    "floor": "Second Floor",
+    "room_number": "MCCR 04, MCCR 05, MCCR 06",
+    "landmark": "Mechanical Building 2nd Floor",
+    "description": "Second floor lecture halls for Mechanical Engineering."
+  },
+  {
+    "name": "MCCR 07 (Mechanical Classroom 07)",
+    "category": "Classroom",
+    "building": "Mechanical Building",
+    "floor": "Third Floor",
+    "room_number": "MCCR 07",
+    "landmark": "Mechanical Building 3rd Floor",
+    "description": "Third floor lecture hall for Mechanical Engineering."
+  },
+  {
+    "name": "BTCR 01, BTCR 02 (Biotechnology Classrooms)",
+    "category": "Classroom",
+    "building": "Biotechnology Building",
+    "floor": "First Floor",
+    "room_number": "BTCR 01, BTCR 02",
+    "landmark": "Biotechnology Building 1st Floor",
+    "description": "Classrooms for Biotechnology Engineering."
+  },
+  {
+    "name": "ETCR 01, ETCR 02 (ETC Classrooms)",
+    "category": "Classroom",
+    "building": "ETC Building",
+    "floor": "First Floor",
+    "room_number": "ETCR 01, ETCR 02",
+    "landmark": "ETC Building 1st Floor",
+    "description": "Electronics & Telecommunication Engineering classrooms."
+  },
+  {
+    "name": "ETC Seminar Hall",
+    "category": "Office",
+    "building": "ETC Building",
+    "floor": "Third Floor",
+    "room_number": "ETC SEM. HALL",
+    "landmark": "ETC Building 3rd Floor",
+    "description": "Department Seminar Hall for Electronics & Telecommunication."
+  },
+  {
+    "name": "Central Canteen",
+    "category": "Canteen",
+    "building": "Campus Amenity Block",
+    "floor": "Ground Floor",
+    "room_number": "CAN-01",
+    "landmark": "Behind Mechanical Workshop and near Boy's Hostel",
+    "description": "Vegetarian cafeteria serving breakfast, lunch, tea and snacks for students and faculty."
+  },
+  {
+    "name": "Principal Office & Administration",
+    "category": "Office",
+    "building": "Main Administrative Building",
+    "floor": "Ground Floor",
+    "room_number": "ADM-01",
+    "landmark": "Main Porch entrance",
+    "description": "Offices of the Executive Director, Principal, Registrar and Student Section counters."
+  }
+]
