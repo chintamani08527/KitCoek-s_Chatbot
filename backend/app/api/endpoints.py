@@ -39,6 +39,9 @@ def format_club_dict(club: StudentClub) -> dict:
         "pdf_url": club.pdf_url
     }
 
+# In-memory response cache for frequent / repeated student questions
+_chat_cache = {}
+
 @router.post("/chat", response_model=ChatResponse)
 def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     gemini = get_gemini_service()
@@ -47,6 +50,10 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     query = req.message.strip()
     if not query:
         raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+    q_key = query.lower()
+    if q_key in _chat_cache:
+        return _chat_cache[q_key]
         
     # 1. Query Classification and scope check
     classification = gemini.classify_query(query)
@@ -209,7 +216,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     db.add(history_entry)
     db.commit()
     
-    return ChatResponse(
+    resp = ChatResponse(
         reply=rag_result["answer"],
         category=category,
         sources=citations,
@@ -218,6 +225,10 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         location_details=matched_loc_data,
         club_details=matched_club_data
     )
+    if len(_chat_cache) > 200:
+        _chat_cache.clear()
+    _chat_cache[q_key] = resp
+    return resp
 
 @router.get("/history")
 def get_chat_history(session_id: str = "default", db: Session = Depends(get_db)):

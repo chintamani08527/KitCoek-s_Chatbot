@@ -34,12 +34,14 @@ class VectorStoreService:
                 self.gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY)
             except Exception as e:
                 print(f"[Warning] Failed to initialize Gemini for embeddings: {e}")
+        # In-memory LRU query embedding cache
+        self._query_cache = {}
 
     def _save(self):
         with open(self.index_file, "w", encoding="utf-8") as f:
             json.dump(self.data, f, ensure_ascii=False)
 
-    def embed_texts(self, texts: List[str]) -> List[List[float]]:
+    def embed_texts(self, texts: List[str], is_query: bool = False) -> List[List[float]]:
         """Generate high-dimension embeddings using Gemini models/gemini-embedding-001 with rate-limit pacing."""
         if not self.gemini_client:
             raise ValueError("GEMINI_API_KEY is required to generate embeddings.")
@@ -56,7 +58,8 @@ class VectorStoreService:
                     )
                     for item in res.embeddings:
                         embeddings.append(item.values)
-                    time.sleep(0.6) # gentle pacing to prevent 429
+                    if not is_query and len(texts) > 1:
+                        time.sleep(0.6) # gentle pacing only for bulk document indexing
                     break
                 except Exception as ex:
                     if ("429" in str(ex) or "RESOURCE_EXHAUSTED" in str(ex)) and attempt < 4:
@@ -118,7 +121,14 @@ class VectorStoreService:
         if not self.gemini_client or not self.data:
             return []
             
-        query_embedding = self.embed_texts([query])[0]
+        q_key = query.strip().lower()
+        if q_key in self._query_cache:
+            query_embedding = self._query_cache[q_key]
+        else:
+            query_embedding = self.embed_texts([query], is_query=True)[0]
+            if len(self._query_cache) > 300:
+                self._query_cache.clear()
+            self._query_cache[q_key] = query_embedding
         
         scored_items = []
         for item in self.data:
