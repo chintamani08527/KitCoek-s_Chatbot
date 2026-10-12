@@ -226,10 +226,23 @@ async function sendMessage(text){
         <div class="nav-box">
           <p><strong>Campus Location:</strong> ${escapeHtml(loc.building)} — ${escapeHtml(loc.floor)}</p>
           ${loc.landmark ? `<p style="font-size:12px; margin-top:2px;"><em>Landmark: ${escapeHtml(loc.landmark)}</em></p>` : ''}
-          ${data.map_url ? `<a href="${data.map_url}" target="_blank" class="map-link-btn">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Open Campus Map
-          </a>` : ''}
+          ${loc.room_number ? `<p style="font-size:12px; margin-top:2px;"><strong>Block / Rooms:</strong> ${escapeHtml(loc.room_number)}</p>` : ''}
+          <div class="map-thumbnail-container open-map-modal-btn" title="Click to open Aerial Campus Map">
+            <img src="/api/locations/map" alt="Aerial Campus Map Preview">
+            <div class="map-thumbnail-overlay">
+              <span>🗺️ Official Aerial Campus Map (Tap to view)</span>
+              <span>🔍 Zoom</span>
+            </div>
+          </div>
+          <div style="margin-top:8px; display:flex; gap:8px;">
+            <button class="map-link-btn open-map-modal-btn" type="button">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+              View Aerial Map
+            </button>
+            <a href="/api/locations/map" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline);">
+              ↗ Open in Tab
+            </a>
+          </div>
         </div>
       `;
     }
@@ -619,8 +632,41 @@ if (resetFilterBtn) {
   });
 }
 
-// Global click delegation for cards and suggestions
+// Map Modal Controls
+const mapModal = document.getElementById('mapModal');
+const mapModalCloseBtn = document.getElementById('mapModalCloseBtn');
+const tabMapBtn = document.getElementById('tabMapBtn');
+const headerMapBtn = document.getElementById('headerMapBtn');
+
+function openMapModal() {
+  if (mapModal) mapModal.style.display = 'flex';
+}
+
+function closeMapModal() {
+  if (mapModal) mapModal.style.display = 'none';
+}
+
+if (tabMapBtn) tabMapBtn.addEventListener('click', openMapModal);
+if (headerMapBtn) headerMapBtn.addEventListener('click', openMapModal);
+if (mapModalCloseBtn) mapModalCloseBtn.addEventListener('click', closeMapModal);
+if (mapModal) {
+  mapModal.addEventListener('click', (e) => {
+    if (e.target === mapModal) closeMapModal();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mapModal && mapModal.style.display === 'flex') {
+    closeMapModal();
+  }
+});
+
+// Global click delegation for cards, map, and suggestions
 document.addEventListener('click', (e) => {
+  if (e.target.closest('.open-map-modal-btn')) {
+    openMapModal();
+    return;
+  }
+
   const viewBtn = e.target.closest('.view-club-btn');
   if (viewBtn && viewBtn.dataset.clubId) {
     if (!clubsLoaded) {

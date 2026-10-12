@@ -33,9 +33,19 @@ app.include_router(api_router, prefix="/api")
 # Map endpoint
 @app.get("/api/locations/map")
 def get_campus_map():
+    map_jpg = "./backend/data/maps/campus_map.jpg"
+    if os.path.exists(map_jpg):
+        return FileResponse(map_jpg, media_type="image/jpeg", filename="kitcoek_campus_map.jpg")
     map_path = "./backend/data/maps/campus_map.svg"
     if os.path.exists(map_path):
         return FileResponse(map_path, media_type="image/svg+xml")
+    return {"error": "Campus map not found"}
+
+@app.get("/campus_map.jpg")
+def serve_campus_map_direct():
+    map_jpg = "./backend/data/maps/campus_map.jpg"
+    if os.path.exists(map_jpg):
+        return FileResponse(map_jpg, media_type="image/jpeg")
     return {"error": "Campus map not found"}
 
 # Health check endpoint
