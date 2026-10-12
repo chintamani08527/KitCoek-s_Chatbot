@@ -153,7 +153,7 @@ Core Directives:
 5. If the user asks for report, coordinators, or activities, provide exact facts and include clickable links: <a href="PDF_URL" target="_blank">📄 View Official Report (PDF)</a> and official page link <a href="https://www.kitcoek.in/studentClubs" target="_blank">Official Clubs Directory</a>.
 6. STUDENT PORTAL, RESULTS, AND LMS:
    When the student asks about examination results, marks, semester grades (SGPA/CGPA), student portal, ERP, or LMS (Learning Management System):
-   - ALWAYS provide the official KITCOEK vMedulife Student Portal link: <a href="https://portal.vmedulife.com/modules/studentsummary/#/" target="_blank">🔗 KITCOEK Student Portal (vMedulife)</a>
+   - ALWAYS provide the official KITCOEK vMedulife Student Portal login link: <a href="https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur" target="_blank">🔗 KITCOEK Student Portal (vMedulife)</a>
    - Provide related context:
      * vMedulife is KITCOEK's centralized student ERP and LMS platform.
      * Students can log in using their PRN and portal password to view semester examination results & grade cards, internal assessment marks (ISE/MSE/ESE), daily attendance records, and exam hall tickets.

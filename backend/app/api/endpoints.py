@@ -186,7 +186,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         "sgpa", "cgpa", "marksheet", "attendance", "hall ticket", "admit card", "studentsummary"
     ])
     if is_portal_intent:
-        portal_url = "https://portal.vmedulife.com/modules/studentsummary/#/"
+        portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
 
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
