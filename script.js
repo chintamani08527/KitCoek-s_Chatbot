@@ -8,6 +8,42 @@ const sidebarName = document.getElementById('sidebarName');
 const sidebarPrn = document.getElementById('sidebarPrn');
 const signOutLink = document.getElementById('signOutLink');
 
+// Navigation elements
+const chatSection = document.getElementById('chatSection');
+const clubsSection = document.getElementById('clubsSection');
+const tabChatBtn = document.getElementById('tabChatBtn');
+const tabClubsBtn = document.getElementById('tabClubsBtn');
+const headerSwitchClubsBtn = document.getElementById('headerSwitchClubsBtn');
+const headerSwitchChatBtn = document.getElementById('headerSwitchChatBtn');
+
+// Clubs directory elements
+const clubsGrid = document.getElementById('clubsGrid');
+const clubsEmpty = document.getElementById('clubsEmpty');
+const categoryFilters = document.getElementById('categoryFilters');
+const clubSearchInput = document.getElementById('clubSearchInput');
+const clearSearchBtn = document.getElementById('clearSearchBtn');
+const resetFilterBtn = document.getElementById('resetFilterBtn');
+const totalClubsCount = document.getElementById('totalClubsCount');
+const catCountAll = document.getElementById('catCountAll');
+
+// Modal elements
+const clubModal = document.getElementById('clubModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalCategory = document.getElementById('modalCategory');
+const modalClubName = document.getElementById('modalClubName');
+const modalAbbr = document.getElementById('modalAbbr');
+const modalBody = document.getElementById('modalBody');
+const modalPdfBtn = document.getElementById('modalPdfBtn');
+const modalSourceBtn = document.getElementById('modalSourceBtn');
+const modalAskAiBtn = document.getElementById('modalAskAiBtn');
+
+let currentModalClub = null;
+let allClubs = [];
+let clubCategories = [];
+let currentCategory = 'All';
+let currentSearch = '';
+let clubsLoaded = false;
+
 // ---- Student session (set to default if not set) ----
 let studentName = sessionStorage.getItem('kitcoek_student_name');
 let studentPrn = sessionStorage.getItem('kitcoek_student_prn');
@@ -19,8 +55,8 @@ if (!studentName) {
   sessionStorage.setItem('kitcoek_student_prn', studentPrn);
 }
 
-sidebarName.textContent = studentName || 'Student';
-sidebarPrn.textContent = studentPrn ? 'PRN ' + studentPrn : '';
+if (sidebarName) sidebarName.textContent = studentName || 'Student';
+if (sidebarPrn) sidebarPrn.textContent = studentPrn ? 'PRN ' + studentPrn : '';
 
 if (signOutLink) {
   signOutLink.addEventListener('click', (e) => {
@@ -31,45 +67,35 @@ if (signOutLink) {
   });
 }
 
-
-// Personalize the first greeting with the student's first name.
+// Personalize the first greeting with the student's first name
 const firstName = studentName ? studentName.trim().split(' ')[0] : '';
 const greetingBubble = document.querySelector('.thread .row.bot .bubble p');
 if (greetingBubble && firstName) {
-  greetingBubble.textContent = `Hi ${firstName}, I'm the KITCOEK Assistant. Ask me about registration, financial aid, hostel, or anything else about campus — or pick a topic below to start.`;
+  greetingBubble.innerHTML = `Hi ${escapeHtml(firstName)}, I'm the KITCOEK Assistant. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.`;
 }
 
-// ---- Canned knowledge base (swap this for a real API call — see bottom) ----
-const knowledge = [
-  { keys: ['financial aid','fafsa','scholarship','tuition','fee'],
-    reply: `<p>Scholarship and fee-related applications for next term are due <strong>November 15</strong>. You'll need:</p>
-            <ul><li>Completed application form</li><li>Income certificate / relevant documents</li><li>Proof of enrollment</li></ul>
-            <p>You can start or check your application in the Student Portal under "Financial Aid."</p>` },
-  { keys: ['register','registration','add','drop','course','class','subject'],
-    reply: `<p>Course registration opens on a rolling schedule by semester. To add or drop a subject:</p>
-            <ul><li>Go to Student Portal → Registration</li><li>Search by subject code or department</li><li>Drop period ends two weeks into the term</li></ul>` },
-  { keys: ['library','hours'],
-    reply: `<p>The central library is open <strong>8am–8pm</strong> Monday–Saturday. Extended hours apply during exam weeks.</p>` },
-  { keys: ['event','events','happening','activities','fest'],
-    reply: `<p>This week on campus:</p>
-            <ul><li>Technical fest prep meeting — Wednesday, Seminar Hall, 3pm</li><li>Cultural evening — Friday, Main Ground, 6pm</li><li>Placement drive orientation — Saturday, Auditorium, 10am</li></ul>` },
-  { keys: ['hostel','room','accommodation'],
-    reply: `<p>Hostel applications are reviewed in the order they're submitted. You can check your status anytime under Student Portal → Hostel. Room allotments for next term go out three weeks before the semester starts.</p>` },
-  { keys: ['admission','apply','eligibility'],
-    reply: `<p>Admissions are handled through the centralized counseling process. You'll need your entrance exam scorecard, 10th/12th mark sheets, and category certificate (if applicable). Visit the Admissions cell for the current cutoff details.</p>` },
-  { keys: ['placement','company','recruitment','job'],
-    reply: `<p>The Training &amp; Placement cell coordinates all campus recruitment drives. Keep your resume and academic records updated on the placement portal to stay eligible for upcoming drives.</p>` },
-  { keys: ['hello','hi','hey'],
-    reply: `<p>Hello! What can I help you find — courses, financial aid, hostel, placements, or something else?</p>` }
-];
-
-function findReply(text){
-  const lower = text.toLowerCase();
-  const match = knowledge.find(k => k.keys.some(word => lower.includes(word)));
-  if (match) return match.reply;
-  return `<p>I don't have a specific answer for that yet, but I can connect you with the right department, or you can try asking about financial aid, course registration, hostel, placements, or campus events.</p>`;
+// ---- View Switching ----
+function switchView(viewName) {
+  if (viewName === 'clubs') {
+    if (chatSection) chatSection.style.display = 'none';
+    if (clubsSection) clubsSection.style.display = 'flex';
+    if (tabChatBtn) tabChatBtn.classList.remove('active');
+    if (tabClubsBtn) tabClubsBtn.classList.add('active');
+    loadClubsDataIfNeeded();
+  } else {
+    if (clubsSection) clubsSection.style.display = 'none';
+    if (chatSection) chatSection.style.display = 'flex';
+    if (tabClubsBtn) tabClubsBtn.classList.remove('active');
+    if (tabChatBtn) tabChatBtn.classList.add('active');
+  }
 }
 
+if (tabChatBtn) tabChatBtn.addEventListener('click', () => switchView('chat'));
+if (tabClubsBtn) tabClubsBtn.addEventListener('click', () => switchView('clubs'));
+if (headerSwitchClubsBtn) headerSwitchClubsBtn.addEventListener('click', () => switchView('clubs'));
+if (headerSwitchChatBtn) headerSwitchChatBtn.addEventListener('click', () => switchView('chat'));
+
+// ---- Chat Functions ----
 function addRow(role, html){
   const row = document.createElement('div');
   row.className = 'row ' + role;
@@ -96,7 +122,6 @@ function removeTyping(){
   if (row) row.remove();
 }
 
-// ---- Dynamic suggestions update ----
 function renderSuggestions(list) {
   if (!suggestions) return;
   if (!list || list.length === 0) return;
@@ -110,6 +135,28 @@ function renderSuggestions(list) {
   });
 }
 
+function escapeHtml(str){
+  if (str === null || str === undefined) return '';
+  const div = document.createElement('div');
+  div.textContent = String(str);
+  return div.innerHTML;
+}
+
+function getCategoryClass(cat) {
+  if (!cat) return '';
+  const map = {
+    'Technical': 'cat-technical',
+    'Entrepreneurship': 'cat-entrepreneurship',
+    'Cultural': 'cat-cultural',
+    'Creative': 'cat-creative',
+    'Social Service': 'cat-social-service',
+    'Environment': 'cat-environment',
+    'Leadership': 'cat-leadership',
+    'Student Development': 'cat-student-development'
+  };
+  return map[cat] || '';
+}
+
 async function sendMessage(text){
   const trimmed = text.trim();
   if (!trimmed) return;
@@ -119,7 +166,7 @@ async function sendMessage(text){
   input.style.height = 'auto';
   sendBtn.disabled = true;
 
-  // add to sidebar history (front of list)
+  // Add to sidebar history
   const li = document.createElement('li');
   li.textContent = trimmed.length > 34 ? trimmed.slice(0,34) + '…' : trimmed;
   historyList.prepend(li);
@@ -147,6 +194,30 @@ async function sendMessage(text){
 
     // Construct response HTML
     let botHtml = data.reply;
+
+    // Append club preview card if present in response
+    if (data.club_details) {
+      const c = data.club_details;
+      const catClass = getCategoryClass(c.category);
+      botHtml += `
+        <div class="chat-club-card">
+          <div class="chat-club-header">
+            <span class="chat-club-category ${catClass}">${escapeHtml(c.category || 'Official Club')}</span>
+            <span class="chat-club-year">${escapeHtml(c.academic_year || 'A.Y. 2025–26')}</span>
+          </div>
+          <h4>${escapeHtml(c.name)} ${c.abbr ? `(${escapeHtml(c.abbr)})` : ''}</h4>
+          <p>${escapeHtml(c.tagline || (c.description ? c.description.slice(0, 150) + '…' : ''))}</p>
+          <div class="chat-club-actions">
+            <button class="chat-club-btn chat-club-btn-secondary view-club-btn" data-club-id="${escapeHtml(c.id)}">
+              🔍 View Full Profile
+            </button>
+            ${c.pdf_url ? `<a href="${c.pdf_url}" target="_blank" class="chat-club-btn chat-club-btn-primary">
+              📄 Official PDF Report
+            </a>` : ''}
+          </div>
+        </div>
+      `;
+    }
 
     // Append navigation map card if present
     if (data.location_details) {
@@ -199,12 +270,6 @@ async function sendMessage(text){
   }
 }
 
-function escapeHtml(str){
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
 sendBtn.addEventListener('click', () => sendMessage(input.value));
 input.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey){
@@ -229,12 +294,354 @@ if (historyList) {
     const li = e.target.closest('li');
     if (li && li.textContent) {
       const q = li.textContent.replace(/…$/, '').trim();
+      switchView('chat');
       sendMessage(q);
     }
   });
 }
 
 newChatBtn.addEventListener('click', () => {
+  switchView('chat');
   thread.innerHTML = '';
-  addRow('bot', `<p>New conversation started. What would you like to know?</p>`);
-});
+  addRow('bot', `<p>New conversation started. Ask me anything about KITCOEK academics, campus, or our 18 student clubs!</p>`);
+});
+
+// ---- Clubs Directory Functions ----
+async function loadClubsDataIfNeeded() {
+  if (clubsLoaded) return;
+  try {
+    const [clubsRes, catsRes] = await Promise.all([
+      fetch('/api/clubs'),
+      fetch('/api/clubs/categories')
+    ]);
+    if (!clubsRes.ok) throw new Error('Failed to load clubs');
+    allClubs = await clubsRes.json();
+    if (catsRes.ok) {
+      clubCategories = await catsRes.json();
+    }
+    clubsLoaded = true;
+    renderCategories();
+    renderClubs();
+  } catch (e) {
+    console.error('Clubs fetch error:', e);
+    if (clubsGrid) {
+      clubsGrid.innerHTML = `
+        <div class="clubs-loading">
+          <p style="color:#b91c1c;">Unable to load clubs directory from backend. Please ensure the backend server is running.</p>
+        </div>
+      `;
+    }
+  }
+}
+
+function renderCategories() {
+  if (!categoryFilters) return;
+  if (catCountAll) catCountAll.textContent = allClubs.length;
+  if (totalClubsCount) totalClubsCount.textContent = `${allClubs.length} Official Clubs`;
+
+  categoryFilters.innerHTML = `
+    <button class="cat-pill ${currentCategory === 'All' ? 'active' : ''}" data-category="All">
+      All (${allClubs.length})
+    </button>
+  `;
+
+  clubCategories.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = `cat-pill ${currentCategory === c.category ? 'active' : ''}`;
+    btn.dataset.category = c.category;
+    btn.textContent = `${c.category} (${c.count})`;
+    categoryFilters.appendChild(btn);
+  });
+}
+
+function renderClubs() {
+  if (!clubsGrid) return;
+  const filtered = allClubs.filter(club => {
+    const matchCat = (currentCategory === 'All' || club.category === currentCategory);
+    if (!matchCat) return false;
+    if (!currentSearch) return true;
+    const s = currentSearch.toLowerCase();
+    const nameMatch = club.name.toLowerCase().includes(s);
+    const abbrMatch = club.abbr && club.abbr.toLowerCase().includes(s);
+    const descMatch = club.description && club.description.toLowerCase().includes(s);
+    const skillsMatch = Array.isArray(club.skills_developed) 
+      ? club.skills_developed.some(sk => sk.toLowerCase().includes(s))
+      : (club.skills_developed && club.skills_developed.toLowerCase().includes(s));
+    const actMatch = Array.isArray(club.major_activities)
+      ? club.major_activities.some(a => (typeof a === 'string' ? a : a.event || a.name || '').toLowerCase().includes(s))
+      : (club.major_activities && club.major_activities.toLowerCase().includes(s));
+    const coordMatch = club.faculty_coordinator && club.faculty_coordinator.toLowerCase().includes(s);
+    return nameMatch || abbrMatch || descMatch || skillsMatch || actMatch || coordMatch;
+  });
+
+  if (filtered.length === 0) {
+    clubsGrid.innerHTML = '';
+    if (clubsEmpty) clubsEmpty.style.display = 'block';
+    return;
+  }
+
+  if (clubsEmpty) clubsEmpty.style.display = 'none';
+
+  clubsGrid.innerHTML = filtered.map(c => {
+    const catClass = getCategoryClass(c.category);
+    const skills = Array.isArray(c.skills_developed) ? c.skills_developed.slice(0, 3) : [];
+    const skillsHtml = skills.map(sk => `<span class="skill-pill">${escapeHtml(sk)}</span>`).join('');
+    
+    return `
+      <div class="club-card" data-club-id="${escapeHtml(c.id)}">
+        <div class="club-card-top">
+          <span class="club-category-badge ${catClass}">${escapeHtml(c.category)}</span>
+          <span class="club-year-tag">${escapeHtml(c.academic_year || '2025–26')}</span>
+        </div>
+        <h3 class="club-card-title">
+          ${escapeHtml(c.name)}
+          ${c.abbr ? `<span class="club-card-abbr">${escapeHtml(c.abbr)}</span>` : ''}
+        </h3>
+        <p class="club-card-desc">${escapeHtml(c.tagline || c.description || '')}</p>
+        
+        ${skillsHtml ? `<div class="club-card-skills">${skillsHtml}</div>` : ''}
+
+        ${c.faculty_coordinator ? `
+          <div class="club-card-coordinator">
+            <strong>Coordinator:</strong> ${escapeHtml(c.faculty_coordinator)}
+          </div>
+        ` : ''}
+
+        <div class="club-card-actions">
+          <button class="btn-card btn-card-primary view-club-btn" data-club-id="${escapeHtml(c.id)}">
+            View Details
+          </button>
+          ${c.pdf_url ? `
+            <a href="${c.pdf_url}" target="_blank" class="btn-card btn-card-secondary" title="Official PDF Report">
+              📄 Report
+            </a>
+          ` : ''}
+          <button class="btn-card btn-card-secondary ask-club-btn" data-club-name="${escapeHtml(c.name)}" title="Ask AI">
+            💬 Ask AI
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ---- Club Details Modal ----
+function openClubModal(clubId) {
+  const club = allClubs.find(c => c.id === clubId);
+  if (!club) return;
+  currentModalClub = club;
+
+  modalCategory.textContent = club.category;
+  modalCategory.className = `modal-category-badge ${getCategoryClass(club.category)}`;
+  modalClubName.textContent = club.name;
+  modalAbbr.textContent = club.abbr ? `Abbreviation: ${club.abbr}` : '';
+
+  // Objectives
+  let objList = '';
+  if (Array.isArray(club.objectives) && club.objectives.length > 0) {
+    objList = `<ul>${club.objectives.map(o => `<li>${escapeHtml(o)}</li>`).join('')}</ul>`;
+  } else if (club.objectives) {
+    objList = `<p>${escapeHtml(club.objectives)}</p>`;
+  }
+
+  // Major Activities
+  let actList = '';
+  if (Array.isArray(club.major_activities) && club.major_activities.length > 0) {
+    actList = `<ul>${club.major_activities.map(a => {
+      if (typeof a === 'object' && a !== null) {
+        const title = a.name || a.event || a.title || JSON.stringify(a);
+        const desc = a.description || a.details ? ` — <em>${escapeHtml(a.description || a.details)}</em>` : '';
+        return `<li><strong>${escapeHtml(title)}</strong>${desc}</li>`;
+      }
+      return `<li>${escapeHtml(String(a))}</li>`;
+    }).join('')}</ul>`;
+  } else if (club.major_activities) {
+    actList = `<p>${escapeHtml(club.major_activities)}</p>`;
+  }
+
+  // Skills Developed
+  let skillsPills = '';
+  if (Array.isArray(club.skills_developed) && club.skills_developed.length > 0) {
+    skillsPills = `<div class="club-card-skills" style="margin-top:6px;">${
+      club.skills_developed.map(s => `<span class="skill-pill" style="font-size:12px; padding:3px 9px;">${escapeHtml(s)}</span>`).join('')
+    }</div>`;
+  } else if (club.skills_developed) {
+    skillsPills = `<p>${escapeHtml(club.skills_developed)}</p>`;
+  }
+
+  modalBody.innerHTML = `
+    <div class="modal-meta-grid">
+      <div class="modal-meta-item">
+        <strong>Academic Year</strong>
+        <span>${escapeHtml(club.academic_year || '2025–26')}</span>
+      </div>
+      <div class="modal-meta-item">
+        <strong>Established</strong>
+        <span>${escapeHtml(club.establishment_year || 'Officially Registered')}</span>
+      </div>
+      <div class="modal-meta-item">
+        <strong>Faculty Coordinator</strong>
+        <span>${escapeHtml(club.faculty_coordinator || 'Refer to Department / Report')}</span>
+      </div>
+      <div class="modal-meta-item">
+        <strong>Student Coordinators</strong>
+        <span>${escapeHtml(club.student_coordinators || 'Published in Annual Report')}</span>
+      </div>
+    </div>
+
+    ${club.description ? `
+      <div class="modal-section">
+        <span class="modal-section-title">About the Club</span>
+        <p>${escapeHtml(club.description)}</p>
+      </div>
+    ` : ''}
+
+    ${objList ? `
+      <div class="modal-section">
+        <span class="modal-section-title">Main Objectives</span>
+        ${objList}
+      </div>
+    ` : ''}
+
+    ${actList ? `
+      <div class="modal-section">
+        <span class="modal-section-title">Major Activities &amp; Events (2025–26)</span>
+        ${actList}
+      </div>
+    ` : ''}
+
+    ${skillsPills ? `
+      <div class="modal-section">
+        <span class="modal-section-title">Skills Students Can Develop</span>
+        ${skillsPills}
+      </div>
+    ` : ''}
+
+    ${club.achievements ? `
+      <div class="modal-section">
+        <span class="modal-section-title">Achievements &amp; Annual Highlights</span>
+        <p>${escapeHtml(club.achievements)}</p>
+      </div>
+    ` : ''}
+
+    ${club.eligibility ? `
+      <div class="modal-section">
+        <span class="modal-section-title">Membership &amp; Eligibility</span>
+        <p>${escapeHtml(club.eligibility)}</p>
+      </div>
+    ` : ''}
+  `;
+
+  // Links
+  if (club.pdf_url) {
+    modalPdfBtn.href = club.pdf_url;
+    modalPdfBtn.style.display = 'inline-flex';
+  } else {
+    modalPdfBtn.style.display = 'none';
+  }
+
+  modalSourceBtn.href = club.source_url || 'https://www.kitcoek.in/studentClubs';
+
+  clubModal.style.display = 'flex';
+}
+
+function closeClubModal() {
+  if (clubModal) clubModal.style.display = 'none';
+  currentModalClub = null;
+}
+
+if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeClubModal);
+if (clubModal) {
+  clubModal.addEventListener('click', (e) => {
+    if (e.target === clubModal) closeClubModal();
+  });
+}
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && clubModal && clubModal.style.display === 'flex') {
+    closeClubModal();
+  }
+});
+
+if (modalAskAiBtn) {
+  modalAskAiBtn.addEventListener('click', () => {
+    if (currentModalClub) {
+      const q = `Tell me about ${currentModalClub.name}`;
+      closeClubModal();
+      switchView('chat');
+      sendMessage(q);
+    }
+  });
+}
+
+// Category filter click
+if (categoryFilters) {
+  categoryFilters.addEventListener('click', (e) => {
+    const pill = e.target.closest('.cat-pill');
+    if (pill && pill.dataset.category) {
+      currentCategory = pill.dataset.category;
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      renderClubs();
+    }
+  });
+}
+
+// Search input
+if (clubSearchInput) {
+  clubSearchInput.addEventListener('input', (e) => {
+    currentSearch = e.target.value.trim();
+    if (clearSearchBtn) {
+      clearSearchBtn.style.display = currentSearch ? 'block' : 'none';
+    }
+    renderClubs();
+  });
+}
+
+if (clearSearchBtn) {
+  clearSearchBtn.addEventListener('click', () => {
+    if (clubSearchInput) clubSearchInput.value = '';
+    currentSearch = '';
+    clearSearchBtn.style.display = 'none';
+    renderClubs();
+  });
+}
+
+if (resetFilterBtn) {
+  resetFilterBtn.addEventListener('click', () => {
+    currentCategory = 'All';
+    currentSearch = '';
+    if (clubSearchInput) clubSearchInput.value = '';
+    if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+    document.querySelectorAll('.cat-pill').forEach(p => {
+      p.classList.toggle('active', p.dataset.category === 'All');
+    });
+    renderClubs();
+  });
+}
+
+// Global click delegation for cards and suggestions
+document.addEventListener('click', (e) => {
+  const viewBtn = e.target.closest('.view-club-btn');
+  if (viewBtn && viewBtn.dataset.clubId) {
+    if (!clubsLoaded) {
+      loadClubsDataIfNeeded().then(() => openClubModal(viewBtn.dataset.clubId));
+    } else {
+      openClubModal(viewBtn.dataset.clubId);
+    }
+    return;
+  }
+
+  const askBtn = e.target.closest('.ask-club-btn');
+  if (askBtn && askBtn.dataset.clubName) {
+    switchView('chat');
+    sendMessage(`Tell me about ${askBtn.dataset.clubName}`);
+    return;
+  }
+
+  const promptChip = e.target.closest('.prompt-chip');
+  if (promptChip && promptChip.dataset.q) {
+    switchView('chat');
+    sendMessage(promptChip.dataset.q);
+    return;
+  }
+});

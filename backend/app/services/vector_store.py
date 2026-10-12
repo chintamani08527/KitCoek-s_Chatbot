@@ -1,6 +1,7 @@
 import os
 import json
 import math
+import time
 from typing import List, Dict, Any, Optional
 from google import genai
 from backend.app.core.config import settings
@@ -39,39 +40,59 @@ class VectorStoreService:
             json.dump(self.data, f, ensure_ascii=False)
 
     def embed_texts(self, texts: List[str]) -> List[List[float]]:
-        """Generate high-dimension embeddings using Gemini models/gemini-embedding-001."""
+        """Generate high-dimension embeddings using Gemini models/gemini-embedding-001 with rate-limit pacing."""
         if not self.gemini_client:
             raise ValueError("GEMINI_API_KEY is required to generate embeddings.")
         
         embeddings = []
-        batch_size = 10
+        batch_size = 8
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
-            res = self.gemini_client.models.embed_content(
-                model=settings.GEMINI_EMBEDDING_MODEL,
-                contents=batch
-            )
-            for item in res.embeddings:
-                embeddings.append(item.values)
+            for attempt in range(5):
+                try:
+                    res = self.gemini_client.models.embed_content(
+                        model=settings.GEMINI_EMBEDDING_MODEL,
+                        contents=batch
+                    )
+                    for item in res.embeddings:
+                        embeddings.append(item.values)
+                    time.sleep(0.6) # gentle pacing to prevent 429
+                    break
+                except Exception as ex:
+                    if ("429" in str(ex) or "RESOURCE_EXHAUSTED" in str(ex)) and attempt < 4:
+                        print(f"[VectorStore] Quota limit hit, backing off 15s (attempt {attempt+1}/5)...")
+                        time.sleep(15)
+                    else:
+                        raise ex
         return embeddings
 
-    def add_chunks(self, document_id: str, document_name: str, category: str, chunks: List[str]) -> int:
-        """Embed and index chunks into vector store."""
+    def add_chunks(
+        self,
+        document_id: str,
+        document_name: str,
+        category: str,
+        chunks: List[str],
+        extra_metadata: Optional[Dict[str, Any]] = None
+    ) -> int:
+        """Embed and index chunks into vector store with optional metadata."""
         if not chunks:
             return 0
             
         embeddings = self.embed_texts(chunks)
+        meta = extra_metadata or {}
         
         for i, (chunk, emb) in enumerate(zip(chunks, embeddings)):
-            self.data.append({
+            entry = {
                 "id": f"{document_id}_chunk_{i}",
                 "document_id": document_id,
                 "document_name": document_name,
                 "category": category,
                 "chunk_index": i,
                 "text": chunk,
-                "embedding": emb
-            })
+                "embedding": emb,
+                **meta
+            }
+            self.data.append(entry)
             
         self._save()
         return len(chunks)
@@ -108,7 +129,11 @@ class VectorStoreService:
                     "document_name": item.get("document_name", "Official Record"),
                     "category": item.get("category", "General"),
                     "document_id": item.get("document_id", ""),
-                    "score": round(score, 3)
+                    "score": round(score, 3),
+                    "pdf_url": item.get("pdf_url"),
+                    "source_url": item.get("source_url"),
+                    "academic_year": item.get("academic_year"),
+                    "club_id": item.get("club_id")
                 })
                 
         # Sort by similarity descending

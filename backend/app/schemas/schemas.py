@@ -15,11 +15,38 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     reply: str
-    category: str # "academic", "navigation", "out_of_scope", "general"
+    category: str # "academic", "navigation", "clubs", "out_of_scope", "general"
     sources: List[SourceCitation] = []
     follow_up_questions: List[str] = []
     map_url: Optional[str] = None
     location_details: Optional[dict] = None
+    club_details: Optional[dict] = None
+
+class StudentClubResponse(BaseModel):
+    id: str
+    name: str
+    abbr: Optional[str] = None
+    category: str
+    tagline: Optional[str] = None
+    establishment_year: Optional[str] = None
+    description: str
+    objectives: Optional[Any] = None
+    major_activities: Optional[Any] = None
+    skills_developed: Optional[Any] = None
+    eligibility: Optional[str] = None
+    faculty_coordinator: Optional[str] = None
+    student_coordinators: Optional[str] = None
+    achievements: Optional[str] = None
+    academic_year: str = "2025–26"
+    source_url: Optional[str] = None
+    pdf_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class ClubCategorySummary(BaseModel):
+    category: str
+    count: int
 
 class LocationCreate(BaseModel):
     name: str

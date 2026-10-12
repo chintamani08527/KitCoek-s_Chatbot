@@ -43,6 +43,15 @@ class GeminiService:
             if not any(c in q_lower for c in ["kit", "college", "campus", "engineering", "dept", "exam"]):
                 return {"category": "out_of_scope", "is_relevant": False}
 
+        club_keywords = [
+            "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur writers",
+            "ebsb", "cultural club", "aura", "shourya", "wdgec", "women development", "rotaract",
+            "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
+            "sip", "student activities", "hackathon", "meraki", "pioneer", "vidman", "prarambha"
+        ]
+        if any(w in q_lower for w in club_keywords):
+            return {"category": "clubs", "is_relevant": True}
+
         college_keywords = [
             "kit", "kitcoek", "syllabus", "subject", "semester", "sem", "nep", "exam", "course",
             "unit", "notes", "passing", "grade", "credits", "result", "prn", "admission", "fee",
@@ -64,14 +73,27 @@ class GeminiService:
         query: str,
         context_chunks: List[str],
         location_data: Optional[Dict[str, Any]] = None,
+        club_data: Optional[Dict[str, Any]] = None,
+        clubs_directory: Optional[List[Dict[str, Any]]] = None,
         chat_history: Optional[List[Dict[str, str]]] = None
     ) -> Dict[str, Any]:
         """
-        Generate grounded RAG answer using official college documents and campus location data.
-        Follows strict grounding: never invents facts, syllabus, or room numbers.
+        Generate grounded RAG answer using official college documents, campus locations,
+        and official Student Clubs reports (AY 2025–26).
+        Follows strict grounding: never invents facts, syllabus, coordinators, or room numbers.
         """
         if not self.is_configured():
-            if context_chunks:
+            if club_data:
+                name = club_data.get("name")
+                desc = club_data.get("description", "")
+                coord = club_data.get("faculty_coordinator") or "Check official website"
+                pdf = club_data.get("pdf_url")
+                pdf_link = f'<p><a href="{pdf}" target="_blank">📄 View Official 2025–26 Report (PDF)</a></p>' if pdf else ""
+                return {
+                    "answer": f"<p><strong>{name}</strong> ({club_data.get('category')}):</p><p>{desc}</p><p><strong>Faculty Coordinator:</strong> {coord}</p>{pdf_link}",
+                    "follow_up_questions": ["What activities does this club organize?", "How do I join this club?"]
+                }
+            elif context_chunks:
                 joined = "\n\n".join(context_chunks[:2])
                 return {
                     "answer": f"<p>{joined[:600]}...</p>",
@@ -90,21 +112,46 @@ class GeminiService:
 
         context_str = ""
         if context_chunks:
-            context_str += "=== OFFICIAL COLLEGE DOCUMENTS CONTEXT ===\n"
+            context_str += "=== OFFICIAL COLLEGE DOCUMENTS & CLUB REPORTS CONTEXT ===\n"
             for i, chunk in enumerate(context_chunks):
                 context_str += f"[Extract {i+1}]:\n{chunk}\n\n"
+        if club_data:
+            context_str += "=== OFFICIAL KITCOEK STUDENT CLUB VERIFIED RECORD ===\n"
+            context_str += json.dumps(club_data, indent=2) + "\n\n"
+        if clubs_directory:
+            context_str += "=== OFFICIAL KITCOEK STUDENT CLUBS DIRECTORY (18 CLUBS) ===\n"
+            context_str += json.dumps(clubs_directory, indent=2) + "\n\n"
         if location_data:
             context_str += "=== CAMPUS LOCATION DATABASE ===\n"
             context_str += json.dumps(location_data, indent=2) + "\n\n"
 
         system_instruction = """You are the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
 Core Directives:
-1. ONLY answer questions regarding KITCOEK campus, student academics (syllabus, NEP-2020, subjects, semesters, notes, units, important questions, exams, faculty, facilities, rules, notices), and campus locations.
-2. Politely decline any question completely unrelated to KITCOEK or college life with: "I am KITCOEK's campus assistant and can only answer questions related to KITCOEK academics, campus locations, syllabus, and college procedures."
-3. GROUNDING IS STRICT: Use the provided context as the authority for college-specific facts (room numbers, syllabus units, dates, rules). NEVER invent or hallucinate course details, faculty names, or room numbers.
-4. If the information requested is not present in the provided context, state clearly: "Official records for this topic are not currently available in the knowledge base. Please verify with your department head or student section."
-5. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>). Include official URLs from context as clickable links when available.
-6. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+1. ONLY answer questions regarding KITCOEK campus, student academics (syllabus, NEP-2020, subjects, exams), campus locations, and official Student Clubs.
+2. Official Student Clubs: KITCOEK has 18 official student clubs and activity groups:
+   - Technical: ISTE, Team Mavericks, Student Developers Club (SDC), Society of Women Engineers (SWE)
+   - Entrepreneurship: E-Cell KITCoEK
+   - Cultural: Cultural Club, Ek Bharat Shreshtha Bharat (EBSB)
+   - Creative: Amateur Writers Club, AURA — The Art Club
+   - Leadership: Shourya Team KIT, National Cadet Corps (NCC), Lead India
+   - Social Service: National Service Scheme (NSS), Rotaract Club of KIT Sunshine
+   - Environment: Petrichor — Green Club
+   - Student Development: Walk With World (WWW), Women Development and Gender Equality Cell, Student Induction Program (SIP)
+3. For Club recommendations:
+   - Coding, Web & AI -> SDC, Team Mavericks, ISTE
+   - Entrepreneurship & Startups -> E-Cell KITCoEK
+   - Public Speaking, Soft Skills, MUN -> Walk With World (WWW), Amateur Writers Club
+   - Defense Services (Armed Forces/SSB) -> NCC (1 MAH ARTY BTY), Shourya Team KIT
+   - Social Work & Community Welfare -> NSS, Rotaract Club
+   - Arts, Sketching, Decor -> AURA — The Art Club
+   - Performing Arts, Music, Dance, Meraki -> Cultural Club
+   - Civil Services (UPSC/MPSC) -> Lead India
+   - Environment & Green Campus -> Petrichor — Green Club
+   - Women in Tech & Gender Equity -> SWE, Women Development Cell
+4. GROUNDING IS STRICT: Use the provided context as authority for club facts, coordinators, office-bearers, events, and room numbers. Never invent office-bearers or dates.
+5. If the user asks for report, coordinators, or activities, provide exact facts and include clickable links: <a href="PDF_URL" target="_blank">📄 View Official Report (PDF)</a> and official page link <a href="https://www.kitcoek.in/studentClubs" target="_blank">Official Clubs Directory</a>.
+6. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+7. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {

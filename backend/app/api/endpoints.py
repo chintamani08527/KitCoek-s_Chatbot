@@ -1,12 +1,14 @@
 import json
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form, Query
+from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 from backend.app.db.database import get_db
-from backend.app.models.models import DocumentRecord, ChatHistory, CampusLocation
+from backend.app.models.models import DocumentRecord, ChatHistory, CampusLocation, StudentClub
 from backend.app.schemas.schemas import (
     ChatRequest, ChatResponse, SourceCitation,
-    LocationCreate, LocationResponse, DocumentResponse
+    LocationCreate, LocationResponse, DocumentResponse,
+    StudentClubResponse, ClubCategorySummary
 )
 from backend.app.services.vector_store import get_vector_store
 from backend.app.services.gemini_service import get_gemini_service
@@ -15,6 +17,27 @@ import uuid
 import os
 
 router = APIRouter()
+
+def format_club_dict(club: StudentClub) -> dict:
+    return {
+        "id": club.id,
+        "name": club.name,
+        "abbr": club.abbr,
+        "category": club.category,
+        "tagline": club.tagline,
+        "establishment_year": club.establishment_year,
+        "description": club.description,
+        "objectives": json.loads(club.objectives) if club.objectives and club.objectives.startswith("[") else club.objectives,
+        "major_activities": json.loads(club.major_activities) if club.major_activities and club.major_activities.startswith("[") else club.major_activities,
+        "skills_developed": json.loads(club.skills_developed) if club.skills_developed and club.skills_developed.startswith("[") else club.skills_developed,
+        "eligibility": club.eligibility,
+        "faculty_coordinator": club.faculty_coordinator,
+        "student_coordinators": club.student_coordinators,
+        "achievements": club.achievements,
+        "academic_year": club.academic_year,
+        "source_url": club.source_url,
+        "pdf_url": club.pdf_url
+    }
 
 @router.post("/chat", response_model=ChatResponse)
 def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
@@ -34,7 +57,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         out_msg = (
             "<p>I am the official <strong>KITCOEK AI Assistant</strong>. "
             "I can only help you with questions related to KITCOEK campus, engineering academics, "
-            "NEP-2020 syllabus, subjects, examinations, campus locations, and college notices. "
+            "NEP-2020 syllabus, subjects, examinations, campus locations, and official Student Clubs. "
             "Please ask a question about KITCOEK.</p>"
         )
         return ChatResponse(
@@ -42,9 +65,9 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             category="out_of_scope",
             sources=[],
             follow_up_questions=[
-                "What is the NEP-2020 syllabus for CSE?",
-                "Where is the Central Library located?",
-                "What are the passing rules for autonomous exams?"
+                "What student clubs are available at KIT?",
+                "Which clubs are related to coding and AI?",
+                "What is the NEP-2020 syllabus for CSE?"
             ]
         )
 
@@ -71,15 +94,95 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 map_url = "/api/locations/map"
                 break
 
-    # 3. RAG Retrieval from Vector Store
-    retrieved_chunks = vs.search(query, top_k=4, threshold=0.35)
+    # 3. Student Clubs matching & context retrieval
+    matched_club_data = None
+    clubs_dir_summary = None
+    q_low = query.lower()
+    
+    is_club_intent = category == "clubs" or any(kw in q_low for kw in [
+        "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur", "writers",
+        "ebsb", "cultural", "aura", "shourya", "wdgec", "women development", "rotaract",
+        "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
+        "sip", "coding", "entrepreneurship", "art", "dance", "drama", "debate", "mun"
+    ])
+
+    if is_club_intent:
+        category = "clubs"
+        all_clubs = db.query(StudentClub).all()
+        
+        # Check if a specific club is directly targeted
+        for club in all_clubs:
+            club_terms = [
+                club.id,
+                club.name.lower(),
+                (club.abbr or "").lower(),
+                club.id.replace("_", " ")
+            ]
+            if club.id == "e_cell":
+                club_terms.extend(["e-cell", "ecell", "entrepreneurship cell"])
+            elif club.id == "iste":
+                club_terms.extend(["iste", "technical education"])
+            elif club.id == "sdc":
+                club_terms.extend(["sdc", "developer", "developers club"])
+            elif club.id == "team_mavericks":
+                club_terms.extend(["maverick", "mavericks"])
+            elif club.id == "amateur_writers":
+                club_terms.extend(["amateur", "writers club", "awc"])
+            elif club.id == "aura":
+                club_terms.extend(["aura", "art club"])
+            elif club.id == "cultural_club":
+                club_terms.extend(["cultural club", "meraki", "cultural committee"])
+            elif club.id == "ncc":
+                club_terms.extend(["ncc", "cadet", "cadets", "1 mah arty"])
+            elif club.id == "nss":
+                club_terms.extend(["nss", "national service scheme"])
+            elif club.id == "rotaract":
+                club_terms.extend(["rotaract", "sunshine"])
+            elif club.id == "swe":
+                club_terms.extend(["swe", "society of women engineers"])
+            elif club.id == "www":
+                club_terms.extend(["www", "walk with world", "sprinters"])
+            elif club.id == "shourya":
+                club_terms.extend(["shourya", "officer making"])
+            elif club.id == "petrichor":
+                club_terms.extend(["petrichor", "green club", "unicef"])
+            elif club.id == "lead_india":
+                club_terms.extend(["lead india", "upsc", "mpsc", "vidman"])
+            elif club.id == "women_dev_cell":
+                club_terms.extend(["women development", "gender equality", "wdgec"])
+            elif club.id == "fy_induction":
+                club_terms.extend(["induction", "sip", "first year induction"])
+
+            if any(term in q_low for term in club_terms if len(term) >= 3):
+                matched_club_data = format_club_dict(club)
+                break
+
+        # If asking general questions (e.g. list all, count, recommendations), provide complete directory
+        if any(w in q_low for w in ["list", "all", "how many", "which club", "recommend", "join", "categories", "options"]):
+            clubs_dir_summary = [
+                {
+                    "id": c.id,
+                    "name": c.name,
+                    "abbr": c.abbr,
+                    "category": c.category,
+                    "tagline": c.tagline,
+                    "coordinator": c.faculty_coordinator,
+                    "pdf_url": c.pdf_url
+                }
+                for c in all_clubs
+            ]
+
+    # 4. RAG Retrieval from Vector Store
+    retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
     
-    # 4. Generate Answer via Gemini with Strict Grounding
+    # 5. Generate Grounded Answer via Gemini
     rag_result = gemini.generate_rag_answer(
         query=query,
         context_chunks=context_texts,
-        location_data=matched_loc_data
+        location_data=matched_loc_data,
+        club_data=matched_club_data,
+        clubs_directory=clubs_dir_summary
     )
     
     # Format source citations
@@ -93,7 +196,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         for r in retrieved_chunks
     ]
     
-    # 5. Persist Chat History in DB
+    # 6. Persist Chat History in DB
     history_entry = ChatHistory(
         id=str(uuid.uuid4()),
         session_id=req.session_id or "default",
@@ -112,7 +215,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         sources=citations,
         follow_up_questions=rag_result.get("follow_up_questions", []),
         map_url=map_url,
-        location_details=matched_loc_data
+        location_details=matched_loc_data,
+        club_details=matched_club_data
     )
 
 @router.get("/history")
@@ -210,3 +314,66 @@ def search_location(query: str, db: Session = Depends(get_db)):
         if q in loc.name.lower() or q in loc.category.lower() or q in loc.building.lower() or (loc.room_number and q in loc.room_number.lower())
     ]
     return matches
+
+# Student Clubs APIs
+@router.get("/clubs", response_model=List[StudentClubResponse])
+def list_clubs(
+    category: Optional[str] = None, 
+    search: Optional[str] = None, 
+    db: Session = Depends(get_db)
+):
+    query = db.query(StudentClub)
+    if category and category.strip() and category != "All":
+        query = query.filter(StudentClub.category == category)
+    clubs = query.all()
+    
+    if search:
+        s = search.lower().strip()
+        clubs = [
+            c for c in clubs
+            if s in c.name.lower() or 
+               (c.abbr and s in c.abbr.lower()) or 
+               (c.category and s in c.category.lower()) or
+               (c.description and s in c.description.lower()) or
+               (c.skills_developed and s in c.skills_developed.lower()) or
+               (c.major_activities and s in c.major_activities.lower())
+        ]
+        
+    return [format_club_dict(c) for c in clubs]
+
+@router.get("/clubs/categories", response_model=List[ClubCategorySummary])
+def get_club_categories(db: Session = Depends(get_db)):
+    clubs = db.query(StudentClub).all()
+    from collections import Counter
+    counts = Counter(c.category for c in clubs if c.category)
+    return [ClubCategorySummary(category=cat, count=cnt) for cat, cnt in counts.items()]
+
+@router.get("/clubs/{club_id}", response_model=StudentClubResponse)
+def get_club(club_id: str, db: Session = Depends(get_db)):
+    club = db.query(StudentClub).filter(
+        (StudentClub.id == club_id) | 
+        (StudentClub.abbr.ilike(club_id))
+    ).first()
+    if not club:
+        raise HTTPException(status_code=404, detail="Club not found")
+    return format_club_dict(club)
+
+@router.get("/clubs/{club_id}/pdf")
+def get_club_pdf(club_id: str, db: Session = Depends(get_db)):
+    club = db.query(StudentClub).filter(
+        (StudentClub.id == club_id) | 
+        (StudentClub.abbr.ilike(club_id))
+    ).first()
+    if not club:
+        raise HTTPException(status_code=404, detail="Club not found")
+        
+    local_pdf = os.path.join("backend", "data", "documents", "clubs", f"{club.id}.pdf")
+    if os.path.exists(local_pdf):
+        return FileResponse(local_pdf, media_type="application/pdf", filename=f"{club.id}_report.pdf")
+        
+    if club.pdf_url:
+        return {"pdf_url": club.pdf_url}
+        
+    raise HTTPException(status_code=404, detail="PDF report not found")
+
+

@@ -38,3 +38,25 @@ class CampusLocation(Base):
     room_number = Column(String(50), nullable=True)
     landmark = Column(String(255), nullable=True)
     description = Column(Text, nullable=True)
+
+class StudentClub(Base):
+    __tablename__ = "student_clubs"
+
+    id = Column(String(50), primary_key=True) # slug e.g. 'iste', 'e_cell'
+    name = Column(String(200), nullable=False)
+    abbr = Column(String(50), nullable=True)
+    category = Column(String(100), nullable=False) # Technical, Entrepreneurship, Cultural, Creative, Social Service, Environment, Leadership, Student Development
+    tagline = Column(String(255), nullable=True)
+    establishment_year = Column(String(50), nullable=True)
+    description = Column(Text, nullable=False)
+    objectives = Column(Text, nullable=True) # JSON list or formatted text
+    major_activities = Column(Text, nullable=True) # JSON list or formatted text
+    skills_developed = Column(Text, nullable=True) # JSON list or formatted text
+    eligibility = Column(Text, nullable=True)
+    faculty_coordinator = Column(String(255), nullable=True)
+    student_coordinators = Column(Text, nullable=True)
+    achievements = Column(Text, nullable=True)
+    academic_year = Column(String(50), default="2025–26")
+    source_url = Column(String(500), nullable=True)
+    pdf_url = Column(String(500), nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)

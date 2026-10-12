@@ -1,0 +1,652 @@
+[
+  {
+    "id": "iste",
+    "name": "Indian Society for Technical Education (ISTE) Student Chapter",
+    "abbr": "ISTE",
+    "category": "Technical",
+    "tagline": "Technical Skill Upgradation & Professional Engineering Development",
+    "establishment_year": null,
+    "description": "Indian Society for Technical Education (ISTE) student chapter under Technical Clubs is established at KITCoEK to conduct various technical skill upgradation programs, hands-on engineering trainings, personality development programs, and national technical symposiums. The club provides a platform for students of all engineering departments to showcase innovations and gain industry exposure.",
+    "objectives": [
+      "Promote technical education and professional engineering competency.",
+      "Organize state and national level technical events such as Pioneer.",
+      "Provide hands-on technical trainings, expert lectures, and industrial visits.",
+      "Foster problem-solving and technical paper presentation skills."
+    ],
+    "major_activities": [
+      "Pioneer 2025–26 National Level Technical Symposium",
+      "Project Presentation and Paper Presentation Competitions",
+      "Technical hands-on workshops on emerging engineering tools",
+      "Expert guest lectures and industry interaction sessions",
+      "Prakalp (Project Exhibition) and Abhivyakti technical events"
+    ],
+    "skills_developed": [
+      "Technical Presentation",
+      "Engineering Problem Solving",
+      "Project Management",
+      "Event Organization",
+      "Technical Communication",
+      "Teamwork & Leadership"
+    ],
+    "eligibility": "Open to all undergraduate engineering students across all branches at KITCoEK. Selection for core committee roles conducted annually.",
+    "faculty_coordinator": "Mrs. Ashwini Amit Shinde (Faculty Coordinator)",
+    "student_coordinators": "Aditya Patil (Chair-Person, CSE), Sarthak Jadhav (Secretary, Civil & Env), Salikahamad Bagwan (Treasurer, E&TC), Riya Pawaskar (Sponsorship Head, Biotech), Aishwarya Keswani (Technical Head, CSBS), Akash Manwar (Abhivyakti Head, CSBS), Tushar Gangadhare (Prakalp Head, Electrical)",
+    "achievements": "Successfully organized Pioneer national symposium with extensive inter-college participation across Maharashtra; hosted technical project exhibitions.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/ISTE.pdf"
+  },
+  {
+    "id": "e_cell",
+    "name": "Entrepreneurship Cell (E-Cell KITCoEK)",
+    "abbr": "E-Cell",
+    "category": "Entrepreneurship",
+    "tagline": "Think. Innovate. Implement.",
+    "establishment_year": "2017–2018",
+    "description": "The Entrepreneurship Cell (E-Cell KITCoEK) is a student-driven initiative dedicated to fostering entrepreneurial mindsets, startup incubation, and business innovation. Operating under the tagline 'Think. Innovate. Implement.', E-Cell empowers aspiring student entrepreneurs with business mentoring, ideation hackathons, pitch decks, and access to venture networks.",
+    "objectives": [
+      "Inspire and nurture the spirit of entrepreneurship among students.",
+      "Facilitate ideation, product development, and startup prototyping.",
+      "Conduct business pitching competitions, E-Summits, and founder talks.",
+      "Connect student founders with incubators, angel investors, and patent experts."
+    ],
+    "major_activities": [
+      "Annual E-Summit with prominent startup founders and venture capitalists",
+      "Business Model Canvas (BMC) & Pitch Deck competitions",
+      "Ideation to Prototype workshops in collaboration with incubation cells",
+      "Startup masterclasses on funding, valuation, and marketing",
+      "Bootcamps on intellectual property rights (IPR) and patent filing"
+    ],
+    "skills_developed": [
+      "Business Ideation & Strategy",
+      "Pitch Deck Creation",
+      "Financial Literacy & Valuation",
+      "Negotiation & Networking",
+      "Leadership & Risk Management",
+      "Design Thinking"
+    ],
+    "eligibility": "Open to all students from First Year to Final Year interested in startups, business innovation, and entrepreneurship.",
+    "faculty_coordinator": "Dr. Saee Thakur (Faculty Coordinator)",
+    "student_coordinators": "Reva Patil (Chairperson, Final Year CSE), Sahil Kulkarni (Overall Coordinator, Third Year CSE AIML), Devyani Powar (Executive Coordinator, Third Year Mechanical), Aseem Gulbarga (Executive Coordinator, Third Year CSBS)",
+    "achievements": "Mentored multiple student startup ideas; hosted high-impact pitching sessions and investor interaction panels during AY 2025–26.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/E_CELL.pdf"
+  },
+  {
+    "id": "team_mavericks",
+    "name": "Team Mavericks",
+    "abbr": "Mavericks",
+    "category": "Technical",
+    "tagline": "Stay Updated, Stay Ahead",
+    "establishment_year": "13th August, 2016",
+    "description": "Team Mavericks is a vibrant, student-led technical and competitive development organization at KITCoEK. Focused on hands-on technology mastery, competitive hackathons, robotics, full-stack software development, and community learning, Mavericks prepares engineering students to stay ahead of rapidly evolving industry standards.",
+    "objectives": [
+      "Promote peer-to-peer technical learning and project building.",
+      "Train students for national-level hackathons and technical competitions.",
+      "Organize technology workshops on emerging stacks and modern engineering tools.",
+      "Cultivate practical problem-solving through live projects."
+    ],
+    "major_activities": [
+      "Hackathon preparation bootcamps and intra-college coding sprints",
+      "Technical masterclasses on modern frameworks and system architecture",
+      "Tech talk series featuring alumni in leading product companies",
+      "Hands-on project mentoring and code reviews for junior students"
+    ],
+    "skills_developed": [
+      "Full-Stack Development",
+      "Competitive Problem Solving",
+      "System Architecture",
+      "Agile Collaboration",
+      "Git & Team Workflows",
+      "Technical Mentorship"
+    ],
+    "eligibility": "Open to all engineering students passionate about technology and software development. Annual recruitment rounds include technical and aptitude assessments.",
+    "faculty_coordinator": "Prof. Shivprasad Majgaonkar (Faculty Coordinator)",
+    "student_coordinators": "Core Executive Committee composed of multidisciplinary engineering students.",
+    "achievements": "Represented KITCoEK in various inter-college hackathons and developer summits; delivered multiple peer-learning bootcamps.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Mavericks.pdf"
+  },
+  {
+    "id": "sdc",
+    "name": "Student Developers Club (SDC)",
+    "abbr": "SDC",
+    "category": "Technical",
+    "tagline": "Code, Innovate, Build the Future",
+    "establishment_year": "2023–24",
+    "description": "The Student Developers Club (SDC) serves as an interactive platform for students eager to dive into modern programming, web development, cloud computing, artificial intelligence, and open-source contribution. It bridges the academic curriculum with industry-ready software engineering workflows.",
+    "objectives": [
+      "Demystify coding and empower students of all levels to build real-world software.",
+      "Conduct structured workshops on web development, APIs, databases, and AI.",
+      "Promote open-source contributions and Git best practices.",
+      "Create collaborative teams for national coding competitions."
+    ],
+    "major_activities": [
+      "Hands-on Web & App Development Bootcamps",
+      "Coding challenges and algorithmic problem-solving contests",
+      "Open Source & GitHub contribution drives",
+      "Workshops on API development and frontend/backend integration"
+    ],
+    "skills_developed": [
+      "Web & Mobile App Development",
+      "Data Structures & Algorithms",
+      "Git & GitHub Workflows",
+      "Database Design",
+      "API Integration",
+      "Open Source Contribution"
+    ],
+    "eligibility": "Open to all engineering students across all branches and academic years. No prior advanced programming experience required.",
+    "faculty_coordinator": "Dr. Ashish Patil (Faculty Coordinator)",
+    "student_coordinators": "Ms. Sakshi Kulkarni (Student Coordinator) and Core Technical Leads",
+    "achievements": "Trained dozens of students in foundational and modern web engineering stacks; held campus-wide coding challenges.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/SDC.pdf"
+  },
+  {
+    "id": "amateur_writers",
+    "name": "Amateur Writers Club",
+    "abbr": "AWC",
+    "category": "Creative",
+    "tagline": "Penning Thoughts, Inspiring Minds",
+    "establishment_year": "2017",
+    "description": "Amateur Writers Club at KITCoEK is dedicated to cultivating literary talent, creative writing, poetry, blogging, and expressive storytelling among engineering students. The club provides a welcoming sanctuary where words transform into impactful ideas and published literature.",
+    "objectives": [
+      "Promote active reading habits and literary appreciation across campus.",
+      "Conduct creative writing, poetry, and essay competitions.",
+      "Provide platforms for student writers to publish articles, poems, and stories.",
+      "Enhance vocabulary, articulation, and expressive communication."
+    ],
+    "major_activities": [
+      "Celebration of Vachan Prerana Din (Reading Inspiration Day)",
+      "Poetry recitation and Slam Poetry competitions",
+      "Short story and article writing challenges",
+      "Book reading sessions, literature reviews, and group discussions"
+    ],
+    "skills_developed": [
+      "Creative & Content Writing",
+      "Poetic Expression & Rhyme",
+      "Linguistic & Grammar Proficiency",
+      "Critical Reading & Reviewing",
+      "Public Reading & Spoken Word"
+    ],
+    "eligibility": "Open to all students who love writing, poetry, literature, or want to enhance their articulation and creative expression.",
+    "faculty_coordinator": "Prof. Mrs. Madhura V. Gangapure (Faculty Coordinator)",
+    "student_coordinators": "Shivani Gudekar (President), Apurva Patil (Vice President), and Literary Editorial Team",
+    "achievements": "Engaged students and faculty in Vachan Prerana Din activities; published curated student literary pieces and poetry collections.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Amateur.pdf"
+  },
+  {
+    "id": "ebsb",
+    "name": "Ek Bharat Shreshtha Bharat (EBSB)",
+    "abbr": "EBSB",
+    "category": "Cultural",
+    "tagline": "Unity in Diversity",
+    "establishment_year": "2025",
+    "description": "Ek Bharat Shreshtha Bharat (EBSB) club at KITCoEK operates under the flagship initiative of the Ministry of Education, Government of India. The club actively promotes mutual understanding, national integration, and cultural exchange among students by celebrating the rich diversity of languages, cuisines, traditions, and arts across different Indian states.",
+    "objectives": [
+      "Celebrate the unity and diversity of Indian culture, heritage, and languages.",
+      "Promote inter-state cultural interaction and regional understanding.",
+      "Conduct cultural exhibitions, language exchange modules, and traditional arts.",
+      "Inculcate national harmony, empathy, and constitutional values."
+    ],
+    "major_activities": [
+      "Inter-state cultural exhibition and state heritage showcases",
+      "Linguistic exchange sessions and regional literature appreciation",
+      "National Unity Day (Rashtriya Ekta Diwas) celebrations",
+      "Traditional costume, cuisine, and cultural quizzes"
+    ],
+    "skills_developed": [
+      "Cross-Cultural Communication",
+      "Event Management & Curation",
+      "Public Speaking & Presentation",
+      "Inclusivity & Cultural Empathy",
+      "Teamwork in Diverse Groups"
+    ],
+    "eligibility": "Open to all undergraduate students enthusiastic about celebrating Indian culture, traditions, and national integration.",
+    "faculty_coordinator": "Ms. Sneha Kagale (Faculty Coordinator)",
+    "student_coordinators": "Digvijay Rajput (President), Nakshatra Waskar (Vice-President), and EBSB Executive Committee",
+    "achievements": "Organized vibrant cultural exchange events showcasing regional heritage; actively promoted national unity and linguistic awareness.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Ek_Bharat.pdf"
+  },
+  {
+    "id": "cultural_club",
+    "name": "Cultural Club (Cultural Committee)",
+    "abbr": "Cultural Club",
+    "category": "Cultural",
+    "tagline": "Celebrate Art, Rhythm & Expression",
+    "establishment_year": "1990",
+    "description": "Established in 1990, the Cultural Club stands as the beacon of artistic creativity, music, dance, theatrical arts, and campus celebration at KITCoEK. It is the driving force behind the college's grandest festivals, musical evenings, drama productions, and represents KITCoEK at university-level youth festivals.",
+    "objectives": [
+      "Nurture student talents in performing arts including dance, drama, and music.",
+      "Organize Meraki — the flagship annual campus cultural festival.",
+      "Coordinate traditional festivities including Ganesh Utsav and cultural days.",
+      "Train and field competitive teams for Inter-Collegiate Youth Festivals."
+    ],
+    "major_activities": [
+      "Meraki — Annual Grand Cultural Fest of KITCoEK",
+      "Ganesh Utsav celebrations with traditional pooja, aarti, and cultural nights",
+      "Inter-Collegiate Youth Festival representation in music, drama, and dance",
+      "Street play (Nukkad Natak) performances on social awareness themes",
+      "Campus open-mic and musical evening performances"
+    ],
+    "skills_developed": [
+      "Stage Performance & Theatrics",
+      "Music & Dance Choreography",
+      "Large-Scale Event Management",
+      "Lighting, Sound & Stage Setup",
+      "Public Relations & Crowds",
+      "Team Leadership"
+    ],
+    "eligibility": "Open to all students with interest or talent in performing arts, music, dance, theatre, stage management, or festival organization.",
+    "faculty_coordinator": "Mr. Kiran Kangle (Faculty Coordinator)",
+    "student_coordinators": "Mr. Yash Patil (President), Mr. Swayam Budhale (Vice-President), and Cultural Secretary Team",
+    "achievements": "Successfully staged Meraki cultural fest; won accolades at zonal Youth Festivals and produced campus-wide traditional celebrations.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Cultural.pdf"
+  },
+  {
+    "id": "aura",
+    "name": "AURA — The Art Club",
+    "abbr": "AURA",
+    "category": "Creative",
+    "tagline": "The Energy of Art",
+    "establishment_year": "2012",
+    "description": "AURA: The Energy of Art is the official visual arts and design club of KITCoEK, born from the vision to give students a space where creativity meets curiosity. More than just a club, AURA celebrates visual storytelling, sketching, painting, calligraphy, poster design, and campus aesthetic installations.",
+    "objectives": [
+      "Provide artistic platforms for students passionate about painting, sketching, and design.",
+      "Design visual aesthetics, stage backdrops, and installations for college festivals.",
+      "Organize art exhibitions, live drawing challenges, and creative workshops.",
+      "Encourage mental relaxation and mindful expression through fine arts."
+    ],
+    "major_activities": [
+      "Canvas painting and fine arts competitions",
+      "Rangoli, mandala, and calligraphy workshops during festivals",
+      "Live sketching and caricature bootcamps",
+      "Annual Campus Art Exhibition showcasing student masterpieces",
+      "Art installations and artistic decorations across campus avenues"
+    ],
+    "skills_developed": [
+      "Drawing & Fine Painting",
+      "Visual Storytelling",
+      "Graphic & Spatial Design",
+      "Creative Thinking & Innovation",
+      "Aesthetic Presentation",
+      "Material Craftsmanship"
+    ],
+    "eligibility": "Open to all students passionate about sketching, painting, crafts, digital design, or visual decoration. No professional background required.",
+    "faculty_coordinator": "Supervised under KITCoEK Student Activities and Cultural Coordination Cell",
+    "student_coordinators": "President, Vice President, and Visual Design Core Leads",
+    "achievements": "Transformed campus festival venues with custom hand-crafted art installations; curated vibrant exhibitions receiving widespread acclaim.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/AURA.pdf"
+  },
+  {
+    "id": "shourya",
+    "name": "Shourya Team KIT",
+    "abbr": "Shourya",
+    "category": "Leadership",
+    "tagline": "Officer Making",
+    "establishment_year": "2012",
+    "description": "Shourya Team KIT is an elite defense preparation club dedicated to mentoring and training engineering students who aspire to serve as officers in the Indian Armed Forces (Army, Navy, Air Force) and paramilitary forces through exams like CDS, AFCAT, NDA, and INET.",
+    "objectives": [
+      "Train defense aspirants for Services Selection Board (SSB) interviews.",
+      "Instill Officer-Like Qualities (OLQs) such as courage, decisiveness, and integrity.",
+      "Conduct physical fitness routines, obstacle training, and stamina drills.",
+      "Provide peer mock interviews, group tasks (GTO), and psychology tests."
+    ],
+    "major_activities": [
+      "SSB Mock Interview and Screening Practice sessions",
+      "Group Testing Officer (GTO) task simulations on campus ground",
+      "Psychological test preparation (TAT, WAT, SRT, Self Description)",
+      "Guest interactions with serving and retired Indian Armed Forces officers",
+      "Physical stamina, cross-country runs, and fitness bootcamps"
+    ],
+    "skills_developed": [
+      "Officer-Like Qualities (OLQs)",
+      "Decisiveness under Pressure",
+      "Physical Endurance & Discipline",
+      "Group Discussion & Public Speaking",
+      "Strategic Thinking & Planning",
+      "Crisis Management"
+    ],
+    "eligibility": "Open to all engineering students passionate about joining the Indian Armed Forces as Commissioned Officers.",
+    "faculty_coordinator": "Mr. Y. A. Chougale (Faculty Coordinator)",
+    "student_coordinators": "Mr. Nitin Kambale (Student Coordinator) and Defense Aspirants Wing",
+    "achievements": "Consistently nurtured candidates who cleared defense written examinations and attended SSB interview boards across India.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Shourya.pdf"
+  },
+  {
+    "id": "women_dev_cell",
+    "name": "Women Development and Gender Equality Cell",
+    "abbr": "WDGEC",
+    "category": "Student Development",
+    "tagline": "Break the Bias",
+    "establishment_year": null,
+    "description": "The Women Development and Gender Equality Cell (WDGEC) is an essential institutional body at KITCoEK committed to promoting awareness about women's rights, gender equality, personal safety, legal protections, and mental well-being. Guided by the motto 'Break the Bias', it fosters an inclusive, safe, and progressive environment for female students and staff.",
+    "objectives": [
+      "Promote awareness regarding women's rights, gender sensitization, and equality.",
+      "Organize self-defense training workshops and safety awareness sessions.",
+      "Host educational seminars on POSH guidelines, health, and wellness.",
+      "Encourage women in engineering leadership and technology careers."
+    ],
+    "major_activities": [
+      "International Women's Day celebrations and panel discussions",
+      "Hands-on Self-Defense and Karate training camps for girls",
+      "Health, hygiene, and mental wellness interactive workshops",
+      "Interactive seminars on legal rights and workplace gender equity",
+      "Competitions highlighting women achievers in science and technology"
+    ],
+    "skills_developed": [
+      "Self-Defense & Personal Safety",
+      "Gender Sensitization & Equity",
+      "Advocacy & Social Leadership",
+      "Legal & POSH Awareness",
+      "Public Speaking & Empowerment"
+    ],
+    "eligibility": "Open to all students across all academic departments. Both female and male students actively participate in gender sensitization drives.",
+    "faculty_coordinator": "Prof. Ranjeeta Sutar (Assistant Professor, Dept of CSE - Faculty Coordinator)",
+    "student_coordinators": "Srushtirani Patil (President, Third Year Data Science), Mrunali Jotiram Patil (Vice-President, Third Year CSE), and Student Core Committee",
+    "achievements": "Conducted high-participation self-defense workshops and interactive sessions addressing gender equality and wellness in AY 2025–26.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Women_Development.pdf"
+  },
+  {
+    "id": "rotaract",
+    "name": "Rotaract Club of KIT Sunshine",
+    "abbr": "Rotaract",
+    "category": "Social Service",
+    "tagline": "Fellowship Through Service",
+    "establishment_year": "2018",
+    "description": "Rotaract Club of KIT Sunshine is a youth-driven social service, humanitarian, and leadership club affiliated with Rotary International. Founded in 2018, the club focuses on impactful community welfare, professional career development, international service, and humanitarian drives across Kolhapur.",
+    "objectives": [
+      "Serve local communities and uplift underprivileged sections of society.",
+      "Organize regular blood donation, health checkup, and relief camps.",
+      "Develop leadership, professional ethics, and public relations among youth.",
+      "Promote environmental cleanliness and global humanitarian awareness."
+    ],
+    "major_activities": [
+      "Annual Mega Blood Donation Drive on campus",
+      "Joy of Giving — Food donation and warm clothing drives",
+      "Educational kit distribution to underprivileged rural school students",
+      "Visits and support to local orphanages and old age homes",
+      "Professional networking and youth leadership conclaves"
+    ],
+    "skills_developed": [
+      "Community Mobilization",
+      "Social Service Leadership",
+      "Philanthropic Project Management",
+      "Public Relations & Networking",
+      "Empathy & Civic Responsibility"
+    ],
+    "eligibility": "Open to all enthusiastic undergraduate engineering students committed to community service and societal welfare.",
+    "faculty_coordinator": "Prof. Sandip Desai (Faculty Coordinator)",
+    "student_coordinators": "Rtr. Yashodutt Patankar (President), Rtr. Renu Bhosale (Vice President), Rtr. Vaishnavi Kadavkar (Secretary), and Rotaract Board of Directors",
+    "achievements": "Recognized by Rotary International district for outstanding blood donation numbers and sustainable rural community support drives.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Rotaract.pdf"
+  },
+  {
+    "id": "swe",
+    "name": "Society of Women Engineers (SWE), Kolhapur Affiliate",
+    "abbr": "SWE",
+    "category": "Technical",
+    "tagline": "Aspire, Advance, Achieve",
+    "establishment_year": "2025",
+    "description": "The Society of Women Engineers (SWE), Kolhapur Affiliate at KITCoEK is the collegiate chapter of the prestigious global organization SWE. It champions the advancement of female engineering students, inspiring women to achieve their full career potential as engineers, innovators, and technological leaders.",
+    "objectives": [
+      "Empower women engineers through technical workshops and STEM mentorship.",
+      "Provide professional networking with leading women leaders in tech.",
+      "Promote STEM education among young female students in schools.",
+      "Foster diversity, inclusion, and career readiness in engineering fields."
+    ],
+    "major_activities": [
+      "Technical workshops on AI, software design, and engineering innovations",
+      "Panel discussions featuring accomplished women engineering alumni",
+      "STEM Outreach programs in nearby schools to inspire young girls",
+      "Resume building, technical interview prep, and corporate mentoring sessions"
+    ],
+    "skills_developed": [
+      "Technical Engineering Competence",
+      "Professional Networking",
+      "STEM Mentorship",
+      "Public Speaking & Presentation",
+      "Career Planning & Leadership"
+    ],
+    "eligibility": "Open to all female engineering students across all disciplines. Male allies and supporters of diversity in STEM are also welcome to collaborate.",
+    "faculty_coordinator": "Ms. Sushmita Sarkar (Head Faculty Coordinator), Mrs. Jahida Khan (Co-Faculty Coordinator)",
+    "student_coordinators": "SWE Student Leadership Committee and Department Representatives",
+    "achievements": "Officially chartered at KITCoEK; conducted high-engagement technical empowerment seminars and STEM outreach events.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/SWE.pdf"
+  },
+  {
+    "id": "www",
+    "name": "Walk With World (WWW)",
+    "abbr": "WWW",
+    "category": "Student Development",
+    "tagline": "By the Students, For the Students | Poise, Accord, World",
+    "establishment_year": "2012",
+    "description": "Walk With World (WWW) is a premier student-run organization with 13+ years of continuous service at KITCoEK. Operating under the motto 'By the Students, For the Students', WWW specializes in personality development, public speaking, soft skills, Model United Nations (MUN), and parliamentary debating to groom well-rounded engineering professionals.",
+    "objectives": [
+      "Equip students with elite soft skills, public speaking, and communicative poise.",
+      "Conduct 'Sprinters' — specialized personality orientation for First Year students.",
+      "Simulate Model United Nations (MUN) and youth parliaments on global affairs.",
+      "Provide platforms for debate, extempore, and diplomatic negotiation."
+    ],
+    "major_activities": [
+      "Sprinters — Signature soft skills and personality series for First Year B.Tech",
+      "Model United Nations (MUN) conferences with international committee simulations",
+      "Youth Parliamentary debate championships and extempore competitions",
+      "Group discussion (GD) and personal interview (PI) mastery bootcamps",
+      "Inter-collegiate diplomacy and communication conclaves"
+    ],
+    "skills_developed": [
+      "Public Speaking & Oratory",
+      "Diplomatic Negotiation",
+      "Parliamentary Debate",
+      "Soft Skills & Professional Poise",
+      "Global Affairs & Policy Analysis",
+      "Active Listening & Articulation"
+    ],
+    "eligibility": "Open to students from all engineering branches. Highly recommended for First Year and Second Year students looking to build confident communication skills.",
+    "faculty_coordinator": "Mr. Amar Tikole (Faculty Coordinator), Mr. Prasad Jadhav (Co-coordinator)",
+    "student_coordinators": "Mr. Shivendra Desai (President), Ms. Janhavi Bhosale (Vice President), and Strategic Executive Committee",
+    "achievements": "Over 13 years of impactful student transformation; successfully trained batches of first-year students through Sprinters and hosted high-level MUN sessions.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/WWW.pdf"
+  },
+  {
+    "id": "ncc",
+    "name": "National Cadet Corps (NCC) — 1 MAH ARTY BTY",
+    "abbr": "NCC",
+    "category": "Leadership",
+    "tagline": "Unity and Discipline",
+    "establishment_year": "January 2021",
+    "description": "The National Cadet Corps (NCC) unit at KITCoEK operates under 1 MAH ARTY BTY, Kolhapur (Army Wing Artillery Battery). Established in January 2021 under the Fully Self-Finance Scheme (FSFS), the unit trains 80 cadets in military parade, rifle firing, fieldcraft, disaster management, and selfless nation-building.",
+    "objectives": [
+      "Develop character, comradeship, discipline, secular outlook, and ideals of selfless service.",
+      "Provide basic military training in small arms firing, map reading, and drill.",
+      "Motivate youth to take up careers in the armed forces with 'C' Certificate benefits.",
+      "Inculcate disaster response, civil defense, and leadership skills."
+    ],
+    "major_activities": [
+      "Annual Training Camps (ATC) and Combined Annual Training Camps (CATC)",
+      "Firing drills and weapon training at military facilities",
+      "Official visits to College of Military Engineering (CME) Pune and School of Artillery Deolali",
+      "Republic Day and Independence Day Guard of Honor and ceremonial parades",
+      "Interactive speaker sessions with SSB recommended officers and defense veterans"
+    ],
+    "skills_developed": [
+      "Military Drill & Weapon Handling",
+      "Physical Fitness & Endurance",
+      "Discipline & Time Management",
+      "Crisis & Disaster Response",
+      "Team Spirit & Patriotic Leadership"
+    ],
+    "eligibility": "Open to physically fit First Year and Second Year students through official enrollment selection (physical fitness and interview tests). Total authorized strength: 80 Cadets.",
+    "faculty_coordinator": "Caretaker Officer (CTO) / Associate NCC Officer (ANO) Ranjit Patil",
+    "student_coordinators": "Senior Under Officer (SUO) and Under Officers (UO) heading the 80 Cadets contingent",
+    "achievements": "Cadets earned high gradings in 'B' and 'C' Certificate exams; completed visits to national defense establishments and secured selections in defense forces.",
+    "academic_year": "2024–25 (Report) / Active 2025–26",
+    "source_url": "https://www.kitcoek.in/kit-ncc-activities",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/24-25/NCC%20ANNUAL%20REPORT.pdf"
+  },
+  {
+    "id": "nss",
+    "name": "National Service Scheme (NSS)",
+    "abbr": "NSS",
+    "category": "Social Service",
+    "tagline": "Not Me, But You",
+    "establishment_year": "24 September 1969",
+    "description": "National Service Scheme (NSS) at KITCoEK is an institutional chapter under the Ministry of Youth Affairs and Sports, Government of India. Guided by Mahatma Gandhi's philosophy and the motto 'Not Me, But You', NSS bridges classroom engineering education with real-world community development, rural upliftment, and civic service.",
+    "objectives": [
+      "Enable students to understand community needs and identify with rural populations.",
+      "Apply engineering and problem-solving skills to practical rural community issues.",
+      "Foster civic and social responsibility, national harmony, and environmental hygiene.",
+      "Promote leadership and democratic values through voluntary social service."
+    ],
+    "major_activities": [
+      "Annual 7-Day Residential Rural Camp in an adopted village",
+      "Village watershed management, road repairs, and soak-pit construction",
+      "Swachh Bharat Abhiyan campus and municipal cleanliness campaigns",
+      "Health, eye, and blood donation camps in rural Kolhapur",
+      "Voter registration drives, tree plantation, and gender equality awareness rallies"
+    ],
+    "skills_developed": [
+      "Community Engagement & Empathy",
+      "Rural Problem Solving",
+      "Grassroots Leadership",
+      "Social Project Planning",
+      "Teamwork in Challenging Environments"
+    ],
+    "eligibility": "Open to all undergraduate students willing to commit to mandatory volunteer hours and the 7-day rural residential camp.",
+    "faculty_coordinator": "Dr. N. S. Patil (NSS Program Officer), Mrs. V. V. Mahajani (Co-coordinator)",
+    "student_coordinators": "Sidheshwar More (Student Coordinator) and Volunteer Core Team",
+    "achievements": "Conducted successful 7-day residential village transformation camps, water conservation drives, and extensive health awareness campaigns.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/NSS.pdf"
+  },
+  {
+    "id": "lead_india",
+    "name": "Lead India",
+    "abbr": "Lead India",
+    "category": "Leadership",
+    "tagline": "Empowering Future Civil Servants",
+    "establishment_year": "2014",
+    "description": "Lead India is a student-driven competitive examination guidance forum founded in 2014 at KITCoEK. It is dedicated to motivating, mentoring, and preparing students who aspire for Indian Civil Services (UPSC — IAS, IPS, IFS) and Maharashtra Public Service Commission (MPSC) examinations.",
+    "objectives": [
+      "Guide students systematically for UPSC and MPSC civil service examinations.",
+      "Enhance analytical skills, general knowledge, and essay articulation.",
+      "Conduct interactive sessions with serving IAS, IPS, and IRS officers.",
+      "Organize competitive quizzes and debate forums on national public policy."
+    ],
+    "major_activities": [
+      "Vidman — National Level Inter-Collegiate Quiz Competition",
+      "Interactive guest lectures with serving government officers (IAS, IPS, IPoS)",
+      "Current affairs group discussions and editorial analysis sessions",
+      "Mock aptitude and general studies examination practice",
+      "Guidance bootcamps on civil services interview preparation"
+    ],
+    "skills_developed": [
+      "General Awareness & Current Affairs",
+      "Analytical & Logical Reasoning",
+      "Public Policy Understanding",
+      "Essay & Descriptive Writing",
+      "Administrative Ethics & Decision Making"
+    ],
+    "eligibility": "Open to all engineering students across all branches aspiring for government administrative, defense, or banking examinations.",
+    "faculty_coordinator": "Dr. Priyanka Mane (Faculty Coordinator; originally established under Asst. Prof. Amit Vaidya)",
+    "student_coordinators": "Snehal Shinde, Sanket Gurav, Sanvee Kulkarni (Core Team: Pravara Prakash Patil)",
+    "achievements": "Organized the prestigious Vidman quiz competition; brought top civil servants to mentor engineering aspirants in AY 2025–26.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Lead_India.pdf"
+  },
+  {
+    "id": "petrichor",
+    "name": "Petrichor — Green Club",
+    "abbr": "Petrichor",
+    "category": "Environment",
+    "tagline": "Guiding Young Minds; Nurturing Young Roots",
+    "establishment_year": "15/08/2023",
+    "description": "Petrichor: Green Club at KITCoEK is an environmental stewardship initiative launched in collaboration with the Higher and Technical Education Department, Government of Maharashtra, UNICEF Maharashtra, ACWADAM, CEE, and 'Why Waste?'. It empowers students to champion environmental sustainability, water audits, biodiversity, and zero-waste living.",
+    "objectives": [
+      "Foster ecological responsibility and sustainability consciousness on campus.",
+      "Promote eco-friendly festivals and waste minimization practices.",
+      "Conduct water literacy audits and campus biodiversity tagging.",
+      "Collaborate with UNICEF and state bodies for youth climate action."
+    ],
+    "major_activities": [
+      "Prarambha — Eco-Friendly Ganesh Idol Making Workshops with natural clay (Shaadu Maati)",
+      "Campus Tree Plantation and Biodiversity flora/fauna tagging drives",
+      "Plastic-Free Campus campaigns and segregation awareness",
+      "Water conservation awareness and sustainability audit initiatives"
+    ],
+    "skills_developed": [
+      "Environmental Sustainability Auditing",
+      "Eco-Friendly Crafting & Sculpture",
+      "Ecological Resource Conservation",
+      "Community Climate Leadership",
+      "Workshop Organization"
+    ],
+    "eligibility": "Open to all students who care about nature, climate action, environmental preservation, and green campus initiatives.",
+    "faculty_coordinator": "Mr. Omkar Prakash Suryawanshi (Faculty Coordinator)",
+    "student_coordinators": "Mr. Rahul Raj (President) and Green Club Student Taskforce (kitpetrichor@gmail.com)",
+    "achievements": "Trained hundreds of students and faculty in crafting eco-friendly clay Ganesh idols under Prarambha; drove notable campus greening projects.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Petrichor.pdf"
+  },
+  {
+    "id": "fy_induction",
+    "name": "Student Induction Program — F.Y. B.Tech.",
+    "abbr": "SIP",
+    "category": "Student Development",
+    "tagline": "Welcoming & Orienting Future Engineers",
+    "establishment_year": "AICTE Mandated Annual Program",
+    "description": "The Student Induction Program (SIP) for First Year B.Tech students is an institutional orientation program conducted at KITCoEK as mandated by AICTE guidelines. Spanning intensive orientation modules (Part I & Part II), it guides incoming engineering freshers into autonomous collegiate life, credit systems, Universal Human Values (UHV), and department facilities.",
+    "objectives": [
+      "Help new incoming students adjust smoothly into the collegiate environment.",
+      "Introduce autonomous academic rules, NEP-2020 curriculum, examinations, and grading.",
+      "Inculcate Universal Human Values (UHV) and interpersonal ethics.",
+      "Familiarize students with campus infrastructure, student clubs, and career opportunities."
+    ],
+    "major_activities": [
+      "5-Day Orientation Series: Part I (August) and Part II (September)",
+      "Campus tours: Departments, laboratories, Central Library, and CBCR",
+      "Universal Human Values (UHV) lectures and interactive workshops",
+      "Showcase of student clubs, sports, and creative arts options",
+      "Interaction sessions with department heads, mentors, and senior leaders"
+    ],
+    "skills_developed": [
+      "Collegiate Adaptability",
+      "Academic Rules Literacy",
+      "Interpersonal Ethics & UHV",
+      "Campus Navigation & Networking",
+      "Time & Stress Management"
+    ],
+    "eligibility": "Mandatory for all newly admitted First Year B.Tech students across all engineering branches at KITCoEK.",
+    "faculty_coordinator": "Dean Academics & First Year Engineering (BSH) Faculty Coordination Team",
+    "student_coordinators": "Senior Student Mentors, Volunteers, and Department Student Council Representatives",
+    "achievements": "Successfully inducted the incoming batch of 2025–26 freshers; organized smooth campus tours, academic orientation, and club showcases.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/FY_Induction.pdf"
+  }
+]

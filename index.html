@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KITCOEK Assistant — Campus Chatbot</title>
+<title>KITCOEK Assistant — Campus &amp; Student Clubs</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,6 +22,18 @@
       </div>
     </div>
 
+    <!-- Navigation Menu (Chat / Student Clubs) -->
+    <div class="sidebar-nav">
+      <button class="nav-tab active" id="tabChatBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Campus Chat
+      </button>
+      <button class="nav-tab" id="tabClubsBtn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Student Clubs <span class="badge-count">18</span>
+      </button>
+    </div>
+
     <button class="new-chat" id="newChatBtn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
       New conversation
@@ -29,9 +41,9 @@
 
     <p class="nav-label">Recent</p>
     <ul class="history" id="historyList">
-      <li>Financial aid deadlines</li>
-      <li>Add/drop a course</li>
-      <li>Library hours this week</li>
+      <li>Explore technical clubs</li>
+      <li>Tell me about E-Cell</li>
+      <li>ISTE 2025-26 activities</li>
       <li>Hostel application status</li>
     </ul>
 
@@ -40,48 +52,148 @@
         <span class="student-name" id="sidebarName">Student</span>
         <span class="student-prn" id="sidebarPrn"></span>
       </div>
+      <a href="https://www.kitcoek.in/studentClubs" target="_blank">Official Clubs Directory ↗</a>
       <a href="#">Help &amp; feedback</a>
-      <a href="#">Talk to a staff member</a>
       <a href="login.html" id="signOutLink">Sign out</a>
     </div>
   </aside>
 
-  <!-- Main -->
+  <!-- Main View -->
   <main class="main">
-    <header class="chat-header">
-      <div>
-        <h1>Ask KITCOEK</h1>
-        <p>Answers on admissions, courses, and campus life.</p>
-      </div>
-      <div class="status"><span class="dot"></span>Online</div>
-    </header>
 
-    <div class="thread" id="thread">
-      <div class="row bot">
-        <div class="avatar">K</div>
-        <div class="bubble">
-          <p>Hi, I'm the KITCOEK Assistant. Ask me about registration, financial aid, hostel, or anything else about campus — or pick a topic below to start.</p>
+    <!-- 1. Chat Section -->
+    <section class="view-section active" id="chatSection">
+      <header class="chat-header">
+        <div>
+          <h1>Ask KITCOEK</h1>
+          <p>Answers on admissions, courses, campus life &amp; student clubs.</p>
+        </div>
+        <div class="header-right">
+          <button class="switch-view-btn" id="headerSwitchClubsBtn">
+            🏛️ View Student Clubs
+          </button>
+          <div class="status"><span class="dot"></span>Online</div>
+        </div>
+      </header>
+
+      <div class="thread" id="thread">
+        <div class="row bot">
+          <div class="avatar">K</div>
+          <div class="bubble">
+            <p>Hi, I'm the KITCOEK Assistant. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.</p>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="suggestions" id="suggestions">
-      <button class="chip" data-q="How do I apply for financial aid?">Financial aid</button>
-      <button class="chip" data-q="How do I register for classes?">Course registration</button>
-      <button class="chip" data-q="What are the library hours?">Library hours</button>
-      <button class="chip" data-q="What campus events are happening this week?">Campus events</button>
-    </div>
-
-    <div class="composer">
-      <div class="composer-inner">
-        <textarea id="input" rows="1" placeholder="Message KITCOEK Assistant…"></textarea>
-        <button class="send-btn" id="sendBtn" aria-label="Send message">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-        </button>
+      <div class="suggestions" id="suggestions">
+        <button class="chip" data-q="Explore technical clubs">Explore technical clubs</button>
+        <button class="chip" data-q="Find clubs for entrepreneurship">Find clubs for entrepreneurship</button>
+        <button class="chip" data-q="Which clubs help improve communication skills?">Improve communication skills</button>
+        <button class="chip" data-q="Which clubs are related to coding and AI?">Coding &amp; AI clubs</button>
+        <button class="chip" data-q="What activities did ISTE organize in 2025–26?">ISTE 2025–26 activities</button>
+        <button class="chip" data-q="What is the purpose of NSS?">Purpose of NSS</button>
       </div>
-      <p class="disclaimer">The assistant can make mistakes. Confirm important dates and requirements with your department.</p>
-    </div>
+
+      <div class="composer">
+        <div class="composer-inner">
+          <textarea id="input" rows="1" placeholder="Message KITCOEK Assistant…"></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+        <p class="disclaimer">Official information grounded in KITCOEK documentation &amp; A.Y. 2025–26 annual reports.</p>
+      </div>
+    </section>
+
+    <!-- 2. Student Clubs Section -->
+    <section class="view-section" id="clubsSection" style="display:none;">
+      <header class="clubs-header">
+        <div>
+          <div class="clubs-title-row">
+            <h1>KITCoEK Student Clubs &amp; Groups</h1>
+            <span class="clubs-count-pill" id="totalClubsCount">18 Official Clubs</span>
+          </div>
+          <p>Official student bodies, development cells, and annual reports for Academic Year 2025–26.</p>
+        </div>
+        <div class="clubs-header-actions">
+          <a href="https://www.kitcoek.in/studentClubs" target="_blank" class="clubs-official-btn">
+            Official Website ↗
+          </a>
+          <button class="switch-view-btn" id="headerSwitchChatBtn">
+            💬 Back to Chat
+          </button>
+        </div>
+      </header>
+
+      <div class="clubs-body">
+        <!-- Quick AI Suggestion Prompts -->
+        <div class="clubs-ai-prompts">
+          <span class="ai-prompt-label">Ask Chatbot:</span>
+          <button class="chip prompt-chip" data-q="Explore technical clubs">Explore technical clubs</button>
+          <button class="chip prompt-chip" data-q="Find clubs for entrepreneurship">Clubs for entrepreneurship</button>
+          <button class="chip prompt-chip" data-q="Which clubs help improve communication skills?">Communication skills</button>
+          <button class="chip prompt-chip" data-q="Which clubs are related to coding and AI?">Coding &amp; AI clubs</button>
+          <button class="chip prompt-chip" data-q="List all KIT student clubs.">List all 18 clubs</button>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="clubs-controls">
+          <div class="clubs-search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input type="text" id="clubSearchInput" placeholder="Search clubs by name, skills, activities, coordinator...">
+            <button id="clearSearchBtn" class="clear-search-btn" style="display:none;">&times;</button>
+          </div>
+
+          <div class="category-filters" id="categoryFilters">
+            <button class="cat-pill active" data-category="All">All (<span id="catCountAll">18</span>)</button>
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+
+        <!-- Clubs Grid -->
+        <div class="clubs-grid-wrapper">
+          <div class="clubs-grid" id="clubsGrid">
+            <!-- Club cards loaded dynamically via JS -->
+            <div class="clubs-loading">
+              <div class="spinner"></div>
+              <p>Loading official student clubs...</p>
+            </div>
+          </div>
+          <div class="clubs-empty" id="clubsEmpty" style="display:none;">
+            <p>No student clubs match your current search or category filter.</p>
+            <button class="btn-sm btn-outline" id="resetFilterBtn">Reset Filters</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- Detailed Club Modal -->
+  <div class="modal-backdrop" id="clubModal" style="display:none;">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-category-badge" id="modalCategory">Technical</div>
+          <h2 id="modalClubName">Indian Society for Technical Education</h2>
+          <span class="modal-abbr" id="modalAbbr">ISTE</span>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close dialog">&times;</button>
+      </div>
+
+      <div class="modal-body" id="modalBody">
+        <!-- Content populated dynamically -->
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-links" id="modalFooterLinks">
+          <a href="#" target="_blank" class="btn-report" id="modalPdfBtn">📄 View Official PDF Report</a>
+          <a href="#" target="_blank" class="btn-source" id="modalSourceBtn">🌐 Official Page</a>
+        </div>
+        <button class="btn-ask-ai" id="modalAskAiBtn">💬 Ask AI about this club</button>
+      </div>
+    </div>
+  </div>
 
 </div>
 
