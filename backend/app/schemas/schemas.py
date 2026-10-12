@@ -21,6 +21,7 @@ class ChatResponse(BaseModel):
     map_url: Optional[str] = None
     location_details: Optional[dict] = None
     club_details: Optional[dict] = None
+    portal_url: Optional[str] = None
 
 class StudentClubResponse(BaseModel):
     id: str

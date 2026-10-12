@@ -179,6 +179,15 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 for c in all_clubs
             ]
 
+    # 3.5 Student Portal, Results & LMS detection
+    portal_url = None
+    is_portal_intent = any(kw in q_low for kw in [
+        "portal", "student portal", "lms", "vmedulife", "result", "results", "marks", "grade", "grades",
+        "sgpa", "cgpa", "marksheet", "attendance", "hall ticket", "admit card", "studentsummary"
+    ])
+    if is_portal_intent:
+        portal_url = "https://portal.vmedulife.com/modules/studentsummary/#/"
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
@@ -223,7 +232,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         follow_up_questions=rag_result.get("follow_up_questions", []),
         map_url=map_url,
         location_details=matched_loc_data,
-        club_details=matched_club_data
+        club_details=matched_club_data,
+        portal_url=portal_url
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()

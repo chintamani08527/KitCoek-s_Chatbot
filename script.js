@@ -247,6 +247,22 @@ async function sendMessage(text){
       `;
     }
 
+    // Append Student Portal & LMS box if portal_url is present
+    if (data.portal_url) {
+      botHtml += `
+        <div class="nav-box" style="border-left: 3px solid var(--pine); background: #f4fbf9; margin-top:10px;">
+          <p><strong>KITCOEK Student Portal (vMedulife) &amp; LMS:</strong></p>
+          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+            Access semester examination results, SGPA/CGPA grade cards, LMS course notes, and attendance tracking.
+          </p>
+          <a href="${data.portal_url}" target="_blank" class="map-link-btn" style="background:var(--pine); color:#fff; display:inline-flex; align-items:center; gap:6px; margin-top:6px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open vMedulife Student Portal ↗
+          </a>
+        </div>
+      `;
+    }
+
     // Append source citations if available
     if (data.sources && data.sources.length > 0) {
       const tags = data.sources

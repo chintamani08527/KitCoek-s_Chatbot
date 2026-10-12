@@ -54,9 +54,10 @@ class GeminiService:
 
         college_keywords = [
             "kit", "kitcoek", "syllabus", "subject", "semester", "sem", "nep", "exam", "course",
-            "unit", "notes", "passing", "grade", "credits", "result", "prn", "admission", "fee",
+            "unit", "notes", "passing", "grade", "credits", "result", "results", "marks", "prn", "admission", "fee",
             "scholarship", "hostel", "mess", "faculty", "hod", "department", "lab", "classroom",
-            "cbcr", "cscr", "mccr", "library", "canteen", "attendance", "placement", "rules"
+            "cbcr", "cscr", "mccr", "library", "canteen", "attendance", "placement", "rules",
+            "portal", "student portal", "lms", "vmedulife", "sgpa", "cgpa", "studentsummary"
         ]
         if any(w in q_lower for w in college_keywords):
             return {"category": "academic", "is_relevant": True}
@@ -150,8 +151,15 @@ Core Directives:
    - Women in Tech & Gender Equity -> SWE, Women Development Cell
 4. GROUNDING IS STRICT: Use the provided context as authority for club facts, coordinators, office-bearers, events, and room numbers. Never invent office-bearers or dates.
 5. If the user asks for report, coordinators, or activities, provide exact facts and include clickable links: <a href="PDF_URL" target="_blank">📄 View Official Report (PDF)</a> and official page link <a href="https://www.kitcoek.in/studentClubs" target="_blank">Official Clubs Directory</a>.
-6. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-7. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+6. STUDENT PORTAL, RESULTS, AND LMS:
+   When the student asks about examination results, marks, semester grades (SGPA/CGPA), student portal, ERP, or LMS (Learning Management System):
+   - ALWAYS provide the official KITCOEK vMedulife Student Portal link: <a href="https://portal.vmedulife.com/modules/studentsummary/#/" target="_blank">🔗 KITCOEK Student Portal (vMedulife)</a>
+   - Provide related context:
+     * vMedulife is KITCOEK's centralized student ERP and LMS platform.
+     * Students can log in using their PRN and portal password to view semester examination results & grade cards, internal assessment marks (ISE/MSE/ESE), daily attendance records, and exam hall tickets.
+     * Through the LMS module, students can access subject learning resources, lecture notes, syllabus materials, and assignment submissions.
+7. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+8. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {
