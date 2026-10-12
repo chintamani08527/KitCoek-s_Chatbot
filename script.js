@@ -263,6 +263,48 @@ async function sendMessage(text){
       `;
     }
 
+    // Append Student Notes card if notes_url is present
+    if (data.notes_url) {
+      botHtml += `
+        <div class="nav-box" style="border-left: 3px solid var(--gold); background: #fdfaf3; margin-top:10px;">
+          <p><strong>KITCOEK Subject &amp; Handwritten Notes:</strong></p>
+          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+            Access verified PDF notes for Statistical Methods (Unit 4: Analysis of Variance), SPS (Unit 3), and department study materials.
+          </p>
+          <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="${data.notes_url}" target="_blank" class="map-link-btn" style="background:var(--ink); color:var(--gold); display:inline-flex; align-items:center; gap:6px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              📄 Open Notes PDF / Folder ↗
+            </a>
+            <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline); display:inline-flex; align-items:center; gap:6px;">
+              📁 View All Notes in Drive
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    // Append Timetable card if timetable_url is present
+    if (data.timetable_url) {
+      botHtml += `
+        <div class="nav-box" style="border-left: 3px solid #2563eb; background: #f4f7fe; margin-top:10px;">
+          <p><strong>KITCOEK Class &amp; Department Timetables:</strong></p>
+          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+            Access class schedules for CSBS (SY, TY, Final Year) and other institute department timetables.
+          </p>
+          <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:8px;">
+            <a href="${data.timetable_url}" target="_blank" class="map-link-btn" style="background:#2563eb; color:#fff; display:inline-flex; align-items:center; gap:6px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              📅 Open Timetable File ↗
+            </a>
+            <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline); display:inline-flex; align-items:center; gap:6px;">
+              📁 View Timetables Drive Folder
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
     // Append source citations if available
     if (data.sources && data.sources.length > 0) {
       const tags = data.sources

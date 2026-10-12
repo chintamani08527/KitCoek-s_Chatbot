@@ -22,6 +22,8 @@ class ChatResponse(BaseModel):
     location_details: Optional[dict] = None
     club_details: Optional[dict] = None
     portal_url: Optional[str] = None
+    notes_url: Optional[str] = None
+    timetable_url: Optional[str] = None
 
 class StudentClubResponse(BaseModel):
     id: str

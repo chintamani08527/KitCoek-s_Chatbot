@@ -57,7 +57,8 @@ class GeminiService:
             "unit", "notes", "passing", "grade", "credits", "result", "results", "marks", "prn", "admission", "fee",
             "scholarship", "hostel", "mess", "faculty", "hod", "department", "lab", "classroom",
             "cbcr", "cscr", "mccr", "library", "canteen", "attendance", "placement", "rules",
-            "portal", "student portal", "lms", "vmedulife", "sgpa", "cgpa", "studentsummary"
+            "portal", "student portal", "lms", "vmedulife", "sgpa", "cgpa", "studentsummary",
+            "timetable", "time table", "schedule", "sps", "statistical methods", "handwritten notes", "handwritten", "variance"
         ]
         if any(w in q_lower for w in college_keywords):
             return {"category": "academic", "is_relevant": True}
@@ -158,8 +159,20 @@ Core Directives:
      * vMedulife is KITCOEK's centralized student ERP and LMS platform.
      * Students can log in using their PRN and portal password to view semester examination results & grade cards, internal assessment marks (ISE/MSE/ESE), daily attendance records, and exam hall tickets.
      * Through the LMS module, students can access subject learning resources, lecture notes, syllabus materials, and assignment submissions.
-7. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-8. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+7. STUDENT NOTES & TIMETABLES (PUBLIC GOOGLE DRIVE REPOSITORY):
+   When the student asks about subject notes, handwritten notes, study materials, or timetables / class schedules:
+   - For NOTES queries:
+     * DIRECTLY provide the specific PDF links:
+       - Statistical Methods (Unit 4: Analysis of Variance): <a href="https://drive.google.com/file/d/1Iw8r8ht5fseg3yeCWbjCXsr_J7a4nQYZ/view" target="_blank">📄 Statistical Methods - Unit 4: Analysis of Variance (PDF)</a>
+       - SPS (Unit 3 Notes): <a href="https://drive.google.com/file/d/1DCB3nY6wc5BF3QJHxMDCOeZtsVIWsC2f/view" target="_blank">📄 SPS - Unit 3 Notes (PDF)</a>
+       - Browse All Subject Notes in Drive: <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank">📁 View All Subject Notes in Drive</a>
+   - For TIMETABLE queries:
+     * DIRECTLY provide the department timetable file link:
+       - CSBS Department Timetable (SY, TY, Final Year): <a href="https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view" target="_blank">📅 CSBS Timetable (SY, TY, Final Year)</a>
+       - Browse All Department Timetables in Drive: <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📁 View All Department Timetables in Drive</a>
+   - Master Public Drive Link: <a href="https://drive.google.com/drive/folders/1O7bzXS8P4I4Z8gI-hBnKuRofLGsoZ19X" target="_blank">📁 KITCOEK Public Drive Repository</a>
+8. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+9. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {

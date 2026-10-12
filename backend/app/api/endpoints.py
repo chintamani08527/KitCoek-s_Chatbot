@@ -188,6 +188,29 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     if is_portal_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
 
+    # 3.6 Student Notes & Timetables detection
+    notes_url = None
+    is_notes_intent = any(kw in q_low for kw in [
+        "note", "notes", "handwritten", "study material", "unit 4", "unit 3", "variance", "sps", "statistical methods"
+    ])
+    if is_notes_intent:
+        if "statistical" in q_low or "variance" in q_low:
+            notes_url = "https://drive.google.com/file/d/1Iw8r8ht5fseg3yeCWbjCXsr_J7a4nQYZ/view"
+        elif "sps" in q_low:
+            notes_url = "https://drive.google.com/file/d/1DCB3nY6wc5BF3QJHxMDCOeZtsVIWsC2f/view"
+        else:
+            notes_url = "https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy"
+
+    timetable_url = None
+    is_timetable_intent = any(kw in q_low for kw in [
+        "timetable", "time table", "schedule", "csbs timetable", "department timetable", "class timetable"
+    ])
+    if is_timetable_intent:
+        if "csbs" in q_low:
+            timetable_url = "https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view"
+        else:
+            timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
@@ -233,7 +256,9 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         map_url=map_url,
         location_details=matched_loc_data,
         club_details=matched_club_data,
-        portal_url=portal_url
+        portal_url=portal_url,
+        notes_url=notes_url,
+        timetable_url=timetable_url
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()
