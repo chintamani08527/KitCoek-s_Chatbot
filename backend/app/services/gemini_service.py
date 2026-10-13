@@ -21,17 +21,10 @@ class GeminiService:
     def classify_query(self, query: str) -> Dict[str, Any]:
         """
         Classifies query into:
-        - category: 'academic', 'navigation', 'rules', 'general_college', 'out_of_scope'
+        - category: 'academic', 'navigation', 'clubs', 'general_college', 'out_of_scope'
         - is_relevant: bool
         """
-        nav_keywords = [
-            "where is", "how to reach", "location of", "direction", "floor", "building",
-            "room", "classroom", "lab", "cbcr", "canteen", "library location", "office location",
-            "department location", "where can i find"
-        ]
         q_lower = query.lower()
-        if any(kw in q_lower for kw in nav_keywords):
-            return {"category": "navigation", "is_relevant": True}
 
         # Fast heuristic for unrelated out-of-scope queries to save network calls
         unrelated_topics = [
@@ -43,6 +36,35 @@ class GeminiService:
             if not any(c in q_lower for c in ["kit", "college", "campus", "engineering", "dept", "exam"]):
                 return {"category": "out_of_scope", "is_relevant": False}
 
+        # Academic priority indicators (timetable, syllabus, notes, results, portal)
+        academic_priority = [
+            "timetable", "time table", "schedule", "syllabus", "curriculum", "unit", "course",
+            "notes", "handwritten", "result", "results", "marks", "grade", "sgpa", "cgpa",
+            "portal", "lms", "vmedulife", "fee", "fees", "admission", "scholarship", "exam", "examination"
+        ]
+        is_academic_doc_query = any(kw in q_lower for kw in academic_priority)
+
+        # Physical location / classroom / map keywords
+        classroom_codes = [
+            "cbcr", "cscr", "mccr", "bshcr", "csamcr", "csdscr", "etcr", "btcr", "eecr", "cvcr"
+        ]
+        physical_nav_keywords = [
+            "campus map", "aerial map", "campus layout", "how to reach", "directions to",
+            "where is classroom", "where is lab", "where is room", "where is building",
+            "where is the library", "where is the canteen", "where is imer", "where is mechanical building",
+            "which floor", "which building", "room location", "lab location", "building location"
+        ]
+        is_room_code = any(code in q_lower for code in classroom_codes)
+        is_nav_explicit = is_room_code or any(kw in q_lower for kw in physical_nav_keywords) or (
+            ("where is" in q_lower or "how to reach" in q_lower or "location of" in q_lower) and
+            any(place in q_lower for place in ["library", "canteen", "imer", "mechanical", "biotechnology", "auditorium", "seminar hall", "entrance", "office", "classroom", "lab", "building"])
+        )
+
+        # Only classify as navigation if it is genuinely a physical classroom or map navigation query and NOT just a syllabus/timetable document query
+        if is_nav_explicit and not (is_academic_doc_query and not is_room_code and "map" not in q_lower):
+            return {"category": "navigation", "is_relevant": True}
+
+        # Student Clubs
         club_keywords = [
             "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur writers",
             "ebsb", "cultural club", "aura", "shourya", "wdgec", "women development", "rotaract",
@@ -55,12 +77,11 @@ class GeminiService:
         college_keywords = [
             "kit", "kitcoek", "syllabus", "subject", "semester", "sem", "nep", "exam", "course",
             "unit", "notes", "passing", "grade", "credits", "result", "results", "marks", "prn", "admission", "fee",
-            "scholarship", "hostel", "mess", "faculty", "hod", "department", "lab", "classroom",
-            "cbcr", "cscr", "mccr", "library", "canteen", "attendance", "placement", "rules",
+            "scholarship", "hostel", "mess", "faculty", "hod", "department", "attendance", "placement", "rules",
             "portal", "student portal", "lms", "vmedulife", "sgpa", "cgpa", "studentsummary",
             "timetable", "time table", "schedule", "sps", "statistical methods", "handwritten notes", "handwritten", "variance"
         ]
-        if any(w in q_lower for w in college_keywords):
+        if any(w in q_lower for w in college_keywords) or is_academic_doc_query:
             return {"category": "academic", "is_relevant": True}
 
         # Check if greeting or introduction

@@ -78,17 +78,69 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             ]
         )
 
-    # 2. Location retrieval if navigational
+    # 2. Location retrieval strictly for classrooms, physical facilities, and map navigation
     matched_loc_data = None
     map_url = None
-    if category == "navigation" or any(kw in query.lower() for kw in ["where", "location", "floor", "room", "building", "cbcr", "library", "canteen", "mccr", "cscr", "bshcr", "csamcr", "csdscr", "etcr", "btcr", "eecr", "cvcr"]):
+    q_low = query.lower()
+
+    # Check if query is primarily about documents/schedules rather than physical rooms
+    is_doc_or_academic_query = any(k in q_low for k in [
+        "timetable", "time table", "schedule", "syllabus", "curriculum", "unit",
+        "notes", "handwritten", "result", "results", "marks", "grade", "grades",
+        "portal", "lms", "vmedulife", "admission", "scholarship", "fee", "fees"
+    ])
+
+    classroom_codes = [
+        "cbcr", "cscr", "mccr", "bshcr", "csamcr", "csdscr", "etcr", "btcr", "eecr", "cvcr"
+    ]
+    has_classroom_code = any(code in q_low for code in classroom_codes)
+    has_map_or_nav_keyword = any(k in q_low for k in [
+        "campus map", "aerial map", "map", "layout", "classroom", "class room",
+        "where is classroom", "where is room", "which floor", "which building",
+        "how to reach", "directions to", "where is the library", "where is the canteen"
+    ])
+
+    # Only look up locations if user explicitly asks about a room code, physical navigation, or map,
+    # and NOT for purely document/academic requests (unless a room code is mentioned)
+    should_check_location = (has_classroom_code or has_map_or_nav_keyword or category == "navigation") and not (
+        is_doc_or_academic_query and not has_classroom_code and "map" not in q_low
+    )
+
+    if should_check_location:
         locations = db.query(CampusLocation).all()
-        q_clean = query.lower().replace("-", " ")
+        q_clean = q_low.replace("-", " ")
         q_tokens = [t for t in q_clean.split() if len(t) >= 3]
+        
+        # Stop words that should NEVER trigger a location match by themselves
+        loc_stopwords = {
+            "where", "what", "which", "floor", "room", "located", "hall",
+            "department", "dept", "find", "can", "show", "tell", "give",
+            "please", "about", "the", "for", "and", "syllabus", "timetable",
+            "schedule", "notes", "result", "results", "portal", "help",
+            "engineering", "college", "campus"
+        }
+
         for loc in locations:
             loc_name_lower = loc.name.lower()
             loc_rooms_lower = (loc.room_number or "").lower().replace("-", " ")
-            if any(tok in loc_name_lower or tok in loc_rooms_lower for tok in q_tokens if tok not in ["where", "what", "which", "floor", "room", "located", "hall"]):
+            
+            # 1. Direct classroom code match
+            direct_code_match = any(code in q_low for code in classroom_codes if code in loc_rooms_lower or code in loc_name_lower)
+            
+            # 2. Key facility match (library, canteen, imer, auditorium, seminar hall, etc.)
+            facility_match = any(
+                fac in q_low and fac in loc_name_lower
+                for fac in ["library", "canteen", "imer", "biotechnology", "seminar hall", "civil model", "geotech", "transportation"]
+            )
+            if "mechanical" in q_low and "mechanical" in loc_name_lower:
+                if any(w in q_low for w in ["building", "lab", "laboratory", "mccr", "room", "floor", "where"]):
+                    facility_match = True
+
+            # 3. Meaningful token match
+            meaningful_tokens = [tok for tok in q_tokens if tok not in loc_stopwords]
+            token_match = any(tok in loc_rooms_lower or (len(tok) >= 4 and tok in loc_name_lower and tok not in ["science", "computer", "systems", "building"]) for tok in meaningful_tokens)
+
+            if direct_code_match or facility_match or token_match:
                 matched_loc_data = {
                     "name": loc.name,
                     "category": loc.category,
@@ -101,10 +153,24 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 map_url = "/api/locations/map"
                 break
 
+        if not matched_loc_data and (
+            any(k in q_low for k in ["campus map", "aerial map", "layout map", "the map", "show map", "open map", "view map"])
+            or q_low.strip() in ["map", "campus map", "aerial map"]
+        ):
+            map_url = "/api/locations/map"
+            matched_loc_data = {
+                "name": "KITCoEK Campus Aerial Layout Map",
+                "category": "Navigation",
+                "building": "Campus Layout",
+                "floor": "All Blocks & Wings",
+                "room_number": None,
+                "landmark": "North Wing, South Wing, IMER, Mechanical, Library, Biotech & Canteen",
+                "description": "Official aerial photo layout of the KITCoEK campus showing all academic buildings, departments, and classroom blocks."
+            }
+
     # 3. Student Clubs matching & context retrieval
     matched_club_data = None
     clubs_dir_summary = None
-    q_low = query.lower()
     
     is_club_intent = category == "clubs" or any(kw in q_low for kw in [
         "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur", "writers",
