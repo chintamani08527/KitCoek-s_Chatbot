@@ -5,6 +5,7 @@ import time
 from typing import List, Dict, Any, Optional
 from google import genai
 from backend.app.core.config import settings
+from backend.app.services.gemini_pool import get_gemini_pool
 
 class VectorStoreService:
     """
@@ -27,13 +28,9 @@ class VectorStoreService:
                 print(f"[Warning] Could not load existing vector index: {e}")
                 self.data = []
 
-        # Initialize Gemini embedding client
-        self.gemini_client = None
-        if settings.GEMINI_API_KEY and settings.GEMINI_API_KEY.strip() and settings.GEMINI_API_KEY != "your_gemini_api_key_here":
-            try:
-                self.gemini_client = genai.Client(api_key=settings.GEMINI_API_KEY)
-            except Exception as e:
-                print(f"[Warning] Failed to initialize Gemini for embeddings: {e}")
+        # Initialize Gemini pool for embeddings
+        self.pool = get_gemini_pool()
+        self.gemini_client = self.pool.keys[0].init_client() if self.pool.has_keys() else None
         # In-memory LRU query embedding cache
         self._query_cache = {}
 
@@ -42,29 +39,28 @@ class VectorStoreService:
             json.dump(self.data, f, ensure_ascii=False)
 
     def embed_texts(self, texts: List[str], is_query: bool = False) -> List[List[float]]:
-        """Generate high-dimension embeddings using Gemini models/gemini-embedding-001 with rate-limit pacing."""
-        if not self.gemini_client:
-            raise ValueError("GEMINI_API_KEY is required to generate embeddings.")
+        """Generate high-dimension embeddings using Gemini pool with automatic multi-key failover."""
+        if not self.pool.has_keys():
+            raise ValueError("No Gemini API keys configured to generate embeddings.")
         
         embeddings = []
         batch_size = 8
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
-            for attempt in range(5):
+            for attempt in range(3):
                 try:
-                    res = self.gemini_client.models.embed_content(
+                    res = self.pool.embed_content(
                         model=settings.GEMINI_EMBEDDING_MODEL,
                         contents=batch
                     )
                     for item in res.embeddings:
                         embeddings.append(item.values)
                     if not is_query and len(texts) > 1:
-                        time.sleep(0.6) # gentle pacing only for bulk document indexing
+                        time.sleep(0.4) # gentle pacing only for bulk document indexing
                     break
                 except Exception as ex:
-                    if ("429" in str(ex) or "RESOURCE_EXHAUSTED" in str(ex)) and attempt < 4:
-                        print(f"[VectorStore] Quota limit hit, backing off 15s (attempt {attempt+1}/5)...")
-                        time.sleep(15)
+                    if attempt < 2 and ("429" in str(ex) or "RESOURCE_EXHAUSTED" in str(ex) or "quota" in str(ex).lower()):
+                        time.sleep(3)
                     else:
                         raise ex
         return embeddings
@@ -118,7 +114,7 @@ class VectorStoreService:
         k = top_k or settings.TOP_K_RESULTS
         min_threshold = threshold or settings.SIMILARITY_THRESHOLD
         
-        if not self.gemini_client or not self.data:
+        if not self.pool.has_keys() or not self.data:
             return []
             
         q_key = query.strip().lower()

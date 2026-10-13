@@ -4,19 +4,16 @@ from typing import Dict, Any, List, Optional
 from google import genai
 from google.genai import types
 from backend.app.core.config import settings
+from backend.app.services.gemini_pool import get_gemini_pool
 
 class GeminiService:
     def __init__(self):
+        self.pool = get_gemini_pool()
         self.api_key = settings.GEMINI_API_KEY
-        self.client = None
-        if self.api_key and self.api_key.strip() and self.api_key != "your_gemini_api_key_here":
-            try:
-                self.client = genai.Client(api_key=self.api_key)
-            except Exception as e:
-                print(f"[Warning] Failed to initialize Gemini Client: {e}")
+        self.client = self.pool.keys[0].init_client() if self.pool.has_keys() else None
 
     def is_configured(self) -> bool:
-        return self.client is not None
+        return self.pool.has_keys()
 
     def classify_query(self, query: str) -> Dict[str, Any]:
         """
@@ -221,7 +218,7 @@ Student Query: {query}
             
             for m in models_to_try:
                 try:
-                    response = self.client.models.generate_content(
+                    response = self.pool.generate_content(
                         model=m,
                         contents=[
                             {"role": "user", "parts": [{"text": system_instruction + "\n\n" + user_prompt}]}
