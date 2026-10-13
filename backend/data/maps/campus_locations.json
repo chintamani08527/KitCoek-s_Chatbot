@@ -9,13 +9,13 @@
     "description": "Houses reference section, reading hall, digital library section with e-journals, and book bank."
   },
   {
-    "name": "CBCR 01 to CBCR 05 (Central Block Classrooms)",
-    "category": "CBCR",
+    "name": "CBCR 01 to CBCR 05 (Computer Science and Business Systems Classrooms)",
+    "category": "Classroom",
     "building": "IMER Building",
     "floor": "Third Floor",
     "room_number": "CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05",
-    "landmark": "IMER Building, 3rd Floor",
-    "description": "Central Block lecture halls and classrooms CBCR 01 through CBCR 05 located on the 3rd floor of the IMER Building."
+    "landmark": "IMER Building, 3rd Floor (CSBS Department)",
+    "description": "In the IMER Building on the 3rd floor, CBCR stands for Computer Science and Business Systems (CSBS) Classrooms. Houses lecture halls and classrooms CBCR 01 through CBCR 05."
   },
   {
     "name": "CSAMCR 01 (CSE AIML Classroom 01)",

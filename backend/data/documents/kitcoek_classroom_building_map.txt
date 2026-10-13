@@ -16,12 +16,12 @@
   * CSAMCR 04 (Computer Science AIML Classroom 04)
   * CSDSCR 02 (Computer Science Data Science Classroom 02)
   * CSDSCR 03 (Computer Science Data Science Classroom 03)
-- Third Floor:
-  * CBCR 01 (Central Block Classroom 01)
-  * CBCR 02 (Central Block Classroom 02)
-  * CBCR 03 (Central Block Classroom 03)
-  * CBCR 04 (Central Block Classroom 04)
-  * CBCR 05 (Central Block Classroom 05)
+- Third Floor (CSBS - Computer Science and Business Systems):
+  * CBCR 01 (Computer Science and Business Systems Classroom 01)
+  * CBCR 02 (Computer Science and Business Systems Classroom 02)
+  * CBCR 03 (Computer Science and Business Systems Classroom 03)
+  * CBCR 04 (Computer Science and Business Systems Classroom 04)
+  * CBCR 05 (Computer Science and Business Systems Classroom 05)
 
 2. MAIN BUILDING:
 - Entrance: Main Building Entrance (central division between North Wing & South Wing)

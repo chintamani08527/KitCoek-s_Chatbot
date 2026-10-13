@@ -170,9 +170,15 @@ Core Directives:
      * DIRECTLY provide the department timetable file link:
        - CSBS Department Timetable (SY, TY, Final Year): <a href="https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view" target="_blank">📅 CSBS Timetable (SY, TY, Final Year)</a>
        - Browse All Department Timetables in Drive: <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📁 View All Department Timetables in Drive</a>
-   - Master Public Drive Link: <a href="https://drive.google.com/drive/folders/1O7bzXS8P4I4Z8gI-hBnKuRofLGsoZ19X" target="_blank">📁 KITCOEK Public Drive Repository</a>
-8. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-9. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+8. CAMPUS LOCATIONS & ABBREVIATIONS:
+   - In the IMER Building on the Third Floor, **CBCR** stands for **Computer Science and Business Systems (CSBS)** Classrooms (CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05).
+   - IMER Building Floor Allocation:
+     * Ground Floor: ETCR 04 (MBA)
+     * First Floor: CSAMCR 01 (CSE AIML), CSDSCR 01 (CSE Data Science), ETCR 03
+     * Second Floor: CSAMCR 02, 03, 04 (CSE AIML), CSDSCR 02, 03 (CSE Data Science)
+     * Third Floor: CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05 (Computer Science and Business Systems / CSBS)
+9. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+10. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {
