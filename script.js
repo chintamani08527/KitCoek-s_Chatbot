@@ -305,19 +305,6 @@ async function sendMessage(text){
       `;
     }
 
-    // Append source citations if available
-    if (data.sources && data.sources.length > 0) {
-      const tags = data.sources
-        .map(s => `<span class="citation-tag">${escapeHtml(s.document_name)} (${Math.round((s.score || 0)*100)}% match)</span>`)
-        .join('');
-      botHtml += `
-        <div class="citations">
-          <div class="citations-title">Sources &amp; References:</div>
-          <div>${tags}</div>
-        </div>
-      `;
-    }
-
     addRow('bot', botHtml);
 
     // Update follow-up questions
