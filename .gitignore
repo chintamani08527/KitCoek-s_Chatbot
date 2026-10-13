@@ -15,3 +15,6 @@ backend/data/chroma_db/
 
 # Uploaded documents (keep sample docs if needed)
 backend/data/documents/uploads/
+
+# Archive bundles
+*.zip

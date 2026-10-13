@@ -2,7 +2,7 @@ import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from backend.app.core.config import settings
 from backend.app.api.endpoints import router as api_router
 from backend.app.db.database import engine, Base
@@ -77,22 +77,7 @@ if os.path.exists("./style.css"):
         return FileResponse("script.js", media_type="application/javascript")
 
     @app.get("/login.html")
+    @app.get("/Login.html")
     def serve_login():
-        return FileResponse("Login.html") if os.path.exists("Login.html") else FileResponse("login.html")
-
-    @app.get("/login.css")
-    def serve_login_css_lower():
-        return FileResponse("Login.css", media_type="text/css")
-
-    @app.get("/Login.css")
-    def serve_login_css():
-        return FileResponse("Login.css", media_type="text/css")
-
-    @app.get("/login.js")
-    def serve_login_js_lower():
-        return FileResponse("Login.js", media_type="application/javascript")
-
-    @app.get("/Login.js")
-    def serve_login_js():
-        return FileResponse("Login.js", media_type="application/javascript")
+        return RedirectResponse(url="/")
 

@@ -6,7 +6,6 @@ const newChatBtn = document.getElementById('newChatBtn');
 const historyList = document.getElementById('historyList');
 const sidebarName = document.getElementById('sidebarName');
 const sidebarPrn = document.getElementById('sidebarPrn');
-const signOutLink = document.getElementById('signOutLink');
 
 // Navigation elements
 const chatSection = document.getElementById('chatSection');
@@ -44,34 +43,17 @@ let currentCategory = 'All';
 let currentSearch = '';
 let clubsLoaded = false;
 
-// ---- Student session (set to default if not set) ----
-let studentName = sessionStorage.getItem('kitcoek_student_name');
-let studentPrn = sessionStorage.getItem('kitcoek_student_prn');
+// ---- Student session ----
+let studentName = 'KITCOEK Student';
+let studentPrn = 'Campus Assistant';
 
-if (!studentName) {
-  studentName = 'KITCOEK Student';
-  studentPrn = '2024CS001';
-  sessionStorage.setItem('kitcoek_student_name', studentName);
-  sessionStorage.setItem('kitcoek_student_prn', studentPrn);
-}
+if (sidebarName) sidebarName.textContent = studentName;
+if (sidebarPrn) sidebarPrn.textContent = studentPrn;
 
-if (sidebarName) sidebarName.textContent = studentName || 'Student';
-if (sidebarPrn) sidebarPrn.textContent = studentPrn ? 'PRN ' + studentPrn : '';
-
-if (signOutLink) {
-  signOutLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    sessionStorage.removeItem('kitcoek_student_name');
-    sessionStorage.removeItem('kitcoek_student_prn');
-    location.reload();
-  });
-}
-
-// Personalize the first greeting with the student's first name
-const firstName = studentName ? studentName.trim().split(' ')[0] : '';
+// Set greeting message
 const greetingBubble = document.querySelector('.thread .row.bot .bubble p');
-if (greetingBubble && firstName) {
-  greetingBubble.innerHTML = `Hi ${escapeHtml(firstName)}, I'm the KITCOEK Assistant. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.`;
+if (greetingBubble) {
+  greetingBubble.innerHTML = `Hi! I'm the <strong>KITCOEK AI Assistant</strong>. Ask me about academic syllabus, timetables, examinations, campus navigation, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.`;
 }
 
 // ---- View Switching ----
