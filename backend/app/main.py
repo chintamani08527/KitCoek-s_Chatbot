@@ -43,6 +43,8 @@ def get_campus_map():
 
 @app.get("/campus_map.jpg")
 def serve_campus_map_direct():
+    if os.path.exists("./campus_map.jpg"):
+        return FileResponse("./campus_map.jpg", media_type="image/jpeg")
     map_jpg = "./backend/data/maps/campus_map.jpg"
     if os.path.exists(map_jpg):
         return FileResponse(map_jpg, media_type="image/jpeg")
@@ -75,6 +77,28 @@ if os.path.exists("./style.css"):
     @app.get("/script.js")
     def serve_js():
         return FileResponse("script.js", media_type="application/javascript")
+
+    @app.get("/favicon.ico")
+    def serve_favicon():
+        if os.path.exists("favicon.ico"):
+            return FileResponse("favicon.ico", media_type="image/x-icon")
+        return {"error": "Favicon not found"}
+
+    @app.get("/kit-emblem.png")
+    def serve_kit_emblem():
+        return FileResponse("kit-emblem.png", media_type="image/png")
+
+    @app.get("/kit-logo.png")
+    def serve_kit_logo():
+        return FileResponse("kit-logo.png", media_type="image/png")
+
+    @app.get("/kit-logo-banner.png")
+    def serve_kit_logo_banner():
+        return FileResponse("kit-logo-banner.png", media_type="image/png")
+
+    @app.get("/kit-emblem-raw.png")
+    def serve_kit_emblem_raw():
+        return FileResponse("kit-emblem-raw.png", media_type="image/png")
 
     @app.get("/login.html")
     @app.get("/Login.html")

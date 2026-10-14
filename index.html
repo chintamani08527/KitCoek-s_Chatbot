@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KITCOEK Assistant — Campus &amp; Student Clubs</title>
+<link rel="icon" type="image/png" href="kit-emblem.png?v=5.0">
+<link rel="shortcut icon" href="favicon.ico?v=5.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=5.0">
 </head>
 <body>
 
@@ -16,9 +18,11 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="brand">
-      <div class="crest">K</div>
+      <div class="brand-logo-wrap" title="KITCOEK Official Emblem">
+        <img src="kit-emblem.png?v=5.0" alt="KITCOEK Official Logo" class="brand-logo">
+      </div>
       <div class="brand-name">KITCOEK
-        <span>Campus assistant</span>
+        <span>CAMPUS ASSISTANT</span>
       </div>
     </div>
 
@@ -43,13 +47,27 @@
       New conversation
     </button>
 
-    <p class="nav-label">Recent</p>
-    <ul class="history" id="historyList">
-      <li>Explore technical clubs</li>
-      <li>Tell me about E-Cell</li>
-      <li>ISTE 2025-26 activities</li>
-      <li>Hostel application status</li>
-    </ul>
+    <!-- Dedicated Chat History Section -->
+    <div class="history-search-container">
+      <div class="history-search-box">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" id="historySearchInput" placeholder="Search conversations..." aria-label="Search conversations">
+        <button type="button" id="clearHistorySearchBtn" class="clear-history-search-btn" style="display:none;" aria-label="Clear search">&times;</button>
+      </div>
+    </div>
+
+    <div class="history-header">
+      <p class="nav-label">Chat History</p>
+      <span class="history-badge-count" id="historyCount">0</span>
+    </div>
+
+    <div class="history-scroll-container">
+      <ul class="history" id="historyList"></ul>
+      <div class="history-empty" id="historyEmpty" style="display:none;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <span>No conversations found</span>
+      </div>
+    </div>
 
     <div class="sidebar-footer">
       <div class="student-id">
@@ -65,13 +83,25 @@
   <main class="main">
 
     <!-- 1. Chat Section -->
-    <section class="view-section active" id="chatSection">
+    <section class="view-section active chat-theme-space" id="chatSection">
       <header class="chat-header">
-        <div>
+        <div class="chat-header-main">
           <h1>Ask KITCOEK</h1>
           <p>Answers on admissions, courses, campus life &amp; student clubs.</p>
         </div>
         <div class="header-right">
+          <!-- Chat Appearance Switcher -->
+          <div class="chat-theme-switcher" role="radiogroup" aria-label="Chat appearance switcher">
+            <button type="button" class="theme-switch-btn" id="themeWhiteBtn" role="radio" aria-checked="false" aria-label="Switch to White Chat Mode">
+              <span class="theme-icon" aria-hidden="true">☀️</span>
+              <span class="theme-text">White Mode</span>
+            </button>
+            <button type="button" class="theme-switch-btn active" id="themeSpaceBtn" role="radio" aria-checked="true" aria-label="Switch to Space Blue Chat Mode">
+              <span class="theme-icon" aria-hidden="true">🌌</span>
+              <span class="theme-text">Space Blue Mode</span>
+            </button>
+          </div>
+
           <button class="switch-view-btn" id="headerMapBtn">
             🗺️ Campus Map
           </button>
@@ -84,9 +114,9 @@
 
       <div class="thread" id="thread">
         <div class="row bot">
-          <div class="avatar">K</div>
+          <div class="avatar bot-avatar" aria-label="KITCOEK AI Assistant"><img src="kit-emblem.png?v=5.0" alt="KITCOEK" class="assistant-avatar-img" onerror="this.style.display='none'; this.parentNode.classList.add('avatar-fallback'); this.parentNode.innerText='K';"></div>
           <div class="bubble">
-            <p>Hi, I'm the KITCOEK Assistant. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.</p>
+            <p>Hi, I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.</p>
           </div>
         </div>
       </div>
@@ -106,6 +136,9 @@
       <div class="composer">
         <div class="composer-inner">
           <textarea id="input" rows="1" placeholder="Message KITCOEK Assistant…"></textarea>
+          <button type="button" class="mic-btn" id="micBtn" aria-label="Voice input" title="Voice Input (Speech-to-Text)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </button>
           <button class="send-btn" id="sendBtn" aria-label="Send message">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </button>
@@ -215,13 +248,13 @@
         <button class="modal-close-btn" id="mapModalCloseBtn" aria-label="Close dialog">&times;</button>
       </div>
       <div class="modal-body map-modal-body">
-        <img src="/api/locations/map" alt="KITCOEK Campus Aerial Map" class="campus-map-img" id="campusMapImg">
+        <img src="campus_map.jpg" alt="KITCOEK Campus Aerial Map" class="campus-map-img" id="campusMapImg">
       </div>
       <div class="modal-footer">
         <div class="map-legend-notes">
           <span>Aerial Layout showing North Wing, South Wing, IMER, Mechanical, Library, Biotechnology &amp; Canteen.</span>
         </div>
-        <a href="/api/locations/map" target="_blank" download="KITCOEK_Campus_Map.jpg" class="btn-report">
+        <a href="campus_map.jpg" target="_blank" download="KITCOEK_Campus_Map.jpg" class="btn-report">
           ⬇️ Open / Download High-Res Map
         </a>
       </div>
@@ -230,6 +263,6 @@
 
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=5.0"></script>
 </body>
 </html>
