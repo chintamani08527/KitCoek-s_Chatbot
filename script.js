@@ -48,6 +48,14 @@ let currentCategory = 'All';
 let currentSearch = '';
 let clubsLoaded = false;
 
+// ---- API Base URL (auto-resolves for http, localhost, live-server and file://) ----
+const API_BASE = (function() {
+  if (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '8000')) {
+    return 'http://127.0.0.1:8000';
+  }
+  return '';
+})();
+
 // ---- Student session ----
 let studentName = 'KITCOEK Student';
 let studentPrn = 'Campus Assistant';
@@ -645,7 +653,7 @@ async function sendMessage(text){
   showTyping();
 
   try {
-    const response = await fetch('/api/chat', {
+    const response = await fetch(`${API_BASE}/api/chat`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -907,8 +915,8 @@ async function loadClubsDataIfNeeded() {
   if (clubsLoaded) return;
   try {
     const [clubsRes, catsRes] = await Promise.all([
-      fetch('/api/clubs'),
-      fetch('/api/clubs/categories')
+      fetch(`${API_BASE}/api/clubs`),
+      fetch(`${API_BASE}/api/clubs/categories`)
     ]);
     if (!clubsRes.ok) throw new Error('Failed to load clubs');
     allClubs = await clubsRes.json();

@@ -237,7 +237,16 @@ Student Query: {query}
             if not response or not response.text:
                 raise last_err or Exception("No response generated")
 
-            data = json.loads(response.text.strip())
+            raw_text = response.text.strip()
+            if raw_text.startswith("```"):
+                raw_text = re.sub(r"^```(?:json)?\s*", "", raw_text)
+                raw_text = re.sub(r"\s*```$", "", raw_text)
+            
+            try:
+                data = json.loads(raw_text.strip())
+            except Exception:
+                data = {"answer": raw_text, "follow_up_questions": []}
+
             return {
                 "answer": data.get("answer", "<p>No response generated.</p>"),
                 "follow_up_questions": data.get("follow_up_questions", [])
