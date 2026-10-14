@@ -65,18 +65,19 @@ def health_check():
 
 # Mount static frontend root files for single-origin serving if opened directly
 if os.path.exists("./style.css"):
-    # Serve index.html and assets directly
+    NO_CACHE = {"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"}
+
     @app.get("/")
     def serve_index():
-        return FileResponse("index.html")
+        return FileResponse("index.html", headers=NO_CACHE)
     
     @app.get("/style.css")
     def serve_css():
-        return FileResponse("style.css", media_type="text/css")
+        return FileResponse("style.css", media_type="text/css", headers=NO_CACHE)
 
     @app.get("/script.js")
     def serve_js():
-        return FileResponse("script.js", media_type="application/javascript")
+        return FileResponse("script.js", media_type="application/javascript", headers=NO_CACHE)
 
     @app.get("/favicon.ico")
     def serve_favicon():
