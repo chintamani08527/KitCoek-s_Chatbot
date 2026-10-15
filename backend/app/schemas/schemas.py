@@ -28,6 +28,7 @@ class ChatResponse(BaseModel):
     notice_board_url: Optional[str] = None
     academic_calendars: Optional[List[dict]] = None
     vmedulife_guide: Optional[dict] = None
+    meraki_reels: Optional[List[dict]] = None
 
 class StudentClubResponse(BaseModel):
     id: str
@@ -47,6 +48,7 @@ class StudentClubResponse(BaseModel):
     academic_year: str = "2025–26"
     source_url: Optional[str] = None
     pdf_url: Optional[str] = None
+    meraki_reels: Optional[Any] = None
 
     class Config:
         from_attributes = True

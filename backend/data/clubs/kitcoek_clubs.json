@@ -250,7 +250,34 @@
     "achievements": "Successfully staged Meraki cultural fest; won accolades at zonal Youth Festivals and produced campus-wide traditional celebrations.",
     "academic_year": "2025–26",
     "source_url": "https://www.kitcoek.in/studentClubs",
-    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Cultural.pdf"
+    "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/Cultural.pdf",
+    "meraki_reels": [
+      {
+        "title": "Meraki Flagship Gathering Highlights",
+        "url": "https://www.instagram.com/reel/DdTvWmjMfM0",
+        "tag": "Reel 1"
+      },
+      {
+        "title": "Meraki Cultural Performances & Dance",
+        "url": "https://www.instagram.com/reel/DUxDO-CEZxu",
+        "tag": "Reel 2"
+      },
+      {
+        "title": "Meraki Campus Celebrations & Vibes",
+        "url": "https://www.instagram.com/reel/DU5NbRZDP7W",
+        "tag": "Reel 3"
+      },
+      {
+        "title": "Meraki Grand Stage Gathering",
+        "url": "https://www.instagram.com/reel/DVNPAWGCMNK",
+        "tag": "Reel 4"
+      },
+      {
+        "title": "Meraki Annual Gathering Celebration",
+        "url": "https://www.instagram.com/reel/DVH9-UiiEoj",
+        "tag": "Reel 5"
+      }
+    ]
   },
   {
     "id": "aura",

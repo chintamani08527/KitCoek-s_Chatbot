@@ -68,7 +68,7 @@ class GeminiService:
             "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur writers",
             "ebsb", "cultural club", "aura", "shourya", "wdgec", "women development", "rotaract",
             "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
-            "sip", "student activities", "hackathon", "meraki", "pioneer", "vidman", "prarambha"
+            "sip", "student activities", "hackathon", "meraki", "gathering", "annual gathering", "cultural fest", "reels", "pioneer", "vidman", "prarambha"
         ]
         if any(w in q_lower for w in club_keywords):
             return {"category": "clubs", "is_relevant": True}
@@ -267,8 +267,18 @@ Core Directives:
      * First Floor: CSAMCR 01 (CSE AIML), CSDSCR 01 (CSE Data Science), ETCR 03
      * Second Floor: CSAMCR 02, 03, 04 (CSE AIML), CSDSCR 02, 03 (CSE Data Science)
      * Third Floor: CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05 (Computer Science and Business Systems / CSBS)
-10. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-11. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+10. MERAKI — FLAGSHIP ANNUAL CULTURAL FESTIVAL & GATHERING:
+    Meraki is KITCOEK's premier annual cultural gathering and campus festival, organized by the Cultural Club (Cultural Committee).
+    When asked about Meraki, gathering, cultural events, or videos/reels:
+    - Describe Meraki as the flagship annual cultural gathering featuring mega dance competitions, musical concerts, drama, fashion shows, and campus celebrations.
+    - Cite the official Instagram Reels links:
+      * Meraki Flagship Gathering Highlights: <a href="https://www.instagram.com/reel/DdTvWmjMfM0" target="_blank">🎬 Watch Highlights Reel</a>
+      * Meraki Cultural Performances & Dance: <a href="https://www.instagram.com/reel/DUxDO-CEZxu" target="_blank">🎬 Watch Dance & Stage Performance Reel</a>
+      * Meraki Campus Celebrations & Vibes: <a href="https://www.instagram.com/reel/DU5NbRZDP7W" target="_blank">🎬 Watch Campus Vibe Reel</a>
+      * Meraki Grand Stage Gathering: <a href="https://www.instagram.com/reel/DVNPAWGCMNK" target="_blank">🎬 Watch Grand Stage Celebration Reel</a>
+      * Meraki Annual Gathering Celebration & Aftermovie: <a href="https://www.instagram.com/reel/DVH9-UiiEoj" target="_blank">🎬 Watch Gathering Aftermovie Reel</a>
+11. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+12. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {

@@ -984,6 +984,156 @@ body{
   box-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
 }
 
+/* In-Chat Meraki Gathering Instagram Reels Cards */
+.nav-box.nav-box-reels {
+  background: var(--card-bg, #100C1F);
+  border: 1px solid rgba(225, 48, 108, 0.35);
+  border-left: 3.5px solid #E1306C;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+.reels-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.reels-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #F43F5E;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.reels-live-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #FB7185;
+  background: rgba(244, 63, 94, 0.12);
+  padding: 2px 7px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+.reels-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+}
+.reel-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  background: #18153A;
+  border: 1px solid rgba(225, 48, 108, 0.25);
+  transition: all 0.2s ease;
+}
+.reel-link-btn:hover {
+  background: rgba(225, 48, 108, 0.18);
+  border-color: #E1306C;
+  transform: translateX(2px);
+}
+.reel-btn-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+.reel-tag-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #E1306C 0%, #C13584 100%);
+  color: #FFFFFF;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.reel-btn-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #F8FAFC;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.reel-btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #FB7185;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Modal MERAKI Reels Section */
+.meraki-reels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+  margin-top: 6px;
+}
+.meraki-reel-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: var(--paper-panel, #0E1A34);
+  border: 1px solid var(--hairline, rgba(225, 48, 108, 0.25));
+  transition: all 0.2s ease;
+}
+.meraki-reel-card:hover {
+  transform: translateY(-2px);
+  border-color: #E1306C;
+  box-shadow: 0 4px 14px rgba(225, 48, 108, 0.2);
+}
+.reel-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.reel-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #E1306C 0%, #C13584 100%);
+  color: #FFFFFF;
+}
+.reel-insta-icon {
+  color: #E1306C;
+  display: inline-flex;
+}
+.reel-card-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text, #F8FAFC);
+  line-height: 1.35;
+}
+.reel-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #E1306C;
+  margin-top: 2px;
+}
+
 /* In-Chat VMedulife Step-by-Step Guide Cards */
 .nav-box.nav-box-vmedulife {
   background: var(--card-bg, #071927);
@@ -2275,6 +2425,21 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   color: #FFFFFF;
   border: 1px solid rgba(45, 212, 191, 0.4);
 }
+#clubModal.theme-space .meraki-reel-card {
+  background: #0E1736;
+  border: 1px solid rgba(225, 48, 108, 0.25);
+}
+#clubModal.theme-space .meraki-reel-card:hover {
+  background: #171E42;
+  border-color: #E1306C;
+  box-shadow: 0 4px 16px rgba(225, 48, 108, 0.25);
+}
+#clubModal.theme-space .reel-card-title {
+  color: #F1F5F9;
+}
+#clubModal.theme-space .reel-card-action {
+  color: #FDA4AF;
+}
 
 /* ========================================================
    CLUB DETAILS MODAL — WHITE THEME
@@ -2354,6 +2519,22 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
 #clubModal.theme-white .btn-ask-ai {
   background: #0D9488;
   color: #FFFFFF;
+}
+#clubModal.theme-white .meraki-reel-card {
+  background: #FFFFFF;
+  border: 1px solid #FBCFE8;
+  box-shadow: 0 1px 4px rgba(225, 48, 108, 0.06);
+}
+#clubModal.theme-white .meraki-reel-card:hover {
+  background: #FDF2F8;
+  border-color: #E1306C;
+  box-shadow: 0 4px 12px rgba(225, 48, 108, 0.15);
+}
+#clubModal.theme-white .reel-card-title {
+  color: #0F172A;
+}
+#clubModal.theme-white .reel-card-action {
+  color: #BE185D;
 }
 
 /* ========================================================
@@ -2569,6 +2750,30 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
   color: #FFFFFF;
   border: 1px solid rgba(129, 140, 248, 0.4);
+}
+
+#chatSection.chat-theme-space .nav-box.nav-box-reels {
+  background: #0D0E26;
+  border-left-color: #E1306C;
+  border-color: rgba(225, 48, 108, 0.35);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 1px rgba(225, 48, 108, 0.25);
+}
+#chatSection.chat-theme-space .nav-box.nav-box-reels .reels-badge {
+  color: #FB7185;
+}
+#chatSection.chat-theme-space .nav-box.nav-box-reels .reel-link-btn {
+  background: #151638;
+  border: 1px solid rgba(225, 48, 108, 0.22);
+}
+#chatSection.chat-theme-space .nav-box.nav-box-reels .reel-link-btn:hover {
+  background: #201E4D;
+  border-color: #E1306C;
+}
+#chatSection.chat-theme-space .nav-box.nav-box-reels .reel-btn-title {
+  color: #F8FAFC;
+}
+#chatSection.chat-theme-space .nav-box.nav-box-reels .reel-btn-arrow {
+  color: #FDA4AF;
 }
 
 #chatSection.chat-theme-space .map-link-btn {
@@ -2828,6 +3033,35 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
 #chatSection.chat-theme-white .nav-box.nav-box-calendar .notice-download-btn {
   background: #4F46E5;
   color: #FFFFFF;
+}
+
+#chatSection.chat-theme-white .nav-box.nav-box-reels {
+  background: #FFF5F7;
+  border-left-color: #E1306C;
+  border-color: #FBCFE8;
+  box-shadow: 0 2px 10px rgba(225, 48, 108, 0.08);
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reels-badge {
+  color: #BE185D;
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reels-live-tag {
+  color: #BE185D;
+  background: #FCE7F3;
+  border-color: #FBCFE8;
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reel-link-btn {
+  background: #FFFFFF;
+  border: 1px solid #FBCFE8;
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reel-link-btn:hover {
+  background: #FDF2F8;
+  border-color: #E1306C;
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reel-btn-title {
+  color: #1E293B;
+}
+#chatSection.chat-theme-white .nav-box.nav-box-reels .reel-btn-arrow {
+  color: #BE185D;
 }
 
 #chatSection.chat-theme-white .map-link-btn {

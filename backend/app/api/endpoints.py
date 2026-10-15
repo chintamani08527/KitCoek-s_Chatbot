@@ -19,8 +19,16 @@ import os
 
 router = APIRouter()
 
+MERAKI_REELS = [
+    {"title": "Meraki Flagship Gathering Highlights", "url": "https://www.instagram.com/reel/DdTvWmjMfM0", "tag": "Reel 1"},
+    {"title": "Meraki Cultural Performances & Dance", "url": "https://www.instagram.com/reel/DUxDO-CEZxu", "tag": "Reel 2"},
+    {"title": "Meraki Campus Celebrations & Vibes", "url": "https://www.instagram.com/reel/DU5NbRZDP7W", "tag": "Reel 3"},
+    {"title": "Meraki Grand Stage Gathering", "url": "https://www.instagram.com/reel/DVNPAWGCMNK", "tag": "Reel 4"},
+    {"title": "Meraki Annual Gathering Celebration", "url": "https://www.instagram.com/reel/DVH9-UiiEoj", "tag": "Reel 5"}
+]
+
 def format_club_dict(club: StudentClub) -> dict:
-    return {
+    d = {
         "id": club.id,
         "name": club.name,
         "abbr": club.abbr,
@@ -39,6 +47,9 @@ def format_club_dict(club: StudentClub) -> dict:
         "source_url": club.source_url,
         "pdf_url": club.pdf_url
     }
+    if club.id == "cultural_club":
+        d["meraki_reels"] = MERAKI_REELS
+    return d
 
 # In-memory response cache for frequent / repeated student questions
 _chat_cache = {}
@@ -205,7 +216,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             elif club.id == "aura":
                 club_terms.extend(["aura", "art club"])
             elif club.id == "cultural_club":
-                club_terms.extend(["cultural club", "meraki", "cultural committee"])
+                club_terms.extend(["cultural club", "meraki", "cultural committee", "gathering", "annual gathering", "cultural fest", "reels", "insta reels"])
             elif club.id == "ncc":
                 club_terms.extend(["ncc", "cadet", "cadets", "1 mah arty"])
             elif club.id == "nss":
@@ -380,9 +391,32 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 for n in found_notices
             ]
 
+    # 3.8 Meraki Flagship Gathering & Instagram Reels detection
+    meraki_reels = None
+    is_meraki_intent = any(kw in q_low for kw in [
+        "meraki", "gathering", "annual gathering", "cultural gathering", "cultural fest",
+        "meraki reel", "meraki reels", "gathering reel", "gathering reels", "insta reel", "insta reels",
+        "instagram reel", "instagram reels", "meraki video", "meraki videos"
+    ])
+    if is_meraki_intent:
+        meraki_reels = MERAKI_REELS
+        category = "clubs" if category not in ["navigation"] else category
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
+
+    # Prepend official Meraki Instagram Reels if matched
+    if meraki_reels:
+        reels_ctx = [
+            "OFFICIAL MERAKI FLAGSHIP GATHERING INSTAGRAM REELS (KITCOEK Cultural Committee):",
+            "1. Meraki Flagship Gathering Highlights: https://www.instagram.com/reel/DdTvWmjMfM0",
+            "2. Meraki Cultural Performances & Dance: https://www.instagram.com/reel/DUxDO-CEZxu",
+            "3. Meraki Campus Celebrations & Vibes: https://www.instagram.com/reel/DU5NbRZDP7W",
+            "4. Meraki Grand Stage Gathering: https://www.instagram.com/reel/DVNPAWGCMNK",
+            "5. Meraki Annual Gathering Celebration & Aftermovie: https://www.instagram.com/reel/DVH9-UiiEoj"
+        ]
+        context_texts.insert(0, "\n".join(reels_ctx))
 
     # Prepend official VMedulife guide if matched
     if vmedulife_guide:
@@ -451,7 +485,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         notices_details=matched_notices,
         notice_board_url=notice_board_url,
         academic_calendars=matched_cals,
-        vmedulife_guide=vmedulife_guide
+        vmedulife_guide=vmedulife_guide,
+        meraki_reels=meraki_reels
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()

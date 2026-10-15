@@ -880,6 +880,39 @@ async function sendMessage(text){
       `;
     }
 
+    if (data.meraki_reels && data.meraki_reels.length > 0) {
+      const reelsHtml = data.meraki_reels.map((r, i) => `
+        <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer" class="reel-link-btn">
+          <div class="reel-btn-left">
+            <span class="reel-tag-badge">${escapeHtml(r.tag || `Reel ${i + 1}`)}</span>
+            <span class="reel-btn-title">${escapeHtml(r.title)}</span>
+          </div>
+          <span class="reel-btn-arrow">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Watch
+          </span>
+        </a>
+      `).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-reels">
+          <div class="reels-card-header">
+            <div class="reels-badge">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              MERAKI Official Instagram Reels &amp; Gathering
+            </div>
+            <span class="reels-live-tag">🎉 Flagship Cultural Fest</span>
+          </div>
+          <p class="nav-box-desc" style="margin-bottom:8px;">
+            Watch official Instagram Reels from KITCOEK's annual cultural gathering — featuring dance competitions, stage performances, concerts, and aftermovies!
+          </p>
+          <div class="reels-links-container">
+            ${reelsHtml}
+          </div>
+        </div>
+      `;
+    }
+
     currentConv.messages.push({
       role: 'bot',
       html: botHtml,
@@ -1213,6 +1246,32 @@ function openClubModal(clubId) {
       <div class="modal-section">
         <span class="modal-section-title">Major Activities &amp; Events (2025–26)</span>
         ${actList}
+      </div>
+    ` : ''}
+
+    ${(club.meraki_reels && Array.isArray(club.meraki_reels) && club.meraki_reels.length > 0) ? `
+      <div class="modal-section modal-section-reels">
+        <span class="modal-section-title">🎬 MERAKI Official Instagram Reels</span>
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:10px;">
+          Watch official highlights, dance performances, stage acts, and campus celebrations:
+        </p>
+        <div class="meraki-reels-grid">
+          ${club.meraki_reels.map((r, i) => `
+            <a href="${escapeHtml(r.url)}" target="_blank" rel="noopener noreferrer" class="meraki-reel-card">
+              <div class="reel-card-top">
+                <span class="reel-pill">${escapeHtml(r.tag || `Reel ${i + 1}`)}</span>
+                <span class="reel-insta-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </span>
+              </div>
+              <div class="reel-card-title">${escapeHtml(r.title)}</div>
+              <div class="reel-card-action">
+                <span>Watch Reel</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </div>
+            </a>
+          `).join('')}
+        </div>
       </div>
     ` : ''}
 
