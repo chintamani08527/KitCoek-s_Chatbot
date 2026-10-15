@@ -59,4 +59,6 @@ class StudentClub(Base):
     academic_year = Column(String(50), default="2025–26")
     source_url = Column(String(500), nullable=True)
     pdf_url = Column(String(500), nullable=True)
+    department = Column(String(150), nullable=True)
+    website_url = Column(String(500), nullable=True)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)

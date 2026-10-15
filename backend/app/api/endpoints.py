@@ -45,7 +45,9 @@ def format_club_dict(club: StudentClub) -> dict:
         "achievements": club.achievements,
         "academic_year": club.academic_year,
         "source_url": club.source_url,
-        "pdf_url": club.pdf_url
+        "pdf_url": club.pdf_url,
+        "department": getattr(club, "department", None),
+        "website_url": getattr(club, "website_url", None)
     }
     if club.id == "cultural_club":
         d["meraki_reels"] = MERAKI_REELS
@@ -237,6 +239,20 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 club_terms.extend(["women development", "gender equality", "wdgec"])
             elif club.id == "fy_induction":
                 club_terms.extend(["induction", "sip", "first year induction"])
+            elif club.id == "mesa":
+                club_terms.extend(["mesa", "mechanical engineering students association", "battle of wits", "mechanical club"])
+            elif club.id == "cesa":
+                club_terms.extend(["cesa", "civil engineering students association", "civil safari", "civil club"])
+            elif club.id == "elesa":
+                club_terms.extend(["elesa", "electrical engineering students association", "dive in circuit", "electrical club"])
+            elif club.id == "assets":
+                club_terms.extend(["assets", "assets club", "entc club", "electronics and telecommunication", "telecom club"])
+            elif club.id == "acses":
+                club_terms.extend(["acses", "association of computer science", "codewizard", "cse club", "computer science club"])
+            elif club.id == "cabssa":
+                club_terms.extend(["cabssa", "tech negotia", "tech-negotia", "csbs club", "computer science and business systems"])
+            elif club.id == "bytearq":
+                club_terms.extend(["bytearq", "byteark", "byte arq", "csbs coding club", "csbs technical wing"])
 
             if any(term in q_low for term in club_terms if len(term) >= 3):
                 matched_club_data = format_club_dict(club)

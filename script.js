@@ -235,6 +235,7 @@ function getCategoryClass(cat) {
   if (!cat) return '';
   const map = {
     'Technical': 'cat-technical',
+    'Departmental': 'cat-departmental',
     'Entrepreneurship': 'cat-entrepreneurship',
     'Cultural': 'cat-cultural',
     'Creative': 'cat-creative',
@@ -1151,10 +1152,21 @@ function renderClubs() {
           </div>
         ` : ''}
 
+        ${c.department ? `
+          <div class="club-card-dept" style="font-size:11.5px; color:var(--text-muted); margin-bottom:4px;">
+            🏢 <strong>Dept:</strong> ${escapeHtml(c.department)}
+          </div>
+        ` : ''}
+
         <div class="club-card-actions">
           <button class="btn-card btn-card-primary view-club-btn" data-club-id="${escapeHtml(c.id)}">
             View Details
           </button>
+          ${c.website_url ? `
+            <a href="${c.website_url}" target="_blank" class="btn-card btn-card-secondary" title="Official Web Portal">
+              🌐 Web
+            </a>
+          ` : ''}
           ${c.pdf_url ? `
             <a href="${c.pdf_url}" target="_blank" class="btn-card btn-card-secondary" title="Official PDF Report">
               📄 Report
@@ -1215,6 +1227,12 @@ function openClubModal(clubId) {
 
   modalBody.innerHTML = `
     <div class="modal-meta-grid">
+      ${club.department ? `
+        <div class="modal-meta-item" style="grid-column: span 2;">
+          <strong>Department / Academic Branch</strong>
+          <span>🏢 ${escapeHtml(club.department)}</span>
+        </div>
+      ` : ''}
       <div class="modal-meta-item">
         <strong>Academic Year</strong>
         <span>${escapeHtml(club.academic_year || '2025–26')}</span>
@@ -1310,7 +1328,8 @@ function openClubModal(clubId) {
     modalPdfBtn.style.display = 'none';
   }
 
-  modalSourceBtn.href = club.source_url || 'https://www.kitcoek.in/studentClubs';
+  modalSourceBtn.href = club.website_url || club.source_url || 'https://www.kitcoek.in/studentClubs';
+  modalSourceBtn.innerHTML = club.website_url ? '🌐 Official Web Portal ↗' : '🌐 Official Page ↗';
 
   clubModal.style.display = 'flex';
 }

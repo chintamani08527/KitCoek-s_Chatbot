@@ -68,7 +68,7 @@ class GeminiService:
             "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur writers",
             "ebsb", "cultural club", "aura", "shourya", "wdgec", "women development", "rotaract",
             "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
-            "sip", "student activities", "hackathon", "meraki", "gathering", "annual gathering", "cultural fest", "reels", "pioneer", "vidman", "prarambha"
+            "sip", "student activities", "hackathon", "meraki", "gathering", "annual gathering", "cultural fest", "reels", "pioneer", "vidman", "prarambha", "mesa", "cesa", "elesa", "assets", "acses", "cabssa", "bytearq", "codewizard", "battle of wits", "civil safari", "tech-negotia", "tech negotia", "departmental club", "departmental clubs", "student association", "student associations"
         ]
         if any(w in q_lower for w in club_keywords):
             return {"category": "clubs", "is_relevant": True}
@@ -273,8 +273,18 @@ Core Directives:
     - Describe Meraki as the flagship annual cultural gathering featuring mega dance competitions, musical concerts, drama, fashion shows, and campus celebrations.
     - Mention that students can watch the official reels and festival highlights below.
     - DO NOT list individual reel links or URLs in your text reply; a dedicated interactive Instagram Reels card with direct watch buttons is automatically appended below your answer.
-11. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-12. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+11. DEPARTMENTAL CLUBS & STUDENT ASSOCIATIONS (PIONEER 2025):
+    Every engineering department at KITCoEK has an active departmental student association:
+    - Mechanical Engineering: MESA (Mechanical Engineering Students' Association) — PIONEER 2025 Flagship Event: 'Battle of Wits', CAD competitions, mechanical project exhibitions, manufacturing workshops.
+    - Civil Engineering: CESA (Civil Engineering Students' Association) — PIONEER 2025 Flagship Event: 'Civil Safari', surveying contests, structural bridge design, green construction.
+    - Electrical Engineering: ELESA (Electrical Engineering Students' Association) — PIONEER 2025 Flagship Event: 'Dive in Circuit 3.0', circuit troubleshooting, EV technologies, automation.
+    - Electronics & Telecom (ENTC): ASSETS (Association of Students of Electronics & Telecommunication) — Embedded systems, IoT, Arduino/sensors, robotics, telecom competitions.
+    - Computer Science & Engineering (CSE): ACSES (Association of Computer Science & Engineering Students) — PIONEER 2025 Flagship Event: 'CodeWizard', competitive coding, web development (official portal: acses-kitcoek.web.app).
+    - CSBS: CABSSA (Computer Science and Business Systems Student Association) — PIONEER 2025 Flagship Event: 'Tech-Negotia 2.0', techno-business case studies, enterprise problem-solving.
+    - CSBS Technical Wing: Bytearq — Coding sprints, open-source web development, collaborative hackathon preparation.
+    When asked about any departmental club, explain its role, department, PIONEER event, skills gained, and student benefits. Mention that students can explore them in the Student Clubs section.
+12. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+13. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {

@@ -675,5 +675,271 @@
     "academic_year": "2025–26",
     "source_url": "https://www.kitcoek.in/studentClubs",
     "pdf_url": "https://www.kitcoek.in/documents/studentClubs/25-26/FY_Induction.pdf"
+  },
+  {
+    "id": "mesa",
+    "name": "Mechanical Engineering Students' Association",
+    "abbr": "MESA",
+    "category": "Departmental",
+    "department": "Mechanical Engineering",
+    "tagline": "Pioneering Mechanical Innovation, CAD Design & Engineering Excellence",
+    "establishment_year": "Registered Departmental Association",
+    "description": "Mechanical Engineering Students' Association (MESA) encourages students to explore mechanical engineering through practical activities, technical competitions, workshops, and project exhibitions. MESA actively organizes the 'Battle of Wits' departmental competition at the annual Pioneer national technical symposium.",
+    "objectives": [
+      "Encourage practical engineering application, machinery design, and manufacturing skills.",
+      "Organize departmental competitions, CAD workshops, and technical events for Pioneer.",
+      "Conduct technical workshops on modern CAD/CAM, robotics, automation, and industrial visits.",
+      "Improve teamwork, technical presentation, and leadership qualities among mechanical students."
+    ],
+    "major_activities": [
+      "Battle of Wits — Flagship departmental technical event at PIONEER 2025",
+      "Computer-Aided Design (CAD) and 3D modeling competitions",
+      "Mechanical model-making, robotics displays, and project exhibitions",
+      "Technical workshops on manufacturing tools, machinery, and industrial site visits"
+    ],
+    "skills_developed": [
+      "Mechanical Design & CAD Tools",
+      "Machines & Manufacturing Process",
+      "Teamwork & Leadership",
+      "Technical Presentation",
+      "Portfolio & Project Building"
+    ],
+    "eligibility": "Open to all Mechanical Engineering undergraduate students at KITCoEK.",
+    "faculty_coordinator": "Department of Mechanical Engineering, KITCoEK",
+    "student_coordinators": "MESA Executive Student Council",
+    "achievements": "Organized the flagship 'Battle of Wits' competition at PIONEER 2025; regularly conducts CAD modeling contests and manufacturing workshops.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "cesa",
+    "name": "Civil Engineering Students' Association",
+    "abbr": "CESA",
+    "category": "Departmental",
+    "department": "Civil Engineering",
+    "tagline": "Building the Future — Structural Engineering, Surveying & Infrastructure",
+    "establishment_year": "Registered Departmental Association",
+    "description": "Civil Engineering Students' Association (CESA) promotes practical learning in construction, structural engineering, surveying, infrastructure, and sustainable development. It provides civil engineering students hands-on exposure to structural design, site analysis, and modern surveying instruments.",
+    "objectives": [
+      "Promote real-world civil engineering applications, sustainable construction, and surveying.",
+      "Host signature departmental events and competitions during the annual Pioneer symposium.",
+      "Organize Total Station surveying competitions, technical site visits, and structural model exhibitions.",
+      "Develop student capabilities in technical drawing, drafting tools, and site planning."
+    ],
+    "major_activities": [
+      "Civil Safari — Signature CESA departmental technical event at PIONEER 2025",
+      "Advanced surveying and construction-related competitions",
+      "Model-making and structural bridge/truss load-testing activities",
+      "Technical seminars on green materials, concrete technology, and industrial site visits"
+    ],
+    "skills_developed": [
+      "Real-World Civil Applications",
+      "Surveying & Construction Materials",
+      "Structural Design & Drafting",
+      "Technical Drawing & Presentations",
+      "Teamwork & Site Planning"
+    ],
+    "eligibility": "Open to all Civil and Environmental Engineering undergraduate students at KITCoEK.",
+    "faculty_coordinator": "Department of Civil Engineering, KITCoEK",
+    "student_coordinators": "CESA Executive Student Council",
+    "achievements": "Staged 'Civil Safari' at PIONEER 2025; regularly conducts surveying hackathons, structural bridge making, and site visits.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "elesa",
+    "name": "Electrical Engineering Students' Association",
+    "abbr": "ELESA",
+    "category": "Departmental",
+    "department": "Electrical Engineering",
+    "tagline": "Empowering Circuits, Power Systems & Renewable Energy Technologies",
+    "establishment_year": "Registered Departmental Association",
+    "description": "Electrical Engineering Students' Association (ELESA) encourages students to learn about electrical circuits, power systems, electrical machines, industrial automation, and emerging electrical technologies including Electric Vehicles (EVs) and renewable energy.",
+    "objectives": [
+      "Enhance student expertise in electrical circuits, power grids, and electric machinery.",
+      "Organize departmental competitions, hardware circuit troubleshooting, and project expos.",
+      "Conduct specialized workshops on Electric Vehicles (EV), PLC automation, and renewable energy.",
+      "Develop analytical, problem-solving, and teamwork abilities in electrical systems."
+    ],
+    "major_activities": [
+      "Dive in Circuit 3.0 — The Electrical department flagship event at PIONEER 2025",
+      "Circuit-building, breadboard wiring, and hardware troubleshooting competitions",
+      "Electrical project exhibitions featuring motor controllers and IoT power monitors",
+      "Workshops on electric vehicles (EV), renewable power, and automation systems"
+    ],
+    "skills_developed": [
+      "Circuit Analysis & Troubleshooting",
+      "Power Systems & EV Technologies",
+      "Electrical Equipment Handling",
+      "Industrial Automation & PLCs",
+      "Problem-Solving & Teamwork"
+    ],
+    "eligibility": "Open to all Electrical Engineering undergraduate students at KITCoEK.",
+    "faculty_coordinator": "Department of Electrical Engineering, KITCoEK",
+    "student_coordinators": "ELESA Executive Student Committee",
+    "achievements": "Successfully organized 'Dive in Circuit 3.0' at PIONEER 2025 with extensive inter-college participation; hosted EV workshops.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "assets",
+    "name": "Association of Students of Electronics & Telecommunication",
+    "abbr": "ASSETS",
+    "category": "Departmental",
+    "department": "Electronics and Telecommunication Engineering (ENTC)",
+    "tagline": "Connecting Circuits, IoT, Embedded Systems & Communication Networks",
+    "establishment_year": "Registered Departmental Association",
+    "description": "ASSETS supports students in exploring modern electronics, communication systems, embedded systems, microcontrollers, VLSI circuits, and Internet of Things (IoT) technologies. The association provides hands-on hardware project experience and prototype demonstration.",
+    "objectives": [
+      "Empower students with practical skills in electronic circuits, signal processing, and communication.",
+      "Conduct hands-on workshops on Arduino, sensors, microcontrollers, and IoT protocols.",
+      "Organize robotics showcases, hardware project exhibitions, and technical quizzes.",
+      "Prepare students for high-demand careers in embedded systems, telecom, and hardware engineering."
+    ],
+    "major_activities": [
+      "Electronics and circuit-based design competitions",
+      "Embedded systems, Arduino, and IoT hands-on workshops",
+      "Robotics and hardware prototype exhibitions",
+      "Technical quizzes, telecom seminars, and industry guest lectures"
+    ],
+    "skills_developed": [
+      "Electronic Circuits & Hardware",
+      "Arduino, Sensors & Microcontrollers",
+      "Embedded Systems & IoT Protocols",
+      "Robotics & Working Prototypes",
+      "Telecom & Hardware Career Prep"
+    ],
+    "eligibility": "Open to all Electronics and Telecommunication Engineering (E&TC) students at KITCoEK.",
+    "faculty_coordinator": "Department of Electronics & Telecommunication Engineering, KITCoEK",
+    "student_coordinators": "ASSETS Student Governing Body",
+    "achievements": "Conducted workshops on Arduino and IoT systems; hosted robotics demonstrations and technical quizzes for E&TC students.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "acses",
+    "name": "Association of Computer Science & Engineering Students",
+    "abbr": "ACSES",
+    "category": "Departmental",
+    "department": "Computer Science and Engineering (CSE)",
+    "tagline": "Code, Innovate, Excel — Empowering Future Computing Leaders",
+    "establishment_year": "Registered Departmental Association",
+    "description": "Association of Computer Science & Engineering Students (ACSES) is a student-driven association at KITCoEK that organizes technical coding events, hackathons, workshops, and seminars to encourage software innovation, competitive programming, and technical development. ACSES hosts CodeWizard at Pioneer 2025 and maintains its official portal.",
+    "objectives": [
+      "Foster a culture of competitive programming, algorithmic problem solving, and software development.",
+      "Host CodeWizard — the flagship CSE technical coding event at the annual PIONEER symposium.",
+      "Conduct technical masterclasses on modern web technologies, cloud computing, and AI/ML.",
+      "Prepare students for national hackathons, coding contests, technical interviews, and placements."
+    ],
+    "major_activities": [
+      "CodeWizard — Flagship CSE Departmental Coding Event at PIONEER 2025",
+      "Competitive coding hackathons and bug-hunting programming challenges",
+      "Technical workshops on modern web technologies, Python, and cloud infrastructure",
+      "Software project exhibitions, technical seminars, and placement prep bootcamps"
+    ],
+    "skills_developed": [
+      "Coding, Debugging & Algorithmic Problem Solving",
+      "Competitive Programming",
+      "Software Development & Modern Stacks",
+      "Teamwork, Networking & Event Management",
+      "Hackathon, Internship & Placement Prep"
+    ],
+    "eligibility": "Open to all Computer Science and Engineering undergraduate students at KITCoEK.",
+    "faculty_coordinator": "Department of Computer Science and Engineering, KITCoEK",
+    "student_coordinators": "ACSES Student Council (CSE Department)",
+    "achievements": "Successfully organized 'CodeWizard' at PIONEER 2025; developed and maintains the official association web portal at acses-kitcoek.web.app.",
+    "academic_year": "2025–26",
+    "source_url": "https://acses-kitcoek.web.app/",
+    "pdf_url": null,
+    "website_url": "https://acses-kitcoek.web.app/",
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "cabssa",
+    "name": "Computer Science and Business Systems Student Association",
+    "abbr": "CABSSA",
+    "category": "Departmental",
+    "department": "Computer Science and Business Systems (CSBS)",
+    "tagline": "Bridging Technology with Enterprise & Strategic Business Acumen",
+    "establishment_year": "Registered Departmental Association",
+    "description": "CABSSA is the official departmental student association for the CSBS department at KITCoEK. It focuses on integrating cutting-edge computing technology with strategic business thinking, enterprise acumen, teamwork, and professional innovation.",
+    "objectives": [
+      "Bridge technical computer science fundamentals with enterprise business logic and management.",
+      "Host Tech-Negotia 2.0 — the signature CSBS techno-business event at the PIONEER symposium.",
+      "Organize coding hackathons, business-tech case studies, and corporate problem-solving activities.",
+      "Prepare students for high-impact careers in enterprise consulting, product management, and software engineering."
+    ],
+    "major_activities": [
+      "Tech-Negotia 2.0 — Flagship CSBS Departmental Event at PIONEER 2025",
+      "Techno-business quizzes, case studies, and corporate problem-solving challenges",
+      "Coding competitions, enterprise software seminars, and project presentations",
+      "Group discussions, mock corporate interviews, and placement preparation sessions"
+    ],
+    "skills_developed": [
+      "Technical & Business-Oriented Synergies",
+      "Communication, Presentation & Negotiation",
+      "Enterprise Software Solution Modeling",
+      "Interview, GD & Placement Confidence",
+      "Event Management & Team Collaboration"
+    ],
+    "eligibility": "Open to all Computer Science and Business Systems (CSBS) undergraduate students at KITCoEK.",
+    "faculty_coordinator": "Department of Computer Science and Business Systems, KITCoEK",
+    "student_coordinators": "CABSSA Executive Student Council",
+    "achievements": "Staged 'Tech-Negotia 2.0' at PIONEER 2025; conducted business-tech workshops and corporate placement mentorship sessions.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
+  },
+  {
+    "id": "bytearq",
+    "name": "Bytearq (CSBS Technical Club / Wing)",
+    "abbr": "Bytearq",
+    "category": "Departmental",
+    "department": "Computer Science and Business Systems (CSBS)",
+    "tagline": "Code, Collaborate & Construct — The Technical Nerve of CSBS",
+    "establishment_year": "Technical Wing",
+    "description": "Bytearq is the specialized technical club and student wing associated with the Department of Computer Science and Business Systems (CSBS) at KITCoEK. It focuses on hands-on software development, competitive programming, web applications, open-source collaboration, and hackathon training.",
+    "objectives": [
+      "Provide a collaborative hands-on coding ecosystem for CSBS engineering students.",
+      "Conduct peer-to-peer coding challenges, debugging competitions, and software buildathons.",
+      "Train students in modern web and mobile application stacks, APIs, and databases.",
+      "Prepare teams for national-level hackathons, coding contests, and technical interviews."
+    ],
+    "major_activities": [
+      "Coding challenges, speed debugging, and algorithmic problem-solving contests",
+      "Web development, app building, and open-source software project sprints",
+      "Technology workshops on Git/GitHub version control, REST APIs, and developer tools",
+      "Peer learning sessions, collaborative software development, and technical project showcases"
+    ],
+    "skills_developed": [
+      "Practical Coding & Software Development",
+      "Collaborative Team Projects & Git",
+      "Problem-Solving & Creative Thinking",
+      "Technical Interview & Placement Skills",
+      "Presentation of Technical Architectures"
+    ],
+    "eligibility": "Open to all CSBS students and tech enthusiasts eager to build software projects and practice coding.",
+    "faculty_coordinator": "Department of Computer Science and Business Systems, KITCoEK",
+    "student_coordinators": "Bytearq Technical Core Team (CSBS)",
+    "achievements": "Conducted peer-to-peer coding sessions and collaborative hackathon prep for CSBS students; built practical software prototypes.",
+    "academic_year": "2025–26",
+    "source_url": "https://www.kitcoek.in/studentClubs",
+    "pdf_url": null,
+    "website_url": null,
+    "insta_url": "https://www.instagram.com/"
   }
 ]

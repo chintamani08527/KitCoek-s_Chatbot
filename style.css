@@ -1636,6 +1636,7 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   color: var(--pine);
 }
 .club-category-badge.cat-technical { background: rgba(27,42,74,0.1); color: var(--ink); }
+.club-category-badge.cat-departmental { background: rgba(14,165,233,0.15); color: #0284c7; }
 .club-category-badge.cat-entrepreneurship { background: rgba(200,155,60,0.18); color: #8c6314; }
 .club-category-badge.cat-cultural { background: rgba(180,83,9,0.12); color: #b45309; }
 .club-category-badge.cat-creative { background: rgba(147,51,234,0.12); color: #7e22ce; }
@@ -2202,6 +2203,14 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   color: #7DD3FC;
   border: 1px solid rgba(56, 189, 248, 0.28);
 }
+#clubsSection.theme-space .club-category-badge.cat-departmental {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+#clubsSection.theme-space .club-card-dept {
+  color: #94A3B8;
+}
 #clubsSection.theme-space .club-card-coordinator {
   color: #94A3B8;
   border-top-color: rgba(56, 189, 248, 0.15);
@@ -2326,6 +2335,14 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   background: #E0F2FE;
   color: #0284C7;
   border: 1px solid #BAE6FD;
+}
+#clubsSection.theme-white .club-category-badge.cat-departmental {
+  background: #E0F2FE;
+  color: #0284C7;
+  border: 1px solid #BAE6FD;
+}
+#clubsSection.theme-white .club-card-dept {
+  color: #64748B;
 }
 #clubsSection.theme-white .btn-card-primary {
   background: #2563EB;

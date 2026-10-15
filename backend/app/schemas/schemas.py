@@ -48,6 +48,8 @@ class StudentClubResponse(BaseModel):
     academic_year: str = "2025–26"
     source_url: Optional[str] = None
     pdf_url: Optional[str] = None
+    department: Optional[str] = None
+    website_url: Optional[str] = None
     meraki_reels: Optional[Any] = None
 
     class Config:
