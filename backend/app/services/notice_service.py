@@ -27,7 +27,23 @@ class NoticeService:
             "academic_year": "2026–27",
             "term": "Odd Semester",
             "programme": "First Year B.Tech & M.Tech",
-            "pdf_url": "https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf"
+            "pdf_url": "https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf",
+            "key_milestones": {
+                "induction_program": "Phase-I: 25–30 Aug, Phase-II: 01–06 Sept, Phase-III: 08–13 Sept 2026",
+                "commencement": "01st September, 2026",
+                "ise_1_marks": "17th October, 2026",
+                "mse_exams": "24th to 31st October, 2026",
+                "mse_result": "14th November, 2026",
+                "sih_hackathon": "08th to 09th December, 2026",
+                "kit_pbl_day": "16th December, 2026",
+                "academic_ends": "19th December, 2026",
+                "ise_2_and_defaulters": "22nd December, 2026",
+                "ese_lab_poe": "26th to 30th December, 2026",
+                "ese_theory": "01st to 12th January, 2027",
+                "even_sem_start": "15th January, 2027",
+                "ese_result": "30th January, 2027",
+                "total_instruction_days": 96
+            }
         },
         {
             "title": "Academic Calendar 2026–27 (Odd Semester) — S.Y. M.Tech",

@@ -225,6 +225,20 @@ Core Directives:
    - For ACADEMIC CALENDARS:
      * Academic Year 2026–27 (Odd Sem) - S.Y., T.Y. & Final Year B.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SY-TY-BTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf" target="_blank">📅 Academic Calendar 2026–27 (SY, TY, Final Year B.Tech) [PDF]</a>
      * Academic Year 2026–27 (Odd Sem) - F.Y. B.Tech & F.Y. M.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf" target="_blank">📅 Academic Calendar 2026–27 (FY B.Tech & M.Tech) [PDF]</a>
+        - Student Induction Program (SIP): Phase-I (25–30 Aug 2026), Phase-II (01–06 Sept 2026), Phase-III (08–13 Sept 2026)
+        - Commencement of Academic Sem-I (Odd Sem): 01st September, 2026
+        - ISE-I Marks Submission: 17th October, 2026
+        - Mid Semester Examination (MSE): 24th to 31st October, 2026
+        - MSE Result Declaration: 14th November, 2026
+        - Smart India Hackathon (SIH 2026 Probable): 08th–09th December, 2026
+        - KIT PBL Day: 16th December, 2026 | End of Academic Activities: 19th December, 2026
+        - Submission of ISE-II Marks & Final Defaulters / Detained List: 22nd December, 2026
+        - Freezing of Attendance & Marks: 23rd December, 2026
+        - End Semester Examination (Lab POE/OE): 26th to 30th December, 2026
+        - End Semester Examination (Theory ESE): 01st to 12th January, 2027
+        - Commencement of Even Semester (Sem-II): 15th January, 2027
+        - ESE Result Declaration: 30th January, 2027
+        - Total Instruction Days: 96 Days
      * Academic Year 2026–27 (Odd Sem) - S.Y. M.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SYMTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf" target="_blank">📅 Academic Calendar 2026–27 (SY M.Tech) [PDF]</a>
      * Academic Year 2025–26 (Even Sem) - All UG & PG: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic25_26/Revised_Academic_Calendar_2025-26_Even_Sem_UG_PG.pdf" target="_blank">📅 Revised Academic Calendar 2025–26 (Even Sem) [PDF]</a>
      * Academic Year 2025–26 (Odd Sem) - S.Y., T.Y. & Final Year B.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic25_26/Academic%20Calendar_SY-TY-Final%20Year%20BTech_2025-26_Odd%20Sem.pdf" target="_blank">📅 Academic Calendar 2025–26 (Odd Sem) [PDF]</a>

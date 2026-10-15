@@ -1,0 +1,130 @@
+{
+  "academic_year": "2026–27",
+  "semester": "Odd Semester (Sem-I)",
+  "programme": "F.Y. B.Tech and F.Y. M.Tech",
+  "institution": "Kolhapur Institute of Technology's College of Engineering (Empowered Autonomous), Kolhapur",
+  "approval": {
+    "approved_by": "Academic Council",
+    "authorities": ["Dean-Academics", "Dean-Examination & Evaluation", "Dean Quality Assurance", "Director"]
+  },
+  "total_instruction_days": 96,
+  "monthly_instruction_days": {
+    "August 2026": 0,
+    "September 2026": 21,
+    "October 2026": 22,
+    "November 2026": 17,
+    "December 2026": 24,
+    "January 2027": 12
+  },
+  "key_milestones": {
+    "student_induction_phase_1": "25th to 30th August, 2026",
+    "commencement_of_academics": "01st September, 2026",
+    "declaration_of_theory_and_lab_ise_components": "01st to 03rd September, 2026",
+    "student_induction_phase_2": "01st to 06th September, 2026",
+    "student_induction_phase_3": "08th to 13th September, 2026",
+    "submission_of_ise_1_marks": "17th October, 2026",
+    "formative_feedback_and_academic_audit_1": "21st to 22nd October, 2026",
+    "mid_semester_examination_mse": "24th to 31st October, 2026",
+    "mse_result_declaration": "14th November, 2026",
+    "smart_india_hackathon_sih_2026_probable": "08th to 09th December, 2026",
+    "internal_evaluation_of_pbl": "12th December, 2026",
+    "summative_feedback_and_academic_audit_2": "15th to 16th December, 2026",
+    "kit_pbl_day": "16th December, 2026",
+    "end_of_academic_activities": "19th December, 2026",
+    "submission_of_ise_2_marks": "22nd December, 2026",
+    "display_of_attendance_and_defaulters_semester": "22nd December, 2026",
+    "freezing_of_attendance_and_ise_marks": "23rd December, 2026",
+    "end_semester_examination_lab_poe_oe": "26th to 30th December, 2026",
+    "end_semester_examination_theory": "01st to 12th January, 2027",
+    "commencement_of_even_semester_sem_2": "15th January, 2027",
+    "ese_result_declaration": "30th January, 2027"
+  },
+  "monthly_schedule": [
+    {
+      "month": "August 2026",
+      "instruction_days": 0,
+      "events": [
+        {"dates": "15 Aug 2026", "event": "Independence Day and Parsi New Year (Holiday)", "type": "holiday"},
+        {"dates": "25-30 Aug 2026", "event": "F.Y. B.Tech Student Induction Program (Phase-I)", "type": "student_activity"},
+        {"dates": "26 Aug 2026", "event": "Eid-E-Milad (Holiday)", "type": "holiday"}
+      ]
+    },
+    {
+      "month": "September 2026",
+      "instruction_days": 21,
+      "events": [
+        {"dates": "01 Sept 2026", "event": "Commencement of Academic Sem-I (Odd Sem)", "type": "academic"},
+        {"dates": "01-03 Sept 2026", "event": "Declaration of Theory and Lab ISE Components, Updating ERP and LMS", "type": "academic"},
+        {"dates": "01-06 Sept 2026", "event": "F.Y. B.Tech Student Induction Program (Phase-II)", "type": "student_activity"},
+        {"dates": "08-13 Sept 2026", "event": "F.Y. B.Tech Student Induction Program (Phase-III)", "type": "student_activity"},
+        {"dates": "14 Sept 2026", "event": "Ganesh Chaturthi (Holiday)", "type": "holiday"},
+        {"dates": "19 Sept 2026", "event": "Gauri-Ganapati Visarjan (Holiday)", "type": "holiday"},
+        {"dates": "25 Sept 2026", "event": "Anant Chaturdashi (Declared Holiday)", "type": "holiday"},
+        {"dates": "30 Sept 2026", "event": "PEC Meeting", "type": "meeting"}
+      ]
+    },
+    {
+      "month": "October 2026",
+      "instruction_days": 22,
+      "events": [
+        {"dates": "02 Oct 2026", "event": "Mahatma Gandhi Jayanti (Holiday)", "type": "holiday"},
+        {"dates": "06-07 Oct 2026", "event": "Display of Attendance and Counseling of Defaulters for the Month of September", "type": "academic"},
+        {"dates": "17 Oct 2026", "event": "Submission of ISE-I Marks", "type": "academic"},
+        {"dates": "20 Oct 2026", "event": "Dasara (Holiday)", "type": "holiday"},
+        {"dates": "21-22 Oct 2026", "event": "Formative Feedback, Academic Audit – I", "type": "academic"},
+        {"dates": "24-31 Oct 2026", "event": "Mid Semester Examination (MSE)", "type": "examination"},
+        {"dates": "31 Oct 2026", "event": "End of Mid Semester Examination, PEC Meeting", "type": "academic"}
+      ]
+    },
+    {
+      "month": "November 2026",
+      "instruction_days": 17,
+      "events": [
+        {"dates": "01 Nov 2026", "event": "Abhigyan 2026", "type": "student_activity"},
+        {"dates": "03-04 Nov 2026", "event": "Display of Attendance and Counseling of Defaulters for the Month of October", "type": "academic"},
+        {"dates": "08 Nov 2026", "event": "Diwali (Laxmipujan) (Holiday)", "type": "holiday"},
+        {"dates": "10 Nov 2026", "event": "Diwali (Balipratipada) (Holiday)", "type": "holiday"},
+        {"dates": "11 Nov 2026", "event": "Bhaubij (Holiday)", "type": "holiday"},
+        {"dates": "14 Nov 2026", "event": "Mid Semester Examination (MSE) Result Declaration", "type": "examination"},
+        {"dates": "24 Nov 2026", "event": "Gurunanak Jayanti (Holiday)", "type": "holiday"},
+        {"dates": "28 Nov 2026", "event": "PEC Meeting", "type": "meeting"}
+      ]
+    },
+    {
+      "month": "December 2026",
+      "instruction_days": 24,
+      "events": [
+        {"dates": "01-02 Dec 2026", "event": "Display of Attendance and Counseling of Defaulters for the Month of November", "type": "academic"},
+        {"dates": "08-09 Dec 2026", "event": "Probable Date of Smart India Hackathon (SIH) 2026", "type": "student_activity"},
+        {"dates": "12 Dec 2026", "event": "Internal Evaluation of PBL Activities", "type": "academic"},
+        {"dates": "15-16 Dec 2026", "event": "Summative Feedback, Academic Audit – II", "type": "academic"},
+        {"dates": "16 Dec 2026", "event": "KIT PBL Day", "type": "student_activity"},
+        {"dates": "19 Dec 2026", "event": "End of Academic Activities (Instruction Ends)", "type": "academic"},
+        {"dates": "22 Dec 2026", "event": "Submission of ISE-II Marks; Display of Attendance & Defaulters in Semester; Finalization of Detained Students cc to Dean Academics, Dean E&E, Registrar", "type": "academic"},
+        {"dates": "23 Dec 2026", "event": "Freezing of Attendance and ISE (Theory and Lab) Marks", "type": "academic"},
+        {"dates": "25 Dec 2026", "event": "Christmas (Holiday)", "type": "holiday"},
+        {"dates": "26-30 Dec 2026", "event": "Lab POE / OE (End Semester Practical Examination)", "type": "examination"},
+        {"dates": "30 Dec 2026", "event": "Completion of Lab POE / OE", "type": "examination"}
+      ]
+    },
+    {
+      "month": "January 2027",
+      "instruction_days": 12,
+      "events": [
+        {"dates": "01 Jan 2027", "event": "Start of End Semester Examination (Theory)", "type": "examination"},
+        {"dates": "12 Jan 2027", "event": "Completion of End Semester Examination (Theory)", "type": "examination"},
+        {"dates": "15 Jan 2027", "event": "Commencement of Academic Year 2026–27 Sem – II (Even Semester)", "type": "academic"},
+        {"dates": "26 Jan 2027", "event": "Republic Day (Holiday)", "type": "holiday"},
+        {"dates": "30 Jan 2027", "event": "End Semester Examination Result Declaration", "type": "examination"}
+      ]
+    }
+  ],
+  "attendance_counseling_milestones": [
+    {"period": "September Defaulters", "dates": "06th to 07th October, 2026"},
+    {"period": "October Defaulters", "dates": "03rd to 04th November, 2026"},
+    {"period": "November Defaulters", "dates": "01st to 02nd December, 2026"},
+    {"period": "Full Semester Final Defaulters & Detained Students List", "dates": "22nd December, 2026"},
+    {"period": "Freezing of Attendance & ISE Marks", "dates": "23rd December, 2026"}
+  ],
+  "pdf_link": "https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf"
+}
