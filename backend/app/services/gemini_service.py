@@ -224,6 +224,22 @@ Core Directives:
    - Mention that live official notices and circulars are accessible on: <a href="https://www.kitcoek.in/notice" target="_blank">📌 KITCOEK Official Notice Board (kitcoek.in/notice)</a>
    - For ACADEMIC CALENDARS:
      * Academic Year 2026–27 (Odd Sem) - S.Y., T.Y. & Final Year B.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SY-TY-BTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf" target="_blank">📅 Academic Calendar 2026–27 (SY, TY, Final Year B.Tech) [PDF]</a>
+        - Commencement of Academic Sem-I: 14th July, 2026
+        - S.Y. B.Tech Induction Program: 21st to 26th July, 2026
+        - ISE-I Marks Submission: 05th September, 2026
+        - Mid Semester Examination (MSE): 08th to 13th September, 2026
+        - MSE Result Declaration: 24th September, 2026
+        - KIT PBL Day: 05th November, 2026
+        - End of Academic Activities (Regular): 14th November, 2026
+        - Remedial Classes: 17th to 20th November, 2026 (End of Academic Activities: 20th Nov)
+        - Submission of ISE-II Marks & Final Defaulters / Detained List: 18th November, 2026
+        - Freezing of Attendance & Marks: 20th November, 2026
+        - End Semester Examination (Lab POE/OE): 25th November to 03rd December, 2026
+        - Smart India Hackathon (SIH 2026 Probable): 08th–09th December, 2026
+        - End Semester Examination (Theory ESE): 15th December, 2026 to 10th January, 2027
+        - Commencement of Even Semester (Sem-II): 19th January, 2027
+        - ESE Result Declaration (Probable): 30th January, 2027
+        - Total Instruction Days: 83 Days
      * Academic Year 2026–27 (Odd Sem) - F.Y. B.Tech & F.Y. M.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf" target="_blank">📅 Academic Calendar 2026–27 (FY B.Tech & M.Tech) [PDF]</a>
         - Student Induction Program (SIP): Phase-I (25–30 Aug 2026), Phase-II (01–06 Sept 2026), Phase-III (08–13 Sept 2026)
         - Commencement of Academic Sem-I (Odd Sem): 01st September, 2026

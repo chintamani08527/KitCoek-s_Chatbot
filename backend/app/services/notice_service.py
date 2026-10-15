@@ -20,7 +20,25 @@ class NoticeService:
             "academic_year": "2026–27",
             "term": "Odd Semester",
             "programme": "S.Y., T.Y. & Final Year B.Tech",
-            "pdf_url": "https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SY-TY-BTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf"
+            "pdf_url": "https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SY-TY-BTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf",
+            "key_milestones": {
+                "kit_foundation_day": "04th July, 2026",
+                "commencement": "14th July, 2026",
+                "sy_induction": "21st to 26th July, 2026",
+                "ise_1_marks": "05th September, 2026",
+                "mse_exams": "08th to 13th September, 2026",
+                "mse_result": "24th September, 2026",
+                "kit_pbl_day": "05th November, 2026",
+                "academic_ends": "14th November, 2026 (Remedial Classes: 17–20 Nov)",
+                "ise_2_and_defaulters": "18th November, 2026",
+                "freezing_attendance_marks": "20th November, 2026",
+                "ese_lab_poe": "25th November to 03rd December, 2026",
+                "sih_hackathon": "08th to 09th December, 2026",
+                "ese_theory": "15th December, 2026 to 10th January, 2027",
+                "even_sem_start": "19th January, 2027",
+                "ese_result_probable": "30th January, 2027",
+                "total_instruction_days": 83
+            }
         },
         {
             "title": "Academic Calendar 2026–27 (Odd Semester) — F.Y. B.Tech & F.Y. M.Tech",
