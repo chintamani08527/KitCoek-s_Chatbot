@@ -15,7 +15,7 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     reply: str
-    category: str # "academic", "navigation", "clubs", "out_of_scope", "general"
+    category: str # "academic", "navigation", "clubs", "notices", "out_of_scope", "general"
     sources: List[SourceCitation] = []
     follow_up_questions: List[str] = []
     map_url: Optional[str] = None
@@ -24,6 +24,9 @@ class ChatResponse(BaseModel):
     portal_url: Optional[str] = None
     notes_url: Optional[str] = None
     timetable_url: Optional[str] = None
+    notices_details: Optional[List[dict]] = None
+    notice_board_url: Optional[str] = None
+    academic_calendars: Optional[List[dict]] = None
 
 class StudentClubResponse(BaseModel):
     id: str

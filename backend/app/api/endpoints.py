@@ -13,6 +13,7 @@ from backend.app.schemas.schemas import (
 from backend.app.services.vector_store import get_vector_store
 from backend.app.services.gemini_service import get_gemini_service
 from backend.app.services.document_processor import extract_text_from_file, chunk_text
+from backend.app.services.notice_service import notice_service
 import uuid
 import os
 
@@ -277,9 +278,60 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         else:
             timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
 
+    # 3.7 Official Notice Board & Academic Calendars detection (https://www.kitcoek.in/notice)
+    matched_notices = None
+    matched_cals = None
+    notice_board_url = None
+
+    is_notice_intent = any(kw in q_low for kw in [
+        "notice", "notices", "circular", "circulars", "mse", "midsem", "mid sem", "mid semester",
+        "academic calendar", "calendar", "calender", "term calendar", "semester calendar",
+        "ese exam", "makeup exam", "re-mse", "re exam", "re-exam", "backlog", "back log",
+        "hall ticket", "admit card", "paper seeing", "grievance", "exam schedule",
+        "commencement", "exam notice", "latest news", "announcement", "announcements"
+    ])
+
+    if is_notice_intent or "exam" in q_low or "timetable" in q_low or "time table" in q_low:
+        notice_board_url = "https://www.kitcoek.in/notice"
+        category = "notices" if is_notice_intent and category not in ["clubs", "navigation"] else category
+
+        # Check if academic calendar specifically requested
+        if any(w in q_low for w in ["calendar", "calender", "academic calendar", "term", "academic year", "commencement"]):
+            matched_cals = notice_service.get_academic_calendars()
+
+        # Search relevant notices from live kitcoek notice API
+        found_notices = notice_service.search_notices(query, limit=5)
+        if not found_notices and any(w in q_low for w in ["notice", "notices", "latest", "circular", "announcement", "news"]):
+            found_notices = notice_service.get_latest_notices(limit=5)
+
+        if found_notices:
+            matched_notices = [
+                {
+                    "title": n.get("title") or n.get("fileName"),
+                    "description": n.get("description"),
+                    "date": notice_service.parse_notice_date(n),
+                    "file_url": n.get("fileUrl"),
+                    "file_name": n.get("fileName")
+                }
+                for n in found_notices
+            ]
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
+
+    # Prepend official notice context if matched
+    if matched_notices or matched_cals:
+        notice_ctx_lines = ["Official KITCOEK Notice Board & Academic Calendar Data (Source: https://www.kitcoek.in/notice):"]
+        if matched_cals:
+            notice_ctx_lines.append("Official Academic Calendars:")
+            for cal in matched_cals:
+                notice_ctx_lines.append(f"- {cal['title']} ({cal['academic_year']}, {cal['term']}): {cal['pdf_url']}")
+        if matched_notices:
+            notice_ctx_lines.append("Latest Relevant Notices & Circulars from Notice Board:")
+            for n in matched_notices:
+                notice_ctx_lines.append(f"- [{n['date']}] {n['title']} (Direct PDF Download: {n['file_url']})")
+        context_texts.insert(0, "\n".join(notice_ctx_lines))
     
     # 5. Generate Grounded Answer via Gemini
     rag_result = gemini.generate_rag_answer(
@@ -324,7 +376,10 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         club_details=matched_club_data,
         portal_url=portal_url,
         notes_url=notes_url,
-        timetable_url=timetable_url
+        timetable_url=timetable_url,
+        notices_details=matched_notices,
+        notice_board_url=notice_board_url,
+        academic_calendars=matched_cals
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()
@@ -487,5 +542,31 @@ def get_club_pdf(club_id: str, db: Session = Depends(get_db)):
         return {"pdf_url": club.pdf_url}
         
     raise HTTPException(status_code=404, detail="PDF report not found")
+
+@router.get("/notices")
+def get_campus_notices(q: Optional[str] = Query(None, description="Search term for notices"), limit: int = 10):
+    """
+    Returns notices and timetables from the official KITCOEK Notice Board (https://www.kitcoek.in/notice)
+    """
+    if q:
+        results = notice_service.search_notices(q, limit=limit)
+    else:
+        results = notice_service.get_latest_notices(limit=limit)
+    return {
+        "source": "https://www.kitcoek.in/notice",
+        "total": len(results),
+        "notices": [
+            {
+                "id": n.get("_id"),
+                "title": n.get("title") or n.get("fileName"),
+                "description": n.get("description"),
+                "date": notice_service.parse_notice_date(n),
+                "file_url": n.get("fileUrl"),
+                "file_name": n.get("fileName")
+            }
+            for n in results
+        ],
+        "academic_calendars": notice_service.get_academic_calendars()
+    }
 
 

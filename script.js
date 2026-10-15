@@ -790,6 +790,72 @@ async function sendMessage(text){
       `;
     }
 
+    if (Array.isArray(data.notices_details) && data.notices_details.length > 0) {
+      const noticeItemsHtml = data.notices_details.map(n => `
+        <div class="notice-item">
+          <div class="notice-item-main">
+            <span class="notice-item-date">📅 ${escapeHtml(n.date || 'Recent Notice')}</span>
+            <div class="notice-item-title">${escapeHtml(n.title)}</div>
+          </div>
+          ${n.file_url ? `
+            <a href="${n.file_url}" target="_blank" class="notice-download-btn" title="Download Official Circular (PDF)">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              PDF ↗
+            </a>
+          ` : ''}
+        </div>
+      `).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-notices">
+          <div class="notice-card-header">
+            <div class="notice-badge">📌 Official KITCOEK Notice Board &amp; Timetables</div>
+            <span class="notice-live-dot">● Live from kitcoek.in/notice</span>
+          </div>
+          <div class="notice-items-container">
+            ${noticeItemsHtml}
+          </div>
+          <div class="nav-box-actions" style="margin-top:8px;">
+            <a href="${data.notice_board_url || 'https://www.kitcoek.in/notice'}" target="_blank" class="map-link-btn map-link-btn-notice">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              View Official Notice Board (kitcoek.in/notice) ↗
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
+    if (Array.isArray(data.academic_calendars) && data.academic_calendars.length > 0) {
+      const calItemsHtml = data.academic_calendars.map(cal => `
+        <div class="notice-item">
+          <div class="notice-item-main">
+            <span class="notice-item-date">📅 Academic Year ${escapeHtml(cal.academic_year)} (${escapeHtml(cal.term)})</span>
+            <div class="notice-item-title">${escapeHtml(cal.title)}</div>
+          </div>
+          <a href="${cal.pdf_url}" target="_blank" class="notice-download-btn" title="Open Academic Calendar PDF">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Calendar PDF ↗
+          </a>
+        </div>
+      `).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-calendar">
+          <div class="notice-card-header">
+            <div class="notice-badge">🗓️ Official KITCOEK Academic Calendars</div>
+          </div>
+          <div class="notice-items-container">
+            ${calItemsHtml}
+          </div>
+          <div class="nav-box-actions" style="margin-top:8px;">
+            <a href="${data.notice_board_url || 'https://www.kitcoek.in/notice'}" target="_blank" class="map-link-btn map-link-btn-notice">
+              📌 Official Campus Notices &amp; Schedules ↗
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
     currentConv.messages.push({
       role: 'bot',
       html: botHtml,
