@@ -680,8 +680,13 @@ async function sendMessage(text){
 
     const data = await response.json();
     removeTyping();
+    let botHtml = data.reply || '';
 
-    let botHtml = data.reply;
+    // If structured Meraki reels card is present, remove any raw reel bullet lists from text to prevent double display
+    if (data.meraki_reels && data.meraki_reels.length > 0) {
+      botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?instagram\.com\/reel[\s\S]*?<\/\1>/gi, '');
+      botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
+    }
 
     if (data.club_details) {
       const c = data.club_details;

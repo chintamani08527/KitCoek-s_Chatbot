@@ -406,15 +406,12 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
 
-    # Prepend official Meraki Instagram Reels if matched
+    # Prepend official Meraki context if matched
     if meraki_reels:
         reels_ctx = [
-            "OFFICIAL MERAKI FLAGSHIP GATHERING INSTAGRAM REELS (KITCOEK Cultural Committee):",
-            "1. Meraki Flagship Gathering Highlights: https://www.instagram.com/reel/DdTvWmjMfM0",
-            "2. Meraki Cultural Performances & Dance: https://www.instagram.com/reel/DUxDO-CEZxu",
-            "3. Meraki Campus Celebrations & Vibes: https://www.instagram.com/reel/DU5NbRZDP7W",
-            "4. Meraki Grand Stage Gathering: https://www.instagram.com/reel/DVNPAWGCMNK",
-            "5. Meraki Annual Gathering Celebration & Aftermovie: https://www.instagram.com/reel/DVH9-UiiEoj"
+            "OFFICIAL MERAKI FLAGSHIP GATHERING INFO (KITCOEK Cultural Committee):",
+            "Meraki is KITCOEK's premier annual cultural gathering featuring grand stage dance competitions, musical concerts, drama, fashion shows, and campus celebrations.",
+            "DIRECTIVE: Give an engaging overview of the Meraki festival. Do NOT output a bullet list of reel links or URLs in your text reply, because a dedicated interactive card with direct watch buttons for all 5 official reels will be automatically displayed."
         ]
         context_texts.insert(0, "\n".join(reels_ctx))
 
