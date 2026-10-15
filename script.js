@@ -32,6 +32,7 @@ const catCountAll = document.getElementById('catCountAll');
 
 // Modal elements
 const clubModal = document.getElementById('clubModal');
+const mapModal = document.getElementById('mapModal');
 const modalCloseBtn = document.getElementById('modalCloseBtn');
 const modalCategory = document.getElementById('modalCategory');
 const modalClubName = document.getElementById('modalClubName');
@@ -74,38 +75,47 @@ const themeWhiteBtn = document.getElementById('themeWhiteBtn');
 const themeSpaceBtn = document.getElementById('themeSpaceBtn');
 
 function setChatTheme(themeName) {
-  if (!chatSection) return;
+  const isWhite = (themeName === 'white');
+  const activeTheme = isWhite ? 'white' : 'space';
   const currentInputValue = input ? input.value : '';
 
-  if (themeName === 'white') {
-    chatSection.classList.remove('chat-theme-space');
-    chatSection.classList.add('chat-theme-white');
-    if (themeWhiteBtn) {
-      themeWhiteBtn.classList.add('active');
-      themeWhiteBtn.setAttribute('aria-checked', 'true');
-    }
-    if (themeSpaceBtn) {
-      themeSpaceBtn.classList.remove('active');
-      themeSpaceBtn.setAttribute('aria-checked', 'false');
-    }
-    try {
-      localStorage.setItem('kitcoek_chat_theme', 'white');
-    } catch (e) {}
-  } else {
-    chatSection.classList.remove('chat-theme-white');
-    chatSection.classList.add('chat-theme-space');
-    if (themeSpaceBtn) {
-      themeSpaceBtn.classList.add('active');
-      themeSpaceBtn.setAttribute('aria-checked', 'true');
-    }
-    if (themeWhiteBtn) {
-      themeWhiteBtn.classList.remove('active');
-      themeWhiteBtn.setAttribute('aria-checked', 'false');
-    }
-    try {
-      localStorage.setItem('kitcoek_chat_theme', 'space');
-    } catch (e) {}
+  // 1. Campus Chat Section
+  if (chatSection) {
+    chatSection.classList.toggle('chat-theme-white', isWhite);
+    chatSection.classList.toggle('chat-theme-space', !isWhite);
   }
+
+  // 2. Student Clubs Section
+  if (clubsSection) {
+    clubsSection.classList.toggle('theme-white', isWhite);
+    clubsSection.classList.toggle('theme-space', !isWhite);
+  }
+
+  // 3. Club Details Modal
+  if (clubModal) {
+    clubModal.classList.toggle('theme-white', isWhite);
+    clubModal.classList.toggle('theme-space', !isWhite);
+  }
+
+  // 4. Campus Map Lightbox Modal
+  if (mapModal) {
+    mapModal.classList.toggle('theme-white', isWhite);
+    mapModal.classList.toggle('theme-space', !isWhite);
+  }
+
+  // 5. Update Switcher Buttons
+  if (themeWhiteBtn) {
+    themeWhiteBtn.classList.toggle('active', isWhite);
+    themeWhiteBtn.setAttribute('aria-checked', isWhite ? 'true' : 'false');
+  }
+  if (themeSpaceBtn) {
+    themeSpaceBtn.classList.toggle('active', !isWhite);
+    themeSpaceBtn.setAttribute('aria-checked', !isWhite ? 'true' : 'false');
+  }
+
+  try {
+    localStorage.setItem('kitcoek_chat_theme', activeTheme);
+  } catch (e) {}
 
   // Ensure input content is preserved
   if (input && currentInputValue && input.value !== currentInputValue) {
@@ -1224,7 +1234,6 @@ if (resetFilterBtn) {
 }
 
 // Map Modal Controls
-const mapModal = document.getElementById('mapModal');
 const mapModalCloseBtn = document.getElementById('mapModalCloseBtn');
 const tabMapBtn = document.getElementById('tabMapBtn');
 const headerMapBtn = document.getElementById('headerMapBtn');

@@ -1712,4 +1712,423 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+/* ========================================================
+   STUDENT CLUBS SECTION — SPACE BLUE THEME
+   ======================================================== */
+#clubsSection.theme-space {
+  border-left: 2px solid #38BDF8;
+  border-right: 2px solid #38BDF8;
+  box-shadow: inset 2px 0 14px rgba(56, 189, 248, 0.22), inset -2px 0 14px rgba(56, 189, 248, 0.22);
+  background-color: #070D1F;
+  background-image:
+    radial-gradient(1px 1px at 30px 40px, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 150px 90px, rgba(56, 189, 248, 0.6), transparent),
+    radial-gradient(1px 1px at 260px 180px, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 380px 120px, rgba(45, 212, 191, 0.5), transparent),
+    radial-gradient(circle at 85% 15%, rgba(37, 99, 235, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(13, 148, 136, 0.10) 0%, transparent 50%),
+    linear-gradient(180deg, #070D1F 0%, #0A1428 50%, #060B18 100%);
+  background-size: 320px 320px, 420px 420px, 360px 360px, 480px 480px, 100% 100%, 100% 100%, 100% 100%;
+}
+
+#clubsSection.theme-space .clubs-header {
+  background: rgba(9, 17, 36, 0.94);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+}
+#clubsSection.theme-space .clubs-header h1 {
+  color: #F8FAFC;
+}
+#clubsSection.theme-space .clubs-count-pill {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+#clubsSection.theme-space .clubs-header p {
+  color: #94A3B8;
+}
+#clubsSection.theme-space .clubs-official-btn {
+  border-color: #38BDF8;
+  color: #38BDF8;
+}
+#clubsSection.theme-space .clubs-official-btn:hover {
+  background: #38BDF8;
+  color: #060B18;
+}
+#clubsSection.theme-space .switch-view-btn {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #E2E8F0;
+}
+#clubsSection.theme-space .switch-view-btn:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: #38BDF8;
+}
+
+#clubsSection.theme-space .clubs-ai-prompts {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+#clubsSection.theme-space .ai-prompt-label {
+  color: #38BDF8;
+}
+#clubsSection.theme-space .prompt-chip {
+  background: rgba(15, 29, 56, 0.85) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  color: #BAE6FD !important;
+}
+#clubsSection.theme-space .prompt-chip:hover {
+  background: rgba(56, 189, 248, 0.25) !important;
+  border-color: #38BDF8 !important;
+  color: #FFFFFF !important;
+}
+
+#clubsSection.theme-space .clubs-search-box {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+#clubsSection.theme-space .clubs-search-box svg {
+  color: #38BDF8;
+}
+#clubsSection.theme-space .clubs-search-box input {
+  color: #F1F5F9;
+}
+#clubsSection.theme-space .clubs-search-box input::placeholder {
+  color: #64748B;
+}
+#clubsSection.theme-space .clubs-search-box:focus-within {
+  border-color: #38BDF8;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+}
+#clubsSection.theme-space .clear-search-btn {
+  color: #94A3B8;
+}
+
+#clubsSection.theme-space .cat-pill {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #94A3B8;
+}
+#clubsSection.theme-space .cat-pill:hover {
+  border-color: #38BDF8;
+  color: #BAE6FD;
+}
+#clubsSection.theme-space .cat-pill.active {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  border-color: #38BDF8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+#clubsSection.theme-space .club-card {
+  background: #0F1D38;
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+#clubsSection.theme-space .club-card:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 12px rgba(56, 189, 248, 0.25);
+}
+#clubsSection.theme-space .club-card-title {
+  color: #F8FAFC;
+}
+#clubsSection.theme-space .club-card-abbr {
+  color: #38BDF8;
+}
+#clubsSection.theme-space .club-card-desc {
+  color: #CBD5E1;
+}
+#clubsSection.theme-space .skill-pill {
+  background: rgba(56, 189, 248, 0.14);
+  color: #7DD3FC;
+  border: 1px solid rgba(56, 189, 248, 0.28);
+}
+#clubsSection.theme-space .club-card-coordinator {
+  color: #94A3B8;
+  border-top-color: rgba(56, 189, 248, 0.15);
+}
+#clubsSection.theme-space .club-card-coordinator strong {
+  color: #E2E8F0;
+}
+#clubsSection.theme-space .btn-card-primary {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+#clubsSection.theme-space .btn-card-primary:hover {
+  background: linear-gradient(135deg, #0369A1 0%, #075985 100%);
+  border-color: #38BDF8;
+}
+#clubsSection.theme-space .btn-card-secondary {
+  background: rgba(15, 29, 56, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #BAE6FD;
+}
+#clubsSection.theme-space .btn-card-secondary:hover {
+  background: rgba(56, 189, 248, 0.2);
+  color: #FFFFFF;
+  border-color: #38BDF8;
+}
+#clubsSection.theme-space .clubs-empty p {
+  color: #94A3B8;
+}
+#clubsSection.theme-space .btn-outline {
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #BAE6FD;
+}
+#clubsSection.theme-space .btn-outline:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: #38BDF8;
+}
+
+/* ========================================================
+   STUDENT CLUBS SECTION — WHITE THEME
+   ======================================================== */
+#clubsSection.theme-white {
+  border-left: 2px solid #2563EB;
+  border-right: 2px solid #2563EB;
+  background-color: #FAFCFF;
+  background-image: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+}
+#clubsSection.theme-white .clubs-header {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+}
+#clubsSection.theme-white .clubs-header h1 {
+  color: #0F172A;
+}
+#clubsSection.theme-white .clubs-count-pill {
+  background: #DBEAFE;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
+}
+#clubsSection.theme-white .clubs-header p {
+  color: #475569;
+}
+#clubsSection.theme-white .clubs-ai-prompts {
+  background: #FFFFFF;
+  border: 1px solid #BAE6FD;
+}
+#clubsSection.theme-white .ai-prompt-label {
+  color: #0284C7;
+}
+#clubsSection.theme-white .prompt-chip {
+  background: #F0F9FF !important;
+  border: 1px solid #BAE6FD !important;
+  color: #0369A1 !important;
+}
+#clubsSection.theme-white .prompt-chip:hover {
+  background: #E0F2FE !important;
+  border-color: #2563EB !important;
+  color: #1D4ED8 !important;
+}
+#clubsSection.theme-white .clubs-search-box {
+  background: #FFFFFF;
+  border: 1px solid #BAE6FD;
+}
+#clubsSection.theme-white .clubs-search-box input {
+  color: #0F172A;
+}
+#clubsSection.theme-white .clubs-search-box:focus-within {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+#clubsSection.theme-white .cat-pill {
+  background: #FFFFFF;
+  border: 1px solid #BAE6FD;
+  color: #475569;
+}
+#clubsSection.theme-white .cat-pill:hover {
+  border-color: #2563EB;
+  color: #1D4ED8;
+}
+#clubsSection.theme-white .cat-pill.active {
+  background: #2563EB;
+  color: #FFFFFF;
+  border-color: #2563EB;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+}
+#clubsSection.theme-white .club-card {
+  background: #FFFFFF;
+  border: 1px solid #BAE6FD;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.06);
+}
+#clubsSection.theme-white .club-card:hover {
+  border-color: #2563EB;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.12);
+}
+#clubsSection.theme-white .club-card-title {
+  color: #0F172A;
+}
+#clubsSection.theme-white .club-card-desc {
+  color: #334155;
+}
+#clubsSection.theme-white .skill-pill {
+  background: #E0F2FE;
+  color: #0284C7;
+  border: 1px solid #BAE6FD;
+}
+#clubsSection.theme-white .btn-card-primary {
+  background: #2563EB;
+  color: #FFFFFF;
+}
+#clubsSection.theme-white .btn-card-primary:hover {
+  background: #1D4ED8;
+}
+#clubsSection.theme-white .btn-card-secondary {
+  background: #F8FAFC;
+  border: 1px solid #BAE6FD;
+  color: #0369A1;
+}
+
+/* ========================================================
+   CLUB DETAILS MODAL — SPACE BLUE THEME
+   ======================================================== */
+#clubModal.theme-space {
+  background: rgba(3, 7, 18, 0.85);
+  backdrop-filter: blur(8px);
+}
+#clubModal.theme-space .modal-dialog {
+  background: #0A1428;
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.25);
+  color: #E2E8F0;
+}
+#clubModal.theme-space .modal-header {
+  background: #0F1D38;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+#clubModal.theme-space .modal-header h2 {
+  color: #F8FAFC;
+}
+#clubModal.theme-space .modal-abbr {
+  color: #38BDF8;
+}
+#clubModal.theme-space .modal-close-btn {
+  color: #94A3B8;
+}
+#clubModal.theme-space .modal-close-btn:hover {
+  color: #F8FAFC;
+  background: rgba(56, 189, 248, 0.15);
+}
+#clubModal.theme-space .modal-body {
+  background: #070D1F;
+  color: #CBD5E1;
+}
+#clubModal.theme-space .modal-meta-item {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+#clubModal.theme-space .modal-meta-item strong {
+  color: #38BDF8;
+}
+#clubModal.theme-space .modal-meta-item span {
+  color: #F1F5F9;
+}
+#clubModal.theme-space .modal-section-title {
+  color: #38BDF8;
+  border-bottom-color: rgba(56, 189, 248, 0.25);
+}
+#clubModal.theme-space .modal-footer {
+  background: #0F1D38;
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+#clubModal.theme-space .btn-report {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+}
+#clubModal.theme-space .btn-source {
+  background: #0E1A34;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #BAE6FD;
+}
+#clubModal.theme-space .btn-ask-ai {
+  background: linear-gradient(135deg, #0D9488 0%, #0F766E 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(45, 212, 191, 0.4);
+}
+
+/* ========================================================
+   CLUB DETAILS MODAL — WHITE THEME
+   ======================================================== */
+#clubModal.theme-white .modal-dialog {
+  background: #FFFFFF;
+  border: 1.5px solid #BAE6FD;
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.15);
+}
+#clubModal.theme-white .modal-header {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+#clubModal.theme-white .modal-header h2 {
+  color: #0F172A;
+}
+#clubModal.theme-white .modal-body {
+  background: #FFFFFF;
+  color: #1E293B;
+}
+
+/* ========================================================
+   CAMPUS MAP MODAL — SPACE BLUE THEME
+   ======================================================== */
+#mapModal.theme-space {
+  background: rgba(3, 7, 18, 0.88);
+  backdrop-filter: blur(8px);
+}
+#mapModal.theme-space .modal-dialog {
+  background: #0A1428;
+  border: 1.5px solid #38BDF8;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(56, 189, 248, 0.3);
+}
+#mapModal.theme-space .modal-header {
+  background: #0F1D38;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+}
+#mapModal.theme-space .modal-header h2 {
+  color: #F8FAFC;
+}
+#mapModal.theme-space .modal-category-badge {
+  color: #38BDF8;
+}
+#mapModal.theme-space .modal-close-btn {
+  color: #94A3B8;
+}
+#mapModal.theme-space .modal-close-btn:hover {
+  color: #F8FAFC;
+  background: rgba(56, 189, 248, 0.15);
+}
+#mapModal.theme-space .map-modal-body {
+  background: #050B16;
+}
+#mapModal.theme-space .modal-footer {
+  background: #0F1D38;
+  border-top: 1px solid rgba(56, 189, 248, 0.25);
+}
+#mapModal.theme-space .map-legend-notes {
+  color: #94A3B8;
+}
+#mapModal.theme-space .btn-report {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+}
+
+/* ========================================================
+   CAMPUS MAP MODAL — WHITE THEME
+   ======================================================== */
+#mapModal.theme-white .modal-dialog {
+  background: #FFFFFF;
+  border: 1.5px solid #2563EB;
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.15);
+}
+#mapModal.theme-white .modal-header {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+}
+#mapModal.theme-white .modal-header h2 {
+  color: #0F172A;
+}
+#mapModal.theme-white .modal-footer {
+  background: #F8FAFC;
+  border-top: 1px solid #E2E8F0;
 }
