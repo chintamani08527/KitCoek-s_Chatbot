@@ -33,11 +33,13 @@ class GeminiService:
             if not any(c in q_lower for c in ["kit", "college", "campus", "engineering", "dept", "exam"]):
                 return {"category": "out_of_scope", "is_relevant": False}
 
-        # Academic priority indicators (timetable, syllabus, notes, results, portal)
+        # Academic priority indicators (timetable, syllabus, notes, results, portal, attendance)
         academic_priority = [
             "timetable", "time table", "schedule", "syllabus", "curriculum", "unit", "course",
             "notes", "handwritten", "result", "results", "marks", "grade", "sgpa", "cgpa",
-            "portal", "lms", "vmedulife", "fee", "fees", "admission", "scholarship", "exam", "examination"
+            "portal", "lms", "vmedulife", "fee", "fees", "admission", "scholarship", "exam", "examination",
+            "attendance", "absent", "present", "my learnings", "start learning", "academic planning",
+            "answer sheet review", "appeals", "paper seeing", "view result", "daily attendance", "monthly attendance"
         ]
         is_academic_doc_query = any(kw in q_lower for kw in academic_priority)
 
@@ -170,13 +172,41 @@ Core Directives:
    - Women in Tech & Gender Equity -> SWE, Women Development Cell
 4. GROUNDING IS STRICT: Use the provided context as authority for club facts, coordinators, office-bearers, events, and room numbers. Never invent office-bearers or dates.
 5. If the user asks for report, coordinators, or activities, provide exact facts and include clickable links: <a href="PDF_URL" target="_blank">📄 View Official Report (PDF)</a> and official page link <a href="https://www.kitcoek.in/studentClubs" target="_blank">Official Clubs Directory</a>.
-6. STUDENT PORTAL, RESULTS, AND LMS:
-   When the student asks about examination results, marks, semester grades (SGPA/CGPA), student portal, ERP, or LMS (Learning Management System):
+6. STUDENT PORTAL, RESULTS, ATTENDANCE, AND LMS (VMEDULIFE):
+   When the student asks about examination results, paper seeing / review appeals, checking attendance, syllabus, or teacher notes on VMedulife / Student Portal:
    - ALWAYS provide the official KITCOEK vMedulife Student Portal login link: <a href="https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur" target="_blank">🔗 KITCOEK Student Portal (vMedulife)</a>
-   - Provide related context:
-     * vMedulife is KITCOEK's centralized student ERP and LMS platform.
-     * Students can log in using their PRN and portal password to view semester examination results & grade cards, internal assessment marks (ISE/MSE/ESE), daily attendance records, and exam hall tickets.
-     * Through the LMS module, students can access subject learning resources, lecture notes, syllabus materials, and assignment submissions.
+   
+   - FOR CHECKING RESULTS & ANSWER SHEET REVIEWS / APPEALS:
+     Instruct the student with these exact numbered steps:
+     1. Open the portal link: <a href="https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur" target="_blank">KITCoEK VMedulife Portal</a>.
+     2. If prompted, log in with your student account credentials (PRN and password).
+     3. Open <strong>Assessment</strong> (or <strong>Exam Forms</strong>, depending on your portal).
+     4. Select <strong>Result → Result</strong> (or if paper is displayed, click on <strong>Answer Sheet Review and Appeals</strong>).
+     5. Select the relevant <strong>Academic Year</strong> and click <strong>Apply</strong>, if prompted.
+     6. Find your semester's result and click <strong>VIEW</strong>.
+
+   - FOR CHECKING SYLLABUS OR NOTES UPLOADED BY TEACHERS ("MY LEARNINGS"):
+     Instruct the student with these exact numbered steps:
+     1. Open the KITCoEK VMedulife website (<a href="https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur" target="_blank">KITCoEK VMedulife Portal</a>) and log in using your student credentials.
+     2. On the dashboard, click <strong>Academic Planning</strong>.
+     3. Select <strong>Start Learning</strong>.
+     4. Open <strong>My Learnings</strong>.
+     5. You should now be able to see the learning materials or courses assigned to you.
+     6. Click the relevant subject or learning item to open it.
+     (Also provide the direct Google Drive backup link for offline/handwritten subject notes: <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank">📁 View All Subject Notes in Drive</a>).
+
+   - FOR CHECKING ATTENDANCE (DAILY, WEEKLY, MONTHLY):
+     Instruct the student with these exact numbered steps:
+     1. Open the KITCoEK VMedulife website (<a href="https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur" target="_blank">KITCoEK VMedulife Portal</a>) and log in with your student ID and password.
+     2. Go to <strong>Academic Planning</strong>.
+     3. Look for the <strong>Attendance</strong> option.
+     4. Open the attendance section.
+     5. Choose the attendance view you want:
+        - <strong>Daily Attendance</strong> – to check attendance for a particular day.
+        - <strong>Weekly Attendance</strong> – to check attendance for a week.
+        - <strong>Monthly Attendance</strong> – to check attendance for a month.
+     6. Select the required date, week, or month, if prompted.
+     7. View your attendance details, including the classes attended and absent, if displayed.
 7. STUDENT NOTES & TIMETABLES (PUBLIC GOOGLE DRIVE REPOSITORY):
    When the student asks about subject notes, handwritten notes, study materials, or timetables / class schedules:
    - For NOTES queries:

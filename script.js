@@ -733,7 +733,28 @@ async function sendMessage(text){
       `;
     }
 
-    if (data.portal_url) {
+    if (data.vmedulife_guide) {
+      const g = data.vmedulife_guide;
+      const icon = g.type === 'result' ? '📊' : (g.type === 'attendance' ? '📅' : '📚');
+      const badgeText = g.type === 'result' ? 'RESULTS & REVIEWS' : (g.type === 'attendance' ? 'ATTENDANCE TRACKER' : 'MY LEARNINGS & NOTES');
+      botHtml += `
+        <div class="nav-box nav-box-guide nav-box-vmedulife">
+          <div class="vmedulife-header">
+            <span class="vmedulife-badge">${icon} ${badgeText}</span>
+            <p class="nav-box-title"><strong>${escapeHtml(g.title)}:</strong></p>
+          </div>
+          <ol class="vmedulife-steps-list">
+            ${g.steps.map((st, i) => `<li><span class="step-num">${i + 1}</span><span class="step-text">${escapeHtml(st)}</span></li>`).join('')}
+          </ol>
+          <div class="nav-box-actions">
+            <a href="${g.portal_url}" target="_blank" class="map-link-btn map-link-btn-portal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open vMedulife Student Portal ↗
+            </a>
+          </div>
+        </div>
+      `;
+    } else if (data.portal_url) {
       botHtml += `
         <div class="nav-box nav-box-portal">
           <p class="nav-box-title"><strong>KITCOEK Student Portal (vMedulife) &amp; LMS:</strong></p>

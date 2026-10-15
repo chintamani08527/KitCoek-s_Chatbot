@@ -1,0 +1,38 @@
+# ==============================================================================
+# KOLHAPUR INSTITUTE OF TECHNOLOGY'S COLLEGE OF ENGINEERING (AUTONOMOUS), KOLHAPUR
+# OFFICIAL VMEDULIFE STUDENT PORTAL (ERP & LMS) STEP-BY-STEP USER GUIDE
+# Official Portal Link: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur
+# Alternate Link: https://www.vmedulife.com/public/auth/login/kitcoek-kolhapur
+# ==============================================================================
+
+1. HOW TO CHECK EXAMINATION RESULTS & ANSWER SHEET REVIEWS ON VMEDULIFE:
+   To view semester examination marks, SGPA/CGPA grade sheets, and apply for answer sheet review or appeals:
+   Step 1: Open the official portal link: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur
+   Step 2: If prompted, log in with your student account credentials (PRN / Student ID and password).
+   Step 3: Open "Assessment" (or "Exam Forms", depending on your portal view).
+   Step 4: Select "Result" → "Result". If your evaluated answer paper is displayed for paper seeing / grievance, click on "Answer Sheet Review and Appeals".
+   Step 5: Select the relevant Academic Year and click "Apply", if prompted.
+   Step 6: Find your semester's result entry and click "VIEW" to see your subject marks, credits, and grades.
+
+2. HOW TO ACCESS "MY LEARNINGS" (SYLLABUS & NOTES UPLOADED BY TEACHERS):
+   To access learning resources, lecture slides, unit notes, and syllabus materials uploaded by faculty members on VMedulife:
+   Step 1: Open the KITCoEK VMedulife website (https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur) and log in using your student credentials.
+   Step 2: On the main dashboard, click on "Academic Planning".
+   Step 3: Select "Start Learning".
+   Step 4: Open "My Learnings".
+   Step 5: You should now be able to see all the learning materials, modules, and courses assigned to you by your subject teachers.
+   Step 6: Click the relevant subject or learning item to open, view, or download the notes and syllabus documents.
+   (Note: For departmental handwritten notes like Statistical Methods and SPS, students can also access the Google Drive repository: https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy)
+
+3. HOW TO CHECK ATTENDANCE (DAILY, WEEKLY, MONTHLY) ON VMEDULIFE:
+   To view official attendance records, attendance percentage, and track absent or present status:
+   Step 1: Open the KITCoEK VMedulife website (https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur) and log in with your student ID (PRN) and password.
+   Step 2: Go to "Academic Planning" on the navigation menu.
+   Step 3: Look for the "Attendance" option.
+   Step 4: Open the attendance section.
+   Step 5: Choose the attendance view you want to inspect:
+      - Daily Attendance – to check attendance for a particular lecture/day.
+      - Weekly Attendance – to check attendance summary for an entire week.
+      - Monthly Attendance – to check aggregate monthly attendance.
+   Step 6: Select the required date, week, or month, if prompted.
+   Step 7: View your attendance details, including total classes attended, absent dates/sessions, and overall attendance percentage.

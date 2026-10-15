@@ -246,13 +246,73 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 for c in all_clubs
             ]
 
-    # 3.5 Student Portal, Results & LMS detection
+    # 3.5 Student Portal, Results, Notes (My Learnings) & Attendance detection (VMedulife)
     portal_url = None
-    is_portal_intent = any(kw in q_low for kw in [
-        "portal", "student portal", "lms", "vmedulife", "result", "results", "marks", "grade", "grades",
-        "sgpa", "cgpa", "marksheet", "attendance", "hall ticket", "admit card", "studentsummary"
+    vmedulife_guide = None
+
+    is_result_intent = any(kw in q_low for kw in [
+        "result", "results", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet",
+        "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result"
     ])
-    if is_portal_intent:
+    is_vmedu_notes_intent = any(kw in q_low for kw in [
+        "my learnings", "start learning", "learning material", "uploaded by teacher", "teacher notes",
+        "vm notes", "vmedulife notes", "syllabus on vmedulife", "course material", "study material uploaded"
+    ])
+    is_attendance_intent = any(kw in q_low for kw in [
+        "attendance", "daily attendance", "weekly attendance", "monthly attendance",
+        "absent", "present", "check attendance", "attendance percentage", "classes attended"
+    ])
+    is_generic_portal_intent = any(kw in q_low for kw in [
+        "portal", "student portal", "lms", "vmedulife", "hall ticket", "admit card", "studentsummary"
+    ])
+
+    if is_result_intent:
+        portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        vmedulife_guide = {
+            "type": "result",
+            "title": "Steps to Check Result & Answer Sheet Reviews on VMedulife",
+            "portal_url": portal_url,
+            "steps": [
+                "Open the official KITCoEK VMedulife portal link: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur",
+                "If prompted, log in with your student account credentials (PRN and password).",
+                "Open Assessment (or Exam Forms, depending on your portal).",
+                "Select Result → Result (or if paper is displayed, click on Answer Sheet Review and Appeals).",
+                "Select the relevant Academic Year and click Apply, if prompted.",
+                "Find your semester's result and click VIEW."
+            ]
+        }
+    elif is_vmedu_notes_intent:
+        portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        vmedulife_guide = {
+            "type": "notes",
+            "title": "Steps to Access 'My Learnings' (Syllabus & Teacher Notes) on VMedulife",
+            "portal_url": portal_url,
+            "steps": [
+                "Open the KITCoEK VMedulife website (https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur) and log in using your student credentials.",
+                "On the dashboard, click Academic Planning.",
+                "Select Start Learning.",
+                "Open My Learnings.",
+                "You should now be able to see the learning materials or courses assigned to you.",
+                "Click the relevant subject or learning item to open it."
+            ]
+        }
+    elif is_attendance_intent:
+        portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        vmedulife_guide = {
+            "type": "attendance",
+            "title": "Steps to Check Attendance on KITCoEK VMedulife",
+            "portal_url": portal_url,
+            "steps": [
+                "Open the KITCoEK VMedulife website (https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur) and log in with your student ID (PRN) and password.",
+                "Go to Academic Planning.",
+                "Look for the Attendance option.",
+                "Open the attendance section.",
+                "Choose the attendance view you want: Daily Attendance, Weekly Attendance, or Monthly Attendance.",
+                "Select the required date, week, or month, if prompted.",
+                "View your attendance details, including the classes attended and absent, if displayed."
+            ]
+        }
+    elif is_generic_portal_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
 
     # 3.6 Student Notes & Timetables detection
@@ -320,6 +380,13 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
 
+    # Prepend official VMedulife guide if matched
+    if vmedulife_guide:
+        guide_lines = [f"OFFICIAL KITCOEK VMEDULIFE GUIDE ({vmedulife_guide['title']}):"]
+        for idx, s in enumerate(vmedulife_guide["steps"], start=1):
+            guide_lines.append(f"{idx}. {s}")
+        context_texts.insert(0, "\n".join(guide_lines))
+
     # Prepend official notice context if matched
     if matched_notices or matched_cals:
         notice_ctx_lines = ["Official KITCOEK Notice Board & Academic Calendar Data (Source: https://www.kitcoek.in/notice):"]
@@ -379,7 +446,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         timetable_url=timetable_url,
         notices_details=matched_notices,
         notice_board_url=notice_board_url,
-        academic_calendars=matched_cals
+        academic_calendars=matched_cals,
+        vmedulife_guide=vmedulife_guide
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()
