@@ -504,7 +504,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             "  * S.Y. (Sem III & IV): Formal Language & Automata Theory, Computer Organization & Architecture, Computational Statistics, Object Oriented Programming (Java/C++), Operating Systems, Database Management Systems, Software Engineering, Fundamentals of Marketing, Financial & Cost Accounting.",
             "  * T.Y. (Sem V & VI): Design & Analysis of Algorithms, Compiler Design, Business Strategy, Computer Networks, Machine Learning, Information Security, Consumer Behaviour.",
             "  * Final Year (Sem VII & VIII): Cloud Computing, Software Testing & Quality Assurance, Financial Management, Deep Learning, IoT, Capstone Projects & Full Semester Industry Internship.",
-            "DIRECTIVE: Present a detailed, helpful breakdown confirming that this syllabus is the official NEP-2020 curriculum from kitcoek.in/online-syllabus. Provide direct clickable links to the All-Year Structure PDF and each individual year's PDF."
+            "DIRECTIVE: Give a concise, helpful overview confirming that the CSBS syllabus strictly complies with the official KITCoEK 2023 [NEP-2020] Scheme from kitcoek.in/online-syllabus. Highlight the program's blend of core computer science, Business 4.0, analytics, and management. DO NOT output a bullet list of PDF links or repeat the year-by-year syllabus lists in your text, because a dedicated interactive card with verified download buttons for All-Year Structure, FY, SY, TY, Final Year, Honors, and MDM is automatically appended below your answer."
         ]
         context_texts.insert(0, "\n".join(syllabus_ctx))
 

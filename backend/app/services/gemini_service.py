@@ -288,19 +288,9 @@ Core Directives:
     When a student asks about syllabus, NEP structure, subjects, or academic curriculum (especially for CSBS - Computer Science & Business Systems):
     - Reassure the student that the syllabus strictly complies with the official KITCoEK 2023 [NEP-2020] Scheme published on the college portal: <a href="https://www.kitcoek.in/online-syllabus" target="_blank">🌐 KITCoEK Online Syllabus Portal</a>.
     - FOR CSBS (Computer Science and Business Systems):
-      * Describe the core blend of Computer Science with Business 4.0, enterprise management, and analytics.
-      * Provide direct links to official documents:
-        - <strong>All-Years Curriculum Structure (NEP-2020)</strong>: <a href="https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf" target="_blank">📄 Download All-Year Structure PDF</a>
-        - <strong>First Year (F.Y. B.Tech CSBS NEP)</strong>: <a href="https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf" target="_blank">📄 Download F.Y. Syllabus PDF</a> (Exit Courses: <a href="https://kitcoek.s3.amazonaws.com/syllabus/exit%20courses_syllabus%20with%20stamp.pdf" target="_blank">Exit Courses PDF</a>)
-        - <strong>Second Year (S.Y. B.Tech CSBS NEP)</strong>: <a href="https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf" target="_blank">📄 Download S.Y. Syllabus PDF</a> (Honors: <a href="https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf" target="_blank">Honors PDF</a>, MDM: <a href="https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf" target="_blank">MDM PDF</a>, AR-VR: <a href="https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf" target="_blank">AR-VR PDF</a>)
-        - <strong>Third Year (T.Y. B.Tech CSBS NEP)</strong>: <a href="https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf" target="_blank">📄 Download T.Y. Syllabus PDF</a> (AR-VR: <a href="https://kitcoek.s3.amazonaws.com/syllabus/AR%20VR%20syllabus.pdf" target="_blank">AR-VR PDF</a>)
-        - <strong>Final Year (Final Year B.Tech CSBS NEP)</strong>: <a href="https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf" target="_blank">📄 Download Final Year Syllabus PDF</a>
-      * Explain key semester subjects:
-        - F.Y. (Sem I & II): Fundamentals of Computer Science, Discrete Mathematics, Electrical Principles, Physics for Computing Science, Statistics & Probability, Business Communication & Value Science, Data Structures & Algorithms, Economics.
-        - S.Y. (Sem III & IV): Formal Language & Automata Theory, Computer Organization, Computational Statistics, OOP (Java/C++), Operating Systems, DBMS, Software Engineering, Fundamentals of Marketing, Financial and Cost Accounting.
-        - T.Y. (Sem V & VI): Design & Analysis of Algorithms (DAA), Compiler Design, Business Strategy, Computer Networks, Machine Learning, Information Security, Consumer Behaviour.
-        - Final Year (Sem VII & VIII): Cloud Computing, Software Testing & QA, Financial Management, IoT, Deep Learning, Capstone Projects & Full Semester Industry Internship.
-      * Mention that a direct download card with verified links for all years is also displayed below.
+      * Describe the core program: an industry-oriented 4-year B.Tech developed in synergy with TCS, blending core computer engineering with Business 4.0, analytics, and enterprise management.
+      * Highlight key focus areas: Core Algorithms & Computing, Data Science & Machine Learning, Enterprise Architecture, Financial & Marketing Strategy, and emerging specialization tracks (AR/VR, Metaverse, Honors & Multidisciplinary Minor).
+      * DO NOT output duplicate raw PDF download links or repeat the year-by-year syllabus lists in your text reply; a dedicated interactive Official Syllabus Card with verified direct download buttons for the All-Years Curriculum Structure, F.Y., S.Y., T.Y., Final Year, Honors, MDM, and Exit Courses is automatically attached right below your answer.
 13. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
 14. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 

@@ -689,6 +689,13 @@ async function sendMessage(text){
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
 
+    // If structured CSBS syllabus card is present, remove raw syllabus link lists to prevent repeating twice
+    if (data.csbs_syllabus && Array.isArray(data.csbs_syllabus.years)) {
+      botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?kitcoek\.s3[\s\S]*?<\/\1>/gi, '');
+      botHtml = botHtml.replace(/<p>[^<]*?(?:below are the direct|download the official curriculum documents|verified links to download|download links:)[^<]*?<\/p>/gi, '');
+      botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
+    }
+
     if (data.club_details) {
       const c = data.club_details;
       const catClass = getCategoryClass(c.category);
