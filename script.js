@@ -709,10 +709,10 @@ async function sendMessage(text){
     if (data.location_details) {
       const loc = data.location_details;
       botHtml += `
-        <div class="nav-box">
-          <p><strong>Campus Location:</strong> ${escapeHtml(loc.building)} — ${escapeHtml(loc.floor)}</p>
-          ${loc.landmark ? `<p style="font-size:12px; margin-top:2px;"><em>Landmark: ${escapeHtml(loc.landmark)}</em></p>` : ''}
-          ${loc.room_number ? `<p style="font-size:12px; margin-top:2px;"><strong>Block / Rooms:</strong> ${escapeHtml(loc.room_number)}</p>` : ''}
+        <div class="nav-box nav-box-location">
+          <p class="nav-box-title"><strong>Campus Location:</strong> ${escapeHtml(loc.building)} — ${escapeHtml(loc.floor)}</p>
+          ${loc.landmark ? `<p class="nav-box-landmark"><em>Landmark: ${escapeHtml(loc.landmark)}</em></p>` : ''}
+          ${loc.room_number ? `<p class="nav-box-rooms"><strong>Block / Rooms:</strong> ${escapeHtml(loc.room_number)}</p>` : ''}
           <div class="map-thumbnail-container open-map-modal-btn" title="Click to open Aerial Campus Map">
             <img src="campus_map.jpg" alt="Aerial Campus Map Preview">
             <div class="map-thumbnail-overlay">
@@ -720,12 +720,12 @@ async function sendMessage(text){
               <span>🔍 Zoom</span>
             </div>
           </div>
-          <div style="margin-top:8px; display:flex; gap:8px;">
-            <button class="map-link-btn open-map-modal-btn" type="button">
+          <div class="nav-box-actions">
+            <button class="map-link-btn map-link-btn-primary open-map-modal-btn" type="button">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
               View Aerial Map
             </button>
-            <a href="campus_map.jpg" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline);">
+            <a href="campus_map.jpg" target="_blank" class="map-link-btn map-link-btn-secondary">
               ↗ Open in Tab
             </a>
           </div>
@@ -735,32 +735,34 @@ async function sendMessage(text){
 
     if (data.portal_url) {
       botHtml += `
-        <div class="nav-box" style="border-left: 3px solid var(--pine); background: #f4fbf9; margin-top:10px;">
-          <p><strong>KITCOEK Student Portal (vMedulife) &amp; LMS:</strong></p>
-          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+        <div class="nav-box nav-box-portal">
+          <p class="nav-box-title"><strong>KITCOEK Student Portal (vMedulife) &amp; LMS:</strong></p>
+          <p class="nav-box-desc">
             Access semester examination results, SGPA/CGPA grade cards, LMS course notes, and attendance tracking.
           </p>
-          <a href="${data.portal_url}" target="_blank" class="map-link-btn" style="background:var(--pine); color:#fff; display:inline-flex; align-items:center; gap:6px; margin-top:6px;">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Open vMedulife Student Portal ↗
-          </a>
+          <div class="nav-box-actions">
+            <a href="${data.portal_url}" target="_blank" class="map-link-btn map-link-btn-portal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Open vMedulife Student Portal ↗
+            </a>
+          </div>
         </div>
       `;
     }
 
     if (data.notes_url) {
       botHtml += `
-        <div class="nav-box" style="border-left: 3px solid #0284C7; margin-top:10px;">
-          <p><strong>KITCOEK Subject &amp; Handwritten Notes:</strong></p>
-          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+        <div class="nav-box nav-box-notes">
+          <p class="nav-box-title"><strong>KITCOEK Subject &amp; Handwritten Notes:</strong></p>
+          <p class="nav-box-desc">
             Access verified PDF notes for Statistical Methods (Unit 4: Analysis of Variance), SPS (Unit 3), and department study materials.
           </p>
-          <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:8px;">
-            <a href="${data.notes_url}" target="_blank" class="map-link-btn" style="background:var(--ink); color:#38BDF8; display:inline-flex; align-items:center; gap:6px;">
+          <div class="nav-box-actions">
+            <a href="${data.notes_url}" target="_blank" class="map-link-btn map-link-btn-primary">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
               📄 Open Notes PDF / Folder ↗
             </a>
-            <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline); display:inline-flex; align-items:center; gap:6px;">
+            <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank" class="map-link-btn map-link-btn-secondary">
               📁 View All Notes in Drive
             </a>
           </div>
@@ -770,17 +772,17 @@ async function sendMessage(text){
 
     if (data.timetable_url) {
       botHtml += `
-        <div class="nav-box" style="border-left: 3px solid #2563eb; background: #f4f7fe; margin-top:10px;">
-          <p><strong>KITCOEK Class &amp; Department Timetables:</strong></p>
-          <p style="font-size:12.5px; color:var(--text-muted); margin-top:2px; line-height:1.45;">
+        <div class="nav-box nav-box-timetable">
+          <p class="nav-box-title"><strong>KITCOEK Class &amp; Department Timetables:</strong></p>
+          <p class="nav-box-desc">
             Access class schedules for CSBS (SY, TY, Final Year) and other institute department timetables.
           </p>
-          <div style="margin-top:6px; display:flex; flex-wrap:wrap; gap:8px;">
-            <a href="${data.timetable_url}" target="_blank" class="map-link-btn" style="background:#2563eb; color:#fff; display:inline-flex; align-items:center; gap:6px;">
+          <div class="nav-box-actions">
+            <a href="${data.timetable_url}" target="_blank" class="map-link-btn map-link-btn-primary">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
               📅 Open Timetable File ↗
             </a>
-            <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank" class="map-link-btn" style="background:#fff; color:var(--ink); border:1px solid var(--hairline); display:inline-flex; align-items:center; gap:6px;">
+            <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank" class="map-link-btn map-link-btn-secondary">
               📁 View Timetables Drive Folder
             </a>
           </div>
@@ -806,7 +808,7 @@ async function sendMessage(text){
   } catch (err) {
     console.error('API Error:', err);
     removeTyping();
-    const errorHtml = `<p style="color:#b91c1c;">Unable to reach KITCOEK backend server. Please verify backend is running on port 8000.</p>`;
+    const errorHtml = `<p class="chat-error-msg">⚠️ Unable to reach KITCOEK backend server. Please verify backend is running on port 8000.</p>`;
     currentConv.messages.push({
       role: 'bot',
       html: errorHtml,
@@ -941,7 +943,7 @@ async function loadClubsDataIfNeeded() {
     if (clubsGrid) {
       clubsGrid.innerHTML = `
         <div class="clubs-loading">
-          <p style="color:#b91c1c;">Unable to load clubs directory from backend. Please ensure the backend server is running.</p>
+          <p class="clubs-error-msg">⚠️ Unable to load clubs directory from backend. Please ensure the backend server is running.</p>
         </div>
       `;
     }
