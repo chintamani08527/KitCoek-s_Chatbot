@@ -351,7 +351,11 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         "commencement", "exam notice", "latest news", "announcement", "announcements"
     ])
 
-    if is_notice_intent or "exam" in q_low or "timetable" in q_low or "time table" in q_low:
+    is_pure_portal_guide = bool(vmedulife_guide) and not any(k in q_low for k in [
+        "notice", "circular", "calendar", "calender", "timetable", "time table", "mse", "ese", "schedule", "latest"
+    ])
+
+    if not is_pure_portal_guide and (is_notice_intent or any(k in q_low for k in ["exam notice", "exam circular", "exam timetable", "exam schedule", "timetable", "time table"])):
         notice_board_url = "https://www.kitcoek.in/notice"
         category = "notices" if is_notice_intent and category not in ["clubs", "navigation"] else category
 
