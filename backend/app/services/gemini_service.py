@@ -337,15 +337,47 @@ Student Query: {query}
             if raw_text.startswith("```"):
                 raw_text = re.sub(r"^```(?:json)?\s*", "", raw_text)
                 raw_text = re.sub(r"\s*```$", "", raw_text)
+                raw_text = raw_text.strip()
             
+            data = None
             try:
-                data = json.loads(raw_text.strip())
+                data = json.loads(raw_text, strict=False)
             except Exception:
-                data = {"answer": raw_text, "follow_up_questions": []}
+                pass
+
+            if not isinstance(data, dict) or "answer" not in data:
+                # Regex fallback extraction when Gemini generates unescaped quotes or invalid JSON
+                ans = ""
+                fqs = []
+                ans_match = re.search(r'"answer"\s*:\s*"(.*?)(?:"\s*,\s*"follow_up_questions"|"\s*\}\s*$)', raw_text, re.DOTALL)
+                if ans_match:
+                    ans = ans_match.group(1).replace('\\"', '"').replace('\\n', '\n').replace('\\t', '\t').replace('\\/', '/')
+                else:
+                    cleaned = raw_text
+                    cleaned = re.sub(r'^\s*\{\s*"answer"\s*:\s*"?', '', cleaned)
+                    cleaned = re.sub(r'"?\s*,\s*"follow_up_questions"[\s\S]*$', '', cleaned)
+                    cleaned = re.sub(r'"?\s*\}\s*$', '', cleaned)
+                    ans = cleaned
+
+                fqs_match = re.search(r'"follow_up_questions"\s*:\s*\[([\s\S]*?)\]', raw_text)
+                if fqs_match:
+                    items = re.findall(r'"([^"\\]*(?:\\.[^"\\]*)*)"', fqs_match.group(1))
+                    fqs = [it.replace('\\"', '"').strip() for it in items if len(it.strip()) > 3]
+
+                data = {
+                    "answer": ans,
+                    "follow_up_questions": fqs
+                }
+
+            # Final sanity cleanup: Guarantee NO raw JSON syntax leaks into answer
+            ans_clean = str(data.get("answer", "<p>No response generated.</p>")).strip()
+            ans_clean = re.sub(r'",\s*"follow_up_questions"[\s\S]*$', '', ans_clean)
+            ans_clean = re.sub(r'^\s*\{\s*"answer"\s*:\s*"', '', ans_clean)
+            ans_clean = re.sub(r'"\s*\}\s*$', '', ans_clean).strip()
 
             return {
-                "answer": data.get("answer", "<p>No response generated.</p>"),
-                "follow_up_questions": data.get("follow_up_questions", [])
+                "answer": ans_clean,
+                "follow_up_questions": data.get("follow_up_questions") if isinstance(data.get("follow_up_questions"), list) else []
             }
         except Exception as e:
             print(f"[Error] Gemini API generation error: {e}")

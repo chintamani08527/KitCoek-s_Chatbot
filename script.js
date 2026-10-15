@@ -683,6 +683,11 @@ async function sendMessage(text){
     removeTyping();
     let botHtml = data.reply || '';
 
+    // Safeguard: Ensure raw JSON keys or follow-up question artifacts never leak into chat bubble
+    botHtml = botHtml.replace(/^\s*\{\s*"answer"\s*:\s*"?/i, '');
+    botHtml = botHtml.replace(/"?\s*,\s*"follow_up_questions"[\s\S]*$/i, '');
+    botHtml = botHtml.replace(/"?\s*\}\s*$/i, '').trim();
+
     // If structured Meraki reels card is present, remove any raw reel bullet lists from text to prevent double display
     if (data.meraki_reels && data.meraki_reels.length > 0) {
       botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?instagram\.com\/reel[\s\S]*?<\/\1>/gi, '');
