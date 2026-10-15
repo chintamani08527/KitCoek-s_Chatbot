@@ -27,6 +27,54 @@ MERAKI_REELS = [
     {"title": "Meraki Annual Gathering Celebration", "url": "https://www.instagram.com/reel/DVH9-UiiEoj", "tag": "Reel 5"}
 ]
 
+CSBS_SYLLABUS_DATA = {
+    "department": "Computer Science and Business Systems (CSBS)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] Scheme",
+    "structure_url": "https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf",
+    "years": [
+        {
+            "year": "All-Year Curriculum Structure",
+            "tag": "NEP-2020 Scheme",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf",
+            "description": "Complete 4-year, 8-semester credit system, course codes, teaching & evaluation schemes."
+        },
+        {
+            "year": "First Year (F.Y. B.Tech CSBS)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf",
+            "exit_courses_url": "https://kitcoek.s3.amazonaws.com/syllabus/exit%20courses_syllabus%20with%20stamp.pdf",
+            "description": "Fundamentals of Computer Science, Discrete Mathematics, Electrical Principles, Physics for Computing Science, Statistics & Probability, Business Communication & Value Science."
+        },
+        {
+            "year": "Second Year (S.Y. B.Tech CSBS)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf",
+            "honours_url": "https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf",
+            "mdm_url": "https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf",
+            "ar_vr_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf",
+            "description": "Formal Language & Automata Theory, Computer Organization, Computational Statistics, OOP (Java/C++), Operating Systems, DBMS, Software Engineering, Marketing, Cost Accounting."
+        },
+        {
+            "year": "Third Year (T.Y. B.Tech CSBS)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf",
+            "honours_url": "https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf",
+            "mdm_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf",
+            "ar_vr_url": "https://kitcoek.s3.amazonaws.com/syllabus/AR%20VR%20syllabus.pdf",
+            "description": "Design & Analysis of Algorithms (DAA), Compiler Design, Business Strategy, Computer Networks, Machine Learning, Information Security, Consumer Behaviour."
+        },
+        {
+            "year": "Final Year (Final Year B.Tech CSBS)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf",
+            "honours_url": "https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf",
+            "mdm_url": "https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf",
+            "description": "Cloud Computing, Software Testing & QA, Financial Management, Professional Electives (Deep Learning, IoT, Image Processing), Capstone Project / Industry Internship."
+        }
+    ]
+}
+
 def format_club_dict(club: StudentClub) -> dict:
     d = {
         "id": club.id,
@@ -418,9 +466,47 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         meraki_reels = MERAKI_REELS
         category = "clubs" if category not in ["navigation"] else category
 
+    # 3.9 Official KITCOEK Online Syllabus & CSBS NEP-2020 detection (https://www.kitcoek.in/online-syllabus)
+    csbs_syllabus = None
+    is_csbs_syllabus_intent = (
+        ("csbs" in q_low or "computer science and business" in q_low or "business systems" in q_low)
+        and any(w in q_low for w in [
+            "syllabus", "curriculum", "subject", "subjects", "nep", "course", "courses",
+            "online syllabus", "structure", "scheme", "sem", "semester", "fy", "sy", "ty", "final year"
+        ])
+    ) or (
+        any(w in q_low for w in ["online syllabus", "kitcoek.in/online-syllabus"])
+        and any(w in q_low for w in ["csbs", "computer science and business"])
+    )
+
+    if is_csbs_syllabus_intent:
+        csbs_syllabus = CSBS_SYLLABUS_DATA
+        category = "academic" if category not in ["navigation", "clubs"] else category
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
+
+    # Prepend official CSBS NEP-2020 syllabus context if matched
+    if csbs_syllabus:
+        syllabus_ctx = [
+            "OFFICIAL KITCOEK ONLINE SYLLABUS DIRECTORY — CSBS NEP-2020 CURRICULUM (Source: https://www.kitcoek.in/online-syllabus):",
+            "College Scheme: 2023 [NEP-2020] Scheme (National Education Policy 2020 Autonomous Scheme).",
+            "Department: Computer Science and Business Systems (CSBS).",
+            "DIRECT OFFICIAL AWS S3 SYLLABUS PDF DOWNLOAD LINKS:",
+            "- All-Year Curriculum Structure (NEP-2020): https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf",
+            "- First Year (F.Y. B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf | Exit Courses: https://kitcoek.s3.amazonaws.com/syllabus/exit%20courses_syllabus%20with%20stamp.pdf",
+            "- Second Year (S.Y. B.Tech CSBS): https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf | Honours: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf | AR-VR: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf",
+            "- Third Year (T.Y. B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf | Honours: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf | AR-VR: https://kitcoek.s3.amazonaws.com/syllabus/AR%20VR%20syllabus.pdf",
+            "- Final Year (Final Year B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf | Honours: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf",
+            "Key Subjects Breakdown:",
+            "  * F.Y. (Sem I & II): Fundamentals of Computer Science, Discrete Mathematics, Principles of Electrical Engineering, Physics for Computing Science, Statistics & Probability, Business Communication & Value Science, Data Structures & Algorithms, Economics.",
+            "  * S.Y. (Sem III & IV): Formal Language & Automata Theory, Computer Organization & Architecture, Computational Statistics, Object Oriented Programming (Java/C++), Operating Systems, Database Management Systems, Software Engineering, Fundamentals of Marketing, Financial & Cost Accounting.",
+            "  * T.Y. (Sem V & VI): Design & Analysis of Algorithms, Compiler Design, Business Strategy, Computer Networks, Machine Learning, Information Security, Consumer Behaviour.",
+            "  * Final Year (Sem VII & VIII): Cloud Computing, Software Testing & Quality Assurance, Financial Management, Deep Learning, IoT, Capstone Projects & Full Semester Industry Internship.",
+            "DIRECTIVE: Present a detailed, helpful breakdown confirming that this syllabus is the official NEP-2020 curriculum from kitcoek.in/online-syllabus. Provide direct clickable links to the All-Year Structure PDF and each individual year's PDF."
+        ]
+        context_texts.insert(0, "\n".join(syllabus_ctx))
 
     # Prepend official Meraki context if matched
     if meraki_reels:
@@ -499,7 +585,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         notice_board_url=notice_board_url,
         academic_calendars=matched_cals,
         vmedulife_guide=vmedulife_guide,
-        meraki_reels=meraki_reels
+        meraki_reels=meraki_reels,
+        csbs_syllabus=csbs_syllabus
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()

@@ -919,6 +919,71 @@ async function sendMessage(text){
       `;
     }
 
+    if (data.csbs_syllabus && Array.isArray(data.csbs_syllabus.years)) {
+      const syl = data.csbs_syllabus;
+      const yearsHtml = syl.years.map(y => `
+        <div class="syllabus-item">
+          <div class="syllabus-item-main">
+            <div class="syllabus-item-header">
+              <span class="syllabus-year-title">${escapeHtml(y.year)}</span>
+              <span class="syllabus-tag-badge">${escapeHtml(y.tag || 'NEP-2020')}</span>
+            </div>
+            ${y.description ? `<div class="syllabus-item-desc">${escapeHtml(y.description)}</div>` : ''}
+          </div>
+          <div class="syllabus-item-actions">
+            <a href="${y.pdf_url}" target="_blank" rel="noopener noreferrer" class="syllabus-download-btn" title="Download Official ${escapeHtml(y.year)} Syllabus PDF">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download PDF ↗
+            </a>
+            ${y.honours_url ? `
+              <a href="${y.honours_url}" target="_blank" rel="noopener noreferrer" class="syllabus-sub-btn" title="Honors Specialization Syllabus PDF">
+                Honors PDF ↗
+              </a>
+            ` : ''}
+            ${y.mdm_url ? `
+              <a href="${y.mdm_url}" target="_blank" rel="noopener noreferrer" class="syllabus-sub-btn" title="Multidisciplinary Minor (MDM) Syllabus PDF">
+                MDM PDF ↗
+              </a>
+            ` : ''}
+            ${y.ar_vr_url ? `
+              <a href="${y.ar_vr_url}" target="_blank" rel="noopener noreferrer" class="syllabus-sub-btn" title="AR-VR Emerging Trend Syllabus PDF">
+                AR-VR Minor ↗
+              </a>
+            ` : ''}
+            ${y.exit_courses_url ? `
+              <a href="${y.exit_courses_url}" target="_blank" rel="noopener noreferrer" class="syllabus-sub-btn" title="NEP Exit Certification Courses PDF">
+                Exit Courses ↗
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-syllabus">
+          <div class="syllabus-card-header">
+            <div class="syllabus-badge">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              ${escapeHtml(syl.department)} — Official NEP Syllabus
+            </div>
+            <span class="syllabus-live-dot">● Verified NEP-2020 Scheme</span>
+          </div>
+          <p class="nav-box-desc" style="margin-bottom:10px;">
+            Official National Education Policy (NEP 2020) syllabus PDFs sourced directly from the college portal:
+          </p>
+          <div class="syllabus-items-container">
+            ${yearsHtml}
+          </div>
+          <div class="nav-box-actions" style="margin-top:10px;">
+            <a href="${syl.portal_url || 'https://www.kitcoek.in/online-syllabus'}" target="_blank" rel="noopener noreferrer" class="map-link-btn map-link-btn-notice">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              KITCoEK Online Syllabus Portal (kitcoek.in/online-syllabus) ↗
+            </a>
+          </div>
+        </div>
+      `;
+    }
+
     currentConv.messages.push({
       role: 'bot',
       html: botHtml,

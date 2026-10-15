@@ -51,6 +51,57 @@ CSE (DATA SCIENCE - DS):
 3. Honors Specialization in Cyber Security for Data Science:
    - Link: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B-%20Tech%20(Hons-)%20Computer%20Science%20and%20Engineering%20(Data%20Science)%20with%20specialization%20in%20cyber%20security.pdf
 
+DEPARTMENT OF COMPUTER SCIENCE AND BUSINESS SYSTEMS (CSBS) — NEP-2020 SYLLABUS DIRECTORY:
+Source: Official College Online Syllabus Portal (https://www.kitcoek.in/online-syllabus)
+Curriculum Schemes: 2023 [NEP-2020] Scheme & 2021 Cycle-2 Autonomy Scheme
+
+Overview:
+Computer Science and Business Systems (CSBS) is a cutting-edge 4-year undergraduate B.Tech program crafted in alignment with National Education Policy (NEP 2020) and industry requirements (Business 4.0). It blends rigorous core computer science with enterprise management, data science, financial analytics, and emerging technologies.
+
+1. CSBS All-Years Complete Curriculum Structure (NEP-2020):
+   - Official Structure PDF: https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf
+   - Breakdown: Full 8-semester credit system, course codes, teaching and evaluation scheme (ISE, MSE, ESE), program outcomes (POs), and multidisciplinary minors.
+
+2. First Year (F.Y. B.Tech CSBS) — 2023 [NEP-2020]:
+   - F.Y. CSBS Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf
+   - F.Y. Exit Courses Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/exit%20courses_syllabus%20with%20stamp.pdf
+   - F.Y. Cycle-2 Non-NEP Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/F.Y.CSBS-Sylaabus-Non-NEP%20%281%29.pdf
+   - Semester I Subjects: Fundamentals of Computer Science (UCBPC0101), Discrete Mathematics (UCBES0102), Principles of Electrical Engineering (UCBES0103), Physics for Computing Science (UCBBS0104), Statistics & Probability (UCBBS0105), Business Communication & Value Science-I (UCBHS0106).
+   - Semester II Subjects: Linear Algebra, Advanced Statistical Methods, Data Structures & Algorithms, Principles of Electronics, Fundamentals of Economics, Business Communication & Value Science-II.
+   - NEP Exit Certification Courses (Certificate in Engineering): UCBEX0291 Certification Course in Graphics Design, UCBEX0292 Certification Course in Data Analysis.
+
+3. Second Year (S.Y. B.Tech CSBS) — 2023 [NEP-2020]:
+   - S.Y. CSBS Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf
+   - S.Y. CSBS Honors Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf
+   - S.Y. CSBS Multidisciplinary Minor (MDM) Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf
+   - S.Y. CSBS AR-VR Emerging Trend Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf
+   - S.Y. CSBS Cycle-2 Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SY%20CSBS%20SYLLABUS%2022-23_compressed%20%281%29.pdf
+   - Semester III Subjects: Formal Language & Automata Theory (UCBPC0301), Computer Organization & Architecture (UCBPC0302), Computational Statistics (UCBBS0303), Object Oriented Programming (UCBPC0304), Fundamentals of Marketing / MM-I (UCBMM0341).
+   - Semester IV Subjects: Operating Systems (UCBPC0401), Database Management Systems (UCBPC0402), Software Engineering (UCBPC0403), Financial and Cost Accounting / MM-II (UCBMM0441).
+   - NEP Exit Courses (Diploma in Engineering): UCBEX0491 Certification Course in Data Science.
+
+4. Third Year (T.Y. B.Tech CSBS) — 2023 [NEP-2020]:
+   - T.Y. CSBS Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf
+   - T.Y. CSBS Honors Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Honours%20Syllabus.pdf
+   - T.Y. CSBS MDM Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf
+   - T.Y. CSBS AR-VR Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/AR%20VR%20syllabus.pdf
+   - T.Y. CSBS Cycle-2 Non-NEP Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/CSBS-TY%20Syllabus%20Non%20NEP.pdf
+   - Semester V Subjects: Design & Analysis of Algorithms (UCBPC0501), Compiler Design (UCBPC0502), Business Strategy / MM-III (UCBMM0541), Professional Elective-I, Open Elective-I.
+   - Semester VI Subjects: Computer Networks (UCBPC0601), Machine Learning (UCBPC0602), Information Security (UCBPC0603), Consumer Behaviour / MM-IV (UCBMM0641), Professional Elective-II, Open Elective-II.
+   - NEP Exit Courses (B.Sc. in Engineering): UCBEX0691 Certification Course in AWS, UCBEX0692 Certification Course in CISA (Certified Information Systems Auditor).
+
+5. Final Year (Final Year B.Tech CSBS) — 2023 [NEP-2020]:
+   - Final Year CSBS Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf
+   - Final Year Honors Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf
+   - Final Year MDM Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf
+   - Final Year Cycle-2 (2025-26) Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/Non%20Nep%20Final%20Year%202025-26%20with%20stamp.pdf
+   - Semester VII Subjects: Cloud Computing, Software Testing and Quality Assurance, Financial Management / MM-V (UCBMM0741), Professional Elective-III (e.g. Deep Learning, Image Processing, IoT), Open Elective-III, Capstone Project Phase-I.
+   - Semester VIII Subjects: Professional Elective-IV, Professional Elective-V, Capstone Project Phase-II or Full Semester Industry Internship.
+
+6. Emerging Trend Minor Specialization (AR / VR & Metaverse):
+   - AR-VR Emerging Trend Curriculum: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf
+   - Courses: Introduction to AR (UCBMN0351), Introduction to VR (UCBMN0451), Metaverse (UCBMN0551).
+
 BIOTECHNOLOGY ENGINEERING:
 - S.Y. B.Tech Biotech Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SY%20BTech%20syllabus%20contents%202022-23.pdf
 - T.Y. B.Tech Biotech Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20BTech%20syllabus%20contents%202023-24.pdf
