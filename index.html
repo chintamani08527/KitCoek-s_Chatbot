@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=15.0">
+<link rel="stylesheet" href="style.css?v=16.0">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
       </button>
       <button class="nav-tab" id="tabClubsBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Student Clubs <span class="badge-count">18</span>
+        Student Clubs <span class="badge-count" id="tabClubsBadgeCount">25</span>
       </button>
       <button class="nav-tab" id="tabMapBtn">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
@@ -110,7 +110,7 @@
         <div class="row bot">
           <div class="avatar bot-avatar" aria-label="KITCOEK AI Assistant"><img src="kit-emblem.png?v=5.0" alt="KITCOEK" class="assistant-avatar-img" onerror="this.style.display='none'; this.parentNode.classList.add('avatar-fallback'); this.parentNode.innerText='K';"></div>
           <div class="bubble">
-            <p>Hi, I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about registration, examinations, syllabus, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.</p>
+            <p>Hi, I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about registration, examinations, syllabus, or any of our <strong>25 Official Student Clubs &amp; Departmental Associations</strong> (ISTE, E-Cell, MESA, CESA, ACSES, CABSSA, Cultural, NSS, and more) — or pick a topic below to start.</p>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
         <div>
           <div class="clubs-title-row">
             <h1>KITCoEK Student Clubs &amp; Groups</h1>
-            <span class="clubs-count-pill" id="totalClubsCount">18 Official Clubs</span>
+            <span class="clubs-count-pill" id="totalClubsCount">25 Official Clubs</span>
           </div>
           <p>Official student bodies, development cells, and annual reports for Academic Year 2025–26.</p>
         </div>
@@ -169,7 +169,7 @@
           <button class="chip prompt-chip" data-q="Find clubs for entrepreneurship">Clubs for entrepreneurship</button>
           <button class="chip prompt-chip" data-q="Which clubs help improve communication skills?">Communication skills</button>
           <button class="chip prompt-chip" data-q="Which clubs are related to coding and AI?">Coding &amp; AI clubs</button>
-          <button class="chip prompt-chip" data-q="List all KIT student clubs.">List all 18 clubs</button>
+          <button class="chip prompt-chip" data-q="List all KIT student clubs.">List all 25 clubs</button>
         </div>
 
         <!-- Search & Filter Bar -->
@@ -257,6 +257,6 @@
 
 </div>
 
-<script src="script.js?v=15.0"></script>
+<script src="script.js?v=16.0"></script>
 </body>
 </html>

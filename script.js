@@ -67,7 +67,7 @@ if (sidebarPrn) sidebarPrn.textContent = studentPrn;
 // Set greeting message
 const greetingBubble = document.querySelector('.thread .row.bot .bubble p');
 if (greetingBubble) {
-  greetingBubble.innerHTML = `Hi! I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about academic syllabus, timetables, examinations, campus navigation, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.`;
+  greetingBubble.innerHTML = `Hi! I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about academic syllabus, timetables, examinations, campus navigation, or any of our <strong>25 Official Student Clubs &amp; Departmental Associations</strong> (ISTE, E-Cell, MESA, CESA, ACSES, CABSSA, Cultural, NSS, and more) — or pick a topic below to start.`;
 }
 
 // ---- Chat Appearance Theme Switcher ----
@@ -256,7 +256,7 @@ let activeConvId = null;
 let historySearchQuery = '';
 
 function getWelcomeMessageHtml() {
-  return `<p>Hi! I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about academic syllabus, timetables, examinations, campus navigation, or any of our <strong>18 Official Student Clubs</strong> (ISTE, E-Cell, SDC, Cultural, NSS, and more) — or pick a topic below to start.</p>`;
+  return `<p>Hi! I'm the <strong class="bot-name-highlight">KITCOEK AI Assistant</strong>. Ask me about academic syllabus, timetables, examinations, campus navigation, or any of our <strong>25 Official Student Clubs &amp; Departmental Associations</strong> (ISTE, E-Cell, MESA, CESA, ACSES, CABSSA, Cultural, NSS, and more) — or pick a topic below to start.</p>`;
 }
 
 function loadStoredConversations() {
@@ -1061,6 +1061,8 @@ async function loadClubsDataIfNeeded() {
     ]);
     if (!clubsRes.ok) throw new Error('Failed to load clubs');
     allClubs = await clubsRes.json();
+    const tabBadge = document.querySelector('#tabClubsBtn .badge-count');
+    if (tabBadge) tabBadge.textContent = allClubs.length;
     if (catsRes.ok) {
       clubCategories = await catsRes.json();
     }
@@ -1083,6 +1085,8 @@ function renderCategories() {
   if (!categoryFilters) return;
   if (catCountAll) catCountAll.textContent = allClubs.length;
   if (totalClubsCount) totalClubsCount.textContent = `${allClubs.length} Official Clubs`;
+  const tabBadge = document.querySelector('#tabClubsBtn .badge-count');
+  if (tabBadge) tabBadge.textContent = allClubs.length;
 
   categoryFilters.innerHTML = `
     <button class="cat-pill ${currentCategory === 'All' ? 'active' : ''}" data-category="All">
@@ -1466,3 +1470,6 @@ document.addEventListener('click', (e) => {
     return;
   }
 });
+
+// Pre-load clubs data on startup to ensure live dynamic club count in sidebar tab
+loadClubsDataIfNeeded();
