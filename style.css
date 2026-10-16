@@ -1077,6 +1077,106 @@ body{
   flex-shrink: 0;
 }
 
+/* In-Chat Systematic Department Timetable Cards */
+.nav-box.nav-box-timetable {
+  background: var(--card-bg, #0D1530);
+  border: 1px solid rgba(129, 140, 248, 0.35);
+  border-left: 3.5px solid #818CF8;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+.timetable-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.timetable-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #A5B4FC;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.timetable-live-dot {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #34D399;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 1.5px 7px;
+  border-radius: 10px;
+}
+.timetable-dept-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+.timetable-dept-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(129, 140, 248, 0.2);
+  transition: all 0.2s ease;
+}
+.timetable-dept-card:hover {
+  background: rgba(30, 41, 59, 0.75);
+  border-color: rgba(129, 140, 248, 0.45);
+}
+.timetable-dept-card.active-match {
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(129, 140, 248, 0.55);
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.18);
+}
+.timetable-dept-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.timetable-dept-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.timetable-dept-icon {
+  font-size: 14px;
+}
+.timetable-dept-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F8FAFC;
+}
+.timetable-year-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  background: rgba(129, 140, 248, 0.2);
+  color: #C7D2FE;
+  border: 1px solid rgba(129, 140, 248, 0.35);
+}
+.timetable-dept-sub {
+  font-size: 11.5px !important;
+  color: #94A3B8 !important;
+  margin: 2px 0 0 0 !important;
+  line-height: 1.4 !important;
+}
+.timetable-dept-action {
+  flex-shrink: 0;
+}
+
 /* In-Chat Official Syllabus Cards */
 .nav-box.nav-box-syllabus {
   background: var(--card-bg, #0F172A);
@@ -1476,6 +1576,18 @@ textarea::placeholder{ color:var(--composer-placeholder, #9AA0AC); }
   .switch-view-btn {
     font-size: 12px;
     padding: 5px 8px;
+  }
+  .timetable-dept-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .timetable-dept-action {
+    width: 100%;
+  }
+  .timetable-dept-action .map-link-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 
@@ -2838,6 +2950,23 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
 #chatSection.chat-theme-space .nav-box.nav-box-timetable strong {
   color: #A5B4FC;
 }
+#chatSection.chat-theme-space .timetable-dept-card {
+  background: #10193D;
+  border: 1px solid rgba(129, 140, 248, 0.22);
+}
+#chatSection.chat-theme-space .timetable-dept-card:hover {
+  background: #182252;
+  border-color: #818CF8;
+}
+#chatSection.chat-theme-space .timetable-dept-card.active-match {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: #818CF8;
+  box-shadow: 0 0 12px rgba(129, 140, 248, 0.25);
+}
+#chatSection.chat-theme-space .timetable-dept-name {
+  color: #F8FAFC;
+}
+
 
 #chatSection.chat-theme-space .nav-box.nav-box-notices {
   background: #08142C;
@@ -3138,9 +3267,42 @@ button:focus-visible, textarea:focus-visible, .chip:focus-visible, .history li:f
   background: #EEF2FF;
   border-left-color: #4F46E5;
   border-color: #C7D2FE;
+  box-shadow: 0 2px 10px rgba(79, 70, 229, 0.08);
 }
 #chatSection.chat-theme-white .nav-box.nav-box-timetable strong {
   color: #4338CA;
+}
+#chatSection.chat-theme-white .timetable-badge {
+  color: #4338CA;
+}
+#chatSection.chat-theme-white .timetable-live-dot {
+  color: #047857;
+  background: #D1FAE5;
+  border-color: #A7F3D0;
+}
+#chatSection.chat-theme-white .timetable-dept-card {
+  background: #FFFFFF;
+  border: 1px solid #E0E7FF;
+}
+#chatSection.chat-theme-white .timetable-dept-card:hover {
+  background: #F5F7FF;
+  border-color: #A5B4FC;
+}
+#chatSection.chat-theme-white .timetable-dept-card.active-match {
+  background: #EEF2FF;
+  border-color: #6366F1;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+}
+#chatSection.chat-theme-white .timetable-dept-name {
+  color: #1E1B4B;
+}
+#chatSection.chat-theme-white .timetable-year-pill {
+  background: #E0E7FF;
+  color: #4338CA;
+  border-color: #C7D2FE;
+}
+#chatSection.chat-theme-white .timetable-dept-sub {
+  color: #475569 !important;
 }
 
 #chatSection.chat-theme-white .nav-box.nav-box-notices {

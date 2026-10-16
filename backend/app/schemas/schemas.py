@@ -24,6 +24,7 @@ class ChatResponse(BaseModel):
     portal_url: Optional[str] = None
     notes_url: Optional[str] = None
     timetable_url: Optional[str] = None
+    timetable_details: Optional[dict] = None
     notices_details: Optional[List[dict]] = None
     notice_board_url: Optional[str] = None
     academic_calendars: Optional[List[dict]] = None

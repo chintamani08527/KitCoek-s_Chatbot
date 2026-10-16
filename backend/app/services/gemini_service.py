@@ -215,9 +215,11 @@ Core Directives:
        - SPS (Unit 3 Notes): <a href="https://drive.google.com/file/d/1DCB3nY6wc5BF3QJHxMDCOeZtsVIWsC2f/view" target="_blank">📄 SPS - Unit 3 Notes (PDF)</a>
        - Browse All Subject Notes in Drive: <a href="https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy" target="_blank">📁 View All Subject Notes in Drive</a>
    - For TIMETABLE queries:
-     * DIRECTLY provide the department timetable file link:
-       - CSBS Department Timetable (SY, TY, Final Year): <a href="https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view" target="_blank">📅 CSBS Timetable (SY, TY, Final Year)</a>
-       - Browse All Department Timetables in Drive: <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📁 View All Department Timetables in Drive</a>
+     * SYSTEMATIC DEPARTMENT TIMETABLES (Hosted on official Google Drive):
+       - BSH Department Timetable (Basic Sciences & Humanities / First Year F.Y. B.Tech): <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📅 BSH Timetable (First Year F.Y.)</a>
+       - AIML Department Timetable (Artificial Intelligence & Machine Learning - SY, TY, Final Year): <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📅 AIML Timetable (SY, TY, Final Year)</a>
+       - CSBS Department Timetable (Computer Science & Business Systems - SY, TY, Final Year): <a href="https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view" target="_blank">📅 CSBS Timetable (SY, TY, Final Year)</a>
+       - Browse All Institute Department Timetables in Drive: <a href="https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT" target="_blank">📁 View All Department Timetables in Drive</a>
 8. OFFICIAL NOTICE BOARD & ACADEMIC CALENDARS (https://www.kitcoek.in/notice):
    When the student asks about Mid Semester Examinations (MSE), exam timetables, ESE exams, academic calendars, re-examinations, hall tickets, paper seeing / grievances, or the latest campus announcements:
    - Cite the exact circular title, date, and link directly to the official notice PDF on the KITCOEK Notice Board whenever relevant.

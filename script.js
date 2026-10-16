@@ -701,6 +701,13 @@ async function sendMessage(text){
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
 
+    // If structured timetable card is present, clean repetitive bullet lists of drive links to prevent repeating twice
+    if (data.timetable_details) {
+      botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?drive\.google\.com[\s\S]*?<\/\1>/gi, '');
+      botHtml = botHtml.replace(/<p>[^<]*?(?:below are the direct|access the official timetable|verified links to download|download links:)[^<]*?<\/p>/gi, '');
+      botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
+    }
+
     if (data.club_details) {
       const c = data.club_details;
       const catClass = getCategoryClass(c.category);
@@ -812,12 +819,59 @@ async function sendMessage(text){
       `;
     }
 
-    if (data.timetable_url) {
+    if (data.timetable_details && Array.isArray(data.timetable_details.departments)) {
+      const tt = data.timetable_details;
+      const deptItemsHtml = tt.departments.map(d => {
+        const isMatched = !!d.is_matched;
+        const cardClass = isMatched ? 'timetable-dept-card active-match' : 'timetable-dept-card';
+        return `
+          <div class="${cardClass}">
+            <div class="timetable-dept-info">
+              <div class="timetable-dept-top">
+                <span class="timetable-dept-icon">${d.icon || '📅'}</span>
+                <span class="timetable-dept-name">${escapeHtml(d.name)}</span>
+                <span class="timetable-year-pill">${escapeHtml(d.badge || d.years)}</span>
+              </div>
+              <p class="timetable-dept-sub">${escapeHtml(d.description || d.years)}</p>
+            </div>
+            <div class="timetable-dept-action">
+              <a href="${d.url}" target="_blank" rel="noopener noreferrer" class="map-link-btn ${isMatched ? 'map-link-btn-primary' : 'map-link-btn-secondary'}">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                ${escapeHtml(d.code)} Timetable ↗
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-timetable">
+          <div class="timetable-card-header">
+            <div class="timetable-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              KITCOEK Systematic Department Timetables
+            </div>
+            <span class="timetable-live-dot">● Official Drive Repository</span>
+          </div>
+          <p class="nav-box-desc">
+            Direct access to official academic timetables, class schedules &amp; batch allocations:
+          </p>
+          <div class="timetable-dept-list">
+            ${deptItemsHtml}
+          </div>
+          <div class="nav-box-actions" style="margin-top: 10px;">
+            <a href="${tt.drive_folder_url || 'https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT'}" target="_blank" rel="noopener noreferrer" class="map-link-btn map-link-btn-secondary">
+              📁 Browse All Department Timetables in Drive ↗
+            </a>
+          </div>
+        </div>
+      `;
+    } else if (data.timetable_url) {
       botHtml += `
         <div class="nav-box nav-box-timetable">
           <p class="nav-box-title"><strong>KITCOEK Class &amp; Department Timetables:</strong></p>
           <p class="nav-box-desc">
-            Access class schedules for CSBS (SY, TY, Final Year) and other institute department timetables.
+            Access class schedules for BSH, AIML, CSBS and other institute department timetables.
           </p>
           <div class="nav-box-actions">
             <a href="${data.timetable_url}" target="_blank" class="map-link-btn map-link-btn-primary">

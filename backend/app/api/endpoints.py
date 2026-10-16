@@ -75,6 +75,43 @@ CSBS_SYLLABUS_DATA = {
     ]
 }
 
+TIMETABLES_DATA = {
+    "title": "KITCOEK Systematic Department Timetables",
+    "drive_folder_url": "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+    "departments": [
+        {
+            "id": "bsh",
+            "code": "BSH",
+            "name": "Basic Sciences & Humanities (BSH)",
+            "years": "First Year (F.Y. B.Tech)",
+            "url": "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+            "badge": "F.Y. B.Tech",
+            "icon": "🎓",
+            "description": "First Year engineering lecture & practical schedules across all divisions."
+        },
+        {
+            "id": "aiml",
+            "code": "AIML",
+            "name": "Artificial Intelligence & Machine Learning (AIML)",
+            "years": "S.Y., T.Y., & Final Year",
+            "url": "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+            "badge": "SY • TY • Final Year",
+            "icon": "🤖",
+            "description": "S.Y., T.Y., and Final Year class schedules, lecture timings & lab batches."
+        },
+        {
+            "id": "csbs",
+            "code": "CSBS",
+            "name": "Computer Science & Business Systems (CSBS)",
+            "years": "S.Y., T.Y., & Final Year",
+            "url": "https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view",
+            "badge": "SY • TY • Final Year",
+            "icon": "💼",
+            "description": "Verified semester schedule & classroom lecture allocations for CSBS."
+        }
+    ]
+}
+
 def format_club_dict(club: StudentClub) -> dict:
     d = {
         "id": club.id,
@@ -404,14 +441,46 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             notes_url = "https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy"
 
     timetable_url = None
+    timetable_details = None
     is_timetable_intent = any(kw in q_low for kw in [
-        "timetable", "time table", "schedule", "csbs timetable", "department timetable", "class timetable"
-    ])
+        "timetable", "time table", "time-table", "class schedule", "lecture schedule",
+        "class timing", "lecture timing", "bsh schedule", "aiml schedule", "csbs schedule",
+        "department timetable", "class timetable", "sy timetable", "ty timetable"
+    ]) or (
+        any(k in q_low for k in ["bsh", "aiml", "csbs"]) and any(w in q_low for w in ["timing", "schedule", "classes", "lecture", "slot", "slots"])
+    )
     if is_timetable_intent:
-        if "csbs" in q_low:
+        category = "academic" if category not in ["navigation", "clubs"] else category
+        
+        is_bsh = any(k in q_low for k in ["bsh", "basic science", "humanities", "first year", "fy", "f.y", "f.e", "fe"])
+        is_aiml = any(k in q_low for k in ["aiml", "ai ml", "ai & ml", "ai and ml", "artificial intelligence", "machine learning"])
+        is_csbs = any(k in q_low for k in ["csbs", "computer science and business", "business systems"])
+        
+        matched_dept_id = "all"
+        if is_bsh and not is_aiml and not is_csbs:
+            matched_dept_id = "bsh"
+            timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
+        elif is_aiml and not is_bsh and not is_csbs:
+            matched_dept_id = "aiml"
+            timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
+        elif is_csbs and not is_bsh and not is_aiml:
+            matched_dept_id = "csbs"
             timetable_url = "https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view"
         else:
             timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
+
+        timetable_details = {
+            "requested_dept": matched_dept_id,
+            "title": TIMETABLES_DATA["title"],
+            "drive_folder_url": TIMETABLES_DATA["drive_folder_url"],
+            "departments": [
+                {
+                    **d,
+                    "is_matched": (matched_dept_id == d["id"]) or (matched_dept_id == "all")
+                }
+                for d in TIMETABLES_DATA["departments"]
+            ]
+        }
 
     # 3.7 Official Notice Board & Academic Calendars detection (https://www.kitcoek.in/notice)
     matched_notices = None
@@ -508,6 +577,26 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         ]
         context_texts.insert(0, "\n".join(syllabus_ctx))
 
+    # Prepend official Systematic Department Timetable context if matched
+    if timetable_details:
+        tt_ctx = [
+            "OFFICIAL KITCOEK DEPARTMENT TIMETABLE DIRECTORY (Systematic Google Drive Repository):",
+            "The institute maintains systematic class timetables for all departments hosted on the official Google Drive repository.",
+            "1. BSH Department (Basic Sciences & Humanities / First Year F.Y. B.Tech):",
+            "   - Target Academic Year: First Year (F.Y. B.Tech) - All Divisions & Practical Batches.",
+            "   - Google Drive Folder Link: https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+            "2. AIML Department (Artificial Intelligence & Machine Learning):",
+            "   - Target Academic Years: Second Year (S.Y.), Third Year (T.Y.), and Final Year B.Tech.",
+            "   - Google Drive Folder Link: https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+            "3. CSBS Department (Computer Science & Business Systems):",
+            "   - Target Academic Years: Second Year (S.Y.), Third Year (T.Y.), and Final Year B.Tech.",
+            "   - Direct Timetable File Link: https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view",
+            "4. Master All Departments Timetable Folder:",
+            "   - Google Drive Folder: https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
+            "DIRECTIVE: Give a polite, clear response confirming timetable availability for the requested department (BSH for F.Y. / AIML for SY, TY, Final Year / CSBS). Provide a clear explanation of what is included. DO NOT list repetitive bullet points of Google Drive links in your text, because an interactive 1-click timetable card is automatically appended below your answer."
+        ]
+        context_texts.insert(0, "\n".join(tt_ctx))
+
     # Prepend official Meraki context if matched
     if meraki_reels:
         reels_ctx = [
@@ -581,6 +670,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         portal_url=portal_url,
         notes_url=notes_url,
         timetable_url=timetable_url,
+        timetable_details=timetable_details,
         notices_details=matched_notices,
         notice_board_url=notice_board_url,
         academic_calendars=matched_cals,
