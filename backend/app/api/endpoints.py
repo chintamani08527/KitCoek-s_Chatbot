@@ -515,6 +515,64 @@ def format_club_dict(club: StudentClub) -> dict:
         d["meraki_reels"] = MERAKI_REELS
     return d
 
+OFFICIAL_CUTOFF_DATA = {
+    "title": "KITCoEK Official Admission & Cutoff Directory",
+    "portal_url": "https://www.kitcoek.in/admission-undergraduate",
+    "apply_url": "https://www.kitcoek.in/apply-admission",
+    "academic_year": "2025–26 & 2026–27",
+    "dte_code": "6267",
+    "items": [
+        {
+            "title": "F.Y. B.Tech General Cutoff Sheet",
+            "category": "First Year (FE)",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg",
+            "type": "General Cutoff Sheet"
+        },
+        {
+            "title": "F.Y. B.Tech Ladies Cutoff Sheet",
+            "category": "First Year (FE)",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg",
+            "type": "Ladies Cutoff Sheet"
+        },
+        {
+            "title": "Direct Second Year (DSY) General Cutoff PDF",
+            "category": "Direct Second Year (DSE)",
+            "url": "https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf",
+            "type": "Official PDF"
+        },
+        {
+            "title": "Direct Second Year (DSY) Ladies Cutoff PDF",
+            "category": "Direct Second Year (DSE)",
+            "url": "https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf",
+            "type": "Official PDF"
+        },
+        {
+            "title": "KIT Choice Codes (DTE Code 6267)",
+            "category": "CAP Process",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/Choice%20code.jpeg",
+            "type": "Choice Code Chart"
+        },
+        {
+            "title": "List of Required Documents (FY)",
+            "category": "Documents",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg",
+            "type": "Document Checklist"
+        },
+        {
+            "title": "List of Required Documents (DSY)",
+            "category": "Documents",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/DSY_List_of_Required_Documents.jpeg",
+            "type": "Document Checklist"
+        },
+        {
+            "title": "KIT Merit Scholarship Details",
+            "category": "Scholarships",
+            "url": "https://www.kitcoek.in/documents/admission/2025_26/KIT%20Merit%20Scholarship.jpeg",
+            "type": "Scholarship Details"
+        }
+    ]
+}
+
 # In-memory response cache for frequent / repeated student questions
 _chat_cache = {}
 
@@ -564,7 +622,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     is_doc_or_academic_query = any(k in q_low for k in [
         "timetable", "time table", "schedule", "syllabus", "curriculum", "unit",
         "notes", "handwritten", "result", "results", "marks", "grade", "grades",
-        "portal", "lms", "vmedulife", "admission", "scholarship", "fee", "fees"
+        "portal", "lms", "vmedulife", "admission", "scholarship", "fee", "fees",
+        "cutoff", "cut off", "cut-off", "cutoffs", "cut offs", "merit list"
     ])
 
     classroom_codes = [
@@ -988,9 +1047,56 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
 
         category = "academic" if category not in ["navigation", "clubs"] else category
 
+    # 3.10 Official Cutoffs & Admission Portal detection (https://www.kitcoek.in/admission-undergraduate)
+    cutoff_details = None
+    is_cutoff_intent = any(kw in q_low for kw in [
+        "cut off", "cutoff", "cut-off", "cutoffs", "cut offs", "cut-offs",
+        "merit list", "merit lists", "cap round", "cap cutoff", "cet cutoff", "jee cutoff",
+        "dse cutoff", "dsy cutoff", "fe cutoff", "first year cutoff",
+        "what is the cutoff", "give me cut off", "give me cutoff", "cutoff list", "cut off list",
+        "branch cutoff", "closing rank", "closing marks", "percentile required"
+    ]) or (
+        ("cut" in q_low and "off" in q_low) and any(w in q_low for w in ["list", "rank", "mark", "marks", "percentile", "score", "give", "show", "what", "how", "details"])
+    )
+
+    if is_cutoff_intent:
+        cutoff_details = OFFICIAL_CUTOFF_DATA
+        category = "academic" if category not in ["navigation", "clubs"] else category
+
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
+
+    # Prepend official Cutoff & Admission context if matched
+    if cutoff_details:
+        cutoff_ctx = [
+            "OFFICIAL KITCOEK ADMISSION & CUTOFF DIRECTORY (Source: https://www.kitcoek.in/admission-undergraduate):",
+            "Institute Name: Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur.",
+            "DTE Choice Code: 6267.",
+            "1. First Year B.Tech (F.Y. B.Tech / FE) Cutoffs:",
+            "   - General Seat Type Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg",
+            "   - Ladies Seat Type Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg",
+            "   - Indicative Branch Percentiles: CSE (93–94%+), CSE AIML (90–92%+), CSBS (88–90%+), ETC (85–88%+), Electrical & Mechanical (75–85%+), Civil & Biotech (70–80%+).",
+            "2. Direct Second Year (D.S.Y. / DSE) Diploma Cutoffs (AY 2025–26 Official Record):",
+            "   - Computer Science & Engineering (CSE): 93.65% (Top Merit No. 795)",
+            "   - CSE (AI & ML): 92.88% (Merit No. 1200)",
+            "   - CS & Business Systems (CSBS): 92.06% (Merit No. 1715)",
+            "   - Electrical Engineering: 93.11% (Merit No. 1063)",
+            "   - Civil Engineering: 92.84% (Merit No. 1227)",
+            "   - Mechanical Engineering: 92.46% (Merit No. 1458)",
+            "   - Electronics & Telecommunication (ETC): 92.47% (Merit No. 1438)",
+            "   - Biotechnology: 75.66%",
+            "   - DSY General Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf",
+            "   - DSY Ladies Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf",
+            "3. Official Portals & Contact:",
+            "   - Undergraduate Admission Portal: https://www.kitcoek.in/admission-undergraduate",
+            "   - Online Admission Application / Inquiry: https://www.kitcoek.in/apply-admission",
+            "   - Choice Codes: https://www.kitcoek.in/documents/admission/2025_26/Choice%20code.jpeg",
+            "   - Required Documents List: https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg",
+            "   - Admission Cell Email: admissions@kitcoek.in | Phone: +91-7769001199",
+            "DIRECTIVE: Provide a thorough, well-formatted response with the official cutoff details for both First Year and Direct Second Year B.Tech, include direct links to the official sheets and PDFs hosted on kitcoek.in, mention DTE Choice Code 6267, and link to the official admission portal (https://www.kitcoek.in/admission-undergraduate)."
+        ]
+        context_texts.insert(0, "\n".join(cutoff_ctx))
 
     # Prepend official syllabus context if matched
     if matched_syllabus:
@@ -1120,7 +1226,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         vmedulife_guide=vmedulife_guide,
         meraki_reels=meraki_reels,
         csbs_syllabus=matched_syllabus,
-        syllabus_details=matched_syllabus
+        syllabus_details=matched_syllabus,
+        cutoff_details=cutoff_details
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()

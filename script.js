@@ -1125,6 +1125,54 @@ async function sendMessage(text){
       `;
     }
 
+    if (data.cutoff_details && Array.isArray(data.cutoff_details.items)) {
+      const co = data.cutoff_details;
+      const itemsHtml = co.items.map(item => `
+        <div class="syllabus-item">
+          <div class="syllabus-item-main">
+            <div class="syllabus-item-header">
+              <span class="syllabus-year-title">${escapeHtml(item.title)}</span>
+              <span class="syllabus-tag-badge">${escapeHtml(item.category)}</span>
+            </div>
+          </div>
+          <div class="syllabus-item-actions">
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="syllabus-download-btn" title="Open ${escapeHtml(item.title)}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              ${escapeHtml(item.type || 'Open File ↗')}
+            </a>
+          </div>
+        </div>
+      `).join('');
+
+      botHtml += `
+        <div class="nav-box nav-box-syllabus">
+          <div class="syllabus-card-header">
+            <div class="syllabus-badge">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+              ${escapeHtml(co.title || 'KITCoEK Official Cutoffs & Admission Portal')}
+            </div>
+            <span class="syllabus-live-dot">● DTE Code: ${escapeHtml(co.dte_code || '6267')}</span>
+          </div>
+          <p class="nav-box-desc" style="margin-bottom:10px;">
+            Official First Year (FE) and Direct Second Year (DSY) cutoff sheets &amp; admission resources from the college portal:
+          </p>
+          <div class="syllabus-items-container">
+            ${itemsHtml}
+          </div>
+          <div class="nav-box-actions" style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+            <a href="${co.portal_url || 'https://www.kitcoek.in/admission-undergraduate'}" target="_blank" rel="noopener noreferrer" class="map-link-btn map-link-btn-notice">
+              🌐 Official Admission Portal (kitcoek.in) ↗
+            </a>
+            ${co.apply_url ? `
+              <a href="${co.apply_url}" target="_blank" rel="noopener noreferrer" class="map-link-btn map-link-btn-primary">
+                ✍️ Apply / Admission Enquiry ↗
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
     currentConv.messages.push({
       role: 'bot',
       html: botHtml,

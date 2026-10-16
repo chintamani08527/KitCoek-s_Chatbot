@@ -84,11 +84,23 @@ class GeminiService:
         if any(w in q_lower for w in club_keywords) and not is_academic_doc_query:
             return {"category": "clubs", "is_relevant": True}
 
+        # Cutoff, Admission & Merit List detection
+        is_cutoff_query = any(k in q_lower for k in [
+            "cut off", "cutoff", "cut-off", "cutoffs", "cut offs", "cut-offs",
+            "merit list", "merit lists", "cap round", "cap cutoff", "cet cutoff", "jee cutoff",
+            "fe cutoff", "dse cutoff", "dsy cutoff", "seat matrix", "choice code", "choice codes"
+        ]) or (
+            ("cut" in q_lower and "off" in q_lower) and any(w in q_lower for w in ["list", "rank", "mark", "marks", "percentile", "score", "give", "show", "what", "how", "details"])
+        )
+        if is_cutoff_query:
+            return {"category": "academic", "is_relevant": True}
+
         college_keywords = [
             "kit", "kitcoek", "kitcoe", "kolhapur", "gokul shirgaon", "college", "campus", "institute", "engineering",
             "cse", "csbs", "aiml", "data science", "aids", "etc", "entc", "telecommunication", "mechanical", "electrical", "civil", "environmental", "biotech", "biotechnology", "bsh", "mtech", "btech", "m.tech", "b.tech", "mba", "imer",
             "syllabus", "curriculum", "subject", "subjects", "semester", "sem", "nep", "nep-2020", "nep2020", "autonomy", "autonomous", "scheme",
-            "unit", "notes", "handwritten", "pyq", "question paper", "question papers", "passing", "grade", "grades", "credits", "result", "results", "marks", "marksheet", "mark sheet", "prn", "admission", "admissions", "cutoff", "cutoffs", "cap round", "mht cet", "jee", "fee", "fees",
+            "unit", "notes", "handwritten", "pyq", "question paper", "question papers", "passing", "grade", "grades", "credits", "result", "results", "marks", "marksheet", "mark sheet", "prn",
+            "admission", "admissions", "cutoff", "cutoffs", "cut off", "cut-off", "cut offs", "cut-offs", "merit list", "merit lists", "seat matrix", "choice code", "choice codes", "cap round", "cap 1", "cap 2", "cap 3", "acap", "dse", "dsy", "direct second year", "first year cutoff", "fe cutoff", "lateral entry", "cet cell", "dte code", "6267", "mht cet", "jee", "fee", "fees",
             "scholarship", "ebc", "freeship", "mahadbt", "hostel", "mess", "canteen", "library", "reading room", "workshop", "auditorium", "seminar hall",
             "faculty", "teacher", "teachers", "professor", "professors", "prof", "hod", "principal", "director", "department", "departments",
             "attendance", "attendence", "attandance", "placement", "placements", "package", "packages", "highest package", "average package", "lpa", "tpo", "internship", "internships", "rules", "regulations", "ordinance",
@@ -154,7 +166,7 @@ class GeminiService:
         system_instruction = """You are the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
 1. STRICT SCOPE & OUT-OF-CONTEXT ENFORCEMENT:
    You are exclusively the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
-   - ONLY answer questions directly pertaining to KITCOEK campus, engineering academics (syllabus, NEP-2020, subjects, exams, marks, results), campus facilities & room navigation, student clubs, timetables, and the VMedulife portal.
+   - ONLY answer questions directly pertaining to KITCOEK campus, engineering academics (syllabus, NEP-2020, subjects, exams, marks, results), college admissions & cutoffs (CAP rounds, MHT-CET/JEE percentile cutoffs, DSE diploma percentage cutoffs, choice codes, DTE code 6267), campus facilities & room navigation, student clubs, timetables, and the VMedulife portal.
    - If the user asks ANY question outside the college context (e.g., celebrities, actors like Salman Khan, Bollywood/Hollywood movies, politics, national/world leaders, general cricket/sports outside college, cooking recipes, general jokes, non-college stories, general homework/coding unrelated to college courses):
      YOU MUST DECLINE AND RESPOND WITH:
      "<p>⚠️ <strong>Out of Context Query:</strong> I am the dedicated <strong>KITCOEK AI Assistant</strong>, designed exclusively to answer questions about <strong>KITCoEK Kolhapur</strong> campus, admissions, engineering syllabus, timetables, examinations, VMedulife portal, and official Student Clubs.</p><p>Your question appears to be outside the scope of college-related topics. Please ask a question related to KITCOEK!</p>"
@@ -527,6 +539,52 @@ Student Query: {query}
                     "What engineering branches are offered?",
                     "CSBS NEP-2020 syllabus",
                     "Where is the Library?"
+                ]
+            }
+
+        # 6.0 Admissions & Cutoffs
+        is_cutoff_req = any(kw in q_low for kw in [
+            "cutoff", "cut off", "cut-off", "cutoffs", "cut offs", "cut-offs",
+            "merit list", "cap round", "cap cutoff", "cet cutoff", "jee cutoff",
+            "dse cutoff", "dsy cutoff", "fe cutoff", "choice code"
+        ]) or (
+            ("cut" in q_low and "off" in q_low) and any(w in q_low for w in ["list", "rank", "mark", "marks", "percentile", "score", "give", "show", "what", "how", "details"])
+        )
+        if is_cutoff_req:
+            return {
+                "answer": (
+                    "<p><strong>KITCOEK Official Admission &amp; Cutoff Lists (DTE Code: 6267):</strong></p>"
+                    "<p>Admissions to <strong>KIT's College of Engineering (Autonomous), Kolhapur</strong> are conducted through the Maharashtra State CET Cell Centralized Admission Process (CAP Rounds) and Autonomous Institute Level seats based on MHT-CET, JEE Main, and Diploma percentages.</p>"
+                    "<p><strong>1. First Year B.Tech (F.Y. B.Tech / FE) Cutoffs:</strong></p>"
+                    "<ul>"
+                    "<li><strong>General Seat Type Cutoffs:</strong> <a href='https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 View FY General Cutoff Sheet ↗</a></li>"
+                    "<li><strong>Ladies Seat Type Cutoffs:</strong> <a href='https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 View FY Ladies Cutoff Sheet ↗</a></li>"
+                    "<li><strong>Indicative Percentiles:</strong> CSE (93–94%+), CSE AIML (90–92%+), CSBS (88–90%+), ETC (85–88%+), Electrical &amp; Mechanical (75–85%+), Civil &amp; Biotech (70–80%+).</li>"
+                    "</ul>"
+                    "<p><strong>2. Direct Second Year (D.S.Y. / DSE) Diploma Cutoffs (AY 2025–26 Official Record):</strong></p>"
+                    "<ul>"
+                    "<li><strong>Computer Science &amp; Engineering (CSE):</strong> 93.65% (Top Merit No. 795)</li>"
+                    "<li><strong>CSE (AI &amp; ML):</strong> 92.88% (Merit No. 1200)</li>"
+                    "<li><strong>CS &amp; Business Systems (CSBS):</strong> 92.06% (Merit No. 1715)</li>"
+                    "<li><strong>Electrical Engineering:</strong> 93.11% (Merit No. 1063)</li>"
+                    "<li><strong>Civil Engineering:</strong> 92.84% (Merit No. 1227)</li>"
+                    "<li><strong>Mechanical Engineering:</strong> 92.46% (Merit No. 1458)</li>"
+                    "<li><strong>Electronics &amp; Telecommunication (ETC):</strong> 92.47% (Merit No. 1438)</li>"
+                    "<li><strong>Biotechnology:</strong> 75.66%</li>"
+                    "<li><strong>Official PDF:</strong> <a href='https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Download DSY General Cutoff PDF ↗</a> | <a href='https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Download DSY Ladies Cutoff PDF ↗</a></li>"
+                    "</ul>"
+                    "<p><strong>Official Admission Portals &amp; Helpline:</strong></p>"
+                    "<ul>"
+                    "<li><strong>Undergraduate Admission Portal:</strong> <a href='https://www.kitcoek.in/admission-undergraduate' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/admission-undergraduate ↗</a></li>"
+                    "<li><strong>Online Admission Application:</strong> <a href='https://www.kitcoek.in/apply-admission' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/apply-admission ↗</a></li>"
+                    "<li><strong>Admission Cell Contact:</strong> <a href='mailto:admissions@kitcoek.in'>admissions@kitcoek.in</a> | Phone: <strong>+91-7769001199</strong></li>"
+                    "</ul>"
+                ),
+                "follow_up_questions": [
+                    "What documents are required for admission?",
+                    "What are the KIT choice codes?",
+                    "What is the fee structure for First Year?",
+                    "CSBS NEP-2020 syllabus"
                 ]
             }
 
