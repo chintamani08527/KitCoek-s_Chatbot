@@ -233,6 +233,225 @@ CSBS_SYLLABUS_DATA = {
     ]
 }
 
+MECHANICAL_SYLLABUS_DATA = {
+    "department": "Department of Mechanical Engineering",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Mech%20Structure.pdf",
+    "years": [
+        {
+            "year": "S.Y. B.Tech Mechanical Structure",
+            "tag": "NEP Structure",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Mech%20Structure.pdf",
+            "description": "Thermodynamics, Fluid Mechanics, Material Science & Metallurgy, Manufacturing Processes, Kinematics of Machines."
+        },
+        {
+            "year": "T.Y. B.Tech Mechanical Structure (NEP-2020)",
+            "tag": "NEP-2020 T.Y.",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MECH_DEPT_TY%20B%20Tech%20_STRUCTURE%20as%20per%20NEP2020_compressed.pdf",
+            "description": "Heat Transfer, Machine Design, Turbo Machinery, Mechatronics, Operations Research."
+        },
+        {
+            "year": "Final Year B.Tech Mechanical Structure (NEP)",
+            "tag": "NEP Final Year",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20BTECH%20MECHANICAL%20STRUCTURE_WEF%20AY%202024-25_compressed.pdf",
+            "description": "Refrigeration & Air Conditioning, CAD/CAM/CAE, Automobile Engineering, Industrial Engineering, Capstone Project."
+        },
+        {
+            "year": "Final Year Mechanical Autonomous Structure",
+            "tag": "Cycle-2 Scheme",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/REVISED_Final%20Year%20BTECH%20Mechanical%20Autonomous%20Structure.pdf",
+            "description": "Complete 160-credit autonomous final year curriculum structure."
+        },
+        {
+            "year": "F.Y. B.Tech Core Branches (Mech/Civil/Biotech)",
+            "tag": "F.Y. NEP Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "Engineering Mechanics, Basic Mechanical Systems, Workshop Practices, Engineering Materials."
+        }
+    ]
+}
+
+ELECTRICAL_SYLLABUS_DATA = {
+    "department": "Department of Electrical Engineering",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://kitcoek.s3.amazonaws.com/syllabus/NEP%20STRUCTURE%20ELECTRICAL%20ENGG.pdf",
+    "years": [
+        {
+            "year": "NEP Electrical Engineering Complete Structure",
+            "tag": "NEP-2020 Structure",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/NEP%20STRUCTURE%20ELECTRICAL%20ENGG.pdf",
+            "description": "Complete semester-wise credit system, course codes, ISE/MSE/ESE evaluation schemes for Electrical Engineering."
+        },
+        {
+            "year": "B.Tech Honors: Electric Vehicles (EV) Syllabus",
+            "tag": "Honors: Electric Vehicles",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/UELHN0351and%20UELHN451_Final%20After%20Bos%20meeting_19-5-2024.pdf",
+            "description": "EV Powertrain Design, Battery Management Systems (BMS), Electric Drives & Control."
+        },
+        {
+            "year": "B.Tech Honors: Electric Vehicles (EV) Structure",
+            "tag": "Honors EV Structure",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/B.Tech%20Honors%20Electric%20Vehicles-Structure-Under%20NEP%202020.pdf",
+            "description": "Complete 20-credit B.Tech Honors curriculum structure in Electric Vehicles under NEP-2020."
+        },
+        {
+            "year": "S.Y. to Final Year Electrical Cycle-2 Structure",
+            "tag": "Cycle-2 Autonomy",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Revised_Structure_S.Y%20to%20Final%20Year%20B.Tech-Electrical%20Engineering%20w.e.f%202022-23.pdf",
+            "description": "Electrical Machines, Power Systems, Control Systems, Power Electronics, Renewable Energy Systems."
+        },
+        {
+            "year": "Final Year B.Tech Electrical Syllabus",
+            "tag": "Final Year Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/%28Final%20B.%20Tech-Syllabus%29%28%20Cycle-2%29-Electrical%20Engineering_compressed.pdf",
+            "description": "High Voltage Engineering, Smart Grid, Switchgear & Protection, Electrical Drives, Capstone Project."
+        },
+        {
+            "year": "Electrical NEP Exit Course Syllabus (SY)",
+            "tag": "NEP Exit Certification",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/Electrical%20Engineering_NEP_Exit%20Course%20SY_compressed_compressed%20%282%29%20%281%29.pdf",
+            "description": "NEP-2020 Diploma / Certificate in Electrical Engineering exit course curriculum."
+        }
+    ]
+}
+
+CIVIL_SYLLABUS_DATA = {
+    "department": "Department of Civil & Environmental Engineering",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://kitcoek.s3.amazonaws.com/syllabus/13.05.2026_B.Tech.%20Civil%20Engineering-Structure%20%28NEP2020%29after%20BoS.pdf",
+    "years": [
+        {
+            "year": "Civil Engineering NEP-2020 Complete Structure",
+            "tag": "NEP-2020 Structure",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/13.05.2026_B.Tech.%20Civil%20Engineering-Structure%20%28NEP2020%29after%20BoS.pdf",
+            "description": "Complete autonomous structure approved after Board of Studies (BoS)."
+        },
+        {
+            "year": "Second Year (S.Y. B.Tech Civil) Syllabus",
+            "tag": "S.Y. NEP Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_S.Y.B.Tech%20Civil%20Engineering%20Syllabus%20%28NEP2020%29.pdf",
+            "description": "Surveying, Strength of Materials, Fluid Mechanics, Building Construction & Planning, Concrete Technology."
+        },
+        {
+            "year": "Third Year (T.Y. B.Tech Civil) Syllabus",
+            "tag": "T.Y. NEP Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_T.Y.B.Tech%20Syllabus%20%28NEP2020%29%20%281%29.pdf",
+            "description": "Structural Analysis, Geotechnical Engineering, Environmental Engineering, Transportation Engineering, Design of Steel Structures."
+        },
+        {
+            "year": "Final Year B.Tech Civil Engineering Syllabus",
+            "tag": "Final Year NEP",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/30.07.2026_Final%20Year%20B.Tech%20Civil%20Engineering_Syllabus%20%28NEP2020%29%20after%20BoS.pdf",
+            "description": "Design of Concrete Structures, Water Resources Engineering, Construction Management, Quantity Surveying & Valuation, Capstone Project."
+        },
+        {
+            "year": "Civil Honors (Strategic Civil Infrastructure)",
+            "tag": "Honors Specialization",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/HONORS%20%28STRATEGIC%20CIVIL%20INFRASTRUCTURE%29_Syllabus%20%28NEP2020%29.pdf",
+            "description": "Strategic Infrastructure Planning, Smart Cities, Advanced Highway Technology."
+        },
+        {
+            "year": "Civil Emerging Minor (Lean Technology)",
+            "tag": "Emerging Minor",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/EMERGING%20SPECIALIZATION%20MINOR%20%28LEAN%20TECHNOLOGY%29_Syllabus%20%28NEP2020%29.pdf",
+            "description": "Lean Construction Management, BIM, Green Building Technology."
+        }
+    ]
+}
+
+ETC_SYLLABUS_DATA = {
+    "department": "Department of Electronics & Telecommunication Engineering (ETC / ENTC)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL-NEP-STructure.pdf",
+    "years": [
+        {
+            "year": "ETC NEP-2020 Complete Structure",
+            "tag": "NEP-2020 Structure",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL-NEP-STructure.pdf",
+            "description": "Complete credit system, evaluation scheme, and course matrix for ETC."
+        },
+        {
+            "year": "Second Year (S.Y. B.Tech ETC) Syllabus",
+            "tag": "S.Y. NEP Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20STructure%2B%20SY%20Syllabus_compressed.pdf",
+            "description": "Electronic Devices & Circuits, Signals & Systems, Digital Logic Design, Network Theory, Analog Circuits."
+        },
+        {
+            "year": "Third Year (T.Y. B.Tech ETC) Syllabus",
+            "tag": "T.Y. NEP Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%2BThird%20Year_compressed.pdf",
+            "description": "Microcontrollers & Embedded Systems, Digital Signal Processing (DSP), Electromagnetic Waves, Analog & Digital Communication."
+        },
+        {
+            "year": "Final Year B.Tech ETC Syllabus",
+            "tag": "Final Year NEP",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20structure%2BFinal%20Year%20Syllabus_compressed.pdf",
+            "description": "VLSI Design, Microwave & Antenna Theory, Optical Fiber Communication, Wireless Cellular Networks, Capstone Project."
+        },
+        {
+            "year": "B.Tech Honors in Internet of Things (IoT)",
+            "tag": "Honors: IoT Specialization",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/structure%20and%20syllabus%20of%20Btech%20%28Hons%29.%20of%20ETC%20DEPT.pdf",
+            "description": "Complete IoT Architecture, Sensor Interfacing, Embedded Linux, Cloud Computing for IoT."
+        },
+        {
+            "year": "Circuit Branches First Year Structure",
+            "tag": "F.Y. Circuit Branches",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/FY%20B%20Tech%20Circuit%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "First Year curriculum for CSE, AIML, DS, ETC, Electrical branches."
+        }
+    ]
+}
+
+GENERAL_SYLLABUS_DATA = {
+    "department": "KITCOEK Online Syllabus Directory (All Departments)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://www.kitcoek.in/online-syllabus",
+    "years": [
+        {
+            "year": "First Year Circuit Branches (CSE, AIML, DS, ETC, EE)",
+            "tag": "Circuit FY",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/FY%20B%20Tech%20Circuit%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "F.Y. B.Tech NEP-2020 structure for circuit engineering programs."
+        },
+        {
+            "year": "First Year Core Branches (Mech, Civil, Biotech)",
+            "tag": "Core FY",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "F.Y. B.Tech NEP-2020 structure for core engineering programs."
+        },
+        {
+            "year": "Mechanical Engineering S.Y. Structure",
+            "tag": "Mechanical",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Mech%20Structure.pdf",
+            "description": "Official Mechanical Engineering autonomous curriculum structure."
+        },
+        {
+            "year": "Electrical Engineering NEP Complete Structure",
+            "tag": "Electrical",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/NEP%20STRUCTURE%20ELECTRICAL%20ENGG.pdf",
+            "description": "Official Electrical Engineering NEP-2020 curriculum structure."
+        },
+        {
+            "year": "Civil Engineering NEP Complete Structure",
+            "tag": "Civil",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/13.05.2026_B.Tech.%20Civil%20Engineering-Structure%20%28NEP2020%29after%20BoS.pdf",
+            "description": "Official Civil Engineering NEP-2020 curriculum structure."
+        },
+        {
+            "year": "ETC Engineering NEP Complete Structure",
+            "tag": "ETC / ENTC",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL-NEP-STructure.pdf",
+            "description": "Official Electronics & Telecommunication Engineering structure."
+        }
+    ]
+}
+
 TIMETABLES_DATA = {
     "title": "KITCOEK Systematic Department Timetables",
     "drive_folder_url": "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
@@ -714,15 +933,23 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             matched_syllabus = AIML_SYLLABUS_DATA
         elif any(w in q_low for w in ["ds", "data science", "aids"]):
             matched_syllabus = DS_SYLLABUS_DATA
+        elif any(w in q_low for w in ["mechanical", "mech", "mccr"]):
+            matched_syllabus = MECHANICAL_SYLLABUS_DATA
+        elif any(w in q_low for w in ["electrical", "elect", "ele", "eecr"]):
+            matched_syllabus = ELECTRICAL_SYLLABUS_DATA
+        elif any(w in q_low for w in ["civil", "environmental", "cvcr"]):
+            matched_syllabus = CIVIL_SYLLABUS_DATA
+        elif any(w in q_low for w in ["etc", "entc", "electronics & telecomm", "electronics and telecomm", "telecom", "etcr"]):
+            matched_syllabus = ETC_SYLLABUS_DATA
+        elif any(w in q_low for w in ["biotech", "biotechnology", "btcr"]):
+            matched_syllabus = BIOTECH_SYLLABUS_DATA
         elif any(w in q_low for w in ["fy", "first year", "f.y.", "bsh", "circuit branch", "core branch"]):
             matched_syllabus = FY_SYLLABUS_DATA
-        elif any(w in q_low for w in ["biotech", "biotechnology"]):
-            matched_syllabus = BIOTECH_SYLLABUS_DATA
-        elif any(w in q_low for w in ["cse", "computer science"]):
+        elif any(w in q_low for w in ["cse", "computer science", "cscr"]):
             matched_syllabus = CSE_SYLLABUS_DATA
         else:
             # Default for general syllabus query
-            matched_syllabus = CSE_SYLLABUS_DATA
+            matched_syllabus = GENERAL_SYLLABUS_DATA
 
         category = "academic" if category not in ["navigation", "clubs"] else category
 

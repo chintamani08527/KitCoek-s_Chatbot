@@ -21,3 +21,4 @@ backend/data/documents/uploads/
 *.zip
 
 .vercel
+scratch/

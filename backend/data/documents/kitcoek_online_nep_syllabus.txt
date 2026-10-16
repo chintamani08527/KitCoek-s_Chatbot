@@ -107,7 +107,76 @@ BIOTECHNOLOGY ENGINEERING:
 - T.Y. B.Tech Biotech Syllabus: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20BTech%20syllabus%20contents%202023-24.pdf
 - Autonomy Structure: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Autonomy%202nd%20Cycle%20Structure%20Biotech%20%20wef%202022-23.pdf
 
+DEPARTMENT OF MECHANICAL ENGINEERING:
+Source: Official College Online Syllabus Portal (https://www.kitcoek.in/online-syllabus)
+Curriculum Schemes: 2023 [NEP-2020] Scheme & Autonomy Cycle-2 Scheme
+1. S.Y. Mechanical Engineering Structure:
+   - Official Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Mech%20Structure.pdf
+   - Subjects: Engineering Thermodynamics, Fluid Mechanics, Strength of Materials, Material Science & Metallurgy, Manufacturing Processes.
+2. T.Y. B.Tech Mechanical Engineering Structure (NEP-2020):
+   - Official Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MECH_DEPT_TY%20B%20Tech%20_STRUCTURE%20as%20per%20NEP2020_compressed.pdf
+   - Subjects: Heat & Mass Transfer, Theory of Machines, Machine Design, Metrology & Quality Control, Turbo Machinery.
+3. Final Year B.Tech Mechanical Engineering (NEP-2020):
+   - Official Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20BTECH%20MECHANICAL%20STRUCTURE_WEF%20AY%202024-25_compressed.pdf
+   - Subjects: CAD/CAM/CAE, Industrial Automation, Finite Element Analysis (FEA), Operations Research, Capstone Project.
+4. Revised Final Year Mechanical Autonomous Structure (Cycle-2):
+   - Official Structure PDF: https://kitcoek.s3.amazonaws.com/syllabus/REVISED_Final%20Year%20BTECH%20Mechanical%20Autonomous%20Structure.pdf
+
+DEPARTMENT OF ELECTRICAL ENGINEERING:
+Source: Official College Online Syllabus Portal (https://www.kitcoek.in/online-syllabus)
+Curriculum Schemes: 2023 [NEP-2020] Scheme & Autonomy Cycle-2 Scheme
+1. Electrical Engineering NEP Complete Structure:
+   - Official Structure PDF: https://kitcoek.s3.amazonaws.com/syllabus/NEP%20STRUCTURE%20ELECTRICAL%20ENGG.pdf
+2. B.Tech Honors in Electric Vehicles (EV):
+   - EV Honors Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/UELHN0351and%20UELHN451-Electric%20Vehicles_compressed.pdf
+   - EV Honors Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B.Tech%20Honors%20Electric%20Vehicles_structure.pdf
+3. Revised Structure S.Y. to Final Year B.Tech Electrical (Cycle-2):
+   - Official Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Revised_Structure_S.Y%20to%20Final%20Year%20B.Tech-Electrical%20Engineering%20w.e.f%202022-23.pdf
+   - Subjects: Electrical Machines, Power Systems, Control Systems, Power Electronics, Renewable Energy Systems.
+4. Final Year B.Tech Electrical Syllabus (Cycle-2):
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/%28Final%20B.%20Tech-Syllabus%29%28%20Cycle-2%29-Electrical%20Engineering_compressed.pdf
+   - Subjects: High Voltage Engineering, Smart Grid, Switchgear & Protection, Electrical Drives, Capstone Project.
+5. Electrical Engineering NEP Exit Course Syllabus (SY):
+   - Official PDF: https://kitcoek.s3.amazonaws.com/syllabus/Electrical%20Engineering_NEP_Exit%20Course%20SY_compressed_compressed%20%282%29%20%281%29.pdf
+
+DEPARTMENT OF CIVIL & ENVIRONMENTAL ENGINEERING:
+Source: Official College Online Syllabus Portal (https://www.kitcoek.in/online-syllabus)
+Curriculum Schemes: 2023 [NEP-2020] Scheme & Autonomy Scheme
+1. B.Tech Civil Engineering Structure (NEP-2020) after BoS:
+   - Official Structure PDF: https://kitcoek.s3.amazonaws.com/syllabus/13.05.2026_B.Tech.%20Civil%20Engineering-Structure%20%28NEP2020%29after%20BoS.pdf
+2. Second Year (S.Y. B.Tech Civil) Syllabus (NEP-2020):
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_S.Y.B.Tech%20Civil%20Engineering%20Syllabus%20%28NEP2020%29.pdf
+   - Subjects: Surveying, Strength of Materials, Fluid Mechanics, Building Construction & Planning, Concrete Technology.
+3. Third Year (T.Y. B.Tech Civil) Syllabus (NEP-2020):
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_T.Y.B.Tech%20Syllabus%20%28NEP2020%29%20%281%29.pdf
+   - Subjects: Structural Analysis, Geotechnical Engineering, Environmental Engineering, Transportation Engineering, Design of Steel Structures.
+4. Final Year B.Tech Civil Engineering Syllabus (NEP-2020) after BoS:
+   - Official Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/30.07.2026_Final%20Year%20B.Tech%20Civil%20Engineering_Syllabus%20%28NEP2020%29%20after%20BoS.pdf
+   - Subjects: Design of Concrete Structures, Water Resources Engineering, Construction Management, Quantity Surveying & Valuation, Capstone Project.
+5. Civil Honors in Strategic Civil Infrastructure:
+   - Official Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/HONORS%20%28STRATEGIC%20CIVIL%20INFRASTRUCTURE%29_Syllabus%20%28NEP2020%29.pdf
+6. Civil Emerging Specialization Minor in Lean Technology:
+   - Official Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/EMERGING%20SPECIALIZATION%20MINOR%20%28LEAN%20TECHNOLOGY%29_Syllabus%20%28NEP2020%29.pdf
+
+DEPARTMENT OF ELECTRONICS & TELECOMMUNICATION ENGINEERING (ETC / ENTC):
+Source: Official College Online Syllabus Portal (https://www.kitcoek.in/online-syllabus)
+Curriculum Schemes: 2023 [NEP-2020] Scheme & Autonomy Scheme
+1. ETC Complete NEP-2020 Structure:
+   - Official Structure PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL-NEP-STructure.pdf
+2. Second Year (S.Y. B.Tech ETC) Syllabus & Structure:
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20STructure%2B%20SY%20Syllabus_compressed.pdf
+   - Subjects: Electronic Devices & Circuits, Signals & Systems, Digital Logic Design, Network Theory, Analog Circuits.
+3. Third Year (T.Y. B.Tech ETC) Syllabus:
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%2BThird%20Year_compressed.pdf
+   - Subjects: Microcontrollers & Embedded Systems, Digital Signal Processing (DSP), Electromagnetic Waves, Analog & Digital Communication.
+4. Final Year B.Tech ETC Syllabus:
+   - Official Syllabus PDF: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20structure%2BFinal%20Year%20Syllabus_compressed.pdf
+   - Subjects: VLSI Design, Microwave & Antenna Theory, Optical Fiber Communication, Wireless Cellular Networks, Capstone Project.
+5. B.Tech Honors in Internet of Things (IoT) - ETC Department:
+   - Structure & Syllabus PDF: https://kitcoek.s3.amazonaws.com/syllabus/structure%20and%20syllabus%20of%20Btech%20%28Hons%29.%20of%20ETC%20DEPT.pdf
+
 EXAM CELL QUESTION PAPERS & NOTICES:
 - Old Question Papers Google Drive repository: https://drive.google.com/drive/folders/1o0k3KU6SWt7Ep2GitzmeAUm_0hGCEZsZ?usp=drive_link
 - Autonomous Exam Timetables and Notices portal: https://www.kitcoek.in/notice
 - vmedulife LMS portal login: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur
+

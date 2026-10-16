@@ -580,6 +580,88 @@ Student Query: {query}
                         "How to check attendance in vmedulife"
                     ]
                 }
+            elif any(w in q_low for w in ["mechanical", "mech", "mccr"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Mechanical Engineering — Official NEP-2020 &amp; Autonomous Syllabus:</strong></p>"
+                        "<p>Official curriculum documents for Mechanical Engineering sourced directly from <a href='https://www.kitcoek.in/online-syllabus' target='_blank' rel='noopener noreferrer'>kitcoek.in/online-syllabus ↗</a>:</p>"
+                        "<ul>"
+                        "<li><strong>Second Year (S.Y. B.Tech Mechanical):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Mech%20Structure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. Mechanical Structure PDF ↗</a><br><em>Key Subjects: Engineering Thermodynamics, Fluid Mechanics, Strength of Materials, Material Science &amp; Metallurgy, Manufacturing Processes.</em></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech Mechanical):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MECH_DEPT_TY%20B%20Tech%20_STRUCTURE%20as%20per%20NEP2020_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. Mechanical NEP Structure PDF ↗</a><br><em>Key Subjects: Heat &amp; Mass Transfer, Theory of Machines, Machine Design, Metrology &amp; Quality Control, Turbo Machinery.</em></li>"
+                        "<li><strong>Final Year B.Tech Mechanical (NEP-2020 Scheme):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20BTECH%20MECHANICAL%20STRUCTURE_WEF%20AY%202024-25_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year NEP Structure PDF ↗</a><br><em>Key Subjects: CAD/CAM/CAE, Industrial Automation, Finite Element Analysis (FEA), Operations Research, Capstone Project.</em></li>"
+                        "<li><strong>Final Year Autonomous Structure (Cycle-2):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/REVISED_Final%20Year%20BTECH%20Mechanical%20Autonomous%20Structure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Autonomous Final Year Structure PDF ↗</a></li>"
+                        "<li><strong>First Year Core Engineering Foundation:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Core Branches F.Y. Syllabus PDF ↗</a></li>"
+                        "</ul>"
+                        "<p>Direct 1-click download buttons are also available in the interactive syllabus card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Tell me about MESA club",
+                        "Where is Mechanical Workshop?",
+                        "Where is MCCR classroom?"
+                    ]
+                }
+            elif any(w in q_low for w in ["electrical", "elect", "ele", "eecr"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Electrical Engineering — Official NEP-2020 &amp; Autonomous Syllabus:</strong></p>"
+                        "<p>Official curriculum documents for Electrical Engineering sourced directly from <a href='https://www.kitcoek.in/online-syllabus' target='_blank' rel='noopener noreferrer'>kitcoek.in/online-syllabus ↗</a>:</p>"
+                        "<ul>"
+                        "<li><strong>Electrical NEP Complete Structure:</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/NEP%20STRUCTURE%20ELECTRICAL%20ENGG.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Electrical NEP Complete Structure PDF ↗</a></li>"
+                        "<li><strong>Honors in Electric Vehicles (EV):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/UELHN0351and%20UELHN451-Electric%20Vehicles_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Electric Vehicles Honors Syllabus PDF ↗</a></li>"
+                        "<li><strong>Electric Vehicles Honors Structure:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B.Tech%20Honors%20Electric%20Vehicles_structure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 EV Honors Structure PDF ↗</a></li>"
+                        "<li><strong>S.Y. to Final Year Cycle-2 Structure:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Revised_Structure_S.Y%20to%20Final%20Year%20B.Tech-Electrical%20Engineering%20w.e.f%202022-23.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. to Final Year Structure PDF ↗</a><br><em>Key Subjects: Electrical Machines, Power Systems, Control Systems, Power Electronics, Renewable Energy Systems.</em></li>"
+                        "<li><strong>Final Year B.Tech Electrical Syllabus:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/%28Final%20B.%20Tech-Syllabus%29%28%20Cycle-2%29-Electrical%20Engineering_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year Electrical Syllabus PDF ↗</a><br><em>Key Subjects: High Voltage Engineering, Smart Grid, Switchgear &amp; Protection, Electrical Drives, Capstone Project.</em></li>"
+                        "<li><strong>Electrical NEP Exit Course Syllabus (SY):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/Electrical%20Engineering_NEP%20Exit%20Course%20SY_compressed_compressed%20%282%29%20%281%29.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Electrical NEP Exit Course PDF ↗</a></li>"
+                        "</ul>"
+                        "<p>Direct download buttons are also available in the interactive syllabus card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Tell me about EESA club",
+                        "Where is Electrical Lab?",
+                        "Where is EECR classroom?"
+                    ]
+                }
+            elif any(w in q_low for w in ["civil", "environmental", "cvcr"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Civil &amp; Environmental Engineering — Official NEP-2020 Syllabus:</strong></p>"
+                        "<p>Official curriculum documents for Civil Engineering sourced directly from <a href='https://www.kitcoek.in/online-syllabus' target='_blank' rel='noopener noreferrer'>kitcoek.in/online-syllabus ↗</a>:</p>"
+                        "<ul>"
+                        "<li><strong>Civil Engineering NEP Complete Structure:</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/13.05.2026_B.Tech.%20Civil%20Engineering-Structure%20%28NEP2020%29after%20BoS.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Civil BoS Approved NEP Structure PDF ↗</a></li>"
+                        "<li><strong>Second Year (S.Y. B.Tech Civil):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_S.Y.B.Tech%20Civil%20Engineering%20Syllabus%20%28NEP2020%29.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. Civil Syllabus PDF ↗</a><br><em>Key Subjects: Surveying, Strength of Materials, Fluid Mechanics, Building Construction &amp; Planning, Concrete Technology.</em></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech Civil):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/16.04.2026_T.Y.B.Tech%20Syllabus%20%28NEP2020%29%20%281%29.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. Civil Syllabus PDF ↗</a><br><em>Key Subjects: Structural Analysis, Geotechnical Engineering, Environmental Engineering, Transportation Engineering, Design of Steel Structures.</em></li>"
+                        "<li><strong>Final Year B.Tech Civil Engineering:</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/30.07.2026_Final%20Year%20B.Tech%20Civil%20Engineering_Syllabus%20%28NEP2020%29%20after%20BoS.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year Civil Syllabus PDF ↗</a><br><em>Key Subjects: Design of Concrete Structures, Water Resources Engineering, Construction Management, Quantity Surveying &amp; Valuation, Capstone Project.</em></li>"
+                        "<li><strong>Civil Honors (Strategic Civil Infrastructure):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/HONORS%20%28STRATEGIC%20CIVIL%20INFRASTRUCTURE%29_Syllabus%20%28NEP2020%29.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Strategic Civil Infrastructure Honors PDF ↗</a></li>"
+                        "<li><strong>Civil Emerging Minor (Lean Technology):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/EMERGING%20SPECIALIZATION%20MINOR%20%28LEAN%20TECHNOLOGY%29_Syllabus%20%28NEP2020%29.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Lean Technology Minor PDF ↗</a></li>"
+                        "</ul>"
+                        "<p>Direct download buttons are also available in the interactive syllabus card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Tell me about CESA club",
+                        "Where is Environmental Lab?",
+                        "Where is CVCR classroom?"
+                    ]
+                }
+            elif any(w in q_low for w in ["etc", "entc", "telecom", "etcr", "electronics & telecomm", "electronics and telecomm"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Electronics &amp; Telecommunication Engineering (ETC / ENTC) — Official NEP-2020 Syllabus:</strong></p>"
+                        "<p>Official curriculum documents for ETC Engineering sourced directly from <a href='https://www.kitcoek.in/online-syllabus' target='_blank' rel='noopener noreferrer'>kitcoek.in/online-syllabus ↗</a>:</p>"
+                        "<ul>"
+                        "<li><strong>ETC NEP Complete Structure:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL-NEP-STructure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 ETC NEP Complete Structure PDF ↗</a></li>"
+                        "<li><strong>Second Year (S.Y. B.Tech ETC):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20STructure%2B%20SY%20Syllabus_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. ETC Syllabus PDF ↗</a><br><em>Key Subjects: Electronic Devices &amp; Circuits, Signals &amp; Systems, Digital Logic Design, Network Theory, Analog Circuits.</em></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech ETC):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%2BThird%20Year_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. ETC Syllabus PDF ↗</a><br><em>Key Subjects: Microcontrollers &amp; Embedded Systems, Digital Signal Processing (DSP), Electromagnetic Waves, Analog &amp; Digital Communication.</em></li>"
+                        "<li><strong>Final Year B.Tech ETC:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/NEP%20structure%2BFinal%20Year%20Syllabus_compressed.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year ETC Syllabus PDF ↗</a><br><em>Key Subjects: VLSI Design, Microwave &amp; Antenna Theory, Optical Fiber Communication, Wireless Cellular Networks, Capstone Project.</em></li>"
+                        "<li><strong>B.Tech Honors in Internet of Things (IoT):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/structure%20and%20syllabus%20of%20Btech%20%28Hons%29.%20of%20ETC%20DEPT.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Honors IoT Specialization Structure &amp; Syllabus PDF ↗</a></li>"
+                        "</ul>"
+                        "<p>Direct download buttons are also available in the interactive syllabus card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Tell me about ELECSA club",
+                        "Where is ETC Seminar Hall?",
+                        "Where is ETCR classroom?"
+                    ]
+                }
             elif any(w in q_low for w in ["biotech", "biotechnology"]):
                 return {
                     "answer": (
@@ -596,8 +678,7 @@ Student Query: {query}
                         "Show me BSH First Year timetable"
                     ]
                 }
-            else:
-                # Default to Computer Science & Engineering (CSE)
+            elif any(w in q_low for w in ["cse", "computer science", "cscr"]):
                 return {
                     "answer": (
                         "<p><strong>Department of Computer Science &amp; Engineering (CSE) — Syllabus &amp; Curriculum:</strong></p>"
@@ -615,6 +696,34 @@ Student Query: {query}
                         "Show me CSBS syllabus",
                         "BSH first year time table",
                         "Where is Central Library?"
+                    ]
+                }
+            else:
+                # General institute syllabus directory
+                return {
+                    "answer": (
+                        "<p><strong>Official KITCOEK Online Syllabus Directory:</strong></p>"
+                        "<p>KITCOEK provides official autonomous NEP-2020 curriculum structures and syllabi for all departments at <a href='https://www.kitcoek.in/online-syllabus' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/online-syllabus ↗</a>.</p>"
+                        "<p>Select your branch to view detailed subjects and download official PDFs:</p>"
+                        "<ul>"
+                        "<li><strong>Computer Science (CSE):</strong> Ask <em>\"CSE syllabus\"</em> for S.Y., T.Y., and Final Year.</li>"
+                        "<li><strong>CSBS:</strong> Ask <em>\"CSBS syllabus\"</em> for 4-year curriculum.</li>"
+                        "<li><strong>AIML:</strong> Ask <em>\"AIML syllabus\"</em> for S.Y. &amp; T.Y. schemes.</li>"
+                        "<li><strong>Data Science (DS):</strong> Ask <em>\"Data Science syllabus\"</em> for S.Y. &amp; T.Y. schemes.</li>"
+                        "<li><strong>Mechanical:</strong> Ask <em>\"Mechanical syllabus\"</em> for S.Y., T.Y. &amp; Final Year NEP.</li>"
+                        "<li><strong>Electrical:</strong> Ask <em>\"Electrical syllabus\"</em> for NEP structure &amp; EV Honors.</li>"
+                        "<li><strong>Civil:</strong> Ask <em>\"Civil syllabus\"</em> for BoS approved NEP structure.</li>"
+                        "<li><strong>ETC / ENTC:</strong> Ask <em>\"ETC syllabus\"</em> for NEP structure &amp; IoT Honors.</li>"
+                        "<li><strong>Biotechnology:</strong> Ask <em>\"Biotech syllabus\"</em> for S.Y. &amp; T.Y. schemes.</li>"
+                        "<li><strong>First Year:</strong> Ask <em>\"First Year syllabus\"</em> for Circuit &amp; Core branches.</li>"
+                        "</ul>"
+                        "<p>Direct download buttons for key structures are also available in the interactive card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Show me Mechanical syllabus",
+                        "Show me Electrical syllabus",
+                        "Show me Civil syllabus",
+                        "Show me ETC syllabus"
                     ]
                 }
 
