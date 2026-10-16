@@ -732,7 +732,7 @@ async function sendMessage(text){
           ${loc.landmark ? `<p class="nav-box-landmark"><em>Landmark: ${escapeHtml(loc.landmark)}</em></p>` : ''}
           ${loc.room_number ? `<p class="nav-box-rooms"><strong>Block / Rooms:</strong> ${escapeHtml(loc.room_number)}</p>` : ''}
           <div class="map-thumbnail-container open-map-modal-btn" title="Click to open Aerial Campus Map">
-            <img src="campus_map.jpg" alt="Aerial Campus Map Preview">
+            <img src="campus_map.jpg?v=20.0" alt="Aerial Campus Map Preview">
             <div class="map-thumbnail-overlay">
               <span>🗺️ Official Aerial Campus Map (Tap to view)</span>
               <span>🔍 Zoom</span>
@@ -743,7 +743,7 @@ async function sendMessage(text){
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
               View Aerial Map
             </button>
-            <a href="campus_map.jpg" target="_blank" class="map-link-btn map-link-btn-secondary">
+            <a href="campus_map.jpg?v=20.0" target="_blank" class="map-link-btn map-link-btn-secondary">
               ↗ Open in Tab
             </a>
           </div>

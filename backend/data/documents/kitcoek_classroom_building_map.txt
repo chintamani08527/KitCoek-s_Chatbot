@@ -68,5 +68,5 @@
 - First Floor:
   * ETCR 01 (Electronics & Telecommunication Classroom 01)
   * ETCR 02 (Electronics & Telecommunication Classroom 02)
-- Third Floor:
+- Second Floor:
   * ETC SEM. HALL (ETC Department Seminar Hall)
