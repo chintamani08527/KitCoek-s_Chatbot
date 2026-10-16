@@ -469,16 +469,23 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         else:
             timetable_url = "https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT"
 
+        if matched_dept_id != "all":
+            depts_to_show = [d for d in TIMETABLES_DATA["departments"] if d["id"] == matched_dept_id]
+            title_text = f"KITCOEK {matched_dept_id.upper()} Department Timetable"
+        else:
+            depts_to_show = TIMETABLES_DATA["departments"]
+            title_text = TIMETABLES_DATA["title"]
+
         timetable_details = {
             "requested_dept": matched_dept_id,
-            "title": TIMETABLES_DATA["title"],
+            "title": title_text,
             "drive_folder_url": TIMETABLES_DATA["drive_folder_url"],
             "departments": [
                 {
                     **d,
-                    "is_matched": (matched_dept_id == d["id"]) or (matched_dept_id == "all")
+                    "is_matched": True
                 }
-                for d in TIMETABLES_DATA["departments"]
+                for d in depts_to_show
             ]
         }
 
@@ -499,7 +506,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         "notice", "circular", "calendar", "calender", "timetable", "time table", "mse", "ese", "schedule", "latest"
     ])
 
-    if not is_pure_portal_guide and (is_notice_intent or any(k in q_low for k in ["exam notice", "exam circular", "exam timetable", "exam schedule", "timetable", "time table"])):
+    is_exam_timetable_intent = any(k in q_low for k in ["exam notice", "exam circular", "exam timetable", "exam schedule", "mse timetable", "ese timetable", "re-mse"])
+    if not is_pure_portal_guide and (is_notice_intent or is_exam_timetable_intent):
         notice_board_url = "https://www.kitcoek.in/notice"
         category = "notices" if is_notice_intent and category not in ["clubs", "navigation"] else category
 
@@ -593,7 +601,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             "   - Direct Timetable File Link: https://drive.google.com/file/d/1Yr3fsic12RvEHj1pZzGjgeFl3yDTO0O3/view",
             "4. Master All Departments Timetable Folder:",
             "   - Google Drive Folder: https://drive.google.com/drive/folders/1Pi-i10qYtu9LQkhzhIMXQOtOa8LLCKZT",
-            "DIRECTIVE: Give a polite, clear response confirming timetable availability for the requested department (BSH for F.Y. / AIML for SY, TY, Final Year / CSBS). Provide a clear explanation of what is included. DO NOT list repetitive bullet points of Google Drive links in your text, because an interactive 1-click timetable card is automatically appended below your answer."
+            "DIRECTIVE: Give a polite, concise overview (2-3 sentences max) confirming the class timetable and target academic years/batches (BSH for F.Y. / AIML for SY, TY, Final Year / CSBS). DO NOT output any URLs, Google Drive links, or <a> anchor tags in your text response, because an interactive 1-click timetable card is automatically displayed directly below your answer."
         ]
         context_texts.insert(0, "\n".join(tt_ctx))
 

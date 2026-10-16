@@ -701,10 +701,11 @@ async function sendMessage(text){
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
 
-    // If structured timetable card is present, clean repetitive bullet lists of drive links to prevent repeating twice
+    // If structured timetable card is present, clean repetitive paragraphs or links to prevent repeating twice
     if (data.timetable_details) {
-      botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?drive\.google\.com[\s\S]*?<\/\1>/gi, '');
-      botHtml = botHtml.replace(/<p>[^<]*?(?:below are the direct|access the official timetable|verified links to download|download links:)[^<]*?<\/p>/gi, '');
+      botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?(?:drive\.google\.com|timetable)[\s\S]*?<\/\1>/gi, '');
+      botHtml = botHtml.replace(/<p>[^<]*?(?:below are the direct|access the official timetable|verified links to download|download links:|browse and download|you can access and download|you can view and download|link below|links below|download your department's schedule)[^<]*?<\/p>/gi, '');
+      botHtml = botHtml.replace(/<p>[^<]*?<a[^>]*href="[^"]*drive\.google\.com[^"]*"[^>]*>[\s\S]*?<\/a>[^<]*?<\/p>/gi, '');
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
 
@@ -849,7 +850,7 @@ async function sendMessage(text){
           <div class="timetable-card-header">
             <div class="timetable-badge">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              KITCOEK Systematic Department Timetables
+              ${escapeHtml(tt.title || 'KITCOEK Systematic Department Timetables')}
             </div>
             <span class="timetable-live-dot">● Official Drive Repository</span>
           </div>
