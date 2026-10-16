@@ -101,14 +101,6 @@ async def restore_vercel_path(request, call_next):
 app.include_router(api_router, prefix="/api")
 app.include_router(api_router)
 
-from fastapi import Request
-@app.get("/api/debug-info")
-@app.get("/debug-info")
-def debug_info(request: Request):
-    return {
-        "scope_path": request.scope.get("path"),
-        "headers": {k: v for k, v in request.headers.items() if not k.lower().startswith("authorization")}
-    }
 
 # Map endpoint
 @app.get("/api/locations/map")
