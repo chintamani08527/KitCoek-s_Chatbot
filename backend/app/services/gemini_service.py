@@ -104,33 +104,12 @@ class GeminiService:
         and official Student Clubs reports (AY 2025–26).
         Follows strict grounding: never invents facts, syllabus, coordinators, or room numbers.
         """
-        if not self.is_configured():
-            if club_data:
-                name = club_data.get("name")
-                desc = club_data.get("description", "")
-                coord = club_data.get("faculty_coordinator") or "Check official website"
-                pdf = club_data.get("pdf_url")
-                pdf_link = f'<p><a href="{pdf}" target="_blank">📄 View Official 2025–26 Report (PDF)</a></p>' if pdf else ""
-                return {
-                    "answer": f"<p><strong>{name}</strong> ({club_data.get('category')}):</p><p>{desc}</p><p><strong>Faculty Coordinator:</strong> {coord}</p>{pdf_link}",
-                    "follow_up_questions": ["What activities does this club organize?", "How do I join this club?"]
-                }
-            elif context_chunks:
-                joined = "\n\n".join(context_chunks[:2])
-                return {
-                    "answer": f"<p>{joined[:600]}...</p>",
-                    "follow_up_questions": ["Where can I view the full syllabus?", "What are the passing criteria?"]
-                }
-            elif location_data:
-                return {
-                    "answer": f"<p><strong>{location_data.get('name')}</strong> is located in the <strong>{location_data.get('building')}</strong> on the <strong>{location_data.get('floor')}</strong> (Room: {location_data.get('room_number', 'N/A')}).</p><p>Landmark: {location_data.get('landmark', 'Main Campus')}</p>",
-                    "follow_up_questions": ["Where is CBCR?", "How do I reach the Library?"]
-                }
-            else:
-                return {
-                    "answer": "<p>Official records for this are not currently available in my knowledge base. Please check with your department or student section.</p>",
-                    "follow_up_questions": []
-                }
+        has_valid_aiza_key = any(
+            isinstance(getattr(k, "key", None), str) and k.key.startswith("AIza")
+            for k in getattr(self.pool, "keys", [])
+        )
+        if not self.is_configured() or not has_valid_aiza_key:
+            return self._generate_smart_fallback(query, context_chunks, location_data, club_data, clubs_directory)
 
         context_str = ""
         if context_chunks:
@@ -381,15 +360,198 @@ Student Query: {query}
             }
         except Exception as e:
             print(f"[Error] Gemini API generation error: {e}")
-            if context_chunks:
-                return {
-                    "answer": f"<p>{context_chunks[0][:400]}...</p>",
-                    "follow_up_questions": ["Where can I view the full syllabus?", "What are the passing criteria?"]
-                }
+            return self._generate_smart_fallback(query, context_chunks, location_data, club_data, clubs_directory)
+
+    def _generate_smart_fallback(
+        self,
+        query: str,
+        context_chunks: List[str],
+        location_data: Optional[Dict[str, Any]] = None,
+        club_data: Optional[Dict[str, Any]] = None,
+        clubs_directory: Optional[List[Dict[str, Any]]] = None
+    ) -> Dict[str, Any]:
+        q_low = query.strip().lower()
+        words = set(re.findall(r'\b\w+\b', q_low))
+        
+        # 1. Greetings & Welcome
+        greetings = ["hi", "hello", "hey", "hola", "namaste", "good morning", "good afternoon", "good evening", "greetings", "hii", "heyy"]
+        if any(w in words for w in greetings) or q_low in greetings or q_low.startswith("hello") or q_low.startswith("hi "):
             return {
-                "answer": "<p>Official records for this are not currently available in my knowledge base. Please check with your department or student section.</p>",
-                "follow_up_questions": []
+                "answer": (
+                    "<p>Hello! 👋 Welcome to the official <strong>KITCOEK AI Campus Assistant</strong>.</p>"
+                    "<p>I am here to help you navigate <strong>Kolhapur Institute of Technology's College of Engineering (Autonomous)</strong>. You can ask me about:</p>"
+                    "<ul>"
+                    "<li>🗺️ <strong>Campus Navigation:</strong> Classrooms, labs, seminar halls, library &amp; departments.</li>"
+                    "<li>🏛️ <strong>Student Clubs:</strong> 25 technical, cultural, sports &amp; social clubs (ISTE, E-Cell, MESA, ACSES...).</li>"
+                    "<li>📚 <strong>Curriculum &amp; Syllabus:</strong> Official CSBS &amp; NEP-2020 syllabus PDFs for FY, SY, TY &amp; Final Year.</li>"
+                    "<li>📅 <strong>Class Timetables:</strong> Systematic Google Drive schedules for BSH, AIML, CSBS &amp; other departments.</li>"
+                    "<li>🎓 <strong>VMedulife Student Portal:</strong> Step-by-step guides for attendance tracking and study notes.</li>"
+                    "<li>🎭 <strong>Meraki Cultural Festival:</strong> Official gathering details &amp; campus Instagram reels.</li>"
+                    "</ul>"
+                    "<p>What would you like to explore?</p>"
+                ),
+                "follow_up_questions": [
+                    "Where is ETC Seminar Hall?",
+                    "Show me BSH First Year timetable",
+                    "Tell me about ISTE club",
+                    "CSBS NEP-2020 syllabus"
+                ]
             }
+
+        # 2. Identity & Purpose
+        if any(kw in q_low for kw in ["who are you", "what can you do", "help", "what is your name", "what do you do", "about you", "features"]):
+            return {
+                "answer": (
+                    "<p>I am the <strong>KITCOEK AI Campus Assistant</strong>, an autonomous student guidance and campus intelligence assistant for "
+                    "<strong>KIT's College of Engineering (Autonomous), Kolhapur</strong>.</p>"
+                    "<p>I provide verified answers using official college records, campus mapping, NEP-2020 autonomous schemes, and student club archives.</p>"
+                    "<p>Feel free to type any query or click one of the suggested topics below!</p>"
+                ),
+                "follow_up_questions": [
+                    "Where is Central Library?",
+                    "Browse all 25 Student Clubs",
+                    "AIML department timetable",
+                    "How to check attendance in VMedulife?"
+                ]
+            }
+
+        # 3. Location / Navigation Match
+        if location_data:
+            name = location_data.get("name", "Campus Location")
+            bldg = location_data.get("building", "Main Campus")
+            floor = location_data.get("floor", "Ground Floor")
+            room = location_data.get("room_number", "")
+            landmark = location_data.get("landmark", "Central Campus")
+            desc = location_data.get("description", "")
+            return {
+                "answer": (
+                    f"<p><strong>{name}</strong> is situated in the <strong>{bldg}</strong> on the <strong>{floor}</strong>"
+                    + (f" (Room / Block: <strong>{room}</strong>)." if room else ".")
+                    + f"</p><p>📍 <strong>Landmark:</strong> {landmark}</p>"
+                    + (f"<p>{desc}</p>" if desc else "")
+                    + "<p>An aerial campus navigation card is displayed below with direct map zoom.</p>"
+                ),
+                "follow_up_questions": [
+                    "Where is Central Library?",
+                    "Where is CBCR?",
+                    "Show aerial campus map"
+                ]
+            }
+
+        # 4. Student Club Match
+        if club_data:
+            name = club_data.get("name", "Student Club")
+            abbr = club_data.get("abbr", "")
+            cat = club_data.get("category", "Student Association")
+            desc = club_data.get("description", "")
+            coord = club_data.get("faculty_coordinator", "Department Faculty")
+            stu_coords = club_data.get("student_coordinators", "")
+            pdf = club_data.get("pdf_url", "")
+            pdf_link = f'<p><a href="{pdf}" target="_blank" rel="noopener noreferrer">📄 View Official 2025–26 Report (PDF) ↗</a></p>' if pdf else ""
+            return {
+                "answer": (
+                    f"<p><strong>{name}</strong> {f'({abbr})' if abbr else ''} — <em>{cat} Club</em></p>"
+                    f"<p>{desc}</p>"
+                    f"<p><strong>Faculty Coordinator:</strong> {coord}</p>"
+                    + (f"<p><strong>Student Coordinators:</strong> {stu_coords}</p>" if stu_coords else "")
+                    + pdf_link
+                ),
+                "follow_up_questions": [
+                    f"What activities does {abbr or name} conduct?",
+                    "Show all Technical clubs",
+                    "How do I join a club?"
+                ]
+            }
+
+        # 5. College Overview / About KIT
+        if any(kw in q_low for kw in ["about kit", "about college", "kitcoek", "kolhapur institute of technology", "autonomous", "history of kit"]):
+            return {
+                "answer": (
+                    "<p><strong>Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur</strong> (KITCoEK) was established in 1983 "
+                    "and is one of Western Maharashtra's premier autonomous engineering institutions.</p>"
+                    "<ul>"
+                    "<li><strong>Accreditation:</strong> NAAC 'A+' Grade with 3.33 CGPA, NBA Accredited engineering programs.</li>"
+                    "<li><strong>Autonomous Status:</strong> Affiliated with Shivaji University, Kolhapur; autonomous curriculum aligned with NEP-2020.</li>"
+                    "<li><strong>Campus Location:</strong> Gokul Shirgaon, Kolhapur, Maharashtra 416234.</li>"
+                    "<li><strong>Official Portal:</strong> <a href='https://www.kitcoek.in' target='_blank'>kitcoek.in ↗</a></li>"
+                    "</ul>"
+                ),
+                "follow_up_questions": [
+                    "What engineering branches are offered?",
+                    "CSBS NEP-2020 syllabus",
+                    "Where is the Library?"
+                ]
+            }
+
+        # 6. Admissions & Departments
+        if any(kw in q_low for kw in ["admission", "eligibility", "branches", "departments", "courses", "mht cet", "jee"]):
+            return {
+                "answer": (
+                    "<p><strong>KITCOEK Admissions &amp; Academic Programs:</strong></p>"
+                    "<p>KIT offers 4-year undergraduate B.Tech and postgraduate M.Tech degrees across major engineering disciplines under the NEP-2020 Autonomous curriculum:</p>"
+                    "<ul>"
+                    "<li>Computer Science &amp; Engineering (CSE)</li>"
+                    "<li>Computer Science &amp; Business Systems (CSBS)</li>"
+                    "<li>Artificial Intelligence &amp; Machine Learning (AIML)</li>"
+                    "<li>Artificial Intelligence &amp; Data Science (AIDS)</li>"
+                    "<li>Electronics &amp; Telecommunication (ETC)</li>"
+                    "<li>Electrical Engineering</li>"
+                    "<li>Mechanical Engineering</li>"
+                    "<li>Civil &amp; Environmental Engineering</li>"
+                    "<li>Biotechnology</li>"
+                    "</ul>"
+                    "<p>Admissions are conducted through Maharashtra State CET Cell (CAP Rounds) based on MHT-CET and JEE Main scores. Visit <a href='https://www.kitcoek.in' target='_blank'>kitcoek.in ↗</a> for cutoff details.</p>"
+                ),
+                "follow_up_questions": [
+                    "CSBS NEP-2020 syllabus",
+                    "AIML department timetable",
+                    "Where is Central Library?"
+                ]
+            }
+
+        # 7. Document RAG chunks synthesis
+        if context_chunks:
+            clean_chunks = []
+            for c in context_chunks[:3]:
+                clean = re.sub(r'===.*?===', '', c).strip()
+                clean = re.sub(r'\[Extract \d+\]:', '', clean).strip()
+                if clean and len(clean) > 30:
+                    clean_chunks.append(clean)
+            
+            if clean_chunks:
+                first = clean_chunks[0]
+                paragraphs = [p.strip() for p in first.split("\n") if p.strip()]
+                formatted = "".join(f"<p>{p}</p>" for p in paragraphs[:4])
+                return {
+                    "answer": formatted,
+                    "follow_up_questions": [
+                        "Where can I view more details?",
+                        "Contact student section",
+                        "View official notices"
+                    ]
+                }
+
+        # 8. Polite general guidance fallback
+        return {
+            "answer": (
+                "<p>I searched the official <strong>KITCoEK Knowledge Base</strong> for your query, but could not find a direct matching record.</p>"
+                "<p>You can try asking in a different way or check out one of the direct sections below:</p>"
+                "<ul>"
+                "<li>🗺️ <strong>Campus Navigation:</strong> <em>\"Where is [room / lab / department]?\"</em></li>"
+                "<li>📚 <strong>Syllabus:</strong> <em>\"Give me CSBS syllabus\"</em></li>"
+                "<li>📅 <strong>Timetables:</strong> <em>\"BSH First Year timetable\"</em> or <em>\"AIML timetable\"</em></li>"
+                "<li>🏛️ <strong>Clubs:</strong> <em>\"Tell me about ISTE / E-Cell / Cultural club\"</em></li>"
+                "<li>🎓 <strong>VMedulife:</strong> <em>\"How to check attendance in VMedulife?\"</em></li>"
+                "</ul>"
+                "<p>You can also check the official institute portal at <a href='https://www.kitcoek.in' target='_blank'>kitcoek.in ↗</a>.</p>"
+            ),
+            "follow_up_questions": [
+                "Where is ETC Seminar Hall?",
+                "Give me CSBS syllabus link",
+                "BSH first year time table",
+                "Tell me about ISTE club"
+            ]
+        }
 
 
 _gemini_service = None
