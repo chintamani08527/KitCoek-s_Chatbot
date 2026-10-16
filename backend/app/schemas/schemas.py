@@ -31,6 +31,7 @@ class ChatResponse(BaseModel):
     vmedulife_guide: Optional[dict] = None
     meraki_reels: Optional[List[dict]] = None
     csbs_syllabus: Optional[dict] = None
+    syllabus_details: Optional[dict] = None
 
 class StudentClubResponse(BaseModel):
     id: str

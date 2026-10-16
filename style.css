@@ -772,6 +772,41 @@ body{
 .bubble p:last-child{ margin-bottom:0; }
 .bubble ul{ margin:8px 0; padding-left:18px; }
 .bubble li{ margin-bottom:4px; }
+.bubble a {
+  color: #38BDF8;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  word-break: break-word;
+  transition: all 0.15s ease;
+}
+.bubble a:hover {
+  color: #7DD3FC;
+  text-decoration-thickness: 2px;
+}
+.chat-inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38BDF8 !important;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none !important;
+  margin: 3px 0;
+  transition: all 0.2s ease;
+  line-height: 1.4;
+}
+.chat-inline-link:hover {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38BDF8;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.25);
+}
 
 .typing{
   display:flex; gap:4px; padding:4px 2px;

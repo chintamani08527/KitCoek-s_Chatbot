@@ -27,6 +27,164 @@ MERAKI_REELS = [
     {"title": "Meraki Annual Gathering Celebration", "url": "https://www.instagram.com/reel/DVH9-UiiEoj", "tag": "Reel 5"}
 ]
 
+import re
+
+def linkify_urls(html: str) -> str:
+    """Safely converts plain text URLs into styled clickable <a> tags without affecting existing <a> links."""
+    if not html:
+        return html
+    tokens = re.split(r'(<a\s+[^>]*>.*?</a>)', html, flags=re.DOTALL | re.IGNORECASE)
+    res = []
+    for t in tokens:
+        if t.lower().startswith('<a'):
+            res.append(t)
+        else:
+            def repl(m):
+                url = m.group(1).rstrip('.,;:)]>')
+                is_pdf = '.pdf' in url.lower()
+                label = '📄 Download Syllabus PDF ↗' if is_pdf else f'{url} ↗'
+                return f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="chat-inline-link">{label}</a>'
+            t_sub = re.sub(r'(https?://[^\s<>"]+)', repl, t)
+            res.append(t_sub)
+    return ''.join(res)
+
+CSE_SYLLABUS_DATA = {
+    "department": "Computer Science & Engineering (CSE)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] & Autonomy Scheme",
+    "structure_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Structure4Web_AY2324.pdf",
+    "years": [
+        {
+            "year": "Complete CSE Curriculum Structure",
+            "tag": "All-Year Structure",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Structure4Web_AY2324.pdf",
+            "description": "Complete credit system, course codes, POs, and teaching evaluation scheme for CSE."
+        },
+        {
+            "year": "Second Year (S.Y. B.Tech CSE)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/SY-CSE-AY-2022-23-Syllabus%20-%20updatged_CO_PO.pdf",
+            "description": "Discrete Mathematical Structures, Data Structures and Algorithms, OOP (Java/C++), Computer Organization & Architecture, Digital Systems."
+        },
+        {
+            "year": "Third Year (T.Y. B.Tech CSE)",
+            "tag": "2023 [NEP-2020]",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/TY-CSE-Syllabus-AY-2023-24%20-%20updated%20copy%2025.pdf",
+            "description": "Database Management Systems (DBMS), Design & Analysis of Algorithms (DAA), Operating Systems, Software Engineering, AI & ML, Computer Networks."
+        },
+        {
+            "year": "Final Year B.Tech CSE",
+            "tag": "Autonomy Scheme",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/2017-FinalYear_Old_syllabus.pdf",
+            "description": "Distributed Systems, Cloud Computing, Big Data Analytics, Information Security, Capstone Project Phase I & II."
+        }
+    ]
+}
+
+AIML_SYLLABUS_DATA = {
+    "department": "CSE (Artificial Intelligence & Machine Learning)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] Scheme",
+    "years": [
+        {
+            "year": "Second Year (S.Y. CSE-AIML)",
+            "tag": "Sem 3 & 4",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/2.CSE%20AIML%20SY%20Syllabus%20Sem%203%20to%20Sem%204.pdf",
+            "description": "Data Structures with Python, Mathematical Foundations of AI, OOP, Computer Architecture, Probability & Statistics for AI."
+        },
+        {
+            "year": "Third Year (T.Y. CSE-AIML)",
+            "tag": "Sem 5",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20CSE(AIML)_syllabus_SEM-V_WEBSITE%20COPY_17%20JUNE%2023.pdf",
+            "description": "Machine Learning Algorithms, Deep Learning Foundations, Natural Language Processing, Computer Vision, AI Ethics."
+        },
+        {
+            "year": "Honors Specialization in Cyber Security",
+            "tag": "Honors Degree",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/B-Tech%20(Hons-)%20CSE(AIML)_Cyber%20Security%20Structure.pdf",
+            "description": "Complete 20-credit B.Tech Honors curriculum structure and syllabus for Cyber Security specialization."
+        }
+    ]
+}
+
+DS_SYLLABUS_DATA = {
+    "department": "CSE (Data Science - DS)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] Scheme",
+    "years": [
+        {
+            "year": "Second Year (S.Y. CSE-DS)",
+            "tag": "Sem 3 & 4",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SYCSE-DS-Syllabus-28-09-22.pdf",
+            "description": "Foundations of Data Science, Data Structures, Computational Statistics, DBMS, R/Python Programming."
+        },
+        {
+            "year": "Third Year (T.Y. CSE-DS)",
+            "tag": "Sem 5 & 6",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TYCSE(DS)_syllabus_SEM-V_VI_WEBSITE%20COPY_17%20JUNE%2023.pdf",
+            "description": "Big Data Technologies, Predictive Analytics, Applied Machine Learning, Data Visualization & Mining."
+        },
+        {
+            "year": "Honors in Cyber Security for Data Science",
+            "tag": "Honors Degree",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B-%20Tech%20(Hons-)%20Computer%20Science%20and%20Engineering%20(Data%20Science)%20with%20specialization%20in%20cyber%20security.pdf",
+            "description": "B.Tech Honors curriculum specializing in Data Science & Cyber Security."
+        }
+    ]
+}
+
+FY_SYLLABUS_DATA = {
+    "department": "First Year Engineering (F.Y. B.Tech - All Branches)",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "2023 [NEP-2020] Scheme",
+    "years": [
+        {
+            "year": "Circuit Branches (CSE, AIML, DS, ENTC, Electrical)",
+            "tag": "NEP-2020 Syllabus",
+            "pdf_url": "https://kitcoek.s3.amazonaws.com/syllabus/FY%20B%20Tech%20Circuit%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "Engineering Mathematics-I & II, Physics/Chemistry, Basic Electrical, Programming for Problem Solving (C/Python), Basic Electronics."
+        },
+        {
+            "year": "Core Branches (Biotech, Civil, Civil-Env, Mechanical)",
+            "tag": "NEP-2020 Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf",
+            "description": "Engineering Mechanics, Basic Mechanical Systems, Workshop Practices, Engineering Materials, Chemistry for Engineers."
+        },
+        {
+            "year": "UG Academic Rules & Regulations (NEP-2020)",
+            "tag": "Official Policy",
+            "pdf_url": "https://www.kitcoek.in/documents/academics/importantDocuments/UG%20ACADEMIC%20RULES%20AND%20REGULATIONS_NEP%202020.pdf",
+            "description": "Official autonomous academic ordinances, grading rules, credit system, examination guidelines."
+        }
+    ]
+}
+
+BIOTECH_SYLLABUS_DATA = {
+    "department": "Biotechnology Engineering",
+    "portal_url": "https://www.kitcoek.in/online-syllabus",
+    "scheme": "Cycle-2 Autonomy & NEP Scheme",
+    "years": [
+        {
+            "year": "Second Year (S.Y. B.Tech Biotech)",
+            "tag": "S.Y. Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SY%20BTech%20syllabus%20contents%202022-23.pdf",
+            "description": "Biochemistry, Cell Biology, Microbiology, Bioprocess Principles, Fluid Flow Operations."
+        },
+        {
+            "year": "Third Year (T.Y. B.Tech Biotech)",
+            "tag": "T.Y. Syllabus",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20BTech%20syllabus%20contents%202023-24.pdf",
+            "description": "Molecular Biology, Genetic Engineering, Immunology, Bioreactor Design, Heat & Mass Transfer."
+        },
+        {
+            "year": "Biotech Autonomy 2nd Cycle Structure",
+            "tag": "Structure & Credits",
+            "pdf_url": "https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Autonomy%202nd%20Cycle%20Structure%20Biotech%20%20wef%202022-23.pdf",
+            "description": "Complete 4-year credit structure and semester-wise evaluation scheme for Biotechnology."
+        }
+    ]
+}
+
 CSBS_SYLLABUS_DATA = {
     "department": "Computer Science and Business Systems (CSBS)",
     "portal_url": "https://www.kitcoek.in/online-syllabus",
@@ -543,47 +701,48 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         meraki_reels = MERAKI_REELS
         category = "clubs" if category not in ["navigation"] else category
 
-    # 3.9 Official KITCOEK Online Syllabus & CSBS NEP-2020 detection (https://www.kitcoek.in/online-syllabus)
-    csbs_syllabus = None
-    is_csbs_syllabus_intent = (
-        ("csbs" in q_low or "computer science and business" in q_low or "business systems" in q_low)
-        and any(w in q_low for w in [
-            "syllabus", "curriculum", "subject", "subjects", "nep", "course", "courses",
-            "online syllabus", "structure", "scheme", "sem", "semester", "fy", "sy", "ty", "final year"
-        ])
-    ) or (
-        any(w in q_low for w in ["online syllabus", "kitcoek.in/online-syllabus"])
-        and any(w in q_low for w in ["csbs", "computer science and business"])
-    )
+    # 3.9 Official KITCOEK Online Syllabus & Department NEP-2020 detection (https://www.kitcoek.in/online-syllabus)
+    matched_syllabus = None
+    is_syllabus_intent = any(w in q_low for w in [
+        "syllabus", "curriculum", "subject", "subjects", "course structure", "course scheme"
+    ]) or ("online syllabus" in q_low)
 
-    if is_csbs_syllabus_intent:
-        csbs_syllabus = CSBS_SYLLABUS_DATA
+    if is_syllabus_intent:
+        if any(w in q_low for w in ["csbs", "business systems", "computer science and business"]):
+            matched_syllabus = CSBS_SYLLABUS_DATA
+        elif any(w in q_low for w in ["aiml", "ai & ml", "artificial intelligence"]):
+            matched_syllabus = AIML_SYLLABUS_DATA
+        elif any(w in q_low for w in ["ds", "data science", "aids"]):
+            matched_syllabus = DS_SYLLABUS_DATA
+        elif any(w in q_low for w in ["fy", "first year", "f.y.", "bsh", "circuit branch", "core branch"]):
+            matched_syllabus = FY_SYLLABUS_DATA
+        elif any(w in q_low for w in ["biotech", "biotechnology"]):
+            matched_syllabus = BIOTECH_SYLLABUS_DATA
+        elif any(w in q_low for w in ["cse", "computer science"]):
+            matched_syllabus = CSE_SYLLABUS_DATA
+        else:
+            # Default for general syllabus query
+            matched_syllabus = CSE_SYLLABUS_DATA
+
         category = "academic" if category not in ["navigation", "clubs"] else category
 
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
     context_texts = [r["chunk_text"] for r in retrieved_chunks]
 
-    # Prepend official CSBS NEP-2020 syllabus context if matched
-    if csbs_syllabus:
-        syllabus_ctx = [
-            "OFFICIAL KITCOEK ONLINE SYLLABUS DIRECTORY — CSBS NEP-2020 CURRICULUM (Source: https://www.kitcoek.in/online-syllabus):",
-            "College Scheme: 2023 [NEP-2020] Scheme (National Education Policy 2020 Autonomous Scheme).",
-            "Department: Computer Science and Business Systems (CSBS).",
-            "DIRECT OFFICIAL AWS S3 SYLLABUS PDF DOWNLOAD LINKS:",
-            "- All-Year Curriculum Structure (NEP-2020): https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf",
-            "- First Year (F.Y. B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf | Exit Courses: https://kitcoek.s3.amazonaws.com/syllabus/exit%20courses_syllabus%20with%20stamp.pdf",
-            "- Second Year (S.Y. B.Tech CSBS): https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf | Honours: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf | AR-VR: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Emerging%20trend%20Syllabus%20with%20Stamp.pdf",
-            "- Third Year (T.Y. B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf | Honours: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf | AR-VR: https://kitcoek.s3.amazonaws.com/syllabus/AR%20VR%20syllabus.pdf",
-            "- Final Year (Final Year B.Tech CSBS): https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf | Honours: https://kitcoek.s3.amazonaws.com/syllabus/Honours%20Syllabus.pdf | MDM: https://kitcoek.s3.amazonaws.com/syllabus/MDM_SYLLABUS_FINAL.pdf",
-            "Key Subjects Breakdown:",
-            "  * F.Y. (Sem I & II): Fundamentals of Computer Science, Discrete Mathematics, Principles of Electrical Engineering, Physics for Computing Science, Statistics & Probability, Business Communication & Value Science, Data Structures & Algorithms, Economics.",
-            "  * S.Y. (Sem III & IV): Formal Language & Automata Theory, Computer Organization & Architecture, Computational Statistics, Object Oriented Programming (Java/C++), Operating Systems, Database Management Systems, Software Engineering, Fundamentals of Marketing, Financial & Cost Accounting.",
-            "  * T.Y. (Sem V & VI): Design & Analysis of Algorithms, Compiler Design, Business Strategy, Computer Networks, Machine Learning, Information Security, Consumer Behaviour.",
-            "  * Final Year (Sem VII & VIII): Cloud Computing, Software Testing & Quality Assurance, Financial Management, Deep Learning, IoT, Capstone Projects & Full Semester Industry Internship.",
-            "DIRECTIVE: Give a concise, helpful overview confirming that the CSBS syllabus strictly complies with the official KITCoEK 2023 [NEP-2020] Scheme from kitcoek.in/online-syllabus. Highlight the program's blend of core computer science, Business 4.0, analytics, and management. DO NOT output a bullet list of PDF links or repeat the year-by-year syllabus lists in your text, because a dedicated interactive card with verified download buttons for All-Year Structure, FY, SY, TY, Final Year, Honors, and MDM is automatically appended below your answer."
+    # Prepend official syllabus context if matched
+    if matched_syllabus:
+        dept_name = matched_syllabus.get("department", "KITCOEK")
+        syl_lines = [
+            f"OFFICIAL KITCOEK ONLINE SYLLABUS DIRECTORY — {dept_name.upper()} NEP-2020 CURRICULUM (Source: https://www.kitcoek.in/online-syllabus):",
+            f"College Scheme: {matched_syllabus.get('scheme', '2023 [NEP-2020] Scheme')}.",
+            f"Department: {dept_name}.",
+            "DIRECT OFFICIAL AWS S3 SYLLABUS PDF DOWNLOAD LINKS:"
         ]
-        context_texts.insert(0, "\n".join(syllabus_ctx))
+        for y in matched_syllabus.get("years", []):
+            syl_lines.append(f"- {y.get('year')}: {y.get('pdf_url')} | Description: {y.get('description')}")
+        syl_lines.append("DIRECTIVE: Confirm the official syllabus for this department. Highlight key subjects and direct official PDF links. Note that verified download buttons are also displayed in the interactive syllabus card below.")
+        context_texts.insert(0, "\n".join(syl_lines))
 
     # Prepend official Systematic Department Timetable context if matched
     if timetable_details:
@@ -675,7 +834,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
             pass
     
     resp = ChatResponse(
-        reply=rag_result["answer"],
+        reply=linkify_urls(rag_result["answer"]),
         category=category,
         sources=[],
         follow_up_questions=rag_result.get("follow_up_questions", []),
@@ -691,7 +850,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         academic_calendars=matched_cals,
         vmedulife_guide=vmedulife_guide,
         meraki_reels=meraki_reels,
-        csbs_syllabus=csbs_syllabus
+        csbs_syllabus=matched_syllabus,
+        syllabus_details=matched_syllabus
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()

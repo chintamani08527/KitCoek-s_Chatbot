@@ -248,6 +248,24 @@ function addRow(role, html){
   return row;
 }
 
+function autolinkUrls(html) {
+  if (!html) return html;
+  // Match existing <a>...</a> tags so we leave them untouched
+  const tokens = html.split(/(<a\s+[^>]*>[\s\S]*?<\/a>)/i);
+  return tokens.map(token => {
+    if (/^<a\s+/i.test(token)) {
+      return token;
+    }
+    return token.replace(/(https?:\/\/[^\s<>"'\)]+)/g, (match) => {
+      const cleanUrl = match.replace(/[.,;:)]+$/, '');
+      const trailing = match.slice(cleanUrl.length);
+      const isPdf = cleanUrl.toLowerCase().includes('.pdf');
+      const label = isPdf ? '📄 Download Official Syllabus PDF ↗' : `${cleanUrl} ↗`;
+      return `<a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" class="chat-inline-link">${label}</a>${trailing}`;
+    });
+  }).join('');
+}
+
 function showTyping(){
   const row = document.createElement('div');
   row.className = 'row bot';
@@ -745,8 +763,9 @@ async function sendMessage(text){
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
 
-    // If structured CSBS syllabus card is present, remove raw syllabus link lists to prevent repeating twice
-    if (data.csbs_syllabus && Array.isArray(data.csbs_syllabus.years)) {
+    // If structured syllabus card is present, remove raw syllabus link lists to prevent repeating twice
+    const activeSyllabusObj = data.syllabus_details || data.csbs_syllabus;
+    if (activeSyllabusObj && Array.isArray(activeSyllabusObj.years)) {
       botHtml = botHtml.replace(/<(ul|ol)[^>]*>[\s\S]*?kitcoek\.s3[\s\S]*?<\/\1>/gi, '');
       botHtml = botHtml.replace(/<p>[^<]*?(?:below are the direct|download the official curriculum documents|verified links to download|download links:)[^<]*?<\/p>/gi, '');
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
@@ -759,6 +778,9 @@ async function sendMessage(text){
       botHtml = botHtml.replace(/<p>[^<]*?<a[^>]*href="[^"]*drive\.google\.com[^"]*"[^>]*>[\s\S]*?<\/a>[^<]*?<\/p>/gi, '');
       botHtml = botHtml.replace(/<p>\s*<\/p>/gi, '').trim();
     }
+
+    // Always auto-linkify any remaining raw URLs into clickable anchor buttons
+    botHtml = autolinkUrls(botHtml);
 
     if (data.club_details) {
       const c = data.club_details;
@@ -1037,8 +1059,9 @@ async function sendMessage(text){
       `;
     }
 
-    if (data.csbs_syllabus && Array.isArray(data.csbs_syllabus.years)) {
-      const syl = data.csbs_syllabus;
+    const activeSyllabus = data.syllabus_details || data.csbs_syllabus;
+    if (activeSyllabus && Array.isArray(activeSyllabus.years)) {
+      const syl = activeSyllabus;
       const yearsHtml = syl.years.map(y => `
         <div class="syllabus-item">
           <div class="syllabus-item-main">

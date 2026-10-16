@@ -509,6 +509,115 @@ Student Query: {query}
                 ]
             }
 
+        # 6.5 Syllabus & Curriculum Queries
+        if any(kw in q_low for kw in ["syllabus", "curriculum", "subject", "subjects", "course structure", "course scheme", "exit courses"]):
+            if any(w in q_low for w in ["csbs", "business systems", "computer science and business"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Computer Science &amp; Business Systems (CSBS) — Official 2023 [NEP-2020] Curriculum:</strong></p>"
+                        "<p>CSBS integrates core computing with enterprise technology, data analytics, and business management:</p>"
+                        "<ul>"
+                        "<li><strong>All-Year Curriculum Structure:</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/CSBS_ALL_Year%20Structure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Full CSBS 4-Year Structure (PDF) ↗</a></li>"
+                        "<li><strong>First Year (F.Y. B.Tech CSBS):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20Syllabus.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 F.Y. CSBS Syllabus PDF ↗</a></li>"
+                        "<li><strong>Second Year (S.Y. B.Tech CSBS):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/SY%20Syllabus.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. CSBS Syllabus PDF ↗</a></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech CSBS):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20Syllabus.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. CSBS Syllabus PDF ↗</a></li>"
+                        "<li><strong>Final Year B.Tech CSBS:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FINAL%20YEAR%20SYLLABUS.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year CSBS Syllabus PDF ↗</a></li>"
+                        "</ul>"
+                        "<p>Click any document above to download, or use the interactive download cards below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Show me CSBS timetable",
+                        "Tell me about CABSSA club",
+                        "Where is CBCR classroom?"
+                    ]
+                }
+            elif any(w in q_low for w in ["aiml", "ai & ml", "artificial intelligence"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of CSE (Artificial Intelligence &amp; Machine Learning) — NEP-2020 Syllabus:</strong></p>"
+                        "<ul>"
+                        "<li><strong>Second Year (S.Y. Sem 3 &amp; 4):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/2.CSE%20AIML%20SY%20Syllabus%20Sem%203%20to%20Sem%204.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. AIML Syllabus PDF ↗</a></li>"
+                        "<li><strong>Third Year (T.Y. Sem 5):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20CSE(AIML)_syllabus_SEM-V_WEBSITE%20COPY_17%20JUNE%2023.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. AIML Syllabus PDF ↗</a></li>"
+                        "<li><strong>Honors in Cyber Security:</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/B-Tech%20(Hons-)%20CSE(AIML)_Cyber%20Security%20Structure.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Cyber Security Honors Structure ↗</a></li>"
+                        "</ul>"
+                        "<p>Click any link to download the official PDF directly.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "AIML department timetable",
+                        "Where is CSAMCR classroom?",
+                        "Tell me about ACSES club"
+                    ]
+                }
+            elif any(w in q_low for w in ["ds", "data science", "aids"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of CSE (Data Science) — NEP-2020 Syllabus:</strong></p>"
+                        "<ul>"
+                        "<li><strong>Second Year (S.Y. Sem 3 &amp; 4):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SYCSE-DS-Syllabus-28-09-22.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. Data Science Syllabus PDF ↗</a></li>"
+                        "<li><strong>Third Year (T.Y. Sem 5 &amp; 6):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TYCSE(DS)_syllabus_SEM-V_VI_WEBSITE%20COPY_17%20JUNE%2023.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. Data Science Syllabus PDF ↗</a></li>"
+                        "<li><strong>Honors in Cyber Security:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/B-%20Tech%20(Hons-)%20Computer%20Science%20and%20Engineering%20(Data%20Science)%20with%20specialization%20in%20cyber%20security.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Honors Specialization Syllabus ↗</a></li>"
+                        "</ul>"
+                    ),
+                    "follow_up_questions": [
+                        "Where is CSDSCR classroom?",
+                        "Tell me about ACSES club",
+                        "Show me BSH First Year timetable"
+                    ]
+                }
+            elif any(w in q_low for w in ["fy", "first year", "f.y.", "bsh", "circuit", "core branch"]):
+                return {
+                    "answer": (
+                        "<p><strong>First Year Engineering (F.Y. B.Tech) — NEP-2020 Syllabus &amp; Structure:</strong></p>"
+                        "<ul>"
+                        "<li><strong>Circuit Branches (CSE, AIML, DS, ENTC, Electrical):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/FY%20B%20Tech%20Circuit%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Circuit Branches Structure &amp; Syllabus ↗</a></li>"
+                        "<li><strong>Core Branches (Biotech, Civil, Mechanical):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/FY%20B%20Tech%20Core%20Branch_Final%20Structure%20%26%20Syllabus%20New.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Core Branches Structure &amp; Syllabus ↗</a></li>"
+                        "<li><strong>UG Academic Rules &amp; Regulations:</strong> <a href='https://www.kitcoek.in/documents/academics/importantDocuments/UG%20ACADEMIC%20RULES%20AND%20REGULATIONS_NEP%202020.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 NEP-2020 Academic Ordinances ↗</a></li>"
+                        "</ul>"
+                    ),
+                    "follow_up_questions": [
+                        "Show me BSH First Year timetable",
+                        "Where is Central Library?",
+                        "How to check attendance in vmedulife"
+                    ]
+                }
+            elif any(w in q_low for w in ["biotech", "biotechnology"]):
+                return {
+                    "answer": (
+                        "<p><strong>Department of Biotechnology Engineering — Syllabus:</strong></p>"
+                        "<ul>"
+                        "<li><strong>Second Year (S.Y. B.Tech Biotech):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/SY%20BTech%20syllabus%20contents%202022-23.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. Biotech Syllabus PDF ↗</a></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech Biotech):</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/TY%20BTech%20syllabus%20contents%202023-24.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. Biotech Syllabus PDF ↗</a></li>"
+                        "<li><strong>Biotechnology 2nd Cycle Structure:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Autonomy%202nd%20Cycle%20Structure%20Biotech%20%20wef%202022-23.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Biotech Structure &amp; Scheme ↗</a></li>"
+                        "</ul>"
+                    ),
+                    "follow_up_questions": [
+                        "Where is Biotechnology Lab?",
+                        "Tell me about ISTE club",
+                        "Show me BSH First Year timetable"
+                    ]
+                }
+            else:
+                # Default to Computer Science & Engineering (CSE)
+                return {
+                    "answer": (
+                        "<p><strong>Department of Computer Science &amp; Engineering (CSE) — Syllabus &amp; Curriculum:</strong></p>"
+                        "<p>The CSE curriculum is autonomous and aligned with the official 2023 [NEP-2020] Scheme.</p>"
+                        "<ul>"
+                        "<li><strong>Second Year (S.Y. B.Tech CSE):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/SY-CSE-AY-2022-23-Syllabus%20-%20updatged_CO_PO.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 S.Y. CSE Syllabus PDF ↗</a><br><em>Key Subjects: Discrete Mathematics, Data Structures &amp; Algorithms, OOP with Java/C++, Computer Organization &amp; Architecture.</em></li>"
+                        "<li><strong>Third Year (T.Y. B.Tech CSE):</strong> <a href='https://kitcoek.s3.amazonaws.com/syllabus/TY-CSE-Syllabus-AY-2023-24%20-%20updated%20copy%2025.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 T.Y. CSE Syllabus PDF ↗</a><br><em>Key Subjects: DBMS, Design &amp; Analysis of Algorithms, Operating Systems, Machine Learning, Computer Networks.</em></li>"
+                        "<li><strong>Final Year B.Tech CSE:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/2017-FinalYear_Old_syllabus.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Final Year CSE Syllabus PDF ↗</a><br><em>Key Subjects: Cloud Computing, Distributed Systems, Information Security, Capstone Project.</em></li>"
+                        "<li><strong>Complete Curriculum Structure:</strong> <a href='https://kitcoek.s3.ap-south-1.amazonaws.com/syllabus/Structure4Web_AY2324.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Full CSE Structure (PDF) ↗</a></li>"
+                        "</ul>"
+                        "<p>Direct download buttons are also available in the interactive syllabus card below.</p>"
+                    ),
+                    "follow_up_questions": [
+                        "Show me AIML syllabus",
+                        "Show me CSBS syllabus",
+                        "BSH first year time table",
+                        "Where is Central Library?"
+                    ]
+                }
+
         # 7. Document RAG chunks synthesis
         if context_chunks:
             clean_chunks = []
@@ -521,7 +630,16 @@ Student Query: {query}
             if clean_chunks:
                 first = clean_chunks[0]
                 paragraphs = [p.strip() for p in first.split("\n") if p.strip()]
-                formatted = "".join(f"<p>{p}</p>" for p in paragraphs[:4])
+                linkified_paragraphs = []
+                for p in paragraphs[:5]:
+                    def repl_link(m):
+                        url = m.group(1).rstrip('.,;:)]>')
+                        is_pdf = '.pdf' in url.lower()
+                        lbl = '📄 Download Syllabus PDF ↗' if is_pdf else f'{url} ↗'
+                        return f'<a href="{url}" target="_blank" rel="noopener noreferrer" class="chat-inline-link">{lbl}</a>'
+                    p_linked = re.sub(r'(https?://[^\s<>"]+)', repl_link, p)
+                    linkified_paragraphs.append(f"<p>{p_linked}</p>")
+                formatted = "".join(linkified_paragraphs)
                 return {
                     "answer": formatted,
                     "follow_up_questions": [
