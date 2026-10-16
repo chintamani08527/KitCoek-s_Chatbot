@@ -538,19 +538,20 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     
     if not is_relevant:
         out_msg = (
-            "<p>I am the official <strong>KITCOEK AI Assistant</strong>. "
-            "I can only help you with questions related to KITCOEK campus, engineering academics, "
-            "NEP-2020 syllabus, subjects, examinations, campus locations, and official Student Clubs. "
-            "Please ask a question about KITCOEK.</p>"
+            "<p>⚠️ <strong>Out of Context Query:</strong> I am the dedicated <strong>KITCOEK AI Assistant</strong>, "
+            "designed exclusively to assist with <strong>KITCoEK Kolhapur</strong> campus information, engineering academics, "
+            "NEP-2020 syllabus, class timetables, examinations, VMedulife portal, campus navigation, and official Student Clubs.</p>"
+            "<p>Your question appears to be outside the scope of college-related topics. Please ask a question related to KITCOEK!</p>"
         )
         return ChatResponse(
             reply=out_msg,
             category="out_of_scope",
             sources=[],
             follow_up_questions=[
-                "What student clubs are available at KIT?",
-                "Which clubs are related to coding and AI?",
-                "What is the NEP-2020 syllabus for CSE?"
+                "What engineering branches are offered at KIT?",
+                "What student clubs are available?",
+                "How to check attendance in VMedulife?",
+                "Show BSH First Year timetable"
             ]
         )
 

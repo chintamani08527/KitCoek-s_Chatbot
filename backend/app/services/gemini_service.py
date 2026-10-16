@@ -23,10 +23,18 @@ class GeminiService:
         """
         q_lower = query.lower()
 
-        # Fast heuristic for unrelated out-of-scope queries to save network calls
+        # Fast heuristic for unrelated out-of-scope queries (celebrities, movies, politics, recipes, sports outside college, etc.)
         unrelated_topics = [
-            "recipe", "cake", "bake", "cook", "movie", "film", "actor", "bitcoin", "crypto",
-            "stock market", "football", "cricket match", "weather in", "song", "lyrics", "game"
+            "salman khan", "shah rukh", "srk", "sharukh", "akshay kumar", "deepika", "katrina", "alia bhatt", "ranbir",
+            "amitabh", "hollywood", "bollywood", "actor", "actress", "celebrity", "celebrities",
+            "movie", "movies", "film", "films", "cinema", "box office", "netflix", "song", "songs", "lyrics", "singer",
+            "recipe", "recipes", "cake", "bake", "cook", "cooking", "pizza", "burger", "biryani", "pasta", "tea recipe",
+            "cricket match", "ipl", "virat kohli", "rohit sharma", "dhoni", "football", "messi", "ronaldo", "fifa", "premier league",
+            "bitcoin", "crypto", "cryptocurrency", "stock market", "trading", "share market", "forex",
+            "weather in", "weather today", "tell me a joke", "tell a joke", "joke", "jokes",
+            "write a poem", "sing a song", "flirt", "who is the prime minister", "narendra modi", "donald trump", "biden", "putin",
+            "capital of", "president of", "population of", "prime minister of", "cm of", "chief minister of",
+            "who is elon musk", "bill gates", "mark zuckerberg", "sundar pichai"
         ]
         if any(topic in q_lower for topic in unrelated_topics):
             # Double check it doesn't mention college
@@ -59,7 +67,7 @@ class GeminiService:
         is_room_code = any(code in q_lower for code in classroom_codes)
         is_nav_explicit = is_room_code or any(kw in q_lower for kw in physical_nav_keywords) or (
             ("where is" in q_lower or "how to reach" in q_lower or "location of" in q_lower) and
-            any(place in q_lower for place in ["library", "canteen", "imer", "mechanical", "biotechnology", "auditorium", "seminar hall", "entrance", "office", "classroom", "lab", "building"])
+            any(place in q_lower for place in ["library", "canteen", "imer", "mechanical", "biotechnology", "auditorium", "seminar hall", "entrance", "office", "classroom", "lab", "building", "hostel", "workshop"])
         )
 
         # Only classify as navigation if it is genuinely a physical classroom or map navigation query and NOT just a syllabus/timetable document query
@@ -77,21 +85,35 @@ class GeminiService:
             return {"category": "clubs", "is_relevant": True}
 
         college_keywords = [
-            "kit", "kitcoek", "syllabus", "subject", "semester", "sem", "nep", "exam", "course",
-            "unit", "notes", "passing", "grade", "credits", "result", "results", "marks", "prn", "admission", "fee",
-            "scholarship", "hostel", "mess", "faculty", "hod", "department", "attendance", "placement", "rules",
-            "portal", "student portal", "lms", "vmedulife", "sgpa", "cgpa", "studentsummary",
-            "timetable", "time table", "schedule", "sps", "statistical methods", "handwritten notes", "handwritten", "variance"
+            "kit", "kitcoek", "kitcoe", "kolhapur", "gokul shirgaon", "college", "campus", "institute", "engineering",
+            "cse", "csbs", "aiml", "data science", "aids", "etc", "entc", "telecommunication", "mechanical", "electrical", "civil", "environmental", "biotech", "biotechnology", "bsh", "mtech", "btech", "m.tech", "b.tech", "mba", "imer",
+            "syllabus", "curriculum", "subject", "subjects", "semester", "sem", "nep", "nep-2020", "nep2020", "autonomy", "autonomous", "scheme",
+            "unit", "notes", "handwritten", "pyq", "question paper", "question papers", "passing", "grade", "grades", "credits", "result", "results", "marks", "marksheet", "mark sheet", "prn", "admission", "admissions", "cutoff", "cutoffs", "cap round", "mht cet", "jee", "fee", "fees",
+            "scholarship", "ebc", "freeship", "mahadbt", "hostel", "mess", "canteen", "library", "reading room", "workshop", "auditorium", "seminar hall",
+            "faculty", "teacher", "teachers", "professor", "professors", "prof", "hod", "principal", "director", "department", "departments",
+            "attendance", "attendence", "attandance", "placement", "placements", "package", "packages", "highest package", "average package", "lpa", "tpo", "internship", "internships", "rules", "regulations", "ordinance",
+            "portal", "student portal", "lms", "vmedulife", "vmedu", "sgpa", "cgpa", "studentsummary", "hall ticket", "admit card",
+            "timetable", "time table", "schedule", "sps", "statistical methods", "variance", "academic calendar", "calendar", "calender", "notice", "circular",
+            "meraki", "pioneer", "gathering", "annual gathering", "bus", "transport", "wifi", "bonafide", "id card", "leaving certificate", "alumni", "shivaji university",
+            "gym", "gymkhana", "ground", "sports", "dress code", "uniform"
         ]
         if any(w in q_lower for w in college_keywords) or is_academic_doc_query:
             return {"category": "academic", "is_relevant": True}
 
-        # Check if greeting or introduction
-        greetings = ["hi", "hello", "hey", "who are you", "what can you do", "help", "good morning", "good evening"]
-        if any(q_lower.startswith(g) or q_lower == g for g in greetings):
+        # Check if greeting or conversational intro
+        greetings = [
+            "hi", "hello", "hey", "hii", "heyy", "who are you", "what can you do", "help",
+            "about yourself", "good morning", "good afternoon", "good evening", "namaste",
+            "thank you", "thanks", "bye", "goodbye"
+        ]
+        words = set(re.findall(r'\b\w+\b', q_lower))
+        is_greeting = any(q_lower.startswith(g) or q_lower == g for g in greetings) or any(w in words for w in ["hi", "hello", "hey", "hii", "heyy", "thanks", "thankyou"])
+        if is_greeting:
             return {"category": "general_college", "is_relevant": True}
 
-        return {"category": "academic", "is_relevant": True}
+        # STRICT SCOPE ENFORCEMENT:
+        # If query has no college keyword, navigation keyword, club keyword, or greeting, it is strictly OUT OF SCOPE.
+        return {"category": "out_of_scope", "is_relevant": False}
 
     def generate_rag_answer(
         self,
@@ -130,8 +152,13 @@ class GeminiService:
             context_str += json.dumps(location_data, indent=2) + "\n\n"
 
         system_instruction = """You are the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
-Core Directives:
-1. ONLY answer questions regarding KITCOEK campus, student academics (syllabus, NEP-2020, subjects, exams), campus locations, and official Student Clubs.
+1. STRICT SCOPE & OUT-OF-CONTEXT ENFORCEMENT:
+   You are exclusively the official AI Assistant for KITCOEK (Kolhapur Institute of Technology's College of Engineering, Kolhapur).
+   - ONLY answer questions directly pertaining to KITCOEK campus, engineering academics (syllabus, NEP-2020, subjects, exams, marks, results), campus facilities & room navigation, student clubs, timetables, and the VMedulife portal.
+   - If the user asks ANY question outside the college context (e.g., celebrities, actors like Salman Khan, Bollywood/Hollywood movies, politics, national/world leaders, general cricket/sports outside college, cooking recipes, general jokes, non-college stories, general homework/coding unrelated to college courses):
+     YOU MUST DECLINE AND RESPOND WITH:
+     "<p>⚠️ <strong>Out of Context Query:</strong> I am the dedicated <strong>KITCOEK AI Assistant</strong>, designed exclusively to answer questions about <strong>KITCoEK Kolhapur</strong> campus, admissions, engineering syllabus, timetables, examinations, VMedulife portal, and official Student Clubs.</p><p>Your question appears to be outside the scope of college-related topics. Please ask a question related to KITCOEK!</p>"
+   - NEVER answer non-college trivia, celebrity biographies, or general world questions.
 2. Official Student Clubs: KITCOEK has 18 official student clubs and activity groups:
    - Technical: ISTE, Team Mavericks, Student Developers Club (SDC), Society of Women Engineers (SWE)
    - Entrepreneurship: E-Cell KITCoEK
@@ -375,7 +402,24 @@ Student Query: {query}
     ) -> Dict[str, Any]:
         q_low = query.strip().lower()
         words = set(re.findall(r'\b\w+\b', q_low))
-        
+        # 0. Strict Scope Check: If query is out of college context, decline immediately!
+        classification = self.classify_query(query)
+        if not classification.get("is_relevant", True):
+            return {
+                "answer": (
+                    "<p>⚠️ <strong>Out of Context Query:</strong> I am the dedicated <strong>KITCOEK AI Assistant</strong>, "
+                    "designed exclusively to assist with <strong>KITCoEK Kolhapur</strong> campus information, engineering academics, "
+                    "NEP-2020 syllabus, class timetables, examinations, VMedulife portal, campus navigation, and official Student Clubs.</p>"
+                    "<p>Your question appears to be outside the scope of college-related topics. Please ask a question related to KITCOEK!</p>"
+                ),
+                "follow_up_questions": [
+                    "What engineering branches are offered at KIT?",
+                    "What student clubs are available?",
+                    "How to check attendance in VMedulife?",
+                    "Show BSH First Year timetable"
+                ]
+            }
+
         # 1. Greetings & Welcome
         greetings = ["hi", "hello", "hey", "hola", "namaste", "good morning", "good afternoon", "good evening", "greetings", "hii", "heyy"]
         if any(w in words for w in greetings) or q_low in greetings or q_low.startswith("hello") or q_low.startswith("hi "):
