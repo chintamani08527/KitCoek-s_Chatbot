@@ -739,24 +739,42 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     portal_url = None
     vmedulife_guide = None
 
-    is_result_intent = any(kw in q_low for kw in [
-        "result", "results", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet",
-        "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result"
-    ])
-    is_vmedu_notes_intent = any(kw in q_low for kw in [
-        "my learnings", "start learning", "learning material", "uploaded by teacher", "teacher notes",
-        "vm notes", "vmedulife notes", "syllabus on vmedulife", "course material", "study material uploaded"
-    ])
-    is_attendance_intent = any(kw in q_low for kw in [
-        "attendance", "daily attendance", "weekly attendance", "monthly attendance",
-        "absent", "present", "check attendance", "attendance percentage", "classes attended"
-    ])
+    is_result_intent = (
+        any(kw in q_low for kw in [
+            "result", "results", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet", "mark sheet",
+            "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result",
+            "exam result", "examination result", "mse result", "ese result", "revaluation", "grievance", "paper review"
+        ])
+        or (any(r in q_low for r in ["result", "results", "marks", "grades"]) and any(p in q_low for p in ["vmedulife", "portal", "lms", "check", "see", "view"]))
+    )
+    is_vmedu_notes_intent = (
+        any(kw in q_low for kw in [
+            "my learnings", "start learning", "learning material", "uploaded by teacher", "teacher notes", "teacher note",
+            "vm notes", "vmedulife notes", "syllabus on vmedulife", "course material", "study material uploaded",
+            "notes in vmedulife", "notes on vmedulife", "notes from vmedulife", "study material in vmedulife",
+            "study materials in vmedulife", "lecture notes in vmedulife", "vmedulife study material",
+            "download notes in vmedulife", "find notes in vmedulife", "access notes in vmedulife"
+        ])
+        or (any(n in q_low for n in ["note", "notes", "material", "materials", "ppt", "slides", "learning"]) and any(p in q_low for p in ["vmedulife", "portal", "lms"]))
+    )
+    is_attendance_intent = (
+        any(kw in q_low for kw in [
+            "attendance", "attendence", "attandance", "atendance", "attandence", "attendece", "attendace",
+            "daily attendance", "weekly attendance", "monthly attendance",
+            "absent", "present", "check attendance", "attendance percentage", "classes attended",
+            "defaulter", "defaulters", "detained", "75% attendance", "75 % attendance", "minimum attendance",
+            "track attendance", "see attendance", "view attendance", "attendance record", "attendance portal",
+            "were to attend", "where to attend"
+        ])
+        or ("attend" in q_low and not any(x in q_low for x in ["attention", "attendee"]))
+    )
     is_generic_portal_intent = any(kw in q_low for kw in [
-        "portal", "student portal", "lms", "vmedulife", "hall ticket", "admit card", "studentsummary"
+        "portal", "student portal", "lms", "vmedulife", "vmedu", "hall ticket", "admit card", "studentsummary", "erp portal"
     ])
 
     if is_result_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        category = "academic"
         vmedulife_guide = {
             "type": "result",
             "title": "Steps to Check Result & Answer Sheet Reviews on VMedulife",
@@ -765,13 +783,15 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 "Open the official KITCoEK VMedulife portal link: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur",
                 "If prompted, log in with your student account credentials (PRN and password).",
                 "Open Assessment (or Exam Forms, depending on your portal).",
-                "Select Result → Result (or if paper is displayed, click on Answer Sheet Review and Appeals).",
+                "Select Result -> Result (or if paper is displayed, click on Answer Sheet Review and Appeals).",
                 "Select the relevant Academic Year and click Apply, if prompted.",
-                "Find your semester's result and click VIEW."
+                "Find your semester's result and click VIEW to see your subject marks, credits, and grades."
             ]
         }
     elif is_vmedu_notes_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        notes_url = "https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy"
+        category = "academic"
         vmedulife_guide = {
             "type": "notes",
             "title": "Steps to Access 'My Learnings' (Syllabus & Teacher Notes) on VMedulife",
@@ -782,27 +802,41 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 "Select Start Learning.",
                 "Open My Learnings.",
                 "You should now be able to see the learning materials or courses assigned to you.",
-                "Click the relevant subject or learning item to open it."
+                "Click the relevant subject or learning item to open, view, or download lecture notes and PPTs."
             ]
         }
     elif is_attendance_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        category = "academic"
         vmedulife_guide = {
             "type": "attendance",
             "title": "Steps to Check Attendance on KITCoEK VMedulife",
             "portal_url": portal_url,
             "steps": [
                 "Open the KITCoEK VMedulife website (https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur) and log in with your student ID (PRN) and password.",
-                "Go to Academic Planning.",
-                "Look for the Attendance option.",
+                "Go to Academic Planning on the left navigation dashboard.",
+                "Look for and click on the Attendance option.",
                 "Open the attendance section.",
                 "Choose the attendance view you want: Daily Attendance, Weekly Attendance, or Monthly Attendance.",
                 "Select the required date, week, or month, if prompted.",
-                "View your attendance details, including the classes attended and absent, if displayed."
+                "Review your attendance records, lecture-by-lecture presence, and cumulative percentage (ensure you maintain >= 75% for exam eligibility)."
             ]
         }
     elif is_generic_portal_intent:
         portal_url = "https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur"
+        category = "academic"
+        vmedulife_guide = {
+            "type": "portal",
+            "title": "KITCoEK Official Student Portal (vMedulife ERP & LMS)",
+            "portal_url": portal_url,
+            "steps": [
+                "Open the official KITCoEK VMedulife portal link: https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur",
+                "Log in using your student credentials (PRN and password).",
+                "To check Attendance: Go to Academic Planning -> Attendance.",
+                "To access Course Notes: Go to Academic Planning -> Start Learning -> My Learnings.",
+                "To view Exam Results: Go to Assessment -> Result -> Result."
+            ]
+        }
 
     # 3.6 Student Notes & Timetables detection
     notes_url = None
@@ -1002,9 +1036,16 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
 
     # Prepend official VMedulife guide if matched
     if vmedulife_guide:
-        guide_lines = [f"OFFICIAL KITCOEK VMEDULIFE GUIDE ({vmedulife_guide['title']}):"]
+        guide_lines = [
+            f"OFFICIAL KITCOEK VMEDULIFE GUIDE ({vmedulife_guide['title']}):",
+            f"Portal URL: {vmedulife_guide.get('portal_url', 'https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur')}",
+            "Step-by-step instructions:"
+        ]
         for idx, s in enumerate(vmedulife_guide["steps"], start=1):
             guide_lines.append(f"{idx}. {s}")
+        guide_lines.append("DIRECTIVE: Answer the student's question clearly, warmly, and politely with structured step-by-step instructions. Link to <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank'>KITCoEK VMedulife Student Portal ↗</a>. DO NOT output irrelevant club reports, activity descriptions, or unconnected faculty names.")
+        # Filter out irrelevant club chunks when query is specifically about portal/attendance/notes/result
+        context_texts = [c for c in context_texts if "REPORT (2025" not in c and "Official Report" not in c and "Activity Report" not in c and "officer making" not in c.lower()]
         context_texts.insert(0, "\n".join(guide_lines))
 
     # Prepend official notice context if matched
