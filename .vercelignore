@@ -1,0 +1,10 @@
+.venv
+testing
+*.zip
+backend/data/chroma_db/*/
+backend/data/chroma_db/*.bin
+backend/data/chroma_db/*.sqlite3
+backend/data/chroma_db/chroma.sqlite3
+*.pyc
+__pycache__
+.git

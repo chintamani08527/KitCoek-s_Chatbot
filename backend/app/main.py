@@ -89,11 +89,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API routes
+# Vercel internal rewrite path restoration middleware
+@app.middleware("http")
+async def restore_vercel_path(request, call_next):
+    matched_path = request.headers.get("x-matched-path")
+    if matched_path and request.scope.get("path") in ("/api/index.py", "/index.py", "/api/index", "/api", "/api/"):
+        request.scope["path"] = matched_path
+    return await call_next(request)
+
+# API routes (support both /api/* and direct /* for Vercel compatibility)
 app.include_router(api_router, prefix="/api")
+app.include_router(api_router)
 
 # Map endpoint
 @app.get("/api/locations/map")
+@app.get("/locations/map")
 def get_campus_map():
     map_jpg = "./backend/data/maps/campus_map.jpg"
     if os.path.exists(map_jpg):
@@ -112,8 +122,9 @@ def serve_campus_map_direct():
         return FileResponse(map_jpg, media_type="image/jpeg")
     return {"error": "Campus map not found"}
 
-# Health check endpoint
+# Health check endpoint (aliased for both /api/health and /health)
 @app.get("/api/health")
+@app.get("/health")
 def health_check():
     from backend.app.services.gemini_service import get_gemini_service
     gemini = get_gemini_service()

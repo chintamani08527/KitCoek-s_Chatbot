@@ -19,3 +19,5 @@ backend/data/documents/uploads/
 
 # Archive bundles
 *.zip
+
+.vercel
