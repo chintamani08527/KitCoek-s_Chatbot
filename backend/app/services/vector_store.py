@@ -121,27 +121,64 @@ class VectorStoreService:
         return dot_product / (norm_a * norm_b)
 
     def search(self, query: str, top_k: int = None, threshold: float = None) -> List[Dict[str, Any]]:
-        """Retrieve most relevant chunks for a user query."""
+        """Retrieve most relevant chunks for a user query with vector and keyword fallback."""
         k = top_k or settings.TOP_K_RESULTS
         min_threshold = threshold or settings.SIMILARITY_THRESHOLD
         
-        if not self.pool.has_keys() or not self.data:
+        if not self.data:
             return []
             
         q_key = query.strip().lower()
-        if q_key in self._query_cache:
-            query_embedding = self._query_cache[q_key]
-        else:
-            query_embedding = self.embed_texts([query], is_query=True)[0]
-            if len(self._query_cache) > 300:
-                self._query_cache.clear()
-            self._query_cache[q_key] = query_embedding
+        query_embedding = None
         
-        scored_items = []
+        if self.pool and self.pool.has_keys():
+            if q_key in self._query_cache:
+                query_embedding = self._query_cache[q_key]
+            else:
+                try:
+                    embs = self.embed_texts([query], is_query=True)
+                    if embs:
+                        query_embedding = embs[0]
+                        if len(self._query_cache) > 300:
+                            self._query_cache.clear()
+                        self._query_cache[q_key] = query_embedding
+                except Exception as ex:
+                    query_embedding = None
+        
+        # If vector embedding succeeded, perform cosine similarity
+        if query_embedding:
+            scored_items = []
+            for item in self.data:
+                if "embedding" in item and item["embedding"]:
+                    score = self._cosine_similarity(query_embedding, item["embedding"])
+                    if score >= min_threshold:
+                        scored_items.append({
+                            "chunk_text": item["text"],
+                            "document_name": item.get("document_name", "Official Record"),
+                            "category": item.get("category", "General"),
+                            "document_id": item.get("document_id", ""),
+                            "score": round(score, 3),
+                            "pdf_url": item.get("pdf_url"),
+                            "source_url": item.get("source_url"),
+                            "academic_year": item.get("academic_year"),
+                            "club_id": item.get("club_id")
+                        })
+            scored_items.sort(key=lambda x: x["score"], reverse=True)
+            if scored_items:
+                return scored_items[:k]
+                
+        # Keyword / Term Search Fallback (Fast, offline, 0 API calls)
+        q_terms = [t for t in q_key.split() if len(t) > 2]
+        if not q_terms:
+            return []
+            
+        keyword_matches = []
         for item in self.data:
-            score = self._cosine_similarity(query_embedding, item["embedding"])
-            if score >= min_threshold:
-                scored_items.append({
+            text_low = item.get("text", "").lower()
+            matches = sum(1 for t in q_terms if t in text_low)
+            if matches > 0:
+                score = matches / len(q_terms)
+                keyword_matches.append({
                     "chunk_text": item["text"],
                     "document_name": item.get("document_name", "Official Record"),
                     "category": item.get("category", "General"),
@@ -152,10 +189,8 @@ class VectorStoreService:
                     "academic_year": item.get("academic_year"),
                     "club_id": item.get("club_id")
                 })
-                
-        # Sort by similarity descending
-        scored_items.sort(key=lambda x: x["score"], reverse=True)
-        return scored_items[:k]
+        keyword_matches.sort(key=lambda x: x["score"], reverse=True)
+        return keyword_matches[:k]
 
 # Singleton instance
 _vector_store = None
