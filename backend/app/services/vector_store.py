@@ -14,9 +14,16 @@ class VectorStoreService:
     Seamlessly persists all document chunks, metadata, and similarity cosine index.
     """
     def __init__(self):
+        base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        default_index = os.path.join(base_dir, "data", "chroma_db", "vector_index.json")
         self.storage_dir = os.path.abspath(settings.CHROMA_PERSIST_DIRECTORY)
-        os.makedirs(self.storage_dir, exist_ok=True)
+        try:
+            os.makedirs(self.storage_dir, exist_ok=True)
+        except Exception:
+            pass
         self.index_file = os.path.join(self.storage_dir, "vector_index.json")
+        if not os.path.exists(self.index_file) and os.path.exists(default_index):
+            self.index_file = default_index
         
         # Load or initialize vector index
         self.data: List[Dict[str, Any]] = []
@@ -35,8 +42,12 @@ class VectorStoreService:
         self._query_cache = {}
 
     def _save(self):
-        with open(self.index_file, "w", encoding="utf-8") as f:
-            json.dump(self.data, f, ensure_ascii=False)
+        try:
+            with open(self.index_file, "w", encoding="utf-8") as f:
+                json.dump(self.data, f, ensure_ascii=False)
+        except (OSError, IOError) as e:
+            # Safe for read-only serverless filesystems
+            pass
 
     def embed_texts(self, texts: List[str], is_query: bool = False) -> List[List[float]]:
         """Generate high-dimension embeddings using Gemini pool with automatic multi-key failover."""

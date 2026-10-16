@@ -9,7 +9,8 @@ __pycache__/
 .env
 
 # Vector & SQLite DB data
-backend/data/chroma_db/
+backend/data/chroma_db/*
+!backend/data/chroma_db/vector_index.json
 *.db
 *.sqlite3
 
