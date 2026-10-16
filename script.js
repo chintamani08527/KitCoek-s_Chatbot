@@ -49,13 +49,64 @@ let currentCategory = 'All';
 let currentSearch = '';
 let clubsLoaded = false;
 
-// ---- API Base URL (auto-resolves for http, localhost, live-server and file://) ----
+// ---- Cloud Production Backend URL ----
+const PROD_API_BASE = 'https://kitcoek-chatbot.vercel.app';
+
+// ---- API Base URL (auto-resolves for http, localhost, live-server, file:// and Vercel) ----
 const API_BASE = (function() {
-  if (window.location.protocol === 'file:' || (window.location.port && window.location.port !== '8000')) {
+  if (typeof window === 'undefined') return '';
+  // If running directly on Vercel or custom domain
+  if (window.location.hostname.includes('vercel.app') || window.location.hostname.includes('kitcoek')) {
+    return '';
+  }
+  // If running locally on port 8000
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    if (window.location.port === '8000') {
+      return '';
+    }
     return 'http://127.0.0.1:8000';
   }
-  return '';
+  // For file:// or live-server on other ports without local backend, fallback to cloud production
+  return PROD_API_BASE;
 })();
+
+async function apiFetch(endpoint, options = {}) {
+  const candidates = [];
+  
+  // 1. Configured base candidate
+  candidates.push(`${API_BASE}${endpoint}`);
+  
+  // 2. Direct route alias (e.g. /chat if /api/chat returns 404)
+  if (endpoint.startsWith('/api/')) {
+    candidates.push(`${API_BASE}${endpoint.replace('/api/', '/')}`);
+  }
+  
+  // 3. Cloud production fallback if local candidate fails
+  if (API_BASE && API_BASE !== PROD_API_BASE) {
+    candidates.push(`${PROD_API_BASE}${endpoint}`);
+    if (endpoint.startsWith('/api/')) {
+      candidates.push(`${PROD_API_BASE}${endpoint.replace('/api/', '/')}`);
+    }
+  }
+
+  let lastError = null;
+  for (const url of candidates) {
+    try {
+      const res = await fetch(url, options);
+      if (res.ok) {
+        return res;
+      }
+      if (res.status === 404) {
+        continue;
+      }
+      return res;
+    } catch (err) {
+      lastError = err;
+      continue;
+    }
+  }
+  throw lastError || new Error('Network error reaching KITCOEK server');
+}
 
 // ---- Student session ----
 let studentName = 'KITCOEK Student';
@@ -664,7 +715,7 @@ async function sendMessage(text){
   showTyping();
 
   try {
-    const response = await fetch(`${API_BASE}/api/chat`, {
+    const response = await apiFetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1069,7 +1120,7 @@ async function sendMessage(text){
   } catch (err) {
     console.error('API Error:', err);
     removeTyping();
-    const errorHtml = `<p class="chat-error-msg">⚠️ Unable to reach KITCOEK backend server. Please verify backend is running on port 8000.</p>`;
+    const errorHtml = `<p class="chat-error-msg">⚠️ Unable to reach KITCOEK backend server. Please check your network connection or verify the server status.</p>`;
     currentConv.messages.push({
       role: 'bot',
       html: errorHtml,
@@ -1188,8 +1239,8 @@ async function loadClubsDataIfNeeded() {
   if (clubsLoaded) return;
   try {
     const [clubsRes, catsRes] = await Promise.all([
-      fetch(`${API_BASE}/api/clubs`),
-      fetch(`${API_BASE}/api/clubs/categories`)
+      apiFetch('/api/clubs'),
+      apiFetch('/api/clubs/categories')
     ]);
     if (!clubsRes.ok) throw new Error('Failed to load clubs');
     allClubs = await clubsRes.json();

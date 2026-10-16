@@ -655,17 +655,24 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     ]
     
     # 6. Persist Chat History in DB
-    history_entry = ChatHistory(
-        id=str(uuid.uuid4()),
-        session_id=req.session_id or "default",
-        user_prn=req.student_prn,
-        query=query,
-        response=rag_result["answer"],
-        category=category,
-        sources=json.dumps([c.dict() for c in citations]) if citations else None
-    )
-    db.add(history_entry)
-    db.commit()
+    try:
+        history_entry = ChatHistory(
+            id=str(uuid.uuid4()),
+            session_id=req.session_id or "default",
+            user_prn=req.student_prn,
+            query=query,
+            response=rag_result["answer"],
+            category=category,
+            sources=json.dumps([c.dict() for c in citations]) if citations else None
+        )
+        db.add(history_entry)
+        db.commit()
+    except Exception as dbe:
+        print(f"[Warning] Chat history save skipped: {dbe}")
+        try:
+            db.rollback()
+        except Exception:
+            pass
     
     resp = ChatResponse(
         reply=rag_result["answer"],
