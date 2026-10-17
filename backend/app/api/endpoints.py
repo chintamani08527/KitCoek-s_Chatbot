@@ -982,43 +982,59 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     matched_cals = None
     notice_board_url = None
 
-    is_notice_intent = any(kw in q_low for kw in [
+    is_calendar_intent = any(kw in q_low for kw in [
+        "academic calendar", "calendar", "calender", "term calendar", "semester calendar", "academic schedule"
+    ]) or (
+        any(w in q_low for w in ["calendar", "calender"]) and any(y in q_low for y in ["2026", "2027", "2025", "odd", "even", "sem", "academic", "term"])
+    )
+
+    is_notice_specific = any(kw in q_low for kw in [
         "notice", "notices", "circular", "circulars", "mse", "midsem", "mid sem", "mid semester",
-        "academic calendar", "calendar", "calender", "term calendar", "semester calendar",
         "ese exam", "makeup exam", "re-mse", "re exam", "re-exam", "backlog", "back log",
         "hall ticket", "admit card", "paper seeing", "grievance", "exam schedule",
-        "commencement", "exam notice", "latest news", "announcement", "announcements"
+        "exam notice", "latest news", "announcement", "announcements"
     ])
+
+    is_exam_timetable_intent = any(k in q_low for k in ["exam notice", "exam circular", "exam timetable", "exam schedule", "mse timetable", "ese timetable", "re-mse"])
+
+    is_pure_calendar_intent = is_calendar_intent and not (
+        any(kw in q_low for kw in ["notice", "notices", "circular", "circulars", "announcement", "announcements"])
+    )
 
     is_pure_portal_guide = bool(vmedulife_guide) and not any(k in q_low for k in [
         "notice", "circular", "calendar", "calender", "timetable", "time table", "mse", "ese", "schedule", "latest"
     ])
 
-    is_exam_timetable_intent = any(k in q_low for k in ["exam notice", "exam circular", "exam timetable", "exam schedule", "mse timetable", "ese timetable", "re-mse"])
-    if not is_pure_portal_guide and (is_notice_intent or is_exam_timetable_intent):
-        notice_board_url = "https://www.kitcoek.in/notice"
-        category = "notices" if is_notice_intent and category not in ["clubs", "navigation"] else category
+    if not is_pure_portal_guide:
+        if is_pure_calendar_intent:
+            # Academic Calendar specifically requested without notice circulars
+            notice_board_url = "https://www.kitcoek.in/notice"
+            category = "academic" if category not in ["clubs", "navigation"] else category
+            matched_cals = notice_service.get_academic_calendars(year_query=query)
+            matched_notices = None  # Explicitly suppress generic notices card when user specifically asks for Academic Calendar
+        elif is_notice_specific or is_exam_timetable_intent or is_calendar_intent:
+            notice_board_url = "https://www.kitcoek.in/notice"
+            category = "notices" if category not in ["clubs", "navigation"] else category
 
-        # Check if academic calendar specifically requested
-        if any(w in q_low for w in ["calendar", "calender", "academic calendar", "term", "academic year", "commencement"]):
-            matched_cals = notice_service.get_academic_calendars()
+            if is_calendar_intent:
+                matched_cals = notice_service.get_academic_calendars(year_query=query)
 
-        # Search relevant notices from live kitcoek notice API
-        found_notices = notice_service.search_notices(query, limit=5)
-        if not found_notices and any(w in q_low for w in ["notice", "notices", "latest", "circular", "announcement", "news"]):
-            found_notices = notice_service.get_latest_notices(limit=5)
+            # Search relevant notices from live kitcoek notice API
+            found_notices = notice_service.search_notices(query, limit=5)
+            if not found_notices and any(w in q_low for w in ["notice", "notices", "latest", "circular", "announcement", "news"]):
+                found_notices = notice_service.get_latest_notices(limit=5)
 
-        if found_notices:
-            matched_notices = [
-                {
-                    "title": n.get("title") or n.get("fileName"),
-                    "description": n.get("description"),
-                    "date": notice_service.parse_notice_date(n),
-                    "file_url": n.get("fileUrl"),
-                    "file_name": n.get("fileName")
-                }
-                for n in found_notices
-            ]
+            if found_notices:
+                matched_notices = [
+                    {
+                        "title": n.get("title") or n.get("fileName"),
+                        "description": n.get("description"),
+                        "date": notice_service.parse_notice_date(n),
+                        "file_url": n.get("fileUrl"),
+                        "file_name": n.get("fileName")
+                    }
+                    for n in found_notices
+                ]
 
     # 3.8 Meraki Flagship Gathering & Instagram Reels detection
     meraki_reels = None
@@ -1187,13 +1203,36 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         context_texts = [c for c in context_texts if "REPORT (2025" not in c and "Official Report" not in c and "Activity Report" not in c and "officer making" not in c.lower()]
         context_texts.insert(0, "\n".join(guide_lines))
 
-    # Prepend official notice context if matched
-    if matched_notices or matched_cals:
+    # Prepend official academic calendar or notice context if matched
+    if matched_cals and not matched_notices:
+        cal_ctx = [
+            "OFFICIAL KITCOEK ACADEMIC CALENDARS (AY 2026–27 & 2025–26):",
+            "The institute has officially released Academic Calendars for Autonomous Engineering programmes.",
+            "Key Academic Milestones for AY 2026–27 (Odd Semester):",
+            "1. S.Y., T.Y. & Final Year B.Tech:",
+            "   - Term Commencement: 14th July, 2026",
+            "   - S.Y. Induction: 21st to 26th July, 2026",
+            "   - Mid-Semester Examination (MSE): 08th to 13th September, 2026 (Result: 24th Sept)",
+            "   - KIT PBL Day: 05th November, 2026",
+            "   - End of Regular Academic Term: 14th November, 2026 (Remedial Classes: 17th–20th Nov)",
+            "   - End Semester Examination (Lab POE): 25th November to 03rd December, 2026",
+            "   - End Semester Examination (Theory ESE): 15th December, 2026 to 10th January, 2027",
+            "   - Even Semester Commencement: 19th January, 2027",
+            "2. First Year (F.Y. B.Tech & F.Y. M.Tech):",
+            "   - Student Induction Program (SIP): Phase-I (25–30 Aug), Phase-II (01–06 Sept), Phase-III (08–13 Sept 2026)",
+            "   - Term Commencement: 01st September, 2026",
+            "   - Mid-Semester Examination (MSE): 24th to 31st October, 2026 (Result: 14th Nov)",
+            "   - End Semester Examination (Theory ESE): 01st to 12th January, 2027",
+            "   - Even Semester Commencement: 15th January, 2027",
+            "DIRECTIVE: Present a clean, well-structured overview of the key semester dates and milestones (Commencement, MSE, ESE, and Even Sem start). DO NOT output any URLs, raw PDF links, or <a> anchor tags in your text response, because a dedicated interactive Academic Calendar card with 1-click PDF download buttons is automatically displayed directly below your answer."
+        ]
+        context_texts.insert(0, "\n".join(cal_ctx))
+    elif matched_notices or matched_cals:
         notice_ctx_lines = ["Official KITCOEK Notice Board & Academic Calendar Data (Source: https://www.kitcoek.in/notice):"]
         if matched_cals:
             notice_ctx_lines.append("Official Academic Calendars:")
             for cal in matched_cals:
-                notice_ctx_lines.append(f"- {cal['title']} ({cal['academic_year']}, {cal['term']}): {cal['pdf_url']}")
+                notice_ctx_lines.append(f"- {cal['title']} ({cal['academic_year']}, {cal['term']})")
         if matched_notices:
             notice_ctx_lines.append("Latest Relevant Notices & Circulars from Notice Board:")
             for n in matched_notices:

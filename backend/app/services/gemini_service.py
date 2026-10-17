@@ -235,46 +235,27 @@ class GeminiService:
        DO NOT include URLs, raw Google Drive links, or <a> anchor tags in your text reply, because an interactive systematic timetable card with 1-click access buttons is automatically displayed directly below your answer.
 8. OFFICIAL NOTICE BOARD & ACADEMIC CALENDARS (https://www.kitcoek.in/notice):
    When the student asks about Mid Semester Examinations (MSE), exam timetables, ESE exams, academic calendars, re-examinations, hall tickets, paper seeing / grievances, or the latest campus announcements:
-   - Cite the exact circular title, date, and link directly to the official notice PDF on the KITCOEK Notice Board whenever relevant.
-   - Mention that live official notices and circulars are accessible on: <a href="https://www.kitcoek.in/notice" target="_blank">📌 KITCOEK Official Notice Board (kitcoek.in/notice)</a>
    - For ACADEMIC CALENDARS:
-     * Academic Year 2026–27 (Odd Sem) - S.Y., T.Y. & Final Year B.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SY-TY-BTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf" target="_blank">📅 Academic Calendar 2026–27 (SY, TY, Final Year B.Tech) [PDF]</a>
+     * Present a clean, well-structured summary of the key academic milestones (Commencement, MSE, ESE, and Even Sem Start dates) for S.Y./T.Y./Final Year and F.Y. B.Tech.
+     * CRITICAL DIRECTIVE: DO NOT output raw URLs, PDF download links, or <a> anchor tags for calendars in your text response, because an interactive 1-click Academic Calendar download card is automatically displayed directly below your answer.
+     * Milestones for S.Y., T.Y. & Final Year B.Tech (Odd Sem 2026–27):
         - Commencement of Academic Sem-I: 14th July, 2026
         - S.Y. B.Tech Induction Program: 21st to 26th July, 2026
-        - ISE-I Marks Submission: 05th September, 2026
-        - Mid Semester Examination (MSE): 08th to 13th September, 2026
-        - MSE Result Declaration: 24th September, 2026
+        - Mid Semester Examination (MSE): 08th to 13th September, 2026 (Result: 24th Sept)
         - KIT PBL Day: 05th November, 2026
-        - End of Academic Activities (Regular): 14th November, 2026
-        - Remedial Classes: 17th to 20th November, 2026 (End of Academic Activities: 20th Nov)
-        - Submission of ISE-II Marks & Final Defaulters / Detained List: 18th November, 2026
-        - Freezing of Attendance & Marks: 20th November, 2026
+        - End of Academic Activities (Regular): 14th November, 2026 (Remedial Classes: 17th–20th Nov)
         - End Semester Examination (Lab POE/OE): 25th November to 03rd December, 2026
-        - Smart India Hackathon (SIH 2026 Probable): 08th–09th December, 2026
         - End Semester Examination (Theory ESE): 15th December, 2026 to 10th January, 2027
         - Commencement of Even Semester (Sem-II): 19th January, 2027
-        - ESE Result Declaration (Probable): 30th January, 2027
-        - Total Instruction Days: 83 Days
-     * Academic Year 2026–27 (Odd Sem) - F.Y. B.Tech & F.Y. M.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/FYBTech_FYMTech_Academic%20Calendar_2026-27%20Odd%20Sem.pdf" target="_blank">📅 Academic Calendar 2026–27 (FY B.Tech & M.Tech) [PDF]</a>
-        - Student Induction Program (SIP): Phase-I (25–30 Aug 2026), Phase-II (01–06 Sept 2026), Phase-III (08–13 Sept 2026)
-        - Commencement of Academic Sem-I (Odd Sem): 01st September, 2026
-        - ISE-I Marks Submission: 17th October, 2026
-        - Mid Semester Examination (MSE): 24th to 31st October, 2026
-        - MSE Result Declaration: 14th November, 2026
-        - Smart India Hackathon (SIH 2026 Probable): 08th–09th December, 2026
-        - KIT PBL Day: 16th December, 2026 | End of Academic Activities: 19th December, 2026
-        - Submission of ISE-II Marks & Final Defaulters / Detained List: 22nd December, 2026
-        - Freezing of Attendance & Marks: 23rd December, 2026
-        - End Semester Examination (Lab POE/OE): 26th to 30th December, 2026
+     * Milestones for F.Y. B.Tech & F.Y. M.Tech (Odd Sem 2026–27):
+        - Student Induction Program (SIP): Phase-I (25–30 Aug), Phase-II (01–06 Sept), Phase-III (08–13 Sept 2026)
+        - Commencement of Academic Sem-I: 01st September, 2026
+        - Mid Semester Examination (MSE): 24th to 31st October, 2026 (Result: 14th Nov)
         - End Semester Examination (Theory ESE): 01st to 12th January, 2027
         - Commencement of Even Semester (Sem-II): 15th January, 2027
-        - ESE Result Declaration: 30th January, 2027
-        - Total Instruction Days: 96 Days
-     * Academic Year 2026–27 (Odd Sem) - S.Y. M.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic26_27/SYMTECH_ACADEMIC%20CALENDAR_2026-27_ODD%20SEM.pdf" target="_blank">📅 Academic Calendar 2026–27 (SY M.Tech) [PDF]</a>
-     * Academic Year 2025–26 (Even Sem) - All UG & PG: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic25_26/Revised_Academic_Calendar_2025-26_Even_Sem_UG_PG.pdf" target="_blank">📅 Revised Academic Calendar 2025–26 (Even Sem) [PDF]</a>
-     * Academic Year 2025–26 (Odd Sem) - S.Y., T.Y. & Final Year B.Tech: <a href="https://www.kitcoek.in/documents/academics/academic-calender/Academic25_26/Academic%20Calendar_SY-TY-Final%20Year%20BTech_2025-26_Odd%20Sem.pdf" target="_blank">📅 Academic Calendar 2025–26 (Odd Sem) [PDF]</a>
    - For MSE (Mid Semester Examinations) & Exam Circulars:
      * Use the provided live notice context from kitcoek.in/notice to give exact dates, circular numbers, and direct PDF download links.
+     * Mention that live official notices and circulars are accessible on: <a href="https://www.kitcoek.in/notice" target="_blank">📌 KITCOEK Official Notice Board (kitcoek.in/notice)</a>
 9. CAMPUS LOCATIONS & ABBREVIATIONS:
    - In the IMER Building on the Third Floor, **CBCR** stands for **Computer Science and Business Systems (CSBS)** Classrooms (CBCR 01, CBCR 02, CBCR 03, CBCR 04, CBCR 05).
    - IMER Building Floor Allocation:
@@ -1012,6 +993,63 @@ Student Query: {query}
                         "Show me ETC syllabus"
                     ]
                 }
+
+        # 6.6 Academic Calendars (AY 2026–27 & AY 2025–26)
+        is_calendar_req = any(w in q_low for w in [
+            "calendar", "calender", "academic calendar", "term calendar", "semester calendar", "academic schedule"
+        ])
+        if is_calendar_req:
+            is_25 = any(yr in q_low for yr in ["2025-26", "2025–26", "2025 26", "25-26", "2025"]) and not any(yr in q_low for yr in ["2026", "2027", "26-27"])
+            if is_25:
+                return {
+                    "answer": (
+                        "<p><strong>Official KITCOEK Academic Calendars (A.Y. 2025–26):</strong></p>"
+                        "<p>The Autonomous Academic Calendars for the 2025–26 academic year are accessible below:</p>"
+                        "<ul>"
+                        "<li><strong>Revised Academic Calendar 2025–26 (Even Semester):</strong> Applicable to all UG &amp; PG programmes.</li>"
+                        "<li><strong>Academic Calendar 2025–26 (Odd Semester):</strong> Applicable to S.Y., T.Y. &amp; Final Year B.Tech.</li>"
+                        "</ul>"
+                        "<p><em>Direct 1-click official PDF copies can be opened via the calendar cards below.</em></p>"
+                    ),
+                    "follow_up_questions": [
+                        "Show academic calendar 2026-27",
+                        "How to check attendance in VMedulife?",
+                        "BSH first year time table",
+                        "How to view results in VMedulife?"
+                    ]
+                }
+            return {
+                "answer": (
+                    "<p><strong>Official KITCOEK Academic Calendar (A.Y. 2026–27):</strong></p>"
+                    "<p>The Autonomous Academic Calendars for the 2026–27 academic year have been published by KIT's College of Engineering (Autonomous), Kolhapur:</p>"
+                    "<p>📌 <strong>1. S.Y., T.Y. &amp; Final Year B.Tech (Odd Semester):</strong></p>"
+                    "<ul>"
+                    "<li><strong>Commencement of Classes:</strong> 14th July, 2026</li>"
+                    "<li><strong>S.Y. Induction Program:</strong> 21st to 26th July, 2026</li>"
+                    "<li><strong>Mid-Semester Examination (MSE):</strong> 08th to 13th September, 2026 (Result: 24th Sept)</li>"
+                    "<li><strong>KIT PBL Day:</strong> 05th November, 2026</li>"
+                    "<li><strong>End of Regular Academic Term:</strong> 14th November, 2026 (Remedial Classes: 17th–20th Nov)</li>"
+                    "<li><strong>End Semester Exam (Lab POE/OE):</strong> 25th November to 03rd December, 2026</li>"
+                    "<li><strong>End Semester Exam (Theory ESE):</strong> 15th December, 2026 to 10th January, 2027</li>"
+                    "<li><strong>Commencement of Even Semester:</strong> 19th January, 2027</li>"
+                    "</ul>"
+                    "<p>🎓 <strong>2. First Year (F.Y. B.Tech &amp; F.Y. M.Tech):</strong></p>"
+                    "<ul>"
+                    "<li><strong>Student Induction Program (SIP):</strong> 25th Aug – 13th Sept, 2026</li>"
+                    "<li><strong>Commencement of Classes:</strong> 01st September, 2026</li>"
+                    "<li><strong>Mid-Semester Examination (MSE):</strong> 24th to 31st October, 2026 (Result: 14th Nov)</li>"
+                    "<li><strong>End Semester Exam (Theory ESE):</strong> 01st to 12th January, 2027</li>"
+                    "<li><strong>Commencement of Even Semester:</strong> 15th January, 2027</li>"
+                    "</ul>"
+                    "<p><em>Direct 1-click official PDF copies for all academic calendars can be opened via the cards below.</em></p>"
+                ),
+                "follow_up_questions": [
+                    "When are MSE exams for First Year?",
+                    "How to check attendance in VMedulife?",
+                    "BSH first year time table",
+                    "How to view results in VMedulife?"
+                ]
+            }
 
         # 7. Document RAG chunks synthesis
         if context_chunks:

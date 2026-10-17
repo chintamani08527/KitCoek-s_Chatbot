@@ -206,7 +206,19 @@ class NoticeService:
         return sorted_list[:limit]
 
     @classmethod
-    def get_academic_calendars(cls) -> List[Dict]:
+    def get_academic_calendars(cls, year_query: Optional[str] = None) -> List[Dict]:
+        if not year_query:
+            return cls.ACADEMIC_CALENDARS
+        
+        y_low = year_query.lower()
+        if any(yr in y_low for yr in ["2026-27", "2026–27", "2026 27", "26-27", "26–27", "2026", "26_27"]):
+            matched = [c for c in cls.ACADEMIC_CALENDARS if "2026" in c.get("academic_year", "") or "2026" in c.get("title", "")]
+            return matched if matched else cls.ACADEMIC_CALENDARS
+        elif any(yr in y_low for yr in ["2025-26", "2025–26", "2025 26", "25-26", "25–26", "2025", "25_26"]):
+            matched = [c for c in cls.ACADEMIC_CALENDARS if "2025" in c.get("academic_year", "") or "2025" in c.get("title", "")]
+            return matched if matched else cls.ACADEMIC_CALENDARS
+        
         return cls.ACADEMIC_CALENDARS
 
 notice_service = NoticeService()
+

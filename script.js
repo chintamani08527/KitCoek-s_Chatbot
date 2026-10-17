@@ -984,7 +984,8 @@ async function sendMessage(text){
       `;
     }
 
-    if (Array.isArray(data.notices_details) && data.notices_details.length > 0) {
+    const hasCalendars = Array.isArray(data.academic_calendars) && data.academic_calendars.length > 0;
+    if (Array.isArray(data.notices_details) && data.notices_details.length > 0 && !(hasCalendars && data.category !== 'notices')) {
       const noticeItemsHtml = data.notices_details.map(n => `
         <div class="notice-item">
           <div class="notice-item-main">
