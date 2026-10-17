@@ -33,6 +33,7 @@ class ChatResponse(BaseModel):
     csbs_syllabus: Optional[dict] = None
     syllabus_details: Optional[dict] = None
     cutoff_details: Optional[dict] = None
+    clubs_directory: Optional[List[dict]] = None
 
 class StudentClubResponse(BaseModel):
     id: str

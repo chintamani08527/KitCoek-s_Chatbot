@@ -805,6 +805,30 @@ async function sendMessage(text){
       `;
     }
 
+    if (Array.isArray(data.clubs_directory) && data.clubs_directory.length > 0) {
+      botHtml += `
+        <div class="nav-box nav-box-clubs" style="background:var(--card-bg, #0F172A); border:1px solid rgba(56, 189, 248, 0.35); border-left:3.5px solid #38BDF8; box-shadow:0 4px 16px rgba(0,0,0,0.4); padding:14px; border-radius:12px; margin-top:10px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:#38BDF8; display:flex; align-items:center; gap:6px;">
+              🏛️ Official KITCOEK Student Clubs Directory
+            </div>
+            <span style="font-size:11px; font-weight:600; color:#34D399; background:rgba(16, 185, 129, 0.12); border:1px solid rgba(16, 185, 129, 0.3); padding:2px 8px; border-radius:10px;">
+              ● ${data.clubs_directory.length} Active Clubs
+            </span>
+          </div>
+          <p class="nav-box-desc" style="font-size:12.5px; color:var(--text, #E2E8F0); margin-bottom:10px; line-height:1.45;">
+            Explore detailed activity reports, faculty coordinators, and student office-bearers across all technical, cultural, defense, and departmental clubs.
+          </p>
+          <div class="nav-box-actions" style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="map-link-btn map-link-btn-primary" type="button" onclick="switchView('clubs')" style="cursor:pointer; display:inline-flex; align-items:center; gap:6px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              🏛️ Browse Full Clubs Directory Tab ↗
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
     if (data.location_details) {
       const loc = data.location_details;
       botHtml += `

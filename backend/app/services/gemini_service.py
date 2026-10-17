@@ -171,15 +171,9 @@ class GeminiService:
      YOU MUST DECLINE AND RESPOND WITH:
      "<p>⚠️ <strong>Out of Context Query:</strong> I am the dedicated <strong>KITCOEK AI Assistant</strong>, designed exclusively to answer questions about <strong>KITCoEK Kolhapur</strong> campus, admissions, engineering syllabus, timetables, examinations, VMedulife portal, and official Student Clubs.</p><p>Your question appears to be outside the scope of college-related topics. Please ask a question related to KITCOEK!</p>"
    - NEVER answer non-college trivia, celebrity biographies, or general world questions.
-2. Official Student Clubs: KITCOEK has 18 official student clubs and activity groups:
-   - Technical: ISTE, Team Mavericks, Student Developers Club (SDC), Society of Women Engineers (SWE)
-   - Entrepreneurship: E-Cell KITCoEK
-   - Cultural: Cultural Club, Ek Bharat Shreshtha Bharat (EBSB)
-   - Creative: Amateur Writers Club, AURA — The Art Club
-   - Leadership: Shourya Team KIT, National Cadet Corps (NCC), Lead India
-   - Social Service: National Service Scheme (NSS), Rotaract Club of KIT Sunshine
-   - Environment: Petrichor — Green Club
-   - Student Development: Walk With World (WWW), Women Development and Gender Equality Cell, Student Induction Program (SIP)
+2. Official Student Clubs: KITCOEK has 25 official student clubs and activity groups across Technical, Entrepreneurship, Cultural, Creative, Leadership, Social Service, Environment, Student Development, and Departmental Associations.
+   - If the user asks "What student clubs are available?", "What clubs are there?", "Show all clubs", "List of clubs", or asks generally about clubs:
+     DO NOT output just a single club profile (such as ISTE)! You MUST provide a structured, categorized directory listing of the clubs across Technical, Cultural, Leadership, Social, and Departmental categories so the student sees all available opportunities.
 3. For Club recommendations:
    - Coding, Web & AI -> SDC, Team Mavericks, ISTE
    - Entrepreneurship & Startups -> E-Cell KITCoEK
@@ -518,6 +512,75 @@ Student Query: {query}
                 "follow_up_questions": [
                     f"What activities does {abbr or name} conduct?",
                     "Show all Technical clubs",
+                    "How do I join a club?"
+                ]
+            }
+
+        # 4.1 All Student Clubs & Directory Overview
+        is_all_clubs_req = clubs_directory is not None or any(kw in q_low for kw in [
+            "what student clubs", "student clubs are available", "what clubs are available", "clubs are available",
+            "what clubs", "which clubs", "all clubs", "list of clubs", "list all clubs",
+            "clubs available", "clubs are there", "available clubs", "student clubs", "student club",
+            "show clubs", "how many clubs", "tell me about clubs", "clubs in kit", "clubs at kit", "join a club", "clubs present"
+        ]) or q_low.strip() in ["club", "clubs", "all clubs", "student clubs", "student club"]
+
+        if is_all_clubs_req and not club_data:
+            return {
+                "answer": (
+                    "<p><strong>KITCOEK Official Student Clubs &amp; Associations (A.Y. 2025–26):</strong></p>"
+                    "<p>KIT's College of Engineering (Autonomous), Kolhapur hosts <strong>25 active student clubs</strong> and departmental student associations providing platforms for technical innovation, cultural arts, defense leadership, entrepreneurship, and community service:</p>"
+                    "<p>🚀 <strong>1. Technical &amp; Coding Clubs:</strong></p>"
+                    "<ul>"
+                    "<li><strong>ISTE Student Chapter:</strong> National technical body organizing workshops, technical symposiums, and paper presentations.</li>"
+                    "<li><strong>Student Developers Club (SDC):</strong> Full-stack web/app development, open-source projects, and hackathons.</li>"
+                    "<li><strong>Team Mavericks:</strong> Competitive coding, algorithm design, Data Structures, and national coding contests.</li>"
+                    "<li><strong>Society of Women Engineers (SWE):</strong> Women in STEM mentorship, technical development, and international networking.</li>"
+                    "</ul>"
+                    "<p>💡 <strong>2. Entrepreneurship &amp; Incubation:</strong></p>"
+                    "<ul>"
+                    "<li><strong>E-Cell KITCoEK:</strong> Startup incubation, funding mentorship, B-plan competitions, and E-Summit.</li>"
+                    "</ul>"
+                    "<p>🎭 <strong>3. Cultural &amp; Creative Arts:</strong></p>"
+                    "<ul>"
+                    "<li><strong>Cultural Club (Cultural Committee):</strong> Organizes <strong>MERAKI</strong> (flagship annual cultural gathering), music, dance, drama, and concerts.</li>"
+                    "<li><strong>AURA — The Art Club:</strong> Visual arts, sketching, painting, campus art installations, and design.</li>"
+                    "<li><strong>Amateur Writers Club (AWC):</strong> Creative writing, poetry, campus magazines, debates, and literature.</li>"
+                    "<li><strong>Ek Bharat Shreshtha Bharat (EBSB):</strong> National integration and inter-state cultural exchange.</li>"
+                    "</ul>"
+                    "<p>🎖️ <strong>4. Leadership, Defense &amp; Civil Services:</strong></p>"
+                    "<ul>"
+                    "<li><strong>Shourya Team KIT:</strong> SSB interview training, officer development, and defense exams.</li>"
+                    "<li><strong>NCC (1 MAH ARTY BTY):</strong> Military drill, weapons training, disaster relief, and Republic Day Camp representation.</li>"
+                    "<li><strong>Lead India:</strong> UPSC, MPSC, and civil services competitive exam preparation and guidance.</li>"
+                    "</ul>"
+                    "<p>🤝 <strong>5. Social Service &amp; Environment:</strong></p>"
+                    "<ul>"
+                    "<li><strong>National Service Scheme (NSS):</strong> Rural development camps, blood donation, and social awareness drives.</li>"
+                    "<li><strong>Rotaract Club of KIT Sunshine:</strong> Rotary International youth leadership, community outreach, and health camps.</li>"
+                    "<li><strong>Petrichor — Green Club:</strong> Tree plantation, campus biodiversity, and UNICEF climate initiatives.</li>"
+                    "</ul>"
+                    "<p>🌟 <strong>6. Student Development:</strong></p>"
+                    "<ul>"
+                    "<li><strong>Walk With World (WWW):</strong> Soft skills, public speaking, Model United Nations (MUN), and personality development.</li>"
+                    "<li><strong>Women Development and Gender Equality Cell (WDGEC):</strong> Gender sensitization, self-defense, and legal rights.</li>"
+                    "<li><strong>Student Induction Program (SIP):</strong> First Year B.Tech orientation and mentorship.</li>"
+                    "</ul>"
+                    "<p>⚙️ <strong>7. Departmental Student Associations:</strong></p>"
+                    "<ul>"
+                    "<li><strong>ACSES:</strong> Association of Computer Science &amp; Engineering Students (CodeWizard).</li>"
+                    "<li><strong>CABSSA &amp; Bytearq:</strong> Computer Science &amp; Business Systems (Tech-Negotia &amp; Coding Wing).</li>"
+                    "<li><strong>MESA:</strong> Mechanical Engineering Students' Association (Battle of Wits).</li>"
+                    "<li><strong>ELESA:</strong> Electrical Engineering Students' Association (Dive in Circuit).</li>"
+                    "<li><strong>ASSETS:</strong> Electronics &amp; Telecommunication Students' Association.</li>"
+                    "<li><strong>CESA:</strong> Civil Engineering Students' Association (Civil Safari).</li>"
+                    "</ul>"
+                    "<p><em>You can explore all clubs, faculty coordinators, and official 2025–26 activity reports by clicking the <strong>Student Clubs</strong> tab in the navigation bar!</em></p>"
+                ),
+                "follow_up_questions": [
+                    "Tell me about SDC Club",
+                    "Tell me about E-Cell KITCoEK",
+                    "Tell me about Cultural Club & Meraki",
+                    "Tell me about Shourya Team KIT",
                     "How do I join a club?"
                 ]
             }

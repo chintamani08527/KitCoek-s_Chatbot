@@ -715,73 +715,90 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         "sip", "coding", "entrepreneurship", "art", "dance", "drama", "debate", "mun"
     ])
 
+    is_general_clubs_query = any(w in q_low for w in [
+        "what student clubs", "student clubs are available", "what clubs are available", "clubs are available",
+        "what clubs", "which clubs", "all clubs", "list of clubs", "list all clubs", "clubs list", "club list",
+        "clubs available", "clubs are there", "available clubs", "student clubs", "student club",
+        "show clubs", "how many clubs", "tell me about clubs", "clubs in kit", "clubs at kit", "join a club", "clubs present",
+        "extracurricular", "student activities", "which club can i join"
+    ]) or q_low.strip() in ["club", "clubs", "all clubs", "student clubs", "student club"]
+
+    is_club_intent = is_general_clubs_query or category == "clubs" or any(kw in q_low for kw in [
+        "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur", "writers",
+        "ebsb", "cultural", "aura", "shourya", "wdgec", "women development", "rotaract",
+        "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
+        "sip", "coding", "entrepreneurship", "art", "dance", "drama", "debate", "mun",
+        "mesa", "cesa", "elesa", "assets", "acses", "cabssa", "bytearq"
+    ])
+
     if is_club_intent:
         category = "clubs"
         all_clubs = db.query(StudentClub).all()
         
-        # Check if a specific club is directly targeted
-        for club in all_clubs:
-            club_terms = [
-                club.id,
-                club.name.lower(),
-                (club.abbr or "").lower(),
-                club.id.replace("_", " ")
-            ]
-            if club.id == "e_cell":
-                club_terms.extend(["e-cell", "ecell", "entrepreneurship cell"])
-            elif club.id == "iste":
-                club_terms.extend(["iste", "technical education"])
-            elif club.id == "sdc":
-                club_terms.extend(["sdc", "developer", "developers club"])
-            elif club.id == "team_mavericks":
-                club_terms.extend(["maverick", "mavericks"])
-            elif club.id == "amateur_writers":
-                club_terms.extend(["amateur", "writers club", "awc"])
-            elif club.id == "aura":
-                club_terms.extend(["aura", "art club"])
-            elif club.id == "cultural_club":
-                club_terms.extend(["cultural club", "meraki", "cultural committee", "gathering", "annual gathering", "cultural fest", "reels", "insta reels"])
-            elif club.id == "ncc":
-                club_terms.extend(["ncc", "cadet", "cadets", "1 mah arty"])
-            elif club.id == "nss":
-                club_terms.extend(["nss", "national service scheme"])
-            elif club.id == "rotaract":
-                club_terms.extend(["rotaract", "sunshine"])
-            elif club.id == "swe":
-                club_terms.extend(["swe", "society of women engineers"])
-            elif club.id == "www":
-                club_terms.extend(["www", "walk with world", "sprinters"])
-            elif club.id == "shourya":
-                club_terms.extend(["shourya", "officer making"])
-            elif club.id == "petrichor":
-                club_terms.extend(["petrichor", "green club", "unicef"])
-            elif club.id == "lead_india":
-                club_terms.extend(["lead india", "upsc", "mpsc", "vidman"])
-            elif club.id == "women_dev_cell":
-                club_terms.extend(["women development", "gender equality", "wdgec"])
-            elif club.id == "fy_induction":
-                club_terms.extend(["induction", "sip", "first year induction"])
-            elif club.id == "mesa":
-                club_terms.extend(["mesa", "mechanical engineering students association", "battle of wits", "mechanical club"])
-            elif club.id == "cesa":
-                club_terms.extend(["cesa", "civil engineering students association", "civil safari", "civil club"])
-            elif club.id == "elesa":
-                club_terms.extend(["elesa", "electrical engineering students association", "dive in circuit", "electrical club"])
-            elif club.id == "assets":
-                club_terms.extend(["assets", "assets club", "entc club", "electronics and telecommunication", "telecom club"])
-            elif club.id == "acses":
-                club_terms.extend(["acses", "association of computer science", "codewizard", "cse club", "computer science club"])
-            elif club.id == "cabssa":
-                club_terms.extend(["cabssa", "tech negotia", "tech-negotia", "csbs club", "computer science and business systems"])
-            elif club.id == "bytearq":
-                club_terms.extend(["bytearq", "byteark", "byte arq", "csbs coding club", "csbs technical wing"])
+        # Only check for a specific single club if NOT a general clubs query
+        if not is_general_clubs_query:
+            for club in all_clubs:
+                club_terms = [
+                    club.id,
+                    club.name.lower(),
+                    (club.abbr or "").lower(),
+                    club.id.replace("_", " ")
+                ]
+                if club.id == "e_cell":
+                    club_terms.extend(["e-cell", "ecell", "entrepreneurship cell"])
+                elif club.id == "iste":
+                    club_terms.extend(["iste", "technical education"])
+                elif club.id == "sdc":
+                    club_terms.extend(["sdc", "developer", "developers club"])
+                elif club.id == "team_mavericks":
+                    club_terms.extend(["maverick", "mavericks"])
+                elif club.id == "amateur_writers":
+                    club_terms.extend(["amateur", "writers club", "awc"])
+                elif club.id == "aura":
+                    club_terms.extend(["aura", "art club"])
+                elif club.id == "cultural_club":
+                    club_terms.extend(["cultural club", "meraki", "cultural committee", "gathering", "annual gathering", "cultural fest", "reels", "insta reels"])
+                elif club.id == "ncc":
+                    club_terms.extend(["ncc", "cadet", "cadets", "1 mah arty"])
+                elif club.id == "nss":
+                    club_terms.extend(["nss", "national service scheme"])
+                elif club.id == "rotaract":
+                    club_terms.extend(["rotaract", "sunshine"])
+                elif club.id == "swe":
+                    club_terms.extend(["swe", "society of women engineers"])
+                elif club.id == "www":
+                    club_terms.extend(["www", "walk with world", "sprinters"])
+                elif club.id == "shourya":
+                    club_terms.extend(["shourya", "officer making"])
+                elif club.id == "petrichor":
+                    club_terms.extend(["petrichor", "green club", "unicef"])
+                elif club.id == "lead_india":
+                    club_terms.extend(["lead india", "upsc", "mpsc", "vidman"])
+                elif club.id == "women_dev_cell":
+                    club_terms.extend(["women development", "gender equality", "wdgec"])
+                elif club.id == "fy_induction":
+                    club_terms.extend(["induction", "sip", "first year induction"])
+                elif club.id == "mesa":
+                    club_terms.extend(["mesa", "mechanical engineering students association", "battle of wits", "mechanical club"])
+                elif club.id == "cesa":
+                    club_terms.extend(["cesa", "civil engineering students association", "civil safari", "civil club"])
+                elif club.id == "elesa":
+                    club_terms.extend(["elesa", "electrical engineering students association", "dive in circuit", "electrical club"])
+                elif club.id == "assets":
+                    club_terms.extend(["assets", "assets club", "entc club", "electronics and telecommunication", "telecom club"])
+                elif club.id == "acses":
+                    club_terms.extend(["acses", "association of computer science", "codewizard", "cse club", "computer science club"])
+                elif club.id == "cabssa":
+                    club_terms.extend(["cabssa", "tech negotia", "tech-negotia", "csbs club", "computer science and business systems"])
+                elif club.id == "bytearq":
+                    club_terms.extend(["bytearq", "byteark", "byte arq", "csbs coding club", "csbs technical wing"])
 
-            if any(term in q_low for term in club_terms if len(term) >= 3):
-                matched_club_data = format_club_dict(club)
-                break
+                if any(term in q_low for term in club_terms if len(term) >= 3):
+                    matched_club_data = format_club_dict(club)
+                    break
 
-        # If asking general questions (e.g. list all, count, recommendations), provide complete directory
-        if any(w in q_low for w in ["list", "all", "how many", "which club", "recommend", "join", "categories", "options"]):
+        # If general club query or no specific club matched, provide the complete directory
+        if is_general_clubs_query or not matched_club_data:
             clubs_dir_summary = [
                 {
                     "id": c.id,
@@ -1098,6 +1115,21 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         ]
         context_texts.insert(0, "\n".join(cutoff_ctx))
 
+    # Prepend official Student Clubs directory context if general clubs query
+    if clubs_dir_summary:
+        club_lines = [
+            "OFFICIAL KITCOEK STUDENT CLUBS DIRECTORY (A.Y. 2025–26) — ALL 25 ACTIVE CLUBS:",
+            "Technical Clubs: ISTE Student Chapter, Student Developers Club (SDC), Team Mavericks, Society of Women Engineers (SWE).",
+            "Entrepreneurship: E-Cell KITCoEK.",
+            "Cultural & Creative Arts: Cultural Club (Meraki annual gathering), AURA — The Art Club, Amateur Writers Club (AWC), Ek Bharat Shreshtha Bharat (EBSB).",
+            "Leadership & Defense: Shourya Team KIT, National Cadet Corps (NCC 1 MAH ARTY BTY), Lead India (UPSC/MPSC).",
+            "Social Service & Environment: National Service Scheme (NSS), Rotaract Club of KIT Sunshine, Petrichor — Green Club.",
+            "Student Development: Walk With World (WWW), Women Development and Gender Equality Cell (WDGEC), Student Induction Program (SIP).",
+            "Departmental Associations: ACSES (CSE), CABSSA & Bytearq (CSBS), MESA (Mechanical), ELESA (Electrical), ASSETS (ETC), CESA (Civil).",
+            "DIRECTIVE: Present a structured, categorized directory listing of all 25 official student clubs at KITCOEK across Technical, Cultural, Leadership, Social, Environment, Student Development, and Departmental. DO NOT just show a single club profile unless specifically asked for."
+        ]
+        context_texts.insert(0, "\n".join(club_lines))
+
     # Prepend official syllabus context if matched
     if matched_syllabus:
         dept_name = matched_syllabus.get("department", "KITCOEK")
@@ -1227,7 +1259,8 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         meraki_reels=meraki_reels,
         csbs_syllabus=matched_syllabus,
         syllabus_details=matched_syllabus,
-        cutoff_details=cutoff_details
+        cutoff_details=cutoff_details,
+        clubs_directory=clubs_dir_summary
     )
     if len(_chat_cache) > 200:
         _chat_cache.clear()
