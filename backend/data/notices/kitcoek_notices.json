@@ -1593,5 +1593,27 @@
     "createdAt": "2026-09-24T04:33:04.534Z",
     "updatedAt": "2026-09-24T04:33:04.534Z",
     "__v": 0
+  },
+  {
+    "_id": "6ad314f82a49a5444a5e5680",
+    "title": "Notice-One Time RE-MAKEUP Examination A.Y.-2025-2026",
+    "fileName": "Notice-One Time RE-MAKEUP Examination A.Y.-2025-2026.pdf",
+    "fileUrl": "https://kitcoek.s3.amazonaws.com/notices/2026-10-17T06%3A25%3A56.770Z-Notice-One%20Time%20RE-MAKEUP%20Examination%20A.Y.-2025-2026.pdf",
+    "date": "2026-10-17",
+    "description": "Notice-One Time RE-MAKEUP Examination A.Y.-2025-2026",
+    "createdAt": "2026-10-17T06:26:00.846Z",
+    "updatedAt": "2026-10-17T06:26:00.846Z",
+    "__v": 0
+  },
+  {
+    "_id": "6ad3175d2a49a5444a5e56d6",
+    "title": "Postponement of Mid-Semester Examination F.Y.B.Tech & F.Y.M.Tech A.Y.-2026-2027",
+    "fileName": "3.Postponement of Mid-Semester Examination.pdf",
+    "fileUrl": "https://kitcoek.s3.ap-south-1.amazonaws.com/notices/2026-10-17T06%3A36%3A11.786Z-3.Postponement%20of%20Mid-Semester%20Examination.pdf",
+    "date": "2026-10-17",
+    "description": "Postponement of Mid-Semester Examination F.Y.B.Tech & F.Y.M.Tech A.Y.-2026-2027 Odd Sem",
+    "createdAt": "2026-10-17T06:36:13.323Z",
+    "updatedAt": "2026-10-17T06:36:13.323Z",
+    "__v": 0
   }
 ]
