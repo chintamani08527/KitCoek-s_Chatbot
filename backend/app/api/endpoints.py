@@ -708,12 +708,19 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     matched_club_data = None
     clubs_dir_summary = None
     
-    is_club_intent = category == "clubs" or any(kw in q_low for kw in [
-        "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur", "writers",
-        "ebsb", "cultural", "aura", "shourya", "wdgec", "women development", "rotaract",
-        "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
-        "sip", "coding", "entrepreneurship", "art", "dance", "drama", "debate", "mun"
-    ])
+    is_academic_doc_query = (
+        any(kw in q_low for kw in [
+            "attendance", "attendence", "attandance", "atendance", "attandence", "attendece", "attendace",
+            "absent", "present", "defaulter", "defaulters", "detained", "75%",
+            "vmedulife", "vmedu", "portal", "lms", "studentsummary",
+            "result", "results", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet", "mark sheet",
+            "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result",
+            "notes in vmedulife", "vmedulife notes", "study material in vmedulife", "my learnings", "start learning",
+            "academic planning", "syllabus", "curriculum", "timetable", "time table", "academic calendar", "calendar",
+            "admission", "admissions", "cutoff", "cutoffs", "cut off", "merit list"
+        ])
+        or ("attend" in q_low and not any(x in q_low for x in ["attention", "attendee"]))
+    )
 
     is_general_clubs_query = any(w in q_low for w in [
         "what student clubs", "student clubs are available", "what clubs are available", "clubs are available",
@@ -723,13 +730,25 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
         "extracurricular", "student activities", "which club can i join"
     ]) or q_low.strip() in ["club", "clubs", "all clubs", "student clubs", "student club"]
 
-    is_club_intent = is_general_clubs_query or category == "clubs" or any(kw in q_low for kw in [
-        "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur", "writers",
-        "ebsb", "cultural", "aura", "shourya", "wdgec", "women development", "rotaract",
-        "swe", "www", "walk with world", "ncc", "nss", "lead india", "petrichor", "induction",
-        "sip", "coding", "entrepreneurship", "art", "dance", "drama", "debate", "mun",
-        "mesa", "cesa", "elesa", "assets", "acses", "cabssa", "bytearq"
-    ])
+    club_keywords = [
+        "club", "clubs", "iste", "e-cell", "ecell", "mavericks", "sdc", "amateur writers",
+        "ebsb", "cultural club", "aura", "shourya", "wdgec", "women development", "rotaract",
+        "swe", "walk with world", "ncc", "nss", "lead india", "petrichor", "meraki",
+        "gathering", "annual gathering", "cultural fest", "pioneer", "vidman", "prarambha",
+        "mesa", "cesa", "elesa", "assets", "acses", "cabssa", "bytearq", "codewizard",
+        "battle of wits", "civil safari", "tech-negotia", "tech negotia", "departmental club",
+        "departmental clubs", "student association", "student associations"
+    ]
+
+    has_explicit_club_mention = any(re.search(r'\b' + re.escape(kw) + r'\b', q_low) for kw in ["club", "clubs", "association", "associations"])
+    has_specific_club_name = any(re.search(r'\b' + re.escape(kw) + r'\b', q_low) for kw in club_keywords if kw not in ["club", "clubs"])
+
+    is_club_intent = (
+        is_general_clubs_query
+        or (category == "clubs" and not is_academic_doc_query)
+        or (has_specific_club_name and not is_academic_doc_query)
+        or (has_explicit_club_mention and not (is_academic_doc_query and "club" not in q_low and "clubs" not in q_low))
+    )
 
     if is_club_intent:
         category = "clubs"
@@ -793,12 +812,12 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 elif club.id == "bytearq":
                     club_terms.extend(["bytearq", "byteark", "byte arq", "csbs coding club", "csbs technical wing"])
 
-                if any(term in q_low for term in club_terms if len(term) >= 3):
+                if any(re.search(r'\b' + re.escape(term) + r'\b', q_low) if len(term) <= 4 else term in q_low for term in club_terms):
                     matched_club_data = format_club_dict(club)
                     break
 
         # If general club query or no specific club matched, provide the complete directory
-        if is_general_clubs_query or not matched_club_data:
+        if is_general_clubs_query or (not matched_club_data and any(w in q_low for w in ["club", "clubs", "all clubs", "activities"])):
             clubs_dir_summary = [
                 {
                     "id": c.id,
@@ -914,6 +933,11 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
                 "To view Exam Results: Go to Assessment -> Result -> Result."
             ]
         }
+
+    if vmedulife_guide or is_result_intent or is_vmedu_notes_intent or is_attendance_intent or is_generic_portal_intent:
+        category = "academic"
+        clubs_dir_summary = None
+        matched_club_data = None
 
     # 3.6 Student Notes & Timetables detection
     notes_url = None

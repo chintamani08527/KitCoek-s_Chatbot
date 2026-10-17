@@ -472,6 +472,121 @@ Student Query: {query}
                 ]
             }
 
+        # 3.5 VMedulife & Academic Portals (Attendance, Notes, Results, Portal)
+        is_attendance_query = (
+            any(w in q_low for w in [
+                "attendance", "attendence", "attandance", "atendance", "attandence", "attendece", "attendace",
+                "absent", "present", "defaulter", "defaulters", "detained", "75%", "bunk", "check attendance",
+                "daily attendance", "weekly attendance", "monthly attendance"
+            ])
+            or ("attend" in q_low and not any(x in q_low for x in ["attention", "attendee"]))
+        )
+        if is_attendance_query:
+            return {
+                "answer": (
+                    "<p><strong>How to Check Student Attendance on KITCoEK VMedulife Portal:</strong></p>"
+                    "<p>KITCOEK tracks all lecture and laboratory attendance through the official <strong>vMedulife Student Portal</strong>:</p>"
+                    "<ol>"
+                    "<li><strong>Login:</strong> Open the <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a> and sign in with your Student ID (PRN) and password.</li>"
+                    "<li><strong>Academic Planning:</strong> On the left dashboard navigation menu, click on <strong>Academic Planning</strong>.</li>"
+                    "<li><strong>Attendance Section:</strong> Click on the <strong>Attendance</strong> option.</li>"
+                    "<li><strong>Select View Mode:</strong> Choose between:"
+                    "<ul>"
+                    "<li><strong>Daily Attendance:</strong> View lecture-by-lecture presence for any specific date.</li>"
+                    "<li><strong>Weekly Attendance:</strong> Summary of sessions attended across the week.</li>"
+                    "<li><strong>Monthly Attendance:</strong> Monthly aggregate and cumulative attendance percentage.</li>"
+                    "</ul></li>"
+                    "<li><strong>Verify Eligibility:</strong> Check your cumulative percentage. As per autonomous college regulations, students must maintain at least <strong>75% attendance</strong> in each course to remain eligible for End Semester Examinations (ESE).</li>"
+                    "</ol>"
+                    "<p>A direct 1-click access card to the student portal is also displayed below.</p>"
+                ),
+                "follow_up_questions": [
+                    "How to check results in VMedulife?",
+                    "How to access notes in VMedulife?",
+                    "Show academic calendar 2026-27",
+                    "BSH first year time table"
+                ]
+            }
+
+        is_vmedu_notes_query = (
+            any(w in q_low for w in [
+                "my learnings", "start learning", "learning material", "teacher notes", "teacher note",
+                "vm notes", "vmedulife notes", "notes in vmedulife", "notes on vmedulife", "study material in vmedulife",
+                "lecture notes in vmedulife", "vmedulife study material", "download notes in vmedulife"
+            ])
+            or (any(n in q_low for n in ["note", "notes", "material", "materials", "ppt", "slides", "learning"]) and any(p in q_low for p in ["vmedulife", "portal", "lms"]))
+        )
+        if is_vmedu_notes_query:
+            return {
+                "answer": (
+                    "<p><strong>How to Access Teacher Notes &amp; Course Materials on VMedulife ('My Learnings'):</strong></p>"
+                    "<p>Faculty members regularly upload lecture notes, unit PPTs, and study materials on the vMedulife LMS:</p>"
+                    "<ol>"
+                    "<li><strong>Login:</strong> Go to the official <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a> and log in with your PRN and password.</li>"
+                    "<li><strong>Academic Planning:</strong> On the dashboard menu, click on <strong>Academic Planning</strong>.</li>"
+                    "<li><strong>Start Learning:</strong> Click on <strong>Start Learning</strong>.</li>"
+                    "<li><strong>My Learnings:</strong> Select <strong>My Learnings</strong> to view all enrolled courses and subjects.</li>"
+                    "<li><strong>Download Notes:</strong> Click on your subject/course to view, read, or download the uploaded unit lecture notes, presentations, and reference documents.</li>"
+                    "</ol>"
+                    "<p>Additionally, verified departmental handwritten notes (Statistical Methods Unit 4, SPS Unit 3, etc.) are available on the <a href='https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📁 KITCOEK Subject Notes Google Drive Folder ↗</a>.</p>"
+                ),
+                "follow_up_questions": [
+                    "How to check attendance in VMedulife?",
+                    "How to check exam results in VMedulife?",
+                    "Statistical Methods Unit 4 notes",
+                    "CSBS syllabus"
+                ]
+            }
+
+        is_result_query = any(w in q_low for w in [
+            "result", "results", "mark", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet", "mark sheet",
+            "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result",
+            "exam result", "examination result", "mse result", "ese result", "revaluation", "grievance"
+        ])
+        if is_result_query:
+            return {
+                "answer": (
+                    "<p><strong>How to Check Examination Results &amp; Marks on KITCoEK VMedulife:</strong></p>"
+                    "<p>Official autonomous semester results, marks, and SGPA/CGPA grade sheets are published on the vMedulife student portal:</p>"
+                    "<ol>"
+                    "<li><strong>Open Portal:</strong> Navigate to the <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a>.</li>"
+                    "<li><strong>Student Login:</strong> Log in using your Student ID (PRN) and password.</li>"
+                    "<li><strong>Assessment / Exam Forms:</strong> On the dashboard, navigate to <strong>Assessment</strong> (or <strong>Exam Forms</strong>).</li>"
+                    "<li><strong>View Result:</strong> Select <strong>Result → Result</strong> (or for paper seeing and marks verification, click on <strong>Answer Sheet Review and Appeals</strong>).</li>"
+                    "<li><strong>Apply &amp; View:</strong> Select the relevant <strong>Academic Year</strong> and <strong>Semester Term</strong>, then click <strong>Apply / View</strong>. Your complete grade sheet with subject-wise marks and credits will appear.</li>"
+                    "</ol>"
+                    "<p>For official re-examination schedules, MSE/ESE result notifications, and circulars, you can also check the <a href='https://www.kitcoek.in/notice' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📌 KITCOEK Notice Board (kitcoek.in/notice) ↗</a>.</p>"
+                ),
+                "follow_up_questions": [
+                    "When will MSE results be declared?",
+                    "How to check attendance in VMedulife?",
+                    "How to check notes in VMedulife?",
+                    "Show academic calendar 2026-27"
+                ]
+            }
+
+        is_portal_query = any(w in q_low for w in ["vmedulife", "student portal", "lms", "vmedu", "erp portal", "hall ticket", "admit card"])
+        if is_portal_query:
+            return {
+                "answer": (
+                    "<p><strong>KITCoEK Official Student Portal (vMedulife ERP &amp; LMS):</strong></p>"
+                    "<p>The vMedulife portal is the central digital academic platform for all KITCOEK students:</p>"
+                    "<ul>"
+                    "<li><strong>Direct Portal Login:</strong> <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>portal.vmedulife.com/public/auth/#/login/kit-kolhapur ↗</a></li>"
+                    "<li><strong>Attendance Tracking:</strong> Go to <em>Academic Planning → Attendance</em> (Daily, Weekly, Monthly views).</li>"
+                    "<li><strong>Course Notes &amp; LMS:</strong> Go to <em>Academic Planning → Start Learning → My Learnings</em>.</li>"
+                    "<li><strong>Exam Results &amp; Grades:</strong> Go to <em>Assessment → Result → Result</em> (SGPA, CGPA, Answer Sheet Reviews).</li>"
+                    "<li><strong>Hall Tickets &amp; Exam Forms:</strong> Download MSE / ESE hall tickets prior to examinations.</li>"
+                    "</ul>"
+                ),
+                "follow_up_questions": [
+                    "How to check attendance in VMedulife?",
+                    "How to access notes in VMedulife?",
+                    "How to check exam results in VMedulife?",
+                    "Show academic calendar 2026-27"
+                ]
+            }
+
         # 4. Student Club Match
         if club_data:
             name = club_data.get("name", "Student Club")
@@ -498,12 +613,13 @@ Student Query: {query}
             }
 
         # 4.1 All Student Clubs & Directory Overview
-        is_all_clubs_req = clubs_directory is not None or any(kw in q_low for kw in [
+        is_all_clubs_req = any(kw in q_low for kw in [
             "what student clubs", "student clubs are available", "what clubs are available", "clubs are available",
-            "what clubs", "which clubs", "all clubs", "list of clubs", "list all clubs",
+            "what clubs", "which clubs", "all clubs", "list of clubs", "list all clubs", "clubs list", "club list",
             "clubs available", "clubs are there", "available clubs", "student clubs", "student club",
-            "show clubs", "how many clubs", "tell me about clubs", "clubs in kit", "clubs at kit", "join a club", "clubs present"
-        ]) or q_low.strip() in ["club", "clubs", "all clubs", "student clubs", "student club"]
+            "show clubs", "how many clubs", "tell me about clubs", "clubs in kit", "clubs at kit", "join a club", "clubs present",
+            "extracurricular", "student activities", "which club can i join"
+        ]) or q_low.strip() in ["club", "clubs", "all clubs", "student clubs", "student club"] or (clubs_directory is not None and any(w in q_low for w in ["club", "clubs", "activity group"]))
 
         if is_all_clubs_req and not club_data:
             return {
@@ -655,124 +771,6 @@ Student Query: {query}
                     "CSBS NEP-2020 syllabus",
                     "AIML department timetable",
                     "Where is Central Library?"
-                ]
-            }
-
-        # 6.1 VMedulife Attendance Tracking
-        is_attendance_query = (
-            any(w in q_low for w in [
-                "attendance", "attendence", "attandance", "atendance", "attandence", "attendece", "attendace",
-                "absent", "present", "defaulter", "defaulters", "detained", "75%", "bunk", "check attendance",
-                "daily attendance", "weekly attendance", "monthly attendance"
-            ])
-            or ("attend" in q_low and not any(x in q_low for x in ["attention", "attendee"]))
-        )
-        if is_attendance_query:
-            return {
-                "answer": (
-                    "<p><strong>How to Check Student Attendance on KITCoEK VMedulife Portal:</strong></p>"
-                    "<p>KITCOEK tracks all lecture and laboratory attendance through the official <strong>vMedulife Student Portal</strong>:</p>"
-                    "<ol>"
-                    "<li><strong>Login:</strong> Open the <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a> and sign in with your Student ID (PRN) and password.</li>"
-                    "<li><strong>Academic Planning:</strong> On the left dashboard navigation menu, click on <strong>Academic Planning</strong>.</li>"
-                    "<li><strong>Attendance Section:</strong> Click on the <strong>Attendance</strong> option.</li>"
-                    "<li><strong>Select View Mode:</strong> Choose between:"
-                    "<ul>"
-                    "<li><strong>Daily Attendance:</strong> View lecture-by-lecture presence for any specific date.</li>"
-                    "<li><strong>Weekly Attendance:</strong> Summary of sessions attended across the week.</li>"
-                    "<li><strong>Monthly Attendance:</strong> Monthly aggregate and cumulative attendance percentage.</li>"
-                    "</ul></li>"
-                    "<li><strong>Verify Eligibility:</strong> Check your cumulative percentage. As per autonomous college regulations, students must maintain at least <strong>75% attendance</strong> in each course to remain eligible for End Semester Examinations (ESE).</li>"
-                    "</ol>"
-                    "<p>A direct 1-click access card to the student portal is also displayed below.</p>"
-                ),
-                "follow_up_questions": [
-                    "How to check results in VMedulife?",
-                    "How to access notes in VMedulife?",
-                    "Show academic calendar 2026-27",
-                    "BSH first year time table"
-                ]
-            }
-
-        # 6.2 VMedulife Notes & My Learnings
-        is_vmedu_notes_query = (
-            any(w in q_low for w in [
-                "my learnings", "start learning", "learning material", "teacher notes", "teacher note",
-                "vm notes", "vmedulife notes", "notes in vmedulife", "notes on vmedulife", "study material in vmedulife",
-                "lecture notes in vmedulife", "vmedulife study material", "download notes in vmedulife"
-            ])
-            or (any(n in q_low for n in ["note", "notes", "material", "materials", "ppt", "slides", "learning"]) and any(p in q_low for p in ["vmedulife", "portal", "lms"]))
-        )
-        if is_vmedu_notes_query:
-            return {
-                "answer": (
-                    "<p><strong>How to Access Teacher Notes &amp; Course Materials on VMedulife ('My Learnings'):</strong></p>"
-                    "<p>Faculty members regularly upload lecture notes, unit PPTs, and study materials on the vMedulife LMS:</p>"
-                    "<ol>"
-                    "<li><strong>Login:</strong> Go to the official <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a> and log in with your PRN and password.</li>"
-                    "<li><strong>Academic Planning:</strong> On the dashboard menu, click on <strong>Academic Planning</strong>.</li>"
-                    "<li><strong>Start Learning:</strong> Click on <strong>Start Learning</strong>.</li>"
-                    "<li><strong>My Learnings:</strong> Select <strong>My Learnings</strong> to view all enrolled courses and subjects.</li>"
-                    "<li><strong>Download Notes:</strong> Click on your subject/course to view, read, or download the uploaded unit lecture notes, presentations, and reference documents.</li>"
-                    "</ol>"
-                    "<p>Additionally, verified departmental handwritten notes (Statistical Methods Unit 4, SPS Unit 3, etc.) are available on the <a href='https://drive.google.com/drive/folders/1_1mxw4T2BNFCYFOoolsfAmZi8zWvv1Hy' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📁 KITCOEK Subject Notes Google Drive Folder ↗</a>.</p>"
-                ),
-                "follow_up_questions": [
-                    "How to check attendance in VMedulife?",
-                    "How to check exam results in VMedulife?",
-                    "Statistical Methods Unit 4 notes",
-                    "CSBS syllabus"
-                ]
-            }
-
-        # 6.3 Examination Results, Marks & Grade Cards
-        is_result_query = any(w in q_low for w in [
-            "result", "results", "mark", "marks", "grade", "grades", "sgpa", "cgpa", "marksheet", "mark sheet",
-            "answer sheet", "paper seeing", "review and appeals", "check result", "see result", "view result",
-            "exam result", "examination result", "mse result", "ese result", "revaluation", "grievance"
-        ])
-        if is_result_query:
-            return {
-                "answer": (
-                    "<p><strong>How to Check Examination Results &amp; Marks on KITCoEK VMedulife:</strong></p>"
-                    "<p>Official autonomous semester results, marks, and SGPA/CGPA grade sheets are published on the vMedulife student portal:</p>"
-                    "<ol>"
-                    "<li><strong>Open Portal:</strong> Navigate to the <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>KITCoEK VMedulife Portal ↗</a>.</li>"
-                    "<li><strong>Student Login:</strong> Log in using your Student ID (PRN) and password.</li>"
-                    "<li><strong>Assessment / Exam Forms:</strong> On the dashboard, navigate to <strong>Assessment</strong> (or <strong>Exam Forms</strong>).</li>"
-                    "<li><strong>View Result:</strong> Select <strong>Result → Result</strong> (or for paper seeing and marks verification, click on <strong>Answer Sheet Review and Appeals</strong>).</li>"
-                    "<li><strong>Apply &amp; View:</strong> Select the relevant <strong>Academic Year</strong> and <strong>Semester Term</strong>, then click <strong>Apply / View</strong>. Your complete grade sheet with subject-wise marks and credits will appear.</li>"
-                    "</ol>"
-                    "<p>For official re-examination schedules, MSE/ESE result notifications, and circulars, you can also check the <a href='https://www.kitcoek.in/notice' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📌 KITCOEK Notice Board (kitcoek.in/notice) ↗</a>.</p>"
-                ),
-                "follow_up_questions": [
-                    "When will MSE results be declared?",
-                    "How to check attendance in VMedulife?",
-                    "How to check notes in VMedulife?",
-                    "Show academic calendar 2026-27"
-                ]
-            }
-
-        # 6.4 General Student Portal (vMedulife ERP)
-        is_portal_query = any(w in q_low for w in ["vmedulife", "student portal", "lms", "vmedu", "erp portal", "hall ticket", "admit card"])
-        if is_portal_query:
-            return {
-                "answer": (
-                    "<p><strong>KITCoEK Official Student Portal (vMedulife ERP &amp; LMS):</strong></p>"
-                    "<p>The vMedulife portal is the central digital academic platform for all KITCOEK students:</p>"
-                    "<ul>"
-                    "<li><strong>Direct Portal Login:</strong> <a href='https://portal.vmedulife.com/public/auth/#/login/kit-kolhapur' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>portal.vmedulife.com/public/auth/#/login/kit-kolhapur ↗</a></li>"
-                    "<li><strong>Attendance Tracking:</strong> Go to <em>Academic Planning → Attendance</em> (Daily, Weekly, Monthly views).</li>"
-                    "<li><strong>Course Notes &amp; LMS:</strong> Go to <em>Academic Planning → Start Learning → My Learnings</em>.</li>"
-                    "<li><strong>Exam Results &amp; Grades:</strong> Go to <em>Assessment → Result → Result</em> (SGPA, CGPA, Answer Sheet Reviews).</li>"
-                    "<li><strong>Hall Tickets &amp; Exam Forms:</strong> Download MSE / ESE hall tickets prior to examinations.</li>"
-                    "</ul>"
-                ),
-                "follow_up_questions": [
-                    "How to check attendance in VMedulife?",
-                    "How to access notes in VMedulife?",
-                    "How to check exam results in VMedulife?",
-                    "Show academic calendar 2026-27"
                 ]
             }
 
