@@ -286,9 +286,31 @@ class GeminiService:
     - FOR CSBS (Computer Science and Business Systems):
       * Describe the core program: an industry-oriented 4-year B.Tech developed in synergy with TCS, blending core computer engineering with Business 4.0, analytics, and enterprise management.
       * Highlight key focus areas: Core Algorithms & Computing, Data Science & Machine Learning, Enterprise Architecture, Financial & Marketing Strategy, and emerging specialization tracks (AR/VR, Metaverse, Honors & Multidisciplinary Minor).
-      * DO NOT output duplicate raw PDF download links or repeat the year-by-year syllabus lists in your text reply; a dedicated interactive Official Syllabus Card with verified direct download buttons for the All-Years Curriculum Structure, F.Y., S.Y., T.Y., Final Year, Honors, MDM, and Exit Courses is automatically attached right below your answer.
-13. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
-14. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
+13. OFFICIAL KITCOEK ADMISSION PROCESS, REQUIRED DOCUMENTS & CUTOFFS (https://www.kitcoek.in/admission-undergraduate):
+    When a user asks about the admission process, how to take admission in KIT, required documents, or cutoffs:
+    Provide a comprehensive, authoritative, structured answer:
+    (a) Step-by-Step Admission Process:
+        1. Eligibility & Entrance Exams: F.Y. B.Tech requires 10+2 (HSC) with min 45% (40% for reserved) in PCM + valid MHT-CET or JEE Main score. DSY requires Diploma in Engineering or B.Sc (min 45% / 40%).
+        2. Centralized Admission Process (CAP) Registration on Maharashtra State CET Cell portal (https://cetcell.mahacet.org).
+        3. Document Verification & Confirmation at Scrutiny Center (E-Scrutiny or Physical Scrutiny).
+        4. Merit List Declaration & CAP Option Form Filling: Fill KITCoEK Choice Codes with DTE Code 6267.
+        5. CAP Seat Allotment (Rounds 1, 2, 3) & Seat Acceptance Fee payment.
+        6. Physical Reporting to KITCoEK Campus (Gokul Shirgaon, Kolhapur) with original documents & college fees payment. Mention Against CAP / Institute Level application on https://www.kitcoek.in/apply-admission.
+    (b) Complete Required Documents Checklist:
+        - General / Open Category: SSC Marksheet, HSC/Diploma Marksheet, MHT-CET/JEE Scorecard, Maharashtra Domicile & Nationality Certificate, College Leaving Certificate (TC), Migration Certificate (if OMS/CBSE/ICSE), Aadhaar Card & 4 photos, Gap Certificate (if applicable).
+        - Reserved Categories (OBC/VJ/NT/SBC): Caste Certificate, Caste Validity Certificate, Non-Creamy Layer (NCL) Certificate valid to 31st March.
+        - SC / ST: Caste Certificate & Caste Validity Certificate.
+        - EWS: Competent authority EWS Certificate.
+        - TFWS: Parents' Annual Income Certificate (< ₹8 Lakhs) from Tahsildar.
+        Include links to official document checklists: https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg and https://www.kitcoek.in/documents/admission/2025_26/DSY_List_of_Required_Documents.jpeg.
+    (c) Official Cutoff Summary & Download Links:
+        DTE Institute Code: 6267.
+        F.Y. B.Tech Indicative Cutoff Percentiles: CSE (93–94%+), AIML (90–92%+), CSBS (88–90%+), ETC (85–88%+), Electrical & Mechanical (75–85%+), Civil & Biotechnology (70–80%+).
+        DSY Diploma Cutoffs: CSE 93.65%, AIML 92.88%, CSBS 92.06%, Electrical 93.11%, Civil 92.84%, Mechanical 92.46%, ETC 92.47%, Biotech 75.66%.
+        Direct links to FY General Cutoff Sheet (https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg), FY Ladies Cutoff Sheet (https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg), DSY General Cutoff PDF, DSY Ladies Cutoff PDF, and Choice Codes chart.
+    (d) Official Portal & Helpline: Link to https://www.kitcoek.in/admission-undergraduate, https://www.kitcoek.in/apply-admission, and Admission Cell (Phone: +91-7769001199, Email: admissions@kitcoek.in).
+14. Format your answer in clean HTML suitable for the chat bubble (use <p>, <ul>, <li>, <strong>, <em>, <a>).
+15. Provide 2 to 3 relevant follow-up questions related to KITCOEK.
 
 Output format (respond ONLY with valid JSON):
 {
@@ -702,7 +724,88 @@ Student Query: {query}
                 ]
             }
 
-        # 6.0 Admissions & Cutoffs
+        # 6.0 Comprehensive Admission Process, Required Documents & Cutoffs
+        is_admission_process_or_doc_req = (
+            any(p in q_low for p in [
+                "admission process", "admission procedure", "process for admission", "process of admission",
+                "process for taking admission", "procedure for admission", "how to take admission",
+                "how to get admission", "taking admission", "take admission", "get admission",
+                "admission in kit", "admission steps", "step to take admission", "steps for admission",
+                "apply for admission", "admission criteria", "eligibility criteria", "admission rules",
+                "documents needed", "documents required", "document required", "document list",
+                "document checklist", "certificates needed", "certificates required", "admission documents",
+                "required documents", "what documents"
+            ])
+            or ("admission" in q_low and any(w in q_low for w in ["process", "procedure", "how", "step", "steps", "kit", "take", "taking", "document", "documents", "cutoff", "criteria", "apply", "form", "fees", "guide", "eligibility", "rule", "rules"]))
+            or ("document" in q_low and any(w in q_low for w in ["needed", "require", "required", "admission", "submit", "checklist", "verify", "verification"]))
+        )
+
+        if is_admission_process_or_doc_req:
+            return {
+                "answer": (
+                    "<p><strong>KITCOEK B.Tech &amp; Direct Second Year (DSE) Admission Process (DTE Code: 6267):</strong></p>"
+                    "<p>Admissions to <strong>Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur</strong> are conducted through the <strong>Maharashtra State CET Cell Centralized Admission Process (CAP Rounds)</strong> as well as Autonomous Institute-Level / Against-CAP (ACAP) seats.</p>"
+                    "<p>📋 <strong>1. Step-by-Step Admission Process:</strong></p>"
+                    "<ol>"
+                    "<li><strong>Eligibility &amp; Entrance Exams:</strong>"
+                    "<ul>"
+                    "<li><em>First Year B.Tech (F.Y. B.Tech):</em> Passed 10+2 (HSC) with min 45% marks (40% for reserved categories) in Physics &amp; Mathematics compulsory along with Chemistry/Biotech/Biology/Technical Vocational subjects. Valid score in <strong>MHT-CET</strong> or <strong>JEE Main (Paper 1)</strong>.</li>"
+                    "<li><em>Direct Second Year B.Tech (DSE / DSY):</em> Passed 3-year Diploma in Engineering &amp; Technology with min 45% marks (40% for reserved categories) or B.Sc Degree.</li>"
+                    "</ul>"
+                    "</li>"
+                    "<li><strong>State CET Cell Online Registration:</strong> Register online at the Maharashtra State CET Cell portal (<a href='https://cetcell.mahacet.org' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>cetcell.mahacet.org ↗</a>) during the scheduled CAP registration window.</li>"
+                    "<li><strong>Document Verification &amp; Scrutiny:</strong> Verify and confirm your application form either via <strong>E-Scrutiny</strong> or in-person at designated <strong>Scrutiny Centers (FC)</strong>.</li>"
+                    "<li><strong>Merit List &amp; Option Form Filling:</strong> When the CAP Option Form opens, fill your choice preferences. Enter KITCoEK's official <strong>DTE Choice Code: 6267</strong> as your top preference along with the department choice codes (<a href='https://www.kitcoek.in/documents/admission/2025_26/Choice%20code.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 View KIT Choice Codes Chart ↗</a>).</li>"
+                    "<li><strong>CAP Seat Allotment (Rounds 1, 2, 3):</strong> Check your seat allotment on the CET portal. Once allotted KITCoEK, accept the seat (Freeze or Float) and pay the ₹1,000 Seat Acceptance Fee.</li>"
+                    "<li><strong>Physical Reporting at KITCoEK Campus:</strong> Report in person to the KITCoEK Admission Cell (Gokul Shirgaon, Kolhapur) within the scheduled reporting dates with all original documents, 3 sets of self-attested photocopies, and college fees to secure your admission.</li>"
+                    "<li><em>Against CAP (ACAP) / Institute Level Quota:</em> Candidates can also apply directly through the college portal for vacant/institute-level seats at <a href='https://www.kitcoek.in/apply-admission' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/apply-admission ↗</a>.</li>"
+                    "</ol>"
+                    "<p>📑 <strong>2. Complete List of Required Documents:</strong></p>"
+                    "<p><strong>A. General / Open Category Mandatory Documents:</strong></p>"
+                    "<ul>"
+                    "<li>SSC (10th) Marksheet &amp; Passing Certificate</li>"
+                    "<li>HSC (12th) Marksheet &amp; Passing Certificate (or Diploma Final Marksheet for DSY)</li>"
+                    "<li>MHT-CET / JEE Main Score Card</li>"
+                    "<li>Maharashtra State Domicile &amp; Nationality Certificate (or Leaving Certificate stating Nationality as Indian)</li>"
+                    "<li>College Leaving Certificate (Transfer Certificate / TC)</li>"
+                    "<li>Migration Certificate (for CBSE, ICSE, or Other than Maharashtra State - OMS students)</li>"
+                    "<li>Aadhaar Card copy and 4 passport size color photographs</li>"
+                    "<li>Gap Certificate (Affidavit on ₹100 stamp paper, if there is a gap in education)</li>"
+                    "</ul>"
+                    "<p><strong>B. Reserved Categories (OBC / VJ / NT / SBC):</strong></p>"
+                    "<ul>"
+                    "<li>Caste Certificate</li>"
+                    "<li>Caste / Tribe Validity Certificate</li>"
+                    "<li>Non-Creamy Layer (NCL) Certificate (valid up to 31st March of current financial year)</li>"
+                    "</ul>"
+                    "<p><strong>C. SC / ST Category:</strong> Caste Certificate and Caste Validity Certificate.</p>"
+                    "<p><strong>D. Economically Weaker Section (EWS):</strong> Valid EWS Eligibility Certificate issued by competent Maharashtra authority.</p>"
+                    "<p><strong>E. Tuition Fee Waiver Scheme (TFWS):</strong> Parents' Annual Income Certificate (&lt; ₹8.00 Lakhs) issued by Tahsildar.</p>"
+                    "<p>Checklists: <a href='https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 View F.Y. Required Documents Checklist ↗</a> | <a href='https://www.kitcoek.in/documents/admission/2025_26/DSY_List_of_Required_Documents.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 View DSY Required Documents Checklist ↗</a></p>"
+                    "<p>📊 <strong>3. Official Cutoff Percentiles &amp; Download Sheets (DTE Code 6267):</strong></p>"
+                    "<ul>"
+                    "<li><strong>F.Y. B.Tech Cutoffs (Indicative Percentiles):</strong> CSE (<strong>93–94%+</strong>), CSE AIML (<strong>90–92%+</strong>), CSBS (<strong>88–90%+</strong>), ETC (<strong>85–88%+</strong>), Electrical &amp; Mechanical (<strong>75–85%+</strong>), Civil &amp; Biotech (<strong>70–80%+</strong>).</li>"
+                    "<li><strong>F.Y. Official Sheets:</strong> <a href='https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 FY General Cutoff Sheet ↗</a> | <a href='https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 FY Ladies Cutoff Sheet ↗</a></li>"
+                    "<li><strong>Direct Second Year (D.S.Y.) Diploma Cutoffs:</strong> CSE (<strong>93.65%</strong>), AIML (<strong>92.88%</strong>), CSBS (<strong>92.06%</strong>), Electrical (<strong>93.11%</strong>), Civil (<strong>92.84%</strong>), Mechanical (<strong>92.46%</strong>), ETC (<strong>92.47%</strong>), Biotech (<strong>75.66%</strong>).</li>"
+                    "<li><strong>DSY Official PDFs:</strong> <a href='https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Download DSY General Cutoff PDF ↗</a> | <a href='https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>📄 Download DSY Ladies Cutoff PDF ↗</a></li>"
+                    "</ul>"
+                    "<p>🌐 <strong>4. Official Admission Portals &amp; Helpline:</strong></p>"
+                    "<ul>"
+                    "<li><strong>Undergraduate Admission Portal:</strong> <a href='https://www.kitcoek.in/admission-undergraduate' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/admission-undergraduate ↗</a></li>"
+                    "<li><strong>Online Admission Application:</strong> <a href='https://www.kitcoek.in/apply-admission' target='_blank' rel='noopener noreferrer' class='chat-inline-link'>kitcoek.in/apply-admission ↗</a></li>"
+                    "<li><strong>Admission Cell Contact:</strong> Phone: <strong>+91-7769001199</strong> | Email: <a href='mailto:admissions@kitcoek.in'>admissions@kitcoek.in</a></li>"
+                    "</ul>"
+                    "<p>Interactive download cards for cutoff sheets, choice codes, and document checklists are also displayed below.</p>"
+                ),
+                "follow_up_questions": [
+                    "What are the KIT choice codes?",
+                    "What documents are required for OBC/EWS category?",
+                    "What is the fee structure for First Year?",
+                    "CSBS NEP-2020 syllabus"
+                ]
+            }
+
+        # 6.1 Cutoffs & Merit Lists Specific Query
         is_cutoff_req = any(kw in q_low for kw in [
             "cutoff", "cut off", "cut-off", "cutoffs", "cut offs", "cut-offs",
             "merit list", "cap round", "cap cutoff", "cet cutoff", "jee cutoff",
@@ -748,11 +851,11 @@ Student Query: {query}
                 ]
             }
 
-        # 6. Admissions & Departments
-        if any(kw in q_low for kw in ["admission", "eligibility", "branches", "departments", "courses", "mht cet", "jee"]):
+        # 6.2 Branches & Academic Programs
+        if any(kw in q_low for kw in ["branches", "departments", "courses offered", "what programs", "engineering branches"]):
             return {
                 "answer": (
-                    "<p><strong>KITCOEK Admissions &amp; Academic Programs:</strong></p>"
+                    "<p><strong>KITCOEK Academic Programs &amp; Engineering Disciplines:</strong></p>"
                     "<p>KIT offers 4-year undergraduate B.Tech and postgraduate M.Tech degrees across major engineering disciplines under the NEP-2020 Autonomous curriculum:</p>"
                     "<ul>"
                     "<li>Computer Science &amp; Engineering (CSE)</li>"
@@ -765,12 +868,13 @@ Student Query: {query}
                     "<li>Civil &amp; Environmental Engineering</li>"
                     "<li>Biotechnology</li>"
                     "</ul>"
-                    "<p>Admissions are conducted through Maharashtra State CET Cell (CAP Rounds) based on MHT-CET and JEE Main scores. Visit <a href='https://www.kitcoek.in' target='_blank'>kitcoek.in ↗</a> for cutoff details.</p>"
+                    "<p>Admissions are conducted through Maharashtra State CET Cell (CAP Rounds) based on MHT-CET and JEE Main scores. DTE Choice Code: <strong>6267</strong>.</p>"
                 ),
                 "follow_up_questions": [
+                    "How to take admission in KIT?",
+                    "What are the cutoff percentiles?",
                     "CSBS NEP-2020 syllabus",
-                    "AIML department timetable",
-                    "Where is Central Library?"
+                    "AIML department timetable"
                 ]
             }
 

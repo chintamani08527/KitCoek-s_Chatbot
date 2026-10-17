@@ -1179,7 +1179,7 @@ async function sendMessage(text){
             <span class="syllabus-live-dot">● DTE Code: ${escapeHtml(co.dte_code || '6267')}</span>
           </div>
           <p class="nav-box-desc" style="margin-bottom:10px;">
-            Official First Year (FE) and Direct Second Year (DSY) cutoff sheets &amp; admission resources from the college portal:
+            Official First Year (FE) &amp; Direct Second Year (DSY) cutoff sheets, required documents checklists &amp; admission resources from the college portal:
           </p>
           <div class="syllabus-items-container">
             ${itemsHtml}

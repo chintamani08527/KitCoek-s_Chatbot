@@ -516,7 +516,7 @@ def format_club_dict(club: StudentClub) -> dict:
     return d
 
 OFFICIAL_CUTOFF_DATA = {
-    "title": "KITCoEK Official Admission & Cutoff Directory",
+    "title": "KITCoEK Official Admission, Cutoffs & Documents Directory",
     "portal_url": "https://www.kitcoek.in/admission-undergraduate",
     "apply_url": "https://www.kitcoek.in/apply-admission",
     "academic_year": "2025–26 & 2026–27",
@@ -585,7 +585,7 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     if not query:
         raise HTTPException(status_code=400, detail="Message cannot be empty")
         
-    q_key = query.lower()
+    q_key = f"v3_{query.lower()}"
     if q_key in _chat_cache:
         return _chat_cache[q_key]
         
@@ -1104,21 +1104,33 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
 
         category = "academic" if category not in ["navigation", "clubs"] else category
 
-    # 3.10 Official Cutoffs & Admission Portal detection (https://www.kitcoek.in/admission-undergraduate)
+    # 3.10 Official Admissions, Documents & Cutoffs detection (https://www.kitcoek.in/admission-undergraduate)
     cutoff_details = None
-    is_cutoff_intent = any(kw in q_low for kw in [
-        "cut off", "cutoff", "cut-off", "cutoffs", "cut offs", "cut-offs",
-        "merit list", "merit lists", "cap round", "cap cutoff", "cet cutoff", "jee cutoff",
-        "dse cutoff", "dsy cutoff", "fe cutoff", "first year cutoff",
-        "what is the cutoff", "give me cut off", "give me cutoff", "cutoff list", "cut off list",
-        "branch cutoff", "closing rank", "closing marks", "percentile required"
-    ]) or (
-        ("cut" in q_low and "off" in q_low) and any(w in q_low for w in ["list", "rank", "mark", "marks", "percentile", "score", "give", "show", "what", "how", "details"])
+    is_admission_or_cutoff_intent = (
+        any(kw in q_low for kw in [
+            "admission", "admissions", "taking admission", "take admission", "get admission",
+            "admission process", "admission procedure", "admission criteria", "admission details",
+            "how to take admission", "how to get admission", "how to apply for admission", "how to apply",
+            "apply admission", "apply for admission", "admission form", "admission inquiry",
+            "documents needed", "documents required", "document required", "document list",
+            "document checklist", "certificates needed", "certificates required", "admission documents",
+            "eligibility criteria", "cut off", "cutoff", "cut-off", "cutoffs", "cut offs", "cut-offs",
+            "merit list", "merit lists", "cap round", "cap rounds", "cap cutoff", "cet cutoff", "jee cutoff",
+            "dse cutoff", "dsy cutoff", "fe cutoff", "first year cutoff",
+            "what is the cutoff", "give me cut off", "give me cutoff", "cutoff list", "cut off list",
+            "branch cutoff", "closing rank", "closing marks", "percentile required",
+            "choice code", "choice codes", "institute code 6267", "dte code 6267"
+        ])
+        or (("cut" in q_low and "off" in q_low) and any(w in q_low for w in ["list", "rank", "mark", "marks", "percentile", "score", "give", "show", "what", "how", "details"]))
+        or ("admission" in q_low and any(w in q_low for w in ["process", "procedure", "how", "step", "steps", "kit", "take", "taking", "document", "documents", "cutoff", "criteria", "apply", "form", "fees", "eligibility", "rule", "rules"]))
+        or ("document" in q_low and any(w in q_low for w in ["needed", "require", "required", "admission", "submit", "submission", "checklist", "verify", "verification"]))
     )
 
-    if is_cutoff_intent:
+    if is_admission_or_cutoff_intent:
         cutoff_details = OFFICIAL_CUTOFF_DATA
-        category = "academic" if category not in ["navigation", "clubs"] else category
+        category = "academic"
+        clubs_dir_summary = None
+        matched_club_data = None
 
     # 4. RAG Retrieval from Vector Store
     retrieved_chunks = vs.search(query, top_k=5, threshold=0.30)
@@ -1127,31 +1139,72 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     # Prepend official Cutoff & Admission context if matched
     if cutoff_details:
         cutoff_ctx = [
-            "OFFICIAL KITCOEK ADMISSION & CUTOFF DIRECTORY (Source: https://www.kitcoek.in/admission-undergraduate):",
-            "Institute Name: Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur.",
-            "DTE Choice Code: 6267.",
-            "1. First Year B.Tech (F.Y. B.Tech / FE) Cutoffs:",
-            "   - General Seat Type Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg",
-            "   - Ladies Seat Type Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg",
-            "   - Indicative Branch Percentiles: CSE (93–94%+), CSE AIML (90–92%+), CSBS (88–90%+), ETC (85–88%+), Electrical & Mechanical (75–85%+), Civil & Biotech (70–80%+).",
-            "2. Direct Second Year (D.S.Y. / DSE) Diploma Cutoffs (AY 2025–26 Official Record):",
-            "   - Computer Science & Engineering (CSE): 93.65% (Top Merit No. 795)",
-            "   - CSE (AI & ML): 92.88% (Merit No. 1200)",
-            "   - CS & Business Systems (CSBS): 92.06% (Merit No. 1715)",
-            "   - Electrical Engineering: 93.11% (Merit No. 1063)",
-            "   - Civil Engineering: 92.84% (Merit No. 1227)",
-            "   - Mechanical Engineering: 92.46% (Merit No. 1458)",
-            "   - Electronics & Telecommunication (ETC): 92.47% (Merit No. 1438)",
-            "   - Biotechnology: 75.66%",
-            "   - DSY General Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf",
-            "   - DSY Ladies Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf",
-            "3. Official Portals & Contact:",
+            "OFFICIAL KITCOEK ADMISSION PROCESS, REQUIRED DOCUMENTS & CUTOFF DIRECTORY (Source: https://www.kitcoek.in/admission-undergraduate):",
+            "College Name: Kolhapur Institute of Technology's College of Engineering (Autonomous), Kolhapur.",
+            "DTE Institute Code / Choice Code: 6267.",
+            "",
+            "1. STEP-BY-STEP ADMISSION PROCESS FOR KITCOEK:",
+            "   Step 1: Eligibility & Entrance Exams:",
+            "     - First Year B.Tech (F.Y. B.Tech): Passed 10+2 / HSC with Physics & Mathematics compulsory along with Chemistry/Biotech/Biology/Technical Vocational with min 45% (40% for reserved categories). Valid score in MHT-CET 2025/2026 or JEE Main Paper 1.",
+            "     - Direct Second Year B.Tech (DSE / DSY): Passed Diploma in Engineering/Technology with min 45% (40% for reserved categories) or B.Sc Degree.",
+            "   Step 2: Maharashtra State CET Cell Registration:",
+            "     - Register online on the State Common Entrance Test Cell Maharashtra portal (https://cetcell.mahacet.org) for Centralized Admission Process (CAP).",
+            "   Step 3: Document Verification & Scrutiny:",
+            "     - Verify documents online (E-Scrutiny) or at designated Scrutiny Centers (FC).",
+            "   Step 4: Merit List & CAP Option Form Filling:",
+            "     - Check Provisional & Final Merit List.",
+            "     - Fill online Option Form specifying preferences. Enter KITCoEK DTE Choice Code 6267 along with branch codes (e.g. 626724210 for CSE).",
+            "   Step 5: CAP Seat Allotment (Rounds 1, 2, 3):",
+            "     - Check allotment status. If allotted KITCoEK, choose Freeze/Float and pay Seat Acceptance Fee on the CET portal.",
+            "   Step 6: Reporting & Physical Document Submission at KITCoEK Campus:",
+            "     - Report to KITCoEK Campus (Gokul Shirgaon, Kolhapur) within scheduled dates with original documents, 3 sets of photocopies, and college fees.",
+            "   - Institute Level / Against CAP (ACAP) Seats: Candidates can apply directly on https://www.kitcoek.in/apply-admission for vacant/management seats.",
+            "",
+            "2. COMPLETE DOCUMENTS REQUIRED CHECKLIST:",
+            "   A. General / Open Category Mandatory Documents:",
+            "      1. SSC (10th) Marksheet & Passing Certificate",
+            "      2. HSC (12th) Marksheet / Diploma Final Marksheet",
+            "      3. MHT-CET / JEE Main Score Card",
+            "      4. Maharashtra State Domicile & Nationality Certificate (or Leaving Certificate stating Nationality as Indian)",
+            "      5. College Leaving Certificate (Transfer Certificate / TC)",
+            "      6. Migration Certificate (for CBSE/ICSE or Other than Maharashtra State - OMS)",
+            "      7. Aadhaar Card copy and 4 passport size color photographs",
+            "      8. Gap Certificate (Affidavit on ₹100 stamp paper, if there is a study gap)",
+            "   B. Reserved Categories (OBC / VJ / NT / SBC):",
+            "      - Caste Certificate",
+            "      - Caste Validity Certificate",
+            "      - Non-Creamy Layer (NCL) Certificate valid up to 31st March of current financial year",
+            "   C. SC / ST Category Candidates:",
+            "      - Caste Certificate & Caste Validity Certificate",
+            "   D. Economically Weaker Section (EWS):",
+            "      - Valid EWS Certificate in prescribed State Government format",
+            "   E. Tuition Fee Waiver Scheme (TFWS):",
+            "      - Parents' Annual Income Certificate (< ₹8.00 Lakhs) issued by competent authority (Tahsildar)",
+            "   Official Document Checklists: https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg and https://www.kitcoek.in/documents/admission/2025_26/DSY_List_of_Required_Documents.jpeg",
+            "",
+            "3. OFFICIAL CUTOFF PERCENTILES (DTE CODE 6267):",
+            "   - First Year B.Tech (F.Y. B.Tech / FE) Indicative Cutoff Percentiles:",
+            "     * Computer Science & Engineering (CSE): 93–94%+",
+            "     * CSE (Artificial Intelligence & Machine Learning): 90–92%+",
+            "     * Computer Science & Business Systems (CSBS): 88–90%+",
+            "     * Electronics & Telecommunication (ETC): 85–88%+",
+            "     * Electrical Engineering: 78–82%+",
+            "     * Mechanical Engineering: 75–80%+",
+            "     * Civil Engineering: 72–78%+",
+            "     * Biotechnology: 70–75%+",
+            "     * General Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20General%20Cutoff-2024-25.jpeg",
+            "     * Ladies Cutoff Sheet: https://www.kitcoek.in/documents/admission/2025_26/FY%20Ladies%20Cutoff-2024-25.jpeg",
+            "   - Direct Second Year (D.S.Y. / DSE) Diploma Cutoffs:",
+            "     * CSE: 93.65% | AIML: 92.88% | CSBS: 92.06% | Electrical: 93.11% | Civil: 92.84% | Mechanical: 92.46% | ETC: 92.47% | Biotech: 75.66%",
+            "     * DSY General Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY.B.Tech%20General%20Seat%20Type%20Wise%20Cut%20Off%202025-26.pdf",
+            "     * DSY Ladies Cutoff PDF: https://www.kitcoek.in/documents/admission/2026_27/dsy/DSY%20B.Tech%20Ladies%20Seat%20Type%20Wise%20Cut%20Off%20A.Y.%202025-26.pdf",
+            "",
+            "4. OFFICIAL ADMISSION LINKS & HELPLINE:",
             "   - Undergraduate Admission Portal: https://www.kitcoek.in/admission-undergraduate",
-            "   - Online Admission Application / Inquiry: https://www.kitcoek.in/apply-admission",
-            "   - Choice Codes: https://www.kitcoek.in/documents/admission/2025_26/Choice%20code.jpeg",
-            "   - Required Documents List: https://www.kitcoek.in/documents/admission/2025_26/FY_List_of_Required_Documents.jpeg",
+            "   - Online Admission Application: https://www.kitcoek.in/apply-admission",
+            "   - KIT Choice Codes: https://www.kitcoek.in/documents/admission/2025_26/Choice%20code.jpeg",
             "   - Admission Cell Email: admissions@kitcoek.in | Phone: +91-7769001199",
-            "DIRECTIVE: Provide a thorough, well-formatted response with the official cutoff details for both First Year and Direct Second Year B.Tech, include direct links to the official sheets and PDFs hosted on kitcoek.in, mention DTE Choice Code 6267, and link to the official admission portal (https://www.kitcoek.in/admission-undergraduate)."
+            "DIRECTIVE: Provide a precious, thorough, well-formatted response with: (1) Step-by-step admission process via CET Cell CAP and Institute Level, (2) Complete category-wise documents required checklist with links, (3) Official cutoff list with percentiles and direct download links for FY & DSY, (4) DTE Code 6267, official portal links, and Admission Cell contact numbers."
         ]
         context_texts.insert(0, "\n".join(cutoff_ctx))
 
